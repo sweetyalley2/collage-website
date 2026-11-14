@@ -3,19 +3,19 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { 
-  CheckCircle, 
-  ArrowRight, 
-  PhoneCall, 
-  Download, 
-  Send, 
-  Play, 
-  GraduationCap, 
-  Award, 
-  Building2, 
-  Calendar, 
-  MapPin, 
-  Clock, 
+import {
+  CheckCircle,
+  ArrowRight,
+  PhoneCall,
+  Download,
+  Send,
+  Play,
+  GraduationCap,
+  Award,
+  Building2,
+  Calendar,
+  MapPin,
+  Clock,
   ChevronRight,
   Sparkles,
   ExternalLink,
@@ -24,11 +24,42 @@ import {
   Users,
   Briefcase,
   HeartHandshake,
-  Check
+  Check,
+  Eye,
+  Building,
+  Facebook,
+  Youtube,
+  Instagram,
+  Globe
 } from 'lucide-react';
-import { CIMS_INFO, INITIAL_COURSES, CIMS_PARTNERS, TOP_RECRUITERS } from '@/lib/data/cimsData';
+import { 
+  CIMS_INFO, 
+  INITIAL_COURSES, 
+  CIMS_PARTNERS, 
+  TOP_RECRUITERS,
+  INDUSTRY_SUPPORT_BRANDS,
+  CIMS_PLACED_STUDENTS_2024,
+  CIMS_PLACED_STUDENTS_2025,
+  ALL_PLACEMENT_RECORDS,
+  PlacementRecord
+} from '@/lib/data/cimsData';
+
+import CoursesGrid from '@/components/CoursesGrid';
+import CoursesCarousel from '@/components/CoursesCarousel';
 
 export default function HomePage() {
+  // Placement Gallery Modal & Filter State
+  const [selectedPlacement, setSelectedPlacement] = useState<PlacementRecord | null>(null);
+  const [placementFilterYear, setPlacementFilterYear] = useState<'2024' | '2025' | 'all'>('2024');
+
+  // Filtered placement records based on user batch tab selection
+  const filteredPlacementRecords =
+    placementFilterYear === '2024'
+      ? CIMS_PLACED_STUDENTS_2024
+      : placementFilterYear === '2025'
+      ? CIMS_PLACED_STUDENTS_2025
+      : ALL_PLACEMENT_RECORDS;
+
   // Hero Form State
   const [formData, setFormData] = useState({
     name: '',
@@ -136,7 +167,7 @@ export default function HomePage() {
       degree: "BBA-HM",
       duration: "3 - 4 Years",
       slug: "hospital-management",
-      image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop",
+      image: "/images/experience-life/CIMS_Campus_Gallery_Photos/campus-students-group.jpg",
       badge: "Hospital Management",
       desc: "Healthcare operations, patient care administration, hospital finance, NABH protocols & clinical internships."
     },
@@ -145,7 +176,7 @@ export default function HomePage() {
       degree: "B.Sc HHA",
       duration: "3 Years",
       slug: "hospitality-hotel-management",
-      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop",
+      image: "/images/experience-life/CIMS_Campus_Gallery_Photos/culinary-hospitality-students.jpg",
       badge: "Hospitality & Tourism",
       desc: "Culinary arts, front desk suites, food & beverage production, mixology & 6 months 5-star hotel training."
     },
@@ -154,7 +185,7 @@ export default function HomePage() {
       degree: "B.Sc Paramedical",
       duration: "3 - 4 Years",
       slug: "allied-health-science",
-      image: "https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=800&auto=format&fit=crop",
+      image: "/images/experience-life/CIMS_Campus_Gallery_Photos/cims-campus-group-photo.jpg",
       badge: "Allied Health",
       desc: "Diagnostic pathology, biochemistry analyzers, clinical microbiology, hematology and blood banking."
     },
@@ -252,27 +283,25 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
 
       {/* ─────────────────────────────────────────────────────────────
-          1. HERO SECTION WITH BACKGROUND VIDEO ANIMATION & STUDENTS
+          1. HERO SECTION WITH VIDEO BACKGROUND
       ───────────────────────────────────────────────────────────── */}
       <section className="relative bg-[#0d1d42] overflow-hidden min-h-[620px] lg:min-h-[680px] flex items-center">
-        
-        {/* Dynamic Video Background Layer with Cinematic Overlay (Matches ISHM Reference) */}
-        <div className="video-bg-container">
+
+        {/* CIMS Training Tour Video Background */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <video
             autoPlay
             loop
             muted
             playsInline
             preload="auto"
-            poster="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop"
+            className="absolute inset-0 w-full h-full object-cover"
+            poster="/images/hero/cims-building.jpg"
           >
-            <source
-              src="https://www.ishm.co.in/assets/frontend/images/bg-video.mp4"
-              type="video/mp4"
-            />
+            <source src="/videos/campus-tour.mp4" type="video/mp4" />
           </video>
-          {/* Deep Navy Dark Vignette Overlay */}
-          <div className="video-dark-overlay" />
+          {/* Dark overlay for text legibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0d1d42]/90 via-[#0d1d42]/75 to-[#0d1d42]/50" />
         </div>
 
         {/* Floating Animated Ambient Glows */}
@@ -281,10 +310,77 @@ export default function HomePage() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
+
             {/* Left Content Column */}
             <div className="lg:col-span-7 text-white space-y-5">
-              
+
+              {/* SVF Logo + Institution Header */}
+              <div className="flex items-center gap-4 mb-2">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 rounded-full overflow-hidden border-2 border-[#ffc923] shadow-lg bg-white">
+                  <Image
+                    src="/images/logo/svf-logo.jpg"
+                    alt="Swami Vivekananda Foundation, West Bengal"
+                    fill
+                    className="object-cover object-center"
+                    priority
+                  />
+                </div>
+                <div>
+                  <p className="text-[#ffc923] text-[10px] sm:text-xs font-bold uppercase tracking-widest leading-tight">
+                    Swami Vivekananda Foundation
+                  </p>
+                  <p className="text-white/90 text-[10px] sm:text-xs font-semibold leading-tight">
+                    West Bengal • MAKAUT (CCPTR) Affiliated
+                  </p>
+                  {/* 15+ Years Badge */}
+                  <span className="inline-flex items-center gap-1 mt-1 bg-[#ed8100] text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider shadow">
+                    <Award size={11} />
+                    15+ Years EDUCATIONAL TRUST
+                  </span>
+                </div>
+              </div>
+
+              {/* Social Media Links */}
+              <div className="flex items-center gap-3">
+                <a
+                  href="https://www.facebook.com/CIMSCollege?mibextid=LQQJ4d"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="CIMS Facebook"
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#1877F2] border border-white/20 hover:border-[#1877F2] flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-lg"
+                >
+                  <Facebook size={15} className="text-white" />
+                </a>
+                <a
+                  href="https://youtube.com/@CIMSCollege"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="CIMS YouTube"
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#FF0000] border border-white/20 hover:border-[#FF0000] flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-lg"
+                >
+                  <Youtube size={15} className="text-white" />
+                </a>
+                <a
+                  href="https://instagram.com/cimscollege?igshid=YWJhMjlhZTc="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="CIMS Instagram"
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-gradient-to-br hover:from-[#f09433] hover:to-[#bc1888] border border-white/20 hover:border-[#E1306C] flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-lg"
+                >
+                  <Instagram size={15} className="text-white" />
+                </a>
+                <a
+                  href="https://cimsgroup.org/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="CIMS Official Website"
+                  className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#ed8100] border border-white/20 hover:border-[#ed8100] flex items-center justify-center transition-all duration-200 hover:scale-110 hover:shadow-lg"
+                >
+                  <Globe size={15} className="text-white" />
+                </a>
+                <span className="text-white/50 text-[10px] font-medium ml-1">Follow Us</span>
+              </div>
+
               {/* Animated Glowing Pill Badge */}
               <div className="inline-flex items-center gap-2 bg-[#ed8100]/25 border border-[#ed8100]/60 text-[#ffc923] px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider animate-pulse-subtle shadow-badge">
                 <span className="w-2 h-2 rounded-full bg-[#ed8100] animate-ping" />
@@ -356,7 +452,7 @@ export default function HomePage() {
                 </a>
 
                 <button
-                  onClick={() => setSelectedVideo(videos[0].youtubeId)}
+                  onClick={() => setSelectedVideo('campus-tour.mp4')}
                   className="bg-transparent hover:bg-white/10 text-white border-2 border-white px-5 py-3 rounded-md font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 group"
                 >
                   <Play size={14} className="fill-current text-[#ffc923] group-hover:scale-110 transition-transform" />
@@ -374,10 +470,32 @@ export default function HomePage() {
 
             </div>
 
-            {/* Right Hero Admission Form (Matches ISHM Landing Form) */}
-            <div className="lg:col-span-5" id="admission-form">
+            {/* Right Hero: Campus Photo + Admission Form stacked */}
+            <div className="lg:col-span-5 space-y-4" id="admission-form">
+
+              {/* Campus Building Photo Card */}
+              <div className="relative w-full overflow-hidden rounded-2xl border-4 border-[#112555] shadow-2xl" style={{ aspectRatio: '3/4', minHeight: '320px' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/hero/cims-building.jpg"
+                  alt="CIMS Campus Building – Students on Balconies, Cambridge Institute of Management Studies"
+                  className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
+                  loading="eager"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0d1d42]/70 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+                  <span className="bg-[#112555]/80 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-lg border border-white/20">
+                    CIMS Campus, Kolkata
+                  </span>
+                  <span className="bg-[#ed8100]/90 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg">
+                    Est. 2009
+                  </span>
+                </div>
+              </div>
+
+              {/* Admission Form */}
               <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-7 border-t-4 border-[#ed8100] text-gray-800">
-                
+
                 <div className="mb-4 pb-3 border-b border-gray-100 flex items-center justify-between">
                   <div>
                     <span className="text-[11px] font-bold uppercase tracking-wider text-[#ed8100] bg-orange-50 px-2 py-0.5 rounded">
@@ -412,7 +530,7 @@ export default function HomePage() {
                   </div>
                 ) : (
                   <form onSubmit={handleFormSubmit} className="space-y-3">
-                    
+
                     <div>
                       <label className="block text-[11px] font-bold text-gray-700 uppercase tracking-wider mb-1">
                         Candidate Name *
@@ -546,7 +664,7 @@ export default function HomePage() {
       <div className="w-full bg-white relative z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-            
+
             {/* Box 1 (Orange / Pink) */}
             <div className="bg-[#F7941E] text-white rounded-lg p-5 text-center shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border-r border-white/20 glow-on-hover">
               <span className="text-[11px] uppercase font-bold tracking-wider opacity-90 block">OVER</span>
@@ -626,88 +744,14 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ─────────────────────────────────────────────────────────────
-          4. STUDENT PLACEMENTS HALL OF FAME (STUDENT PICTURES SECTION)
-      ───────────────────────────────────────────────────────────── */}
-      <section className="py-16 bg-white" id="student-spotlights">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider bg-orange-50 px-3 py-1 rounded-full border border-orange-100">
-              Real Student Achievements
-            </span>
-            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-wide mt-2">
-              STUDENT PLACEMENTS HALL OF FAME
-            </h2>
-            <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full" />
-            <p className="text-xs sm:text-sm text-gray-600 mt-2">
-              Meet our proud graduates successfully placed at India&apos;s leading multispecialty hospitals, 5-star luxury brand hotels, and technology enterprises.
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {studentSpotlights.map((student, idx) => (
-              <div 
-                key={idx}
-                className="bg-gray-50 rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-[#ed8100] shadow-md flex-shrink-0 group-hover:scale-105 transition-transform">
-                      <img
-                        src={student.image}
-                        alt={student.name}
-                        className="w-full h-full object-cover"
-                      />
-                      <span className="absolute bottom-0 right-0 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white" title="Placed Alumni" />
-                    </div>
-                    <div>
-                      <h4 className="font-heading font-black text-base text-[#112555] group-hover:text-[#ed8100] transition-colors">
-                        {student.name}
-                      </h4>
-                      <p className="text-[11px] font-bold text-[#ed8100] uppercase tracking-wide">
-                        {student.company}
-                      </p>
-                      <span className="text-[10px] text-gray-500 font-medium block">
-                        {student.role}
-                      </span>
-                    </div>
-                  </div>
-
-                  <p className="text-xs text-gray-600 italic leading-relaxed pt-2 border-t border-gray-200">
-                    &ldquo;{student.quote}&rdquo;
-                  </p>
-                </div>
-
-                <div className="mt-4 pt-3 border-t border-gray-200 flex items-center justify-between text-[11px]">
-                  <span className="text-gray-500 font-semibold">{student.course}</span>
-                  <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                    ✓ Verified Placed
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-10">
-            <Link
-              href="/training-placements"
-              className="inline-flex items-center gap-2 bg-[#112555] hover:bg-[#1c3786] text-white px-7 py-3 rounded-md font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-xl transition-all"
-            >
-              <span>View All 1,700+ Placements &amp; Recruiters</span>
-              <ArrowRight size={14} />
-            </Link>
-          </div>
-
-        </div>
-      </section>
 
       {/* ─────────────────────────────────────────────────────────────
           5. ALL COURSES SECTION (ISHM "all_courcess" SECTION)
       ───────────────────────────────────────────────────────────── */}
       <section className="py-16 bg-[#f8fafc] border-t border-gray-200" id="all-courses">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
               Explore Our Programs
@@ -723,8 +767,8 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {allCourses.map((c, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-200 flex flex-col justify-between group hover:-translate-y-1.5 glow-on-hover"
               >
                 <div>
@@ -797,7 +841,7 @@ export default function HomePage() {
       ───────────────────────────────────────────────────────────── */}
       <section className="py-16 bg-white border-t border-gray-200" id="study-tours">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
               Practical Immersion
@@ -811,46 +855,14 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {videos.map((vid) => (
-              <div 
-                key={vid.id} 
-                className="bg-gray-50 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-gray-200 group hover:-translate-y-1"
-              >
-                <div 
-                  className="relative h-48 bg-gray-900 overflow-hidden cursor-pointer"
-                  onClick={() => setSelectedVideo(vid.youtubeId)}
-                >
-                  <img
-                    src={vid.thumbnail}
-                    alt={vid.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90"
-                  />
-                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                    <div className="w-14 h-14 rounded-full bg-[#ed8100] text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform animate-pulse-subtle">
-                      <Play size={22} className="fill-current ml-0.5" />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] font-bold px-2 py-0.5 rounded">
-                    {vid.duration}
-                  </div>
-                </div>
-
-                <div className="p-4">
-                  <h4 className="font-heading font-bold text-sm text-[#112555] group-hover:text-[#ed8100] transition-colors leading-snug">
-                    {vid.title}
-                  </h4>
-                  <button
-                    onClick={() => setSelectedVideo(vid.youtubeId)}
-                    className="mt-2 text-xs font-bold text-[#ed8100] flex items-center gap-1 hover:underline"
-                  >
-                    <span>Watch Training Tour</span>
-                    <ChevronRight size={14} />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+                      <div className="flex justify-center">
+              <video
+                src="/videos/cims-training-practical-lab-tour-enhanced-1080p.mp4"
+                controls
+                className="w-full max-w-4xl rounded-lg shadow-lg"
+                poster="/videos/cims-training-practical-lab-tour-poster.jpg"
+              />
+            </div>
 
         </div>
       </section>
@@ -860,7 +872,7 @@ export default function HomePage() {
       ───────────────────────────────────────────────────────────── */}
       <section className="py-16 bg-[#f8fafc] border-t border-gray-200" id="gallery">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
               Visual Glimpses
@@ -876,8 +888,8 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {galleryItems.map((item, idx) => (
-              <div 
-                key={idx} 
+              <div
+                key={idx}
                 className="group relative h-64 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all cursor-pointer bg-gray-900 hover:-translate-y-1.5"
               >
                 <img
@@ -916,9 +928,9 @@ export default function HomePage() {
       ───────────────────────────────────────────────────────────── */}
       <section className="py-16 bg-white border-t border-gray-200" id="why-join">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
+
             <div className="lg:col-span-7 space-y-4">
               <span className="text-xs font-extrabold uppercase text-[#ed8100] tracking-wider">
                 Excellence in Professional Education
@@ -960,11 +972,12 @@ export default function HomePage() {
             </div>
 
             <div className="lg:col-span-5 relative">
-              <div className="rounded-2xl overflow-hidden shadow-2xl border-4 border-[#112555] group">
+              <div className="rounded-2xl overflow-hidden shadow-2xl border-4 border-[#112555] group bg-white">
                 <img
-                  src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop"
-                  alt="CIMS Campus Building"
-                  className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700"
+                  src="/images/hero/cims-building.jpg"
+                  alt="CIMS Campus Building – Students on Balconies, Cambridge Institute of Management Studies"
+                  className="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  loading="eager"
                 />
               </div>
               <div className="absolute -bottom-4 -left-4 bg-[#ed8100] text-white p-4 rounded-xl shadow-xl hidden sm:block animate-float">
@@ -982,48 +995,94 @@ export default function HomePage() {
           9. TIE-UPS & INDUSTRY ASSOCIATIONS (MATCHES ISHM TIE-UP)
       ───────────────────────────────────────────────────────────── */}
       <section className="py-16 bg-[#f8fafc] border-t border-gray-200" id="tie-ups">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
-              Practical Training Collaborations
-            </span>
-            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-wide">
-              HOSPITAL &amp; INDUSTRY TIE-UPS
-            </h2>
-            <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full" />
-            <p className="text-xs sm:text-sm text-gray-600 mt-2">
-              Official institutional partners providing continuous clinical training, practical rotations and hotel internships.
-            </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+
+          {/* Sub-block A: Verified Industry Support Brands */}
+          <div>
+            <div className="text-center max-w-3xl mx-auto mb-10">
+              <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
+                Industry Support &amp; Practical Training Network
+              </span>
+              <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-wide">
+                HOSPITAL &amp; INDUSTRY TIE-UPS
+              </h2>
+              <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full" />
+              <p className="text-xs sm:text-sm text-gray-600 mt-2">
+                Verified industry support and healthcare collaborations providing student internships, practical rotations, and industrial exposure across India.
+              </p>
+            </div>
+
+            {/* 12 Verified Industry Support Brands Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              {INDUSTRY_SUPPORT_BRANDS.map((brand, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-[#ed8100] hover:-translate-y-1 transition-all flex flex-col items-center justify-center text-center group min-h-[140px]"
+                >
+                  <div className="h-16 w-full flex items-center justify-center p-1 mb-2">
+                    <img
+                      src={brand.logo}
+                      alt={`${brand.name} Logo`}
+                      className="max-h-14 max-w-[120px] w-auto h-auto object-contain group-hover:scale-105 transition-transform"
+                      loading="lazy"
+                    />
+                  </div>
+                  <h4 className="font-heading font-bold text-xs text-[#112555] leading-tight">
+                    {brand.name}
+                  </h4>
+                  <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider mt-1 px-2 py-0.5 bg-gray-50 rounded">
+                    {brand.category}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {CIMS_PARTNERS.map((partner) => (
-              <div 
-                key={partner.id}
-                className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group"
-              >
-                <div className="h-44 bg-gray-100 overflow-hidden relative">
-                  <img
-                    src={partner.image}
-                    alt={partner.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-2.5 left-2.5 bg-[#112555] text-white text-[10px] font-bold px-2 py-0.5 rounded">
-                    {partner.category}
+          {/* Sub-block B: Official Institutional Partners (cimsgroup.org/partners/) */}
+          <div className="pt-8 border-t border-gray-200">
+            <div className="text-center max-w-2xl mx-auto mb-10">
+              <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
+                Official Institutional Training Wings
+              </span>
+              <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-[#112555] uppercase tracking-wide">
+                OUR ACCREDITED PARTNERS
+              </h3>
+              <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full" />
+              <p className="text-xs sm:text-sm text-gray-600 mt-2">
+                Dedicated training hospital units, luxury resort properties, and 24x7 diagnostic pathology facilities from our official partners network.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {CIMS_PARTNERS.map((partner) => (
+                <div
+                  key={partner.id}
+                  className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col"
+                >
+                  <div className="h-48 bg-gray-100 overflow-hidden relative">
+                    <img
+                      src={partner.image}
+                      alt={partner.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute top-2.5 left-2.5 bg-[#112555] text-white text-[10px] font-bold px-2.5 py-0.5 rounded shadow">
+                      {partner.category}
+                    </div>
+                  </div>
+                  <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h4 className="font-heading font-extrabold text-base text-[#112555] group-hover:text-[#ed8100] transition-colors">
+                        {partner.name}
+                      </h4>
+                      <p className="text-xs text-gray-600 leading-relaxed mt-1">
+                        {partner.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div className="p-5 space-y-1.5">
-                  <h3 className="font-heading font-extrabold text-sm text-[#112555] group-hover:text-[#ed8100] transition-colors">
-                    {partner.name}
-                  </h3>
-                  <p className="text-xs text-gray-600 leading-relaxed">
-                    {partner.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
         </div>
@@ -1033,42 +1092,172 @@ export default function HomePage() {
           10. PLACEMENT & RECRUITERS (MATCHES ISHM "PLACEMENT")
       ───────────────────────────────────────────────────────────── */}
       <section className="py-16 bg-white border-t border-gray-200" id="placement">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          
-          <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
-            Career Records
-          </span>
-          <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-wide">
-            PLACEMENT &amp; CORPORATE RECRUITERS
-          </h2>
-          <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full mb-8" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
 
-          {/* Recruiter Logos Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
-            {TOP_RECRUITERS.map((r, i) => (
-              <div 
-                key={i} 
-                className="p-3 bg-gray-50 border border-gray-200 rounded-lg hover:border-[#ed8100] hover:shadow-md transition-all flex flex-col items-center justify-center text-center group"
-              >
-                <span className="text-2xl mb-1 group-hover:scale-110 transition-transform">{r.logo}</span>
-                <span className="font-heading font-bold text-xs text-[#112555] leading-tight">
-                  {r.name}
-                </span>
-                <span className="text-[9px] uppercase tracking-wider text-gray-500 mt-0.5">
-                  {r.sector}
-                </span>
-              </div>
-            ))}
+          {/* Section Heading */}
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
+              Career Records &amp; Corporate Relations
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-wide">
+              PLACEMENT &amp; CORPORATE RECRUITERS
+            </h2>
+            <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full mb-3" />
+            <p className="text-xs sm:text-sm text-gray-600">
+              Leading IT conglomerates, international 5-star luxury hotel chains, and premier multispecialty hospital groups regularly recruit graduating CIMS students.
+            </p>
           </div>
 
-          <div className="mt-8">
-            <Link
-              href="/training-placements"
-              className="inline-flex items-center gap-2 bg-[#ed8100] hover:bg-[#d97400] text-white px-6 py-2.5 rounded-md font-bold text-xs uppercase tracking-wider shadow hover:shadow-lg transition-all"
-            >
-              <span>Explore Placement Records</span>
-              <ArrowRight size={14} />
-            </Link>
+          {/* Part A: Corporate & Hotel Recruiter Logos */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between border-b border-gray-100 pb-2">
+              <div>
+                <span className="text-[11px] font-extrabold text-[#ed8100] uppercase tracking-wider">
+                  Top Recruiters
+                </span>
+                <h3 className="font-heading text-lg font-bold text-[#112555]">
+                  Corporate IT &amp; Luxury Hospitality Recruitment Partners
+                </h3>
+              </div>
+              <span className="hidden sm:inline-block text-[11px] font-semibold text-gray-400">
+                12 Verified Recruiter Brands
+              </span>
+            </div>
+
+            {/* Recruiter Logos Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5">
+              {TOP_RECRUITERS.map((r, i) => (
+                <div
+                  key={i}
+                  className="p-3.5 bg-gray-50/70 border border-gray-200 rounded-xl hover:border-[#ed8100] hover:bg-white hover:shadow-md transition-all flex flex-col items-center justify-center text-center group min-h-[110px]"
+                >
+                  <div className="h-12 w-full flex items-center justify-center mb-1.5">
+                    <img
+                      src={r.logo}
+                      alt={`${r.name} recruiter logo`}
+                      className="max-h-11 max-w-[110px] w-auto h-auto object-contain group-hover:scale-105 transition-transform"
+                      loading="lazy"
+                    />
+                  </div>
+                  <span className="font-heading font-bold text-[11px] text-[#112555] leading-tight line-clamp-1">
+                    {r.name}
+                  </span>
+                  <span className="text-[9px] uppercase tracking-wider text-gray-500 mt-0.5">
+                    {r.sector}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Part B: Student Placement Records Gallery */}
+          <div className="space-y-6 pt-4 border-t border-gray-200">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+              <div>
+                <span className="text-[11px] font-extrabold text-[#ed8100] uppercase tracking-wider">
+                  Authentic Placement Records
+                </span>
+                <h3 className="font-heading text-xl sm:text-2xl font-extrabold text-[#112555] uppercase">
+                  OUR PLACED STUDENTS {placementFilterYear === 'all' ? '(ALL BATCHES)' : `BATCH ${placementFilterYear}`}
+                </h3>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  Click on any placement card to view the official student record and hospital/hotel placement proof.
+                </p>
+              </div>
+
+              {/* Filter Tabs */}
+              <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-lg w-max self-start sm:self-auto">
+                <button
+                  type="button"
+                  onClick={() => setPlacementFilterYear('2024')}
+                  className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-all ${
+                    placementFilterYear === '2024'
+                      ? 'bg-[#112555] text-white shadow'
+                      : 'text-gray-600 hover:text-[#112555]'
+                  }`}
+                >
+                  2024 Batch ({CIMS_PLACED_STUDENTS_2024.length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPlacementFilterYear('2025')}
+                  className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-all ${
+                    placementFilterYear === '2025'
+                      ? 'bg-[#112555] text-white shadow'
+                      : 'text-gray-600 hover:text-[#112555]'
+                  }`}
+                >
+                  2025 Batch ({CIMS_PLACED_STUDENTS_2025.length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPlacementFilterYear('all')}
+                  className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-all ${
+                    placementFilterYear === 'all'
+                      ? 'bg-[#ed8100] text-white shadow'
+                      : 'text-gray-600 hover:text-[#112555]'
+                  }`}
+                >
+                  All Records ({ALL_PLACEMENT_RECORDS.length})
+                </button>
+              </div>
+            </div>
+
+            {/* Placement Records Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+              {filteredPlacementRecords.map((record) => (
+                <div
+                  key={record.id}
+                  onClick={() => setSelectedPlacement(record)}
+                  className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-[#ed8100] hover:-translate-y-1 transition-all cursor-pointer group flex flex-col"
+                >
+                  {/* Photo Container */}
+                  <div className="relative bg-gray-50 overflow-hidden aspect-[4/3] flex items-center justify-center border-b border-gray-100">
+                    <img
+                      src={record.image}
+                      alt={`Placed Student - ${record.studentName}`}
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 text-white">
+                      <Eye size={18} className="text-[#ffc923]" />
+                      <span className="text-xs font-bold">View Full Record</span>
+                    </div>
+                    <div className="absolute top-2 right-2 bg-[#112555]/90 text-white text-[10px] font-extrabold px-2 py-0.5 rounded shadow">
+                      {record.year}
+                    </div>
+                  </div>
+
+                  {/* Details */}
+                  <div className="p-4 space-y-1.5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h4 className="font-heading font-extrabold text-sm text-[#112555] group-hover:text-[#ed8100] transition-colors leading-snug">
+                        {record.studentName}
+                      </h4>
+                      <div className="flex items-center gap-1 text-[11px] text-gray-500 mt-1">
+                        <MapPin size={12} className="text-[#ed8100] shrink-0" />
+                        <span>{record.location}</span>
+                      </div>
+                    </div>
+                    <div className="pt-2 border-t border-gray-100 flex items-start gap-1.5 text-[11px] text-[#112555] font-semibold">
+                      <Building2 size={13} className="text-[#ed8100] shrink-0 mt-0.5" />
+                      <span className="line-clamp-2 leading-tight">{record.company}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Clear "View All Placement Records" CTA */}
+            <div className="text-center pt-6">
+              <Link
+                href="/training-placements"
+                className="inline-flex items-center gap-2 bg-[#ed8100] hover:bg-[#d97400] text-white px-8 py-3.5 rounded-md font-bold text-xs uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+              >
+                <span>View All Placement Records &amp; Career Details</span>
+                <ArrowRight size={15} />
+              </Link>
+            </div>
           </div>
 
         </div>
@@ -1079,7 +1268,7 @@ export default function HomePage() {
       ───────────────────────────────────────────────────────────── */}
       <section className="py-16 bg-[#f8fafc] border-t border-gray-200" id="news">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8">
             <div>
               <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
@@ -1186,11 +1375,11 @@ export default function HomePage() {
 
       {/* Video Modal */}
       {selectedVideo && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={() => setSelectedVideo(null)}
         >
-          <div 
+          <div
             className="bg-black max-w-3xl w-full rounded-2xl overflow-hidden shadow-2xl relative"
             onClick={(e) => e.stopPropagation()}
           >
@@ -1202,13 +1391,97 @@ export default function HomePage() {
               <X size={18} />
             </button>
             <div className="relative pt-[56.25%] w-full bg-black">
-              <iframe
-                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
-                title="CIMS Training Tour"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full border-0"
-              />
+              {selectedVideo?.endsWith('.mp4') ? (
+                <video
+                  src={`/videos/${selectedVideo}`}
+                  controls
+                  autoPlay
+                  className="absolute inset-0 w-full h-full"
+                />
+              ) : (
+                <iframe
+                  src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
+                  title="CIMS Training Tour"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full border-0"
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Placement Record Lightbox Modal */}
+      {selectedPlacement && (
+        <div
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setSelectedPlacement(null)}
+        >
+          <div
+            className="bg-white max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl relative border-2 border-[#ed8100] animate-in fade-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="bg-[#112555] text-white px-6 py-4 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="bg-[#ed8100] text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded uppercase">
+                  Batch {selectedPlacement.year}
+                </span>
+                <h3 className="font-heading font-extrabold text-base sm:text-lg">
+                  {selectedPlacement.studentName}
+                </h3>
+              </div>
+              <button
+                onClick={() => setSelectedPlacement(null)}
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+                aria-label="Close record modal"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Modal Body: Image & Info */}
+            <div className="p-4 sm:p-6 space-y-4">
+              <div className="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden flex items-center justify-center p-2 max-h-[480px]">
+                <img
+                  src={selectedPlacement.image}
+                  alt={`Placed Student Record - ${selectedPlacement.studentName}`}
+                  className="max-h-[440px] w-auto max-w-full object-contain rounded-lg"
+                />
+              </div>
+
+              <div className="bg-blue-50/60 p-4 rounded-xl border border-blue-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-gray-500 tracking-wider block">
+                    Placement Organization
+                  </span>
+                  <p className="font-bold text-[#112555] text-sm mt-0.5">
+                    {selectedPlacement.company}
+                  </p>
+                </div>
+                <div className="sm:text-right">
+                  <span className="text-[10px] uppercase font-bold text-gray-500 tracking-wider block">
+                    Hometown / Origin
+                  </span>
+                  <p className="font-bold text-[#ed8100] text-sm mt-0.5">
+                    {selectedPlacement.location}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="bg-gray-50 px-6 py-3 border-t border-gray-100 flex items-center justify-between">
+              <span className="text-[11px] text-gray-500">
+                Verified CIMS Training &amp; Placement Record
+              </span>
+              <button
+                onClick={() => setSelectedPlacement(null)}
+                className="bg-[#112555] hover:bg-[#1a3880] text-white text-xs font-bold px-4 py-1.5 rounded transition-colors"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>

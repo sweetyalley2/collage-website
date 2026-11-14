@@ -89,9 +89,9 @@ export default function AboutPage() {
           <div className="lg:col-span-5 relative">
             <div className="border-4 border-white shadow-2xl overflow-hidden relative">
               <img
-                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop"
+                src="/images/hero/cims-building.jpg"
                 alt="CIMS Campus Building"
-                className="w-full h-96 object-cover"
+                className="w-full h-96 object-cover object-center"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#07101f]/85 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 p-3 bg-[#0c1b33]/90 border-l-3 border-[#c5a059] text-white text-xs">

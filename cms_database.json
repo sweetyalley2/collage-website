@@ -173,25 +173,11 @@
       "description": "Clinical pathology, biochemistry, and microscopy practical sessions."
     },
     {
-      "id": "g-4",
-      "title": "Modern Air-Conditioned Computer Application Lab",
-      "category": "Campus",
-      "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=900&auto=format&fit=crop",
-      "description": "High-spec workstations with cloud development, programming, and web engineering tools."
-    },
-    {
       "id": "g-5",
       "title": "Clinical Exposure & Hospital Rounds",
       "category": "Hospital Training",
       "image": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=900&auto=format&fit=crop",
       "description": "Rotational learning and patient records coordination in partner multispecialty hospitals."
-    },
-    {
-      "id": "g-6",
-      "title": "Annual Cultural Fest & Freshers Welcome",
-      "category": "Events",
-      "image": "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=900&auto=format&fit=crop",
-      "description": "Vibrant student life, cultural performances, and felicitation ceremonies at CIMS."
     }
   ],
   "testimonials": [

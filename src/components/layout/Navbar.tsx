@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { 
   Menu, 
@@ -53,10 +54,16 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
 
-          {/* Institutional Brand Logo (Matches ISHM Logo Banner) */}
+          {/* Institutional Brand Logo – Swami Vivekananda Foundation */}
           <Link href="/" className="flex items-center space-x-3 group flex-shrink-0" onClick={closeMobileMenu}>
-            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-[#112555] to-[#1c3786] rounded-xl flex items-center justify-center text-white shadow-md border-2 border-[#ed8100] group-hover:scale-105 transition-transform">
-              <span className="font-extrabold text-xl sm:text-2xl tracking-tighter text-[#ffc923]">CIMS</span>
+            <div className="relative w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 rounded-full overflow-hidden border-2 border-[#ed8100] shadow-md group-hover:scale-105 transition-transform bg-white">
+              <Image
+                src="/images/logo/svf-logo.jpg"
+                alt="Swami Vivekananda Foundation, West Bengal"
+                fill
+                className="object-cover object-center"
+                priority
+              />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
@@ -82,7 +89,7 @@ export default function Navbar() {
             <Link 
               href="/" 
               className={`px-3 py-2 text-xs xl:text-sm font-bold uppercase tracking-wider transition-colors rounded-md ${
-                pathname === '/' ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100]'
+                pathname === '/' ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100] hover:underline decoration-2 decoration-[#ed8100]'
               }`}
             >
               Home
@@ -97,7 +104,7 @@ export default function Navbar() {
               <Link
                 href="/about"
                 className={`px-3 py-2 text-xs xl:text-sm font-bold uppercase tracking-wider transition-colors flex items-center gap-1 rounded-md ${
-                  pathname.startsWith('/about') ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100]'
+                  pathname.startsWith('/about') ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100] hover:underline decoration-2 decoration-[#ed8100]'
                 }`}
               >
                 <span>About Us</span>
@@ -132,7 +139,7 @@ export default function Navbar() {
               <Link
                 href="/courses"
                 className={`px-3 py-2 text-xs xl:text-sm font-bold uppercase tracking-wider transition-colors flex items-center gap-1 rounded-md ${
-                  pathname.startsWith('/courses') ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100]'
+                  pathname.startsWith('/courses') ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100] hover:underline decoration-2 decoration-[#ed8100]'
                 }`}
               >
                 <span>Courses</span>
@@ -189,7 +196,7 @@ export default function Navbar() {
             <Link 
               href="/training-placements" 
               className={`px-3 py-2 text-xs xl:text-sm font-bold uppercase tracking-wider transition-colors rounded-md ${
-                pathname === '/training-placements' ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100]'
+                pathname === '/training-placements' ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100] hover:underline decoration-2 decoration-[#ed8100]'
               }`}
             >
               Placement
@@ -198,7 +205,7 @@ export default function Navbar() {
             <Link 
               href="/approvals-affiliations" 
               className={`px-3 py-2 text-xs xl:text-sm font-bold uppercase tracking-wider transition-colors rounded-md ${
-                pathname === '/approvals-affiliations' ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100]'
+                pathname === '/approvals-affiliations' ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100] hover:underline decoration-2 decoration-[#ed8100]'
               }`}
             >
               Affiliations
@@ -207,7 +214,7 @@ export default function Navbar() {
             <Link 
               href="/gallery" 
               className={`px-3 py-2 text-xs xl:text-sm font-bold uppercase tracking-wider transition-colors rounded-md ${
-                pathname === '/gallery' ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100]'
+                pathname === '/gallery' ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100] hover:underline decoration-2 decoration-[#ed8100]'
               }`}
             >
               Gallery
@@ -216,7 +223,7 @@ export default function Navbar() {
             <Link 
               href="/news-notices" 
               className={`px-3 py-2 text-xs xl:text-sm font-bold uppercase tracking-wider transition-colors rounded-md ${
-                pathname === '/news-notices' ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100]'
+                pathname === '/news-notices' ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100] hover:underline decoration-2 decoration-[#ed8100]'
               }`}
             >
               News &amp; Notice
@@ -225,7 +232,7 @@ export default function Navbar() {
             <Link 
               href="/contact" 
               className={`px-3 py-2 text-xs xl:text-sm font-bold uppercase tracking-wider transition-colors rounded-md ${
-                pathname === '/contact' ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100]'
+                pathname === '/contact' ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100] hover:underline decoration-2 decoration-[#ed8100]'
               }`}
             >
               Contact

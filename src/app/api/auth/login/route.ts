@@ -4,27 +4,20 @@ export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json();
 
-    // Default institutional admin credentials with user-provided password
     const validEmail = 'admin@cimsgroup.org';
     const validPassword = 'Sweety@123';
 
-    if (
-      (email?.toLowerCase() === validEmail.toLowerCase() || email?.toLowerCase() === 'admin') &&
-      password === validPassword
-    ) {
+    if ((email?.toLowerCase() === validEmail.toLowerCase() || email?.toLowerCase() === 'admin') && password === validPassword) {
       const response = NextResponse.json({
         success: true,
         user: { email: validEmail, role: 'SuperAdmin', name: 'CIMS Administrator' }
       });
-
-      // Set auth cookie
       response.cookies.set('cims_admin_token', 'authenticated_session_token_' + Date.now(), {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         path: '/',
         maxAge: 60 * 60 * 24 * 7 // 7 days
       });
-
       return response;
     }
 
@@ -33,4 +26,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Authentication failed' }, { status: 500 });
   }
 }
-

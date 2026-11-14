@@ -17,6 +17,8 @@ import {
 } from 'lucide-react';
 import { CIMS_INFO } from '@/lib/data/cimsData';
 
+import { motion } from 'framer-motion';
+
 export default function HeroSection() {
   const [formData, setFormData] = useState({
     name: '',
@@ -70,13 +72,9 @@ export default function HeroSection() {
       
       {/* Background Graphic & Video Simulation Layer */}
       <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-30 transform scale-105 transition-transform duration-1000"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop')`
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0c1c44] via-[#112555]/95 to-[#1c3786]/85" />
+        <div className="absolute inset-0 bg-cover bg-center" style={{backgroundImage: `url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop')`}} />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0c1c44] via-[#112555] to-[#1c3786] opacity-70" />
+        <div className="absolute inset-0 bg-black/80 pointer-events-none" />
         
         {/* Subtle decorative geometric shapes matching reference */}
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-[#ed8100]/15 rounded-full blur-3xl pointer-events-none" />
@@ -87,7 +85,7 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           {/* Left Column: Hero Institutional Introduction */}
-          <div className="lg:col-span-7 text-white space-y-6">
+          <div className="lg:col-span-7 text-white space-y-6 bg-black/60 p-4 rounded">
             
             {/* Accreditation Badge */}
             <div className="inline-flex items-center gap-2 bg-[#ed8100]/20 border border-[#ed8100]/40 text-[#ffc923] px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase shadow-sm">
@@ -96,31 +94,36 @@ export default function HeroSection() {
             </div>
 
             {/* Main Headline */}
-            <h1 className="font-heading text-3xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight leading-[1.15] text-white">
+            <motion.h1 className="font-heading text-3xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight leading-[1.15] text-white" initial={{opacity:0, y:-20}} animate={{opacity:1, y:0}} transition={{duration:0.8}}>
               Welcome To <br />
               <span className="text-[#ffc923]">Cambridge Institute</span> <br />
               <span className="text-white">of Management Studies</span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+            {/* Campus Tour Video */}
+            <div className="mt-4">
+              <video className="w-full rounded-lg" src="/videos/campus-tour.mp4" autoPlay muted loop controls />
+            </div>
+
+            <p className="text-white text-sm sm:text-base leading-relaxed max-w-2xl">
               A flagship unit of <strong className="text-white">Swami Vivekananda Foundation</strong>, affiliated with <strong className="text-[#ed8100]">MAKAUT (CCPTR)</strong>. Pioneer in delivering career-focused education in <strong className="text-white">Hospital Management, Hospitality &amp; Hotel Administration, Allied Health Sciences &amp; Computer Applications</strong>.
             </p>
 
             {/* Key Value Propositions */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-              <div className="flex items-center gap-2 text-xs text-gray-200">
+              <div className="flex items-center gap-2 text-xs text-white">
                 <CheckCircle2 size={16} className="text-[#ed8100] flex-shrink-0" />
                 <span>100% Placement &amp; Paid Internships</span>
               </div>
-              <div className="flex items-center gap-2 text-xs text-gray-200">
+              <div className="flex items-center gap-2 text-xs text-white">
                 <CheckCircle2 size={16} className="text-[#ed8100] flex-shrink-0" />
                 <span>Hands-on Hospital &amp; 5-Star Hotel Training</span>
               </div>
-              <div className="flex items-center gap-2 text-xs text-gray-200">
+              <div className="flex items-center gap-2 text-xs text-white">
                 <CheckCircle2 size={16} className="text-[#ed8100] flex-shrink-0" />
                 <span>MAKAUT Approved Modern Curriculum</span>
               </div>
-              <div className="flex items-center gap-2 text-xs text-gray-200">
+              <div className="flex items-center gap-2 text-xs text-white">
                 <CheckCircle2 size={16} className="text-[#ed8100] flex-shrink-0" />
                 <span>100% Loan Assistance &amp; Scholarships</span>
               </div>

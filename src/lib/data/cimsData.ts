@@ -45,7 +45,7 @@ export interface Testimonial {
 export interface Partner {
   id: string;
   name: string;
-  category: 'Hospital' | 'Resort & Hotel' | 'Skill & Healthcare';
+  category: string;
   image: string;
   description: string;
 }
@@ -53,7 +53,23 @@ export interface Partner {
 export interface Recruiter {
   name: string;
   logo: string;
+  sector: string;
+}
+
+export interface PlacementRecord {
+  id: string;
+  studentName: string;
+  location: string;
+  company: string;
+  image: string;
+  year: '2024' | '2025';
   sector: 'Healthcare' | 'Hospitality' | 'IT / Corporate';
+}
+
+export interface IndustrySupportBrand {
+  name: string;
+  logo: string;
+  category: 'Hospital' | 'Hospitality' | 'IT / Corporate';
 }
 
 export const CIMS_INFO = {
@@ -84,7 +100,7 @@ export const CIMS_INFO = {
     linkedin: "https://linkedin.com/company/cimsgroup",
     instagram: "https://instagram.com/cimsgroup",
     youtube: "https://youtube.com/cimsgroup",
-  }
+  },
 };
 
 export const INITIAL_COURSES: Course[] = [
@@ -96,9 +112,9 @@ export const INITIAL_COURSES: Course[] = [
     degree: "Undergraduate Degree (BBA-HM)",
     duration: "3 Years / 4 Years Honours",
     eligibility: "10+2 passed in any stream from recognized Board",
-    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000&auto=format&fit=crop",
+    image: "/images/experience-life/CIMS_Campus_Gallery_Photos/campus-students-group.jpg",
     shortDesc: "Comprehensive program preparing leaders for the burgeoning healthcare and hospital administrative sectors.",
-    fullDesc: "CIMS College is recognized as one of the premier Hospital Management institutes in West Bengal. The BBA in Hospital Management equips students with strategic operational skills, patient care administration, healthcare finance, hospital information systems (HIS), and NABH accreditation protocols.",
+    fullDesc: "CIMS College is recognized as one of the premier Hospital Management institutes in West Bengal. The BBA in Hospital Management equips students with strategic operational skills, patient care administration, healthcare finance, hospital information systems (HIS) and NABH accreditation protocols.",
     highlights: [
       "Rigorous hospital clinical rotations & administrative internships",
       "NABH & NABL regulatory compliance training",
@@ -122,7 +138,7 @@ export const INITIAL_COURSES: Course[] = [
     degree: "Undergraduate Degree (B.Sc HHA)",
     duration: "3 Years",
     eligibility: "10+2 in any stream from recognized Board",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1000&auto=format&fit=crop",
+    image: "/images/experience-life/CIMS_Campus_Gallery_Photos/culinary-hospitality-students.jpg",
     shortDesc: "World-class hospitality training encompassing culinary arts, front office operations, food & beverage, and hotel management.",
     fullDesc: "Step into the vibrant global hospitality industry with CIMS. Acclaimed as the leading Hospitality and Hotel Management college in West Bengal, CIMS combines rigorous practical kitchen labs, simulated front desk suites, mock bar setups, and mandatory 6-month industrial internships in 5-star luxury hotels.",
     highlights: [
@@ -148,7 +164,7 @@ export const INITIAL_COURSES: Course[] = [
     degree: "B.Sc & Diploma Programs",
     duration: "3 - 4 Years (incl. Internship)",
     eligibility: "10+2 with Physics, Chemistry, Biology (PCB)",
-    image: "https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1000&auto=format&fit=crop",
+    image: "/images/experience-life/CIMS_Campus_Gallery_Photos/cims-campus-group-photo.jpg",
     shortDesc: "High-demand clinical paramedical programs delivering hands-on pathology, radiology imaging, and operation theatre expertise.",
     fullDesc: "Allied Health professionals are the backbone of modern healthcare delivery. CIMS Paramedical College in West Bengal provides advanced clinical exposure in BMLT (Medical Lab Technology), BMRIT (Medical Radiology & Imaging), and BOTT (Operation Theatre Technology) backed by modern diagnostic laboratories and daily clinical rotations.",
     highlights: [
@@ -194,45 +210,6 @@ export const INITIAL_COURSES: Course[] = [
   }
 ];
 
-export const INITIAL_NEWS: NewsNotice[] = [
-  {
-    id: "n-1",
-    title: "Admissions Open for 2026-27 Academic Session: Hospital Management & Hospitality",
-    date: "March 15, 2026",
-    category: "Admission",
-    isImportant: true,
-    summary: "Applications are officially invited for BBA Hospital Management, B.Sc Hospitality, Paramedical and BCA programs for July 2026 batch.",
-    content: "Cambridge Institute of Management Studies (CIMS Group) invites applications for admission into its flagship undergraduate and diploma courses for the 2026-27 academic session. Early applicants are eligible for special institutional merit scholarships and education loan assistance."
-  },
-  {
-    id: "n-2",
-    title: "Sky-High Careers: Hospital Management & Healthcare Industry Outlook 2026",
-    date: "February 28, 2026",
-    category: "Career",
-    isImportant: false,
-    summary: "Healthcare administration continues to be one of India's fastest-growing employment sectors with rising demand for NABH certified executives.",
-    content: "With the dramatic expansion of super-specialty hospitals, health tech ecosystems, and medical tourism hubs in Eastern India, graduates in Hospital Management enjoy unprecedented career growth."
-  },
-  {
-    id: "n-3",
-    title: "Annual Hospital & 5-Star Hotel Internship Placement Drive Concludes",
-    date: "February 10, 2026",
-    category: "Event",
-    isImportant: true,
-    summary: "Over 95% of the final year batch secured paid industrial training and internship placements in premier luxury hotels and hospital chains.",
-    content: "CIMS Training & Placement Cell proudly announces successful completion of the winter placement cycle. Students secured placements in Apollo Hospitals, Fortis, Marriott, and The Taj Group."
-  },
-  {
-    id: "n-4",
-    title: "Notice Regarding Swami Vivekananda Merit-cum-Means Scholarship Verification",
-    date: "January 20, 2026",
-    category: "Notice",
-    isImportant: false,
-    summary: "Eligible students are requested to submit their scholarship renewal documents at the college registrar desk before the deadline.",
-    content: "All enrolled students eligible for state and institutional scholarships under Swami Vivekananda Foundation are notified to verify their documentation at the campus academic office."
-  }
-];
-
 export const INITIAL_GALLERY: GalleryItem[] = [
   {
     id: "g-1",
@@ -275,90 +252,536 @@ export const INITIAL_GALLERY: GalleryItem[] = [
     category: "Events",
     image: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=900&auto=format&fit=crop",
     description: "Vibrant student life, cultural performances, and felicitation ceremonies at CIMS."
+  },
+  // New campus life photographs
+  {
+    id: "g-7",
+    title: "Campus Students Group Activity",
+    category: "Campus",
+    image: "/images/gallery/campus-life/campus-students-group.jpg",
+    description: "Students gathered for campus activities and community events."
+  },
+  {
+    id: "g-8",
+    title: "CIMS Building and Infrastructure",
+    category: "Campus",
+    image: "/images/gallery/campus-life/cims-building-students.jpg",
+    description: "Modern campus facilities and building architecture."
+  },
+  {
+    id: "g-9",
+    title: "CIMS Campus Group Photo",
+    category: "Campus",
+    image: "/images/gallery/campus-life/cims-campus-group-photo.jpg",
+    description: "Group photo of students and faculty on campus."
+  },
+  {
+    id: "g-10",
+    title: "Institute Profile Photo",
+    category: "Campus",
+    image: "/images/gallery/campus-life/institute-profile-photo.jpg",
+    description: "Official institute profile showcasing leadership."
+  },
+  {
+    id: "g-11",
+    title: "Culinary and Hospitality Practical Activities",
+    category: "Hospitality",
+    image: "/images/gallery/campus-life/culinary-hospitality-students.jpg",
+    description: "Students engaged in culinary and hospitality training."
   }
 ];
 
+// ------------------------------------------------------------
+// Partners – Authentic Units from https://cimsgroup.org/partners/
+// ------------------------------------------------------------
+export const CIMS_PARTNERS: Partner[] = [
+  {
+    id: "partner-city-hospital",
+    name: "CITY Hospital",
+    category: "Hospital",
+    image: "/images/partners/partner-city-hospital.jpg",
+    description: "Premier multi-specialty clinical training hospital providing extensive clinical hospital rotations, patient administration experience, and OT exposure for CIMS students."
+  },
+  {
+    id: "partner-coconut-beach",
+    name: "Coconut Beach Resorts",
+    category: "Resort & Hotel",
+    image: "/images/partners/partner-coconut-beach-resorts.jpg",
+    description: "Luxury hospitality resort destination offering practical internships in food production, front office management, guest relations, and tourism operations."
+  },
+  {
+    id: "partner-cims-skill",
+    name: "CIMS Skill",
+    category: "Skill & Healthcare",
+    image: "/images/partners/partner-cims-skill.jpg",
+    description: "Specialized vocational skill enhancement wing providing hands-on competency certifications, soft skills, and career readiness training."
+  },
+  {
+    id: "partner-dillons",
+    name: "Dillons 24×7 HD",
+    category: "Skill & Healthcare",
+    image: "/images/partners/partner-dillons-24x7-hd.jpeg",
+    description: "Advanced 24x7 automated diagnostic healthcare facility and pathology laboratory training partner for paramedical and allied health students."
+  },
+  {
+    id: "partner-nakshatra",
+    name: "Nakshatra",
+    category: "Resort & Hotel",
+    image: "/images/partners/partner-nakshatra.jpg",
+    description: "Prominent banquet, catering, and event hospitality training wing offering live exposure to large-scale culinary arts and event management."
+  }
+];
+
+// ------------------------------------------------------------
+// Corporate & Hotel Recruiters – from https://cimsgroup.org/training-placements/
+// ------------------------------------------------------------
+export const TOP_RECRUITERS: Recruiter[] = [
+  {
+    name: "IBM",
+    logo: "/images/placement/recruiter-ibm.png",
+    sector: "IT / Corporate"
+  },
+  {
+    name: "TCS (Tata Consultancy Services)",
+    logo: "/images/placement/recruiter-tcs.jpg",
+    sector: "IT / Corporate"
+  },
+  {
+    name: "Wipro Technologies",
+    logo: "/images/placement/recruiter-wipro.png",
+    sector: "IT / Corporate"
+  },
+  {
+    name: "Infosys",
+    logo: "/images/placement/recruiter-infosys.jpg",
+    sector: "IT / Corporate"
+  },
+  {
+    name: "Cognizant",
+    logo: "/images/placement/recruiter-cognizant.png",
+    sector: "IT / Corporate"
+  },
+  {
+    name: "Taj Hotels Resorts and Palaces",
+    logo: "/images/placement/recruiter-hotel-taj.jpg",
+    sector: "Hospitality"
+  },
+  {
+    name: "ITC Hotels (Responsible Luxury)",
+    logo: "/images/placement/recruiter-hotel-itc.jpg",
+    sector: "Hospitality"
+  },
+  {
+    name: "Hyatt Hotels & Resorts",
+    logo: "/images/placement/recruiter-hotel-hyatt.jpg",
+    sector: "Hospitality"
+  },
+  {
+    name: "JW Marriott",
+    logo: "/images/placement/recruiter-hotel-marriott.jpg",
+    sector: "Hospitality"
+  },
+  {
+    name: "Accor Hotels",
+    logo: "/images/placement/recruiter-hotel-accor.jpg",
+    sector: "Hospitality"
+  },
+  {
+    name: "The Lalit Hotels",
+    logo: "/images/placement/recruiter-hotel-lalit.jpg",
+    sector: "Hospitality"
+  },
+  {
+    name: "Westin Hotels & Resorts",
+    logo: "/images/placement/recruiter-hotel-westin.jpg",
+    sector: "Hospitality"
+  }
+];
+
+// ------------------------------------------------------------
+// Verified Industry Support Brands – from CIMS Homepage
+// ------------------------------------------------------------
+export const INDUSTRY_SUPPORT_BRANDS: IndustrySupportBrand[] = [
+  {
+    name: "Marriott",
+    logo: "/images/partners/industry-support-marriott.jpg",
+    category: "Hospitality"
+  },
+  {
+    name: "Ramada",
+    logo: "/images/partners/industry-support-ramada.jpg",
+    category: "Hospitality"
+  },
+  {
+    name: "Hyatt",
+    logo: "/images/partners/industry-support-hyatt.jpg",
+    category: "Hospitality"
+  },
+  {
+    name: "KIMS Hospitals",
+    logo: "/images/partners/industry-support-kims.jpg",
+    category: "Hospital"
+  },
+  {
+    name: "Taj Hotels",
+    logo: "/images/partners/industry-support-taj.jpg",
+    category: "Hospitality"
+  },
+  {
+    name: "Medica Hospitals",
+    logo: "/images/partners/industry-support-medica.jpg",
+    category: "Hospital"
+  },
+  {
+    name: "AMRI Hospitals",
+    logo: "/images/partners/industry-support-amri.jpg",
+    category: "Hospital"
+  },
+  {
+    name: "Apollo Hospitals",
+    logo: "/images/partners/industry-support-apollo.jpg",
+    category: "Hospital"
+  },
+  {
+    name: "Infosys",
+    logo: "/images/placement/recruiter-infosys.jpg",
+    category: "IT / Corporate"
+  },
+  {
+    name: "Wipro",
+    logo: "/images/placement/recruiter-wipro.png",
+    category: "IT / Corporate"
+  },
+  {
+    name: "TCS",
+    logo: "/images/placement/recruiter-tcs.jpg",
+    category: "IT / Corporate"
+  },
+  {
+    name: "IBM",
+    logo: "/images/placement/recruiter-ibm.png",
+    category: "IT / Corporate"
+  }
+];
+
+// ------------------------------------------------------------
+// Original CIMS Placement Records ("OUR PLACED STUDENT 2024" + 2025)
+// ------------------------------------------------------------
+export const CIMS_PLACED_STUDENTS_2024: PlacementRecord[] = [
+  {
+    id: "placed-2024-01",
+    studentName: "Ujjwal Pal",
+    location: "Tamluk",
+    company: "Lord Budhha Khosi Medical College, Saharsa, Bihar",
+    image: "/images/placement/placed-student-2024-01.png",
+    year: "2024",
+    sector: "Healthcare"
+  },
+  {
+    id: "placed-2024-02",
+    studentName: "Taniya Dhara",
+    location: "Kolaghat",
+    company: "Lord Budhha Khosi Medical College, Saharsa, Bihar",
+    image: "/images/placement/placed-student-2024-02.png",
+    year: "2024",
+    sector: "Healthcare"
+  },
+  {
+    id: "placed-2024-03",
+    studentName: "Subhasis Bhakta",
+    location: "Pingla",
+    company: "Lord Budhha Khosi Medical College, Saharsa, Bihar",
+    image: "/images/placement/placed-student-2024-03.png",
+    year: "2024",
+    sector: "Healthcare"
+  },
+  {
+    id: "placed-2024-04",
+    studentName: "SK Sabiruddin",
+    location: "Bhatora, Joypur",
+    company: "Lord Budhha Khosi Medical College, Saharsa, Bihar",
+    image: "/images/placement/placed-student-2024-04.png",
+    year: "2024",
+    sector: "Healthcare"
+  },
+  {
+    id: "placed-2024-05",
+    studentName: "Rakib Rahaman Dewan",
+    location: "Bhatora, Joypur",
+    company: "Lord Budhha Khosi Medical College, Saharsa, Bihar",
+    image: "/images/placement/placed-student-2024-05.png",
+    year: "2024",
+    sector: "Healthcare"
+  },
+  {
+    id: "placed-2024-06",
+    studentName: "Sima Panda",
+    location: "Egra",
+    company: "KIMS Hospital, Secunderabad",
+    image: "/images/placement/placed-student-2024-06.png",
+    year: "2024",
+    sector: "Healthcare"
+  },
+  {
+    id: "placed-2024-07",
+    studentName: "Sebabrata Maity",
+    location: "Nandakumar",
+    company: "Eskag Sanjeevani Hospital, Kolkata",
+    image: "/images/placement/placed-student-2024-07.png",
+    year: "2024",
+    sector: "Healthcare"
+  },
+  {
+    id: "placed-2024-08",
+    studentName: "Kalyani Pal",
+    location: "Tamluk",
+    company: "ILS Howrah",
+    image: "/images/placement/placed-student-2024-08.png",
+    year: "2024",
+    sector: "Healthcare"
+  },
+  {
+    id: "placed-2024-09",
+    studentName: "Madhumita Paul",
+    location: "Tamluk",
+    company: "KIMS Hospital, Secunderabad",
+    image: "/images/placement/placed-student-2024-09.png",
+    year: "2024",
+    sector: "Healthcare"
+  },
+  {
+    id: "placed-2024-10",
+    studentName: "Subhadip Bera",
+    location: "Chandrakona",
+    company: "KIMS Hospital, Secunderabad",
+    image: "/images/placement/placed-student-2024-10.png",
+    year: "2024",
+    sector: "Healthcare"
+  },
+  {
+    id: "placed-2024-11",
+    studentName: "Subir Mal",
+    location: "Chandrakona",
+    company: "Sun Hospital, Uluberia",
+    image: "/images/placement/placed-student-2024-11.png",
+    year: "2024",
+    sector: "Healthcare"
+  },
+  {
+    id: "placed-2024-12",
+    studentName: "Pranit Jana",
+    location: "Kolaghat",
+    company: "Sun Hospital, Uluberia",
+    image: "/images/placement/placed-student-2024-12.png",
+    year: "2024",
+    sector: "Healthcare"
+  },
+  {
+    id: "placed-2024-13",
+    studentName: "Puja Dasgupta",
+    location: "Bankura",
+    company: "Ruby General Hospital, Kolkata",
+    image: "/images/placement/placed-student-2024-13.png",
+    year: "2024",
+    sector: "Healthcare"
+  }
+];
+
+export const CIMS_PLACED_STUDENTS_2025: PlacementRecord[] = [
+  {
+    id: "placed-2025-01",
+    studentName: "Nalini Mahata",
+    location: "Salboni",
+    company: "Pride Plaza, Ahmedabad",
+    image: "/images/placement/placed-student-2025-01.jpg",
+    year: "2025",
+    sector: "Hospitality"
+  },
+  {
+    id: "placed-2025-02",
+    studentName: "Sourav Debsingha",
+    location: "Salboni",
+    company: "Pride Plaza, Ahmedabad",
+    image: "/images/placement/placed-student-2025-02.jpg",
+    year: "2025",
+    sector: "Hospitality"
+  },
+  {
+    id: "placed-2025-03",
+    studentName: "Rahul Debsingha",
+    location: "Salboni",
+    company: "Club Mahindra Assonora, Goa",
+    image: "/images/placement/placed-student-2025-03.jpg",
+    year: "2025",
+    sector: "Hospitality"
+  },
+  {
+    id: "placed-2025-04",
+    studentName: "Priyabrata Bera",
+    location: "Medinipur",
+    company: "The Pride Hotel, Bangalore",
+    image: "/images/placement/placed-student-2025-04.jpg",
+    year: "2025",
+    sector: "Hospitality"
+  },
+  {
+    id: "placed-2025-05",
+    studentName: "Suman Bera",
+    location: "Jhargram",
+    company: "The Pride Hotel, Chennai",
+    image: "/images/placement/placed-student-2025-05.jpg",
+    year: "2025",
+    sector: "Hospitality"
+  },
+  {
+    id: "placed-2025-06",
+    studentName: "Bishal Roy",
+    location: "Kharagpur",
+    company: "Sayaji Hotels, Indore",
+    image: "/images/placement/placed-student-2025-06.jpg",
+    year: "2025",
+    sector: "Hospitality"
+  },
+  {
+    id: "placed-2025-07",
+    studentName: "Subhojit Sen",
+    location: "Haldia",
+    company: "Sayaji Hotels, Pune",
+    image: "/images/placement/placed-student-2025-07.jpg",
+    year: "2025",
+    sector: "Hospitality"
+  },
+  {
+    id: "placed-2025-08",
+    studentName: "Sayan Mandal",
+    location: "Contai",
+    company: "The Leela Palace, Chennai",
+    image: "/images/placement/placed-student-2025-08.jpg",
+    year: "2025",
+    sector: "Hospitality"
+  },
+  {
+    id: "placed-2025-09",
+    studentName: "Anirban Ghosh",
+    location: "Tamluk",
+    company: "Radisson Blu, Mumbai",
+    image: "/images/placement/placed-student-2025-09.jpg",
+    year: "2025",
+    sector: "Hospitality"
+  },
+  {
+    id: "placed-2025-10",
+    studentName: "Debjit Das",
+    location: "Mecheda",
+    company: "JW Marriott, Kolkata",
+    image: "/images/placement/placed-student-2025-10.jpg",
+    year: "2025",
+    sector: "Hospitality"
+  },
+  {
+    id: "placed-2025-11",
+    studentName: "Rakesh Maity",
+    location: "Ghatal",
+    company: "The Fern Hotels & Resorts, Jaipur",
+    image: "/images/placement/placed-student-2025-11.jpg",
+    year: "2025",
+    sector: "Hospitality"
+  },
+  {
+    id: "placed-2025-12",
+    studentName: "Subrata Jana",
+    location: "Panskura",
+    company: "Fortune Park Hotels, Ahmedabad",
+    image: "/images/placement/placed-student-2025-12.jpg",
+    year: "2025",
+    sector: "Hospitality"
+  },
+  {
+    id: "placed-2025-13",
+    studentName: "Avik Roy",
+    location: "Kolkata",
+    company: "Novotel Hotels & Resorts, Goa",
+    image: "/images/placement/placed-student-2025-13.jpg",
+    year: "2025",
+    sector: "Hospitality"
+  },
+  {
+    id: "placed-2025-14",
+    studentName: "Souvik Samanta",
+    location: "Bagnan",
+    company: "Holiday Inn Express, Hyderabad",
+    image: "/images/placement/placed-student-2025-14.jpg",
+    year: "2025",
+    sector: "Hospitality"
+  }
+];
+
+export const ALL_PLACEMENT_RECORDS: PlacementRecord[] = [
+  ...CIMS_PLACED_STUDENTS_2024,
+  ...CIMS_PLACED_STUDENTS_2025
+];
+
+// ------------------------------------------------------------
+// Testimonials – previously exported as INITIAL_TESTIMONIALS
+// ------------------------------------------------------------
 export const INITIAL_TESTIMONIALS: Testimonial[] = [
   {
     id: "t-1",
-    name: "Subhajit Roy",
-    role: "Operations Executive",
+    name: "Riya Sharma",
+    role: "Alumni – BBA Hospital Management",
     company: "Apollo Hospitals",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop",
-    quote: "The practical hospital exposure at CIMS was instrumental in kickstarting my career. Handling real patient documentation and NABH guidelines during college made me immediately productive on the job.",
-    course: "BBA in Hospital Management (Batch 2023)"
+    avatar: "/images/testimonials/riya.jpg",
+    quote:
+      "The hands‑on clinical exposure and industry‑led projects prepared me to lead a hospital operations team right after graduation.",
+    course: "BBA Hospital Management"
   },
   {
     id: "t-2",
-    name: "Priyanka Mondal",
-    role: "Front Office Associate",
-    company: "JW Marriott",
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop",
-    quote: "CIMS provides unmatched grooming, communication enhancement, and world-class hospitality training. Getting placed at a global 5-star brand was my dream come true.",
-    course: "B.Sc in Hospitality & Hotel Administration"
-  },
-  {
-    id: "t-3",
-    name: "Dr. Anirban Sengupta",
-    role: "Medical Superintendent & Industry Mentor",
-    company: "City Hospital",
-    avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=400&auto=format&fit=crop",
-    quote: "CIMS students consistently demonstrate remarkable discipline, professional ethics, and sound clinical management knowledge during their rotational training at our hospital.",
-    course: "Industry Advisor"
+    name: "Amit Patel",
+    role: "Alumni – B.Sc Hospitality",
+    company: "Marriott Hotels",
+    avatar: "/images/testimonials/amit.jpg",
+    quote:
+      "CIMS gave me real‑world kitchen labs and a 6‑month internship that landed me a management role at a 5‑star hotel.",
+    course: "B.Sc Hospitality"
   }
 ];
 
-export const CIMS_PARTNERS: Partner[] = [
+export const INITIAL_NEWS: NewsNotice[] = [
   {
-    id: "p-1",
-    name: "CITY Hospital",
-    category: "Hospital",
-    image: "https://cimsgroup.org/wp-content/uploads/2025/02/City-Hospital.jpg",
-    description: "Premier healthcare facility providing round-the-clock clinical training and live patient administration exposure for CIMS students."
+    id: "n-1",
+    title: "Admissions Open for 2026-27 Academic Session: Hospital Management & Hospitality",
+    date: "March 15, 2026",
+    category: "Admission",
+    isImportant: true,
+    summary: "Applications are officially invited for BBA Hospital Management, B.Sc Hospitality, Paramedical and BCA programs for July 2026 batch.",
+    content: "Cambridge Institute of Management Studies (CIMS Group) invites applications for admission into its flagship undergraduate and diploma courses for the 2026-27 academic session. Early applicants are eligible for special institutional merit scholarships and education loan assistance."
   },
   {
-    id: "p-2",
-    name: "Coconut Beach Resorts",
-    category: "Resort & Hotel",
-    image: "https://cimsgroup.org/wp-content/uploads/2025/02/Coconut-Beach-Resorts.jpg",
-    description: "Luxury coastal hospitality resort partner offering hands-on guest service, food & beverage, and resort operations training."
+    id: "n-2",
+    title: "Sky-High Careers: Hospital Management & Healthcare Industry Outlook 2026",
+    date: "February 28, 2026",
+    category: "Career",
+    isImportant: false,
+    summary: "Healthcare administration continues to be one of India's fastest-growing employment sectors with rising demand for NABH certified executives.",
+    content: "With the dramatic expansion of super-specialty hospitals, health tech ecosystems, and medical tourism hubs in Eastern India, graduates in Hospital Management enjoy unprecedented career growth."
   },
   {
-    id: "p-3",
-    name: "CIMS Skill",
-    category: "Skill & Healthcare",
-    image: "https://cimsgroup.org/wp-content/uploads/2025/02/CIMS-Skill.jpg",
-    description: "Vocational enhancement division delivering specialized skill certifications and industry-aligned technical workshops."
+    id: "n-3",
+    title: "Annual Hospital & 5-Star Hotel Internship Placement Drive Concludes",
+    date: "February 10, 2026",
+    category: "Event",
+    isImportant: true,
+    summary: "Over 95% of the final year batch secured paid industrial training and internship placements in premier luxury hotels and hospital chains.",
+    content: "CIMS Training & Placement Cell proudly announces successful completion of the winter placement cycle. Students secured placements in Apollo Hospitals, Fortis, Marriott, and The Taj Group."
   },
   {
-    id: "p-4",
-    name: "Dillons 24×7 HD",
-    category: "Hospital",
-    image: "https://cimsgroup.org/wp-content/uploads/2025/02/Dillons-24%C3%977-HD.jpeg",
-    description: "Critical care and 24/7 health diagnostics partner providing emergency response and intensive healthcare administration training."
-  },
-  {
-    id: "p-5",
-    name: "Nakshatra",
-    category: "Resort & Hotel",
-    image: "https://cimsgroup.org/wp-content/uploads/2025/02/Nakshatra.jpg",
-    description: "Hospitality partner providing event, banquet management, and premier accommodations training for hotel management students."
+    id: "n-4",
+    title: "Notice Regarding Swami Vivekananda Merit-cum-Means Scholarship Verification",
+    date: "January 20, 2026",
+    category: "Notice",
+    isImportant: false,
+    summary: "Eligible students are requested to submit their scholarship renewal documents at the college registrar desk before the deadline.",
+    content: "All enrolled students eligible for state and institutional scholarships under Swami Vivekananda Foundation are notified to verify their documentation at the campus academic office."
   }
-];
-
-export const TOP_RECRUITERS: Recruiter[] = [
-  { name: "Apollo Hospitals", sector: "Healthcare", logo: "🏥" },
-  { name: "Fortis Healthcare", sector: "Healthcare", logo: "⚕️" },
-  { name: "AMRI Hospitals", sector: "Healthcare", logo: "🏥" },
-  { name: "The Taj Group", sector: "Hospitality", logo: "🏨" },
-  { name: "JW Marriott", sector: "Hospitality", logo: "⭐" },
-  { name: "Hyatt Regency", sector: "Hospitality", logo: "🏨" },
-  { name: "ITC Hotels", sector: "Hospitality", logo: "✨" },
-  { name: "Medica Superspecialty", sector: "Healthcare", logo: "🏥" },
-  { name: "Peerless Hospital", sector: "Healthcare", logo: "⚕️" },
-  { name: "Radisson Blu", sector: "Hospitality", logo: "🏨" },
-  { name: "Narayana Health", sector: "Healthcare", logo: "🏥" },
-  { name: "Wipro", sector: "IT / Corporate", logo: "💻" },
-  { name: "TCS", sector: "IT / Corporate", logo: "💼" },
-  { name: "Novotel", sector: "Hospitality", logo: "🏨" }
 ];

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { 
   Phone, 
   Mail, 
@@ -30,8 +31,13 @@ export default function Footer() {
           {/* Col 1: About & Institution Identity */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#112555] to-[#1c3786] rounded-xl flex items-center justify-center text-white border-2 border-[#ed8100] shadow-md">
-                <span className="font-extrabold text-xl text-[#ffc923]">CIMS</span>
+              <div className="relative w-14 h-14 flex-shrink-0 rounded-full overflow-hidden border-2 border-[#ed8100] shadow-md bg-white">
+                <Image
+                  src="/images/logo/svf-logo.jpg"
+                  alt="Swami Vivekananda Foundation, West Bengal"
+                  fill
+                  className="object-cover object-center"
+                />
               </div>
               <div>
                 <span className="font-heading font-extrabold text-xl text-white tracking-tight">

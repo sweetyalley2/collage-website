@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   },
 };
 
+import dynamic from 'next/dynamic';
+const BackgroundAnimation = dynamic(() => import('@/components/layout/BackgroundAnimation'), { ssr: false });
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,6 +31,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-white text-slate-800 antialiased selection:bg-[#ed8100] selection:text-white">
         <TopBar />
         <Navbar />
+        <BackgroundAnimation />
         <main className="flex-grow">
           {children}
         </main>
