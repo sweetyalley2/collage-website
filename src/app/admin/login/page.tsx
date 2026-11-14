@@ -6,8 +6,8 @@ import { Lock, Mail, ArrowRight, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdminLoginPage() {
-  const [email, setEmail] = useState('admin@cimsgroup.org');
-  const [password, setPassword] = useState('Sweety@123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
@@ -95,10 +95,10 @@ export default function AdminLoginPage() {
             </div>
           </div>
 
-          <div className="p-3 bg-blue-50/70 border border-blue-100 rounded-lg text-[11px] text-[#112555]">
-            <strong>Authorized Access Only:</strong> Preconfigured with institutional credentials:
-            <div className="mt-1 font-mono text-[10px] text-gray-600">
-              Email: <span className="font-bold text-gray-800">admin@cimsgroup.org</span> | Password: <span className="font-bold text-gray-800">Sweety@123</span>
+          <div className="p-3 bg-amber-50/80 border border-amber-200 rounded-lg text-[11px] text-amber-900 flex items-start gap-2">
+            <ShieldCheck size={16} className="text-amber-700 flex-shrink-0 mt-0.5" />
+            <div>
+              <strong>Institutional Access:</strong> This portal is reserved for authorized CIMS administrative staff. All session activities and access attempts are monitored and recorded.
             </div>
           </div>
 

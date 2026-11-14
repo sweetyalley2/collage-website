@@ -353,9 +353,6 @@ export default function Navbar() {
               <Link href="/contact" onClick={closeMobileMenu} className="font-bold text-base text-[#112555] hover:text-[#ed8100] py-1">
                 Contact Us
               </Link>
-              <Link href="/admin/login" onClick={closeMobileMenu} className="font-bold text-base text-gray-500 hover:text-[#ed8100] py-1">
-                CMS Admin Login
-              </Link>
             </div>
 
             <div className="pt-6 space-y-3">

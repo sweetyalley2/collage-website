@@ -488,7 +488,7 @@ export default function HomePage() {
                     CIMS Campus, Kolkata
                   </span>
                   <span className="bg-[#ed8100]/90 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg">
-                    Est. 2009
+                    Est. 2011
                   </span>
                 </div>
               </div>
@@ -1292,41 +1292,41 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white p-5 rounded-xl border border-gray-200 space-y-2 hover:shadow-md transition-shadow">
               <span className="text-[10px] font-bold text-red-600 bg-red-50 border border-red-200 px-2 py-0.5 rounded uppercase">
-                Admission 2026
+                Admission 2026-27
               </span>
               <h3 className="font-heading font-extrabold text-base text-[#112555] group-hover:text-[#ed8100] transition-colors leading-snug">
-                Admissions Open for July 2026 Batch in Hospital Management &amp; Paramedical
+                Admission Open 2026 in Kolkata Colleges: Your Guide to Hotel Management &amp; Computer Applications
               </h3>
               <p className="text-xs text-gray-600 leading-relaxed">
-                Applications invited for BBA Hospital Management, B.Sc Hospitality, Paramedical and BCA programs. Special scholarships available.
+                Official circular for 2026 academic admissions. Applications open for BBA Hospital Management, B.Sc Hospitality, Paramedical and BCA under MAKAUT (CCPTR).
               </p>
-              <div className="pt-2 text-[11px] text-gray-400">March 15, 2026</div>
+              <div className="pt-2 text-[11px] text-gray-400">April 2026</div>
             </div>
 
             <div className="bg-white p-5 rounded-xl border border-gray-200 space-y-2 hover:shadow-md transition-shadow">
               <span className="text-[10px] font-bold text-[#ed8100] bg-orange-50 border border-orange-200 px-2 py-0.5 rounded uppercase">
-                Placement Drive
+                Career Guide
               </span>
               <h3 className="font-heading font-extrabold text-base text-[#112555] group-hover:text-[#ed8100] transition-colors leading-snug">
-                Over 95% of Final Year Batch Placed in Premier Multispecialty Hospitals &amp; Luxury Hotels
+                Sky-High Careers: B.Sc Hotel Management Kolkata Admissions 2026 &amp; Aviation Guide
               </h3>
               <p className="text-xs text-gray-600 leading-relaxed">
-                CIMS Training &amp; Placement Cell proudly announces successful winter placement cycle with Apollo, Fortis, and Taj Group.
+                Career insights into 5-star hotel brand training, executive hospitality paths, and aviation ground operations with Taj, Marriott, Hyatt, and ITC.
               </p>
-              <div className="pt-2 text-[11px] text-gray-400">February 10, 2026</div>
+              <div className="pt-2 text-[11px] text-gray-400">March 2026</div>
             </div>
 
             <div className="bg-white p-5 rounded-xl border border-gray-200 space-y-2 hover:shadow-md transition-shadow">
               <span className="text-[10px] font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded uppercase">
-                Scholarship Notice
+                Placement Drive
               </span>
               <h3 className="font-heading font-extrabold text-base text-[#112555] group-hover:text-[#ed8100] transition-colors leading-snug">
-                Notice Regarding Swami Vivekananda Merit-cum-Means Scholarship Verification
+                Annual Hospital &amp; 5-Star Hotel Placement Drive Concludes with 100% Placement Record
               </h3>
               <p className="text-xs text-gray-600 leading-relaxed">
-                Eligible students are requested to submit their scholarship renewal documents at the college registrar desk.
+                CIMS Training &amp; Placement Cell announces successful placement cycle across Apollo Hospitals, Fortis, Medica, Taj Group, and Wipro.
               </p>
-              <div className="pt-2 text-[11px] text-gray-400">January 20, 2026</div>
+              <div className="pt-2 text-[11px] text-gray-400">February 2026</div>
             </div>
           </div>
 

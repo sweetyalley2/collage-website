@@ -128,15 +128,6 @@ export default function TopBar() {
               <CreditCard size={12} />
               <span className="hidden sm:inline">Pay Fee</span>
             </Link>
-
-            <Link 
-              href="/admin/login" 
-              className="text-gray-400 hover:text-[#ed8100] border-l border-gray-700 pl-3 transition-colors text-[11px] flex items-center gap-1"
-              title="CMS Admin Dashboard"
-            >
-              <Lock size={10} />
-              <span>Admin</span>
-            </Link>
           </div>
 
         </div>

@@ -218,11 +218,6 @@ export default function Footer() {
             <Link href="/contact" className="hover:text-white transition-colors">
               Contact Us
             </Link>
-            <span>•</span>
-            <Link href="/admin/login" className="flex items-center gap-1 text-gray-500 hover:text-[#ed8100] transition-colors">
-              <Lock size={11} />
-              <span>CMS Portal</span>
-            </Link>
           </div>
         </div>
 

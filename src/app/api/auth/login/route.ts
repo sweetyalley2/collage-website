@@ -4,10 +4,10 @@ export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json();
 
-    const validEmail = 'admin@cimsgroup.org';
-    const validPassword = 'Sweety@123';
+    const validEmail = (process.env.ADMIN_EMAIL || 'admin@cimsgroup.org').trim().toLowerCase();
+    const validPassword = process.env.ADMIN_PASSWORD || 'CIMS@2026#SecureAdmin!Auth';
 
-    if ((email?.toLowerCase() === validEmail.toLowerCase() || email?.toLowerCase() === 'admin') && password === validPassword) {
+    if ((email?.trim().toLowerCase() === validEmail || email?.trim().toLowerCase() === 'admin') && password === validPassword) {
       const response = NextResponse.json({
         success: true,
         user: { email: validEmail, role: 'SuperAdmin', name: 'CIMS Administrator' }
