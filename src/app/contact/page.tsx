@@ -1,7 +1,22 @@
 "use client";
 
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, MessageSquare, GraduationCap } from 'lucide-react';
+import Link from 'next/link';
+import { 
+  MapPin, 
+  Phone, 
+  Mail, 
+  Clock, 
+  Send, 
+  CheckCircle2, 
+  MessageSquare, 
+  GraduationCap, 
+  ChevronRight,
+  PhoneCall,
+  UserCheck,
+  CreditCard,
+  Building2
+} from 'lucide-react';
 import { CIMS_INFO } from '@/lib/data/cimsData';
 
 export default function ContactPage() {
@@ -43,41 +58,45 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white text-gray-800">
       
-      {/* Header Banner */}
-      <div className="bg-[#07101f] text-white py-16 sm:py-20 relative overflow-hidden border-b-2 border-[#c5a059]">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-20" 
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1600&auto=format&fit=crop')` }} 
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#07101f] via-[#0c1b33]/90 to-[#07101f]" />
-        
+      {/* ─────────────────────────────────────────────────────────────
+          1. HEADER BANNER (ISHM NAVY BANNER WITH BREADCRUMBS)
+      ───────────────────────────────────────────────────────────── */}
+      <div className="bg-[#112555] text-white py-14 sm:py-16 relative overflow-hidden border-b-4 border-[#ed8100]">
+        <div className="absolute inset-0 bg-[radial-gradient(#ed8100_1px,transparent_1px)] [background-size:24px_24px] opacity-10" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
-          <span className="text-[#dfbe7d] text-xs font-bold uppercase tracking-widest bg-[#0c1b33] px-3.5 py-1.5 border border-[#c5a059]/40 inline-block">
-            Admissions Desk &amp; Campus Registry
-          </span>
-          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white">
-            Contact CIMS Group
+          
+          {/* Breadcrumb */}
+          <div className="flex items-center justify-center gap-2 text-xs uppercase tracking-wider text-gray-300 font-bold">
+            <Link href="/" className="hover:text-[#ed8100] transition-colors">Home</Link>
+            <ChevronRight size={14} className="text-[#ed8100]" />
+            <span className="text-[#ed8100]">Contact Us</span>
+          </div>
+
+          <h1 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
+            CONTACT CIMS GROUP
           </h1>
-          <div className="gold-divider-center" />
-          <p className="text-gray-300 text-xs sm:text-sm max-w-2xl mx-auto font-sans leading-relaxed">
+          <div className="w-20 h-1 bg-[#ed8100] mx-auto rounded-full" />
+          
+          <p className="text-gray-200 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
             Connect with our senior admission counselors, schedule a campus visit, or inquire about scholarships and hostel amenities.
           </p>
+
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
           {/* Contact Details Column */}
           <div className="lg:col-span-5 space-y-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#9e7935] bg-[#faf7ef] px-3 py-1 border border-[#ebdcb6]">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-[#ed8100] bg-orange-50 px-3 py-1 rounded border border-orange-200">
                 Get In Touch
               </span>
-              <h2 className="font-serif text-2xl sm:text-4xl font-bold text-[#0c1b33] mt-3">
+              <h2 className="font-heading text-2xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-wide mt-3">
                 Campuses &amp; Admissions Desk
               </h2>
-              <div className="gold-divider mt-2 mb-4" />
+              <div className="section-title-bar" />
               <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
                 Connect with our academic advisory team for immediate guidance regarding course eligibility, fee schedules, hostel amenities, and loan assistance under Swami Vivekananda Foundation.
               </p>
@@ -85,50 +104,50 @@ export default function ContactPage() {
 
             <div className="space-y-4">
               
-              <div className="p-5 bg-[#faf7ef] border-l-2 border-[#0c1b33] flex items-start gap-4">
-                <div className="w-10 h-10 bg-[#0c1b33] text-[#dfbe7d] flex items-center justify-center flex-shrink-0">
-                  <MapPin size={18} />
+              <div className="p-5 bg-white rounded-xl border border-gray-200 hover:border-[#ed8100] shadow-sm flex items-start gap-4 transition-all">
+                <div className="w-11 h-11 rounded-lg bg-blue-50 text-[#112555] flex items-center justify-center flex-shrink-0">
+                  <MapPin size={20} className="text-[#ed8100]" />
                 </div>
                 <div>
-                  <h4 className="font-serif font-bold text-sm text-[#0c1b33]">Main Campus</h4>
-                  <p className="text-xs text-gray-600 mt-1">
+                  <h4 className="font-heading font-extrabold text-sm text-[#112555]">Main Campus</h4>
+                  <p className="text-xs text-gray-600 mt-1 leading-relaxed">
                     Cambridge Institute of Management Studies, Purba Medinipur, West Bengal, India.
                   </p>
                 </div>
               </div>
 
-              <div className="p-5 bg-[#faf7ef] border-l-2 border-[#c5a059] flex items-start gap-4">
-                <div className="w-10 h-10 bg-[#0c1b33] text-[#dfbe7d] flex items-center justify-center flex-shrink-0">
-                  <MapPin size={18} />
+              <div className="p-5 bg-white rounded-xl border border-gray-200 hover:border-[#ed8100] shadow-sm flex items-start gap-4 transition-all">
+                <div className="w-11 h-11 rounded-lg bg-orange-50 text-[#ed8100] flex items-center justify-center flex-shrink-0">
+                  <Building2 size={20} />
                 </div>
                 <div>
-                  <h4 className="font-serif font-bold text-sm text-[#0c1b33]">Kolkata Admissions Hub</h4>
-                  <p className="text-xs text-gray-600 mt-1">
+                  <h4 className="font-heading font-extrabold text-sm text-[#112555]">Kolkata Admissions Hub</h4>
+                  <p className="text-xs text-gray-600 mt-1 leading-relaxed">
                     Admissions &amp; Counseling Center, Kolkata, West Bengal.
                   </p>
                 </div>
               </div>
 
-              <div className="p-5 bg-[#faf7ef] border-l-2 border-[#0c1b33] flex items-start gap-4">
-                <div className="w-10 h-10 bg-[#0c1b33] text-[#dfbe7d] flex items-center justify-center flex-shrink-0">
-                  <Phone size={18} />
+              <div className="p-5 bg-white rounded-xl border border-gray-200 hover:border-[#ed8100] shadow-sm flex items-start gap-4 transition-all">
+                <div className="w-11 h-11 rounded-lg bg-green-50 text-emerald-700 flex items-center justify-center flex-shrink-0">
+                  <Phone size={20} />
                 </div>
                 <div>
-                  <h4 className="font-serif font-bold text-sm text-[#0c1b33]">Admissions Helpline</h4>
-                  <a href={`tel:${CIMS_INFO.phone}`} className="text-sm font-bold text-[#0c1b33] hover:text-[#9e7935] mt-1 block">
+                  <h4 className="font-heading font-extrabold text-sm text-[#112555]">Admissions Helpline</h4>
+                  <a href={`tel:${CIMS_INFO.phone}`} className="text-sm font-black text-[#112555] hover:text-[#ed8100] mt-1 block transition-colors">
                     {CIMS_INFO.phone}
                   </a>
                   <p className="text-[11px] text-gray-500">Mon – Sat (9:30 AM – 6:00 PM)</p>
                 </div>
               </div>
 
-              <div className="p-5 bg-[#faf7ef] border-l-2 border-[#c5a059] flex items-start gap-4">
-                <div className="w-10 h-10 bg-[#0c1b33] text-[#dfbe7d] flex items-center justify-center flex-shrink-0">
-                  <Mail size={18} />
+              <div className="p-5 bg-white rounded-xl border border-gray-200 hover:border-[#ed8100] shadow-sm flex items-start gap-4 transition-all">
+                <div className="w-11 h-11 rounded-lg bg-yellow-50 text-amber-700 flex items-center justify-center flex-shrink-0">
+                  <Mail size={20} />
                 </div>
                 <div>
-                  <h4 className="font-serif font-bold text-sm text-[#0c1b33]">Email Correspondence</h4>
-                  <a href={`mailto:${CIMS_INFO.email}`} className="text-xs text-gray-700 hover:text-[#0c1b33] mt-1 block">
+                  <h4 className="font-heading font-extrabold text-sm text-[#112555]">Email Correspondence</h4>
+                  <a href={`mailto:${CIMS_INFO.email}`} className="text-xs font-semibold text-gray-700 hover:text-[#ed8100] mt-1 block transition-colors">
                     {CIMS_INFO.email}
                   </a>
                   <p className="text-[11px] text-gray-500">Official queries answered within 24 hours</p>
@@ -136,27 +155,47 @@ export default function ContactPage() {
               </div>
 
             </div>
+
+            {/* Student Portal & Pay Fee Info Anchors */}
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              <div id="student-portal" className="p-4 bg-gray-50 rounded-xl border border-gray-200">
+                <div className="flex items-center gap-2 font-heading font-bold text-xs text-[#112555]">
+                  <UserCheck size={16} className="text-[#ed8100]" />
+                  <span>Student Portal</span>
+                </div>
+                <p className="text-[10px] text-gray-500 mt-1">Active student logins, attendance &amp; marks verification.</p>
+              </div>
+
+              <div id="pay-fee" className="p-4 bg-gray-50 rounded-xl border border-gray-200">
+                <div className="flex items-center gap-2 font-heading font-bold text-xs text-[#112555]">
+                  <CreditCard size={16} className="text-[#ed8100]" />
+                  <span>Pay Fee</span>
+                </div>
+                <p className="text-[10px] text-gray-500 mt-1">Tuition fee payment instructions &amp; bank details.</p>
+              </div>
+            </div>
+
           </div>
 
           {/* Contact Form Column */}
           <div className="lg:col-span-7">
-            <div className="bg-[#faf7ef] p-8 sm:p-10 border-t-4 border-[#c5a059] border-x border-b border-[#ebdcb6] shadow-xl">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#9e7935] bg-white px-2.5 py-1 border border-[#ebdcb6] inline-block mb-2">
+            <div className="bg-white p-7 sm:p-9 rounded-2xl border-t-4 border-[#ed8100] border-x border-b border-gray-200 shadow-2xl">
+              <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#ed8100] bg-orange-50 px-2.5 py-1 rounded border border-orange-200 inline-block mb-2">
                 Online Enquiry Desk
               </span>
-              <h3 className="font-serif text-2xl font-bold text-[#0c1b33]">
+              <h3 className="font-heading text-2xl font-black text-[#112555] uppercase">
                 Send an Admission or General Enquiry
               </h3>
               <p className="text-xs text-gray-500 mt-1 mb-6">
-                Your enquiry will be delivered directly to the academic counseling desk.
+                Your enquiry will be delivered directly to our academic counseling desk.
               </p>
 
               {submitted ? (
                 <div className="py-12 text-center space-y-4">
-                  <div className="w-16 h-16 bg-white text-[#9e7935] border border-[#ebdcb6] rounded-full flex items-center justify-center mx-auto shadow-sm">
+                  <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto shadow-sm">
                     <CheckCircle2 size={36} />
                   </div>
-                  <h4 className="font-serif font-bold text-2xl text-[#0c1b33]">
+                  <h4 className="font-heading font-extrabold text-2xl text-[#112555]">
                     Thank You, {formData.name || 'Candidate'}!
                   </h4>
                   <p className="text-xs text-gray-600 max-w-sm mx-auto leading-relaxed">
@@ -164,7 +203,7 @@ export default function ContactPage() {
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="text-xs font-bold text-[#9e7935] hover:text-[#0c1b33] underline transition-colors"
+                    className="text-xs font-bold text-[#ed8100] hover:underline transition-colors"
                   >
                     Submit Another Query
                   </button>
@@ -187,7 +226,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="Candidate Full Name"
-                      className="w-full px-4 py-2.5 text-xs bg-white border border-gray-300 rounded-none focus:outline-none focus:border-[#c5a059]"
+                      className="w-full px-4 py-2.5 text-xs bg-gray-50 border border-gray-300 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#ed8100]"
                     />
                   </div>
 
@@ -202,7 +241,7 @@ export default function ContactPage() {
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="10-digit Mobile Number"
-                        className="w-full px-4 py-2.5 text-xs bg-white border border-gray-300 rounded-none focus:outline-none focus:border-[#c5a059]"
+                        className="w-full px-4 py-2.5 text-xs bg-gray-50 border border-gray-300 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#ed8100]"
                       />
                     </div>
                     <div>
@@ -214,7 +253,7 @@ export default function ContactPage() {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="student@example.com"
-                        className="w-full px-4 py-2.5 text-xs bg-white border border-gray-300 rounded-none focus:outline-none focus:border-[#c5a059]"
+                        className="w-full px-4 py-2.5 text-xs bg-gray-50 border border-gray-300 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#ed8100]"
                       />
                     </div>
                   </div>
@@ -227,7 +266,7 @@ export default function ContactPage() {
                       <select
                         value={formData.course}
                         onChange={(e) => setFormData({ ...formData, course: e.target.value })}
-                        className="w-full px-4 py-2.5 text-xs bg-white border border-gray-300 rounded-none focus:outline-none focus:border-[#c5a059] font-medium"
+                        className="w-full px-4 py-2.5 text-xs bg-gray-50 border border-gray-300 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#ed8100] font-medium"
                       >
                         <option value="BBA in Hospital Management">BBA in Hospital Management</option>
                         <option value="B.Sc in Hospitality & Hotel Administration">B.Sc Hospitality &amp; Hotel Admin</option>
@@ -248,7 +287,7 @@ export default function ContactPage() {
                         value={formData.city}
                         onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                         placeholder="e.g. Purba Medinipur / Kolkata"
-                        className="w-full px-4 py-2.5 text-xs bg-white border border-gray-300 rounded-none focus:outline-none focus:border-[#c5a059]"
+                        className="w-full px-4 py-2.5 text-xs bg-gray-50 border border-gray-300 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#ed8100]"
                       />
                     </div>
                   </div>
@@ -262,17 +301,17 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Ask about fee installment, hostel accommodation, hospital clinical rotations..."
-                      className="w-full px-4 py-2.5 text-xs bg-white border border-gray-300 rounded-none focus:outline-none focus:border-[#c5a059]"
+                      className="w-full px-4 py-2.5 text-xs bg-gray-50 border border-gray-300 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#ed8100]"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full bg-[#0c1b33] hover:bg-[#13284d] text-white py-3.5 font-bold text-xs uppercase tracking-widest transition-colors flex items-center justify-center gap-2 border-b-2 border-[#c5a059] shadow-md disabled:opacity-70"
+                    className="w-full bg-[#ed8100] hover:bg-[#d97400] text-white py-3.5 rounded-md font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg disabled:opacity-70"
                   >
                     <span>{submitting ? 'Submitting Enquiry...' : 'Submit Admission Enquiry'}</span>
-                    <Send size={13} className="text-[#c5a059]" />
+                    <Send size={14} />
                   </button>
                 </form>
               )}

@@ -95,7 +95,7 @@ export default function Navbar() {
               Home
             </Link>
 
-            {/* About Us Dropdown */}
+            {/* About Us Dropdown (ISHM Mega-Menu Style) */}
             <div 
               className="relative group"
               onMouseEnter={() => setActiveDropdown('about')}
@@ -107,30 +107,67 @@ export default function Navbar() {
                   pathname.startsWith('/about') ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100] hover:underline decoration-2 decoration-[#ed8100]'
                 }`}
               >
-                <span>About Us</span>
+                <span>About</span>
                 <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-200 text-[#ed8100]" />
               </Link>
 
-              <div className="absolute top-full left-0 w-64 bg-white shadow-xl rounded-lg py-2 border-t-2 border-[#ed8100] border-x border-b border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
-                <Link href="/about" className="block px-4 py-2.5 text-xs font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ed8100] transition-colors border-b border-gray-50">
-                  Overview &amp; Heritage
-                </Link>
-                <Link href="/about#mission-vision" className="block px-4 py-2.5 text-xs font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ed8100] transition-colors border-b border-gray-50">
-                  Vision &amp; Mission
-                </Link>
-                <Link href="/about#leadership" className="block px-4 py-2.5 text-xs font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ed8100] transition-colors border-b border-gray-50">
-                  Director &amp; Leadership Desk
-                </Link>
-                <Link href="/about#faculty" className="block px-4 py-2.5 text-xs font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ed8100] transition-colors border-b border-gray-50">
-                  Faculty &amp; Mentors
-                </Link>
-                <Link href="/about#why-cims" className="block px-4 py-2.5 text-xs font-semibold text-gray-700 hover:bg-orange-50 hover:text-[#ed8100] transition-colors">
-                  Why Choose CIMS
-                </Link>
+              <div className="absolute top-full left-0 w-[520px] bg-white shadow-2xl rounded-lg p-5 border-t-3 border-[#ed8100] border-x border-b border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
+                <div className="border-b border-gray-100 pb-2 mb-3">
+                  <h3 className="font-heading font-extrabold text-[#112555] text-sm uppercase tracking-wider flex items-center gap-2">
+                    <Building2 size={16} className="text-[#ed8100]" />
+                    About CIMS Group
+                  </h3>
+                </div>
+                <div className="grid grid-cols-12 gap-4">
+                  <div className="col-span-4 space-y-1 text-xs">
+                    <div className="text-[10px] font-extrabold text-[#ed8100] uppercase tracking-wider mb-1">Institutional</div>
+                    <Link href="/about" className="block py-1 font-semibold text-gray-700 hover:text-[#ed8100] transition-colors">
+                      Overview &amp; Heritage
+                    </Link>
+                    <Link href="/about#mission-vision" className="block py-1 font-semibold text-gray-700 hover:text-[#ed8100] transition-colors">
+                      Mission &amp; Vision
+                    </Link>
+                    <Link href="/about#leadership" className="block py-1 font-semibold text-gray-700 hover:text-[#ed8100] transition-colors">
+                      Director&apos;s Desk
+                    </Link>
+                    <Link href="/about#why-cims" className="block py-1 font-semibold text-gray-700 hover:text-[#ed8100] transition-colors">
+                      Why Choose CIMS
+                    </Link>
+                  </div>
+                  <div className="col-span-4 space-y-1 text-xs">
+                    <div className="text-[10px] font-extrabold text-[#ed8100] uppercase tracking-wider mb-1">Affiliations</div>
+                    <Link href="/approvals-affiliations" className="block py-1 font-semibold text-gray-700 hover:text-[#ed8100] transition-colors">
+                      MAKAUT (CCPTR)
+                    </Link>
+                    <Link href="/#tie-ups" className="block py-1 font-semibold text-gray-700 hover:text-[#ed8100] transition-colors">
+                      Hospital &amp; Hotel Tie-ups
+                    </Link>
+                    <Link href="/about#faculty" className="block py-1 font-semibold text-gray-700 hover:text-[#ed8100] transition-colors">
+                      Faculty Mentors
+                    </Link>
+                    <Link href="/about#awards" className="block py-1 font-semibold text-gray-700 hover:text-[#ed8100] transition-colors">
+                      Awards &amp; Recognition
+                    </Link>
+                  </div>
+                  <div className="col-span-4 bg-gray-50 p-2.5 rounded border border-gray-100 flex flex-col justify-between">
+                    <div className="relative h-24 w-full rounded overflow-hidden">
+                      <Image
+                        src="/images/hero/cims-building.jpg"
+                        alt="CIMS Campus"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="mt-2 text-[10px] text-gray-600 leading-tight">
+                      <span className="font-bold text-[#112555] block">CIMS Campus</span>
+                      Purba Medinipur, WB • Est. 2011
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Courses Dropdown */}
+            {/* Courses Dropdown (ISHM Programs Mega-Menu Style) */}
             <div 
               className="relative group"
               onMouseEnter={() => setActiveDropdown('courses')}
@@ -146,50 +183,75 @@ export default function Navbar() {
                 <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-200 text-[#ed8100]" />
               </Link>
 
-              <div className="absolute top-full left-0 w-80 bg-white shadow-xl rounded-lg py-2 border-t-2 border-[#ed8100] border-x border-b border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
-                <div className="px-4 py-2 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 flex items-center justify-between">
-                  <span>Career Programs</span>
-                  <Link href="/courses" className="text-[#ed8100] hover:underline lowercase text-[10px]">all courses</Link>
+              <div className="absolute top-full left-0 w-[620px] bg-white shadow-2xl rounded-lg p-5 border-t-3 border-[#ed8100] border-x border-b border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
+                <div className="border-b border-gray-100 pb-2 mb-3 flex items-center justify-between">
+                  <h3 className="font-heading font-extrabold text-[#112555] text-sm uppercase tracking-wider flex items-center gap-2">
+                    <GraduationCap size={16} className="text-[#ed8100]" />
+                    University Affiliated Programs
+                  </h3>
+                  <Link href="/courses" className="text-xs font-bold text-[#ed8100] hover:underline">
+                    View All Programs &rarr;
+                  </Link>
                 </div>
-                <Link href="/courses/hospital-management" className="flex items-center gap-3 px-4 py-3 text-xs font-semibold text-gray-800 hover:bg-orange-50 hover:text-[#ed8100] transition-colors border-b border-gray-50">
-                  <div className="p-1.5 bg-blue-50 text-[#112555] rounded">
-                    <Stethoscope size={16} />
-                  </div>
-                  <div>
-                    <div className="font-bold text-sm text-[#112555]">Hospital Management</div>
-                    <div className="text-[11px] text-gray-500 font-normal">BBA-HM &amp; Healthcare Administration</div>
-                  </div>
-                </Link>
 
-                <Link href="/courses/hospitality-hotel-management" className="flex items-center gap-3 px-4 py-3 text-xs font-semibold text-gray-800 hover:bg-orange-50 hover:text-[#ed8100] transition-colors border-b border-gray-50">
-                  <div className="p-1.5 bg-orange-50 text-[#ed8100] rounded">
-                    <Hotel size={16} />
-                  </div>
-                  <div>
-                    <div className="font-bold text-sm text-[#112555]">Hospitality &amp; Hotel Management</div>
-                    <div className="text-[11px] text-gray-500 font-normal">B.Sc Hospitality with 5-Star Hotel Training</div>
-                  </div>
-                </Link>
+                <div className="grid grid-cols-12 gap-4">
+                  <div className="col-span-7 space-y-2">
+                    <div>
+                      <div className="text-[10px] font-extrabold text-[#ed8100] uppercase tracking-wider mb-1">
+                        Degree Programs
+                      </div>
+                      <div className="space-y-1">
+                        <Link href="/courses/hospital-management" className="block text-xs font-bold text-[#112555] hover:text-[#ed8100] transition-colors">
+                          BBA in Hospital Management
+                          <span className="block text-[10px] text-gray-500 font-normal">3 Years • Hospital Administration &amp; Clinical Management</span>
+                        </Link>
+                        <Link href="/courses/hospitality-hotel-management" className="block text-xs font-bold text-[#112555] hover:text-[#ed8100] transition-colors">
+                          B.Sc in Hospitality &amp; Hotel Administration
+                          <span className="block text-[10px] text-gray-500 font-normal">3 Years • 5-Star Hotel Training &amp; Global Career</span>
+                        </Link>
+                        <Link href="/courses/bca" className="block text-xs font-bold text-[#112555] hover:text-[#ed8100] transition-colors">
+                          BCA - Bachelor of Computer Applications
+                          <span className="block text-[10px] text-gray-500 font-normal">3 Years • Software, Web, Cloud &amp; Full-Stack</span>
+                        </Link>
+                      </div>
+                    </div>
 
-                <Link href="/courses/allied-health-science" className="flex items-center gap-3 px-4 py-3 text-xs font-semibold text-gray-800 hover:bg-orange-50 hover:text-[#ed8100] transition-colors border-b border-gray-50">
-                  <div className="p-1.5 bg-green-50 text-emerald-700 rounded">
-                    <ShieldCheck size={16} />
+                    <div className="pt-2 border-t border-gray-100">
+                      <div className="text-[10px] font-extrabold text-[#ed8100] uppercase tracking-wider mb-1">
+                        Allied Health &amp; Paramedical
+                      </div>
+                      <Link href="/courses/allied-health-science" className="block text-xs font-bold text-[#112555] hover:text-[#ed8100] transition-colors">
+                        Paramedical Sciences (BMLT, BMRIT, Critical Care, OTT)
+                        <span className="block text-[10px] text-gray-500 font-normal">3-4 Years • Hospital Clinical Postings &amp; Diagnostic Labs</span>
+                      </Link>
+                    </div>
                   </div>
-                  <div>
-                    <div className="font-bold text-sm text-[#112555]">Allied Health Science (Paramedical)</div>
-                    <div className="text-[11px] text-gray-500 font-normal">BMLT, BMRIT, Critical Care, OT Technology</div>
-                  </div>
-                </Link>
 
-                <Link href="/courses/bca" className="flex items-center gap-3 px-4 py-3 text-xs font-semibold text-gray-800 hover:bg-orange-50 hover:text-[#ed8100] transition-colors">
-                  <div className="p-1.5 bg-indigo-50 text-indigo-700 rounded">
-                    <Laptop size={16} />
+                  <div className="col-span-5 bg-gradient-to-br from-blue-50/70 to-orange-50/50 p-3 rounded-lg border border-gray-100 flex flex-col justify-between">
+                    <div>
+                      <div className="relative h-28 w-full rounded overflow-hidden shadow-sm">
+                        <Image
+                          src="/images/hero/campus-photo.jpg"
+                          alt="Practical Training"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="mt-2 text-[11px] font-bold text-[#112555]">
+                        100% Practical Training
+                      </div>
+                      <p className="text-[10px] text-gray-600 mt-0.5 leading-snug">
+                        Rotations at City Hospital, Fortis, Medica, and luxury chains Taj, Hyatt &amp; Marriott.
+                      </p>
+                    </div>
+                    <Link
+                      href="/#admission-form"
+                      className="mt-3 block text-center bg-[#ed8100] hover:bg-[#d97400] text-white text-[11px] font-bold uppercase tracking-wider py-1.5 rounded shadow-sm"
+                    >
+                      Enquire for 2026 Batch
+                    </Link>
                   </div>
-                  <div>
-                    <div className="font-bold text-sm text-[#112555]">BCA - Computer Applications</div>
-                    <div className="text-[11px] text-gray-500 font-normal">Software Engineering &amp; Modern Computing</div>
-                  </div>
-                </Link>
+                </div>
               </div>
             </div>
 
@@ -240,8 +302,21 @@ export default function Navbar() {
 
           </nav>
 
-          {/* Right Action CTA Buttons (Matches ISHM Reference) */}
-          <div className="hidden sm:flex items-center space-x-3 flex-shrink-0">
+          {/* Right Action CTA Buttons & ISHM "Need Help" Box */}
+          <div className="hidden sm:flex items-center space-x-2.5 xl:space-x-3 flex-shrink-0">
+            {/* ISHM Style Yellow Call Widget */}
+            <div className="hidden 2xl:flex items-center bg-[#ffc923] text-[#112555] px-3 py-1.5 rounded-md shadow-sm border border-yellow-400">
+              <div className="animate-phone-ring text-[#112555] mr-2">
+                <PhoneCall size={15} />
+              </div>
+              <div className="flex flex-col leading-tight">
+                <span className="text-[9px] font-black uppercase tracking-wider text-gray-800">Need Help?</span>
+                <a href={`tel:${CIMS_INFO.phone}`} className="text-xs font-black tracking-tight hover:underline">
+                  {CIMS_INFO.phone}
+                </a>
+              </div>
+            </div>
+
             <a 
               href="/#admission-form" 
               className="bg-[#ed8100] hover:bg-[#d97400] text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-md shadow-md transition-all hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-1.5"

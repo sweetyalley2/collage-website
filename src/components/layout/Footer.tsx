@@ -189,13 +189,19 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-gray-800">
+            <div className="mt-4 pt-3 border-t border-gray-800 flex items-center justify-between">
               <Link 
                 href="/#admission-form" 
                 className="inline-block bg-[#ed8100] hover:bg-[#d97400] text-white text-xs font-bold uppercase tracking-wider px-3.5 py-2 rounded shadow transition-colors"
               >
                 Apply Online 2026
               </Link>
+
+              {/* ISHM Style Number of Visitors Badge */}
+              <div className="text-right">
+                <span className="text-[10px] uppercase font-bold text-[#ed8100] tracking-wider block">Total Visitors</span>
+                <span className="text-sm font-black text-white font-mono tracking-widest bg-gray-900/80 px-2 py-0.5 rounded border border-gray-700">184,950+</span>
+              </div>
             </div>
           </div>
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import { Calendar, Bell, ArrowRight, Download, Share2 } from 'lucide-react';
-import { INITIAL_NEWS } from '@/lib/data/cimsData';
+import { Calendar, Bell, ArrowRight, Download, Share2, ChevronRight, Sparkles } from 'lucide-react';
+import { INITIAL_NEWS, CIMS_INFO } from '@/lib/data/cimsData';
 
 export const metadata = {
   title: "News & Notices | Cambridge Institute of Management Studies",
@@ -12,25 +12,29 @@ export default function NewsNoticesPage() {
   return (
     <div className="min-h-screen bg-white text-gray-800">
       
-      {/* Header Banner */}
-      <div className="bg-[#07101f] text-white py-16 sm:py-20 relative overflow-hidden border-b-2 border-[#c5a059]">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-20" 
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1600&auto=format&fit=crop')` }} 
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#07101f] via-[#0c1b33]/90 to-[#07101f]" />
-        
+      {/* ─────────────────────────────────────────────────────────────
+          1. HEADER BANNER (ISHM NAVY BANNER WITH BREADCRUMBS)
+      ───────────────────────────────────────────────────────────── */}
+      <div className="bg-[#112555] text-white py-14 sm:py-16 relative overflow-hidden border-b-4 border-[#ed8100]">
+        <div className="absolute inset-0 bg-[radial-gradient(#ed8100_1px,transparent_1px)] [background-size:24px_24px] opacity-10" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
-          <span className="text-[#dfbe7d] text-xs font-bold uppercase tracking-widest bg-[#0c1b33] px-3.5 py-1.5 border border-[#c5a059]/40 inline-block">
-            Official Circulars &amp; Communiqués
-          </span>
-          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white">
-            News &amp; Notices
+          
+          {/* Breadcrumb */}
+          <div className="flex items-center justify-center gap-2 text-xs uppercase tracking-wider text-gray-300 font-bold">
+            <Link href="/" className="hover:text-[#ed8100] transition-colors">Home</Link>
+            <ChevronRight size={14} className="text-[#ed8100]" />
+            <span className="text-[#ed8100]">News &amp; Notices</span>
+          </div>
+
+          <h1 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
+            NEWS &amp; NOTICES
           </h1>
-          <div className="gold-divider-center" />
-          <p className="text-gray-300 text-xs sm:text-sm max-w-2xl mx-auto font-sans leading-relaxed">
+          <div className="w-20 h-1 bg-[#ed8100] mx-auto rounded-full" />
+          
+          <p className="text-gray-200 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
             Stay informed with the latest institutional circulars regarding admissions, examinations, scholarship verifications, and corporate placement cycles.
           </p>
+
         </div>
       </div>
 
@@ -39,45 +43,45 @@ export default function NewsNoticesPage() {
         {INITIAL_NEWS.map((item) => (
           <div 
             key={item.id}
-            className="bg-[#faf7ef] border-t-2 border-[#0c1b33] hover:border-[#c5a059] border-x border-b border-[#ebdcb6] p-6 sm:p-8 hover:shadow-md transition-all space-y-3.5"
+            className="bg-white border border-gray-200 hover:border-[#ed8100] rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 space-y-4 hover:-translate-y-1 group"
           >
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#ebdcb6] pb-3">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 pb-3">
               <div className="flex items-center gap-2.5">
-                <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 border ${
-                  item.isImportant ? 'bg-red-50 text-red-700 border-red-200' : 'bg-white text-[#9e7935] border-[#ebdcb6]'
+                <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded ${
+                  item.isImportant ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-orange-50 text-[#ed8100] border border-orange-200'
                 }`}>
                   {item.category} {item.isImportant && '• URGENT'}
                 </span>
-                <span className="flex items-center gap-1 text-xs text-gray-500 font-medium">
-                  <Calendar size={13} className="text-[#c5a059]" />
+                <span className="flex items-center gap-1.5 text-xs text-gray-500 font-semibold">
+                  <Calendar size={13} className="text-[#ed8100]" />
                   <span>{item.date}</span>
                 </span>
               </div>
-              <span className="text-[10px] font-bold text-[#0c1b33] bg-white px-2.5 py-0.5 border border-[#ebdcb6] uppercase tracking-wider">
-                Ref Circular #{item.id}
+              <span className="text-[10px] font-bold text-gray-400 bg-gray-50 px-2 py-0.5 rounded uppercase tracking-wider">
+                Circular #{item.id}
               </span>
             </div>
 
-            <h2 className="font-serif font-bold text-xl sm:text-2xl text-[#0c1b33]">
+            <h2 className="font-heading font-extrabold text-xl sm:text-2xl text-[#112555] group-hover:text-[#ed8100] transition-colors leading-snug">
               {item.title}
             </h2>
 
-            <p className="text-xs sm:text-sm text-gray-700 leading-relaxed font-medium">
+            <p className="text-xs sm:text-sm text-gray-700 leading-relaxed font-semibold">
               {item.summary}
             </p>
 
-            <p className="text-xs text-gray-600 leading-relaxed pt-2">
+            <p className="text-xs text-gray-600 leading-relaxed pt-1">
               {item.content}
             </p>
 
-            <div className="pt-3 border-t border-[#ebdcb6] flex items-center justify-between">
-              <Link
-                href="/#admissions"
-                className="text-xs font-bold text-[#0c1b33] hover:text-[#9e7935] uppercase tracking-wider flex items-center gap-1.5 transition-colors"
+            <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
+              <a
+                href="/#admission-form"
+                className="text-xs font-bold text-[#ed8100] hover:underline uppercase tracking-wider flex items-center gap-1.5 transition-colors"
               >
-                <span>Inquire regarding this circular</span>
-                <ArrowRight size={13} className="text-[#c5a059]" />
-              </Link>
+                <span>Inquire Regarding This Circular</span>
+                <ArrowRight size={14} />
+              </a>
             </div>
           </div>
         ))}

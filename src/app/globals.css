@@ -110,3 +110,40 @@ h1, h2, h3, h4, h5, h6, .font-heading {
 .animate-ticker:hover {
   animation-play-state: paused;
 }
+
+/* ISHM Phone Ring Animation */
+@keyframes phoneRing {
+  0% { transform: rotate(0) scale(1); }
+  10% { transform: rotate(-25deg) scale(1.1); }
+  20% { transform: rotate(25deg) scale(1.1); }
+  30% { transform: rotate(-25deg) scale(1.1); }
+  40% { transform: rotate(25deg) scale(1.1); }
+  50% { transform: rotate(0) scale(1); }
+  100% { transform: rotate(0) scale(1); }
+}
+
+.animate-phone-ring {
+  animation: phoneRing 2.5s infinite ease-in-out;
+  display: inline-block;
+  transform-origin: center center;
+}
+
+/* Section Title Underline Bar (ISHM Signature) */
+.section-title-bar {
+  width: 60px;
+  height: 3px;
+  background-color: #ed8100;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+.section-title-bar-center {
+  width: 60px;
+  height: 3px;
+  background-color: #ed8100;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 2px;
+}

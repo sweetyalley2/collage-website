@@ -1264,6 +1264,111 @@ export default function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
+          10.5. TESTIMONIALS & INDUSTRY SPEAKS (MATCHES ISHM "#Testimonials")
+      ───────────────────────────────────────────────────────────── */}
+      <section className="py-16 bg-white border-t border-gray-200" id="testimonials">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
+              Student &amp; Mentor Voices
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-wide">
+              TESTIMONIALS &amp; INDUSTRY SPEAKS
+            </h2>
+            <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full" />
+            <p className="text-xs sm:text-sm text-gray-600 mt-2">
+              Hear from our successfully placed alumni, clinical hospital superintendents, and executive hospitality mentors.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-[#f8fafc] p-6 rounded-2xl border border-gray-200 hover:border-[#ed8100] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
+              <div className="space-y-3">
+                <div className="flex items-center gap-1 text-[#ffc923] text-sm">
+                  {"★★★★★"}
+                </div>
+                <p className="text-xs text-gray-700 italic leading-relaxed">
+                  &ldquo;The hands‑on clinical exposure and live hospital postings at City Hospital prepared me to lead an inpatient floor team at Apollo right after graduation.&rdquo;
+                </p>
+              </div>
+              <div className="pt-4 border-t border-gray-200 mt-4 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#112555] text-white font-bold text-xs flex items-center justify-center">
+                  RS
+                </div>
+                <div>
+                  <h4 className="font-heading font-extrabold text-xs text-[#112555]">Riya Sharma</h4>
+                  <p className="text-[10px] text-[#ed8100] font-bold">Placed at Apollo Hospitals</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-[#f8fafc] p-6 rounded-2xl border border-gray-200 hover:border-[#ed8100] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
+              <div className="space-y-3">
+                <div className="flex items-center gap-1 text-[#ffc923] text-sm">
+                  {"★★★★★"}
+                </div>
+                <p className="text-xs text-gray-700 italic leading-relaxed">
+                  &ldquo;CIMS gave me real‑world kitchen labs and a 6‑month mandatory internship that landed me a guest service management role at Marriott Hotels.&rdquo;
+                </p>
+              </div>
+              <div className="pt-4 border-t border-gray-200 mt-4 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#112555] text-white font-bold text-xs flex items-center justify-center">
+                  AP
+                </div>
+                <div>
+                  <h4 className="font-heading font-extrabold text-xs text-[#112555]">Amit Patel</h4>
+                  <p className="text-[10px] text-[#ed8100] font-bold">Placed at Marriott Hotels</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-[#f8fafc] p-6 rounded-2xl border border-gray-200 hover:border-[#ed8100] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
+              <div className="space-y-3">
+                <div className="flex items-center gap-1 text-[#ffc923] text-sm">
+                  {"★★★★★"}
+                </div>
+                <p className="text-xs text-gray-700 italic leading-relaxed">
+                  &ldquo;CIMS paramedical and hospital administration interns demonstrate exceptional diagnostic discipline and patient care standards during rotations.&rdquo;
+                </p>
+              </div>
+              <div className="pt-4 border-t border-gray-200 mt-4 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#ed8100] text-white font-bold text-xs flex items-center justify-center">
+                  SM
+                </div>
+                <div>
+                  <h4 className="font-heading font-extrabold text-xs text-[#112555]">Dr. S. K. Mukherjee</h4>
+                  <p className="text-[10px] text-gray-500 font-semibold">Medical Superintendent, City Hospital</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-[#f8fafc] p-6 rounded-2xl border border-gray-200 hover:border-[#ed8100] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
+              <div className="space-y-3">
+                <div className="flex items-center gap-1 text-[#ffc923] text-sm">
+                  {"★★★★★"}
+                </div>
+                <p className="text-xs text-gray-700 italic leading-relaxed">
+                  &ldquo;The practical rigor of CIMS computing labs equipped me with modern full-stack development skills, clearing my TCS placement interview smoothly.&rdquo;
+                </p>
+              </div>
+              <div className="pt-4 border-t border-gray-200 mt-4 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#112555] text-white font-bold text-xs flex items-center justify-center">
+                  SB
+                </div>
+                <div>
+                  <h4 className="font-heading font-extrabold text-xs text-[#112555]">Souvik Biswas</h4>
+                  <p className="text-[10px] text-[#ed8100] font-bold">Placed at TCS (BCA Batch)</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
           11. NEWS & NOTICE (MATCHES ISHM "News & Notice")
       ───────────────────────────────────────────────────────────── */}
       <section className="py-16 bg-[#f8fafc] border-t border-gray-200" id="news">
