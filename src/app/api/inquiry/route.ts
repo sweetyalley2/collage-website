@@ -32,14 +32,15 @@ async function sendEmailNotification(inquiry: {
   };
 
   try {
-    // Attempt dispatch via FormSubmit ajax endpoint to deliver directly to sweetyalley2@gmail.com
+    // Attempt dispatch via FormSubmit ajax endpoint with 6s timeout so it never hangs or crashes
     const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(TARGET_NOTIFICATION_EMAIL)}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(emailPayload)
+      body: JSON.stringify(emailPayload),
+      signal: AbortSignal.timeout(6000)
     });
 
     if (response.ok) {
@@ -49,7 +50,8 @@ async function sendEmailNotification(inquiry: {
       console.warn(`[INQUIRY_EMAIL] FormSubmit responded with status: ${response.status}`);
     }
   } catch (err: any) {
-    console.error('[INQUIRY_EMAIL] Failed to send email via FormSubmit:', err?.message || err);
+    // Gracefully handle any network timeout / fetch failed error without crashing
+    console.warn('[INQUIRY_EMAIL] External notification dispatch skipped (offline/network timeout):', err?.message || 'fetch failed');
   }
 
   return false;

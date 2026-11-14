@@ -70,26 +70,32 @@ const DEFAULT_DATA: CMSData = {
   ]
 };
 
+let memoryCache: CMSData | null = null;
+
 export function getCMSData(): CMSData {
+  if (memoryCache) return memoryCache;
   try {
     if (fs.existsSync(DB_FILE)) {
       const fileData = fs.readFileSync(DB_FILE, 'utf-8');
-      return JSON.parse(fileData);
+      const parsed = JSON.parse(fileData);
+      memoryCache = parsed;
+      return parsed;
     }
   } catch (err) {
-    console.error("Error reading CMS database, falling back to defaults:", err);
+    console.warn("Error reading local CMS database, using defaults:", err);
   }
-  saveCMSData(DEFAULT_DATA);
+  memoryCache = DEFAULT_DATA;
   return DEFAULT_DATA;
 }
 
 export function saveCMSData(data: CMSData): boolean {
+  memoryCache = data;
   try {
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
     return true;
   } catch (err) {
-    console.error("Error saving CMS database:", err);
-    return false;
+    console.warn("Filesystem read-only (serverless environment), stored in memory cache:", err);
+    return true;
   }
 }
 

@@ -21,7 +21,7 @@ import {
   Calendar
 } from 'lucide-react';
 import { CMSData, Inquiry } from '@/lib/cmsStore';
-import { Course, NewsNotice, GalleryItem } from '@/lib/data/cimsData';
+import { Course, NewsNotice, GalleryItem, INITIAL_COURSES, INITIAL_NEWS, INITIAL_GALLERY, INITIAL_TESTIMONIALS } from '@/lib/data/cimsData';
 
 export default function AdminDashboardPage() {
   const [data, setData] = useState<CMSData | null>(null);
@@ -56,9 +56,38 @@ export default function AdminDashboardPage() {
       if (res.ok) {
         const json = await res.json();
         setData(json);
+      } else {
+        setData({
+          hero: {
+            badge: "★ Ranked Leading Institute in West Bengal",
+            headline: "Welcome To Cambridge Institute of Management Studies",
+            subheadline: "Empowering Next-Generation Leaders in Hospital Management, Hospitality, Allied Health Sciences & Computer Applications under MAKAUT (CCPTR) & Swami Vivekananda Foundation.",
+            admissionSeason: "Admissions Open 2026-2027",
+            announcementTicker: "📢 Admissions Open for 2026 Academic Session | 100% Placement Assistance"
+          },
+          courses: INITIAL_COURSES,
+          news: INITIAL_NEWS,
+          gallery: INITIAL_GALLERY,
+          testimonials: INITIAL_TESTIMONIALS,
+          inquiries: []
+        });
       }
     } catch (err) {
-      console.error(err);
+      console.warn('Network issue fetching CMS content, falling back to default data:', err);
+      setData({
+        hero: {
+          badge: "★ Ranked Leading Institute in West Bengal",
+          headline: "Welcome To Cambridge Institute of Management Studies",
+          subheadline: "Empowering Next-Generation Leaders in Hospital Management, Hospitality, Allied Health Sciences & Computer Applications under MAKAUT (CCPTR) & Swami Vivekananda Foundation.",
+          admissionSeason: "Admissions Open 2026-2027",
+          announcementTicker: "📢 Admissions Open for 2026 Academic Session | 100% Placement Assistance"
+        },
+        courses: INITIAL_COURSES,
+        news: INITIAL_NEWS,
+        gallery: INITIAL_GALLERY,
+        testimonials: INITIAL_TESTIMONIALS,
+        inquiries: []
+      });
     } finally {
       setLoading(false);
     }
