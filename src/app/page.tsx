@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -17,6 +17,7 @@ import {
   MapPin,
   Clock,
   ChevronRight,
+  ChevronLeft,
   Sparkles,
   ExternalLink,
   X,
@@ -30,7 +31,10 @@ import {
   Facebook,
   Youtube,
   Instagram,
-  Globe
+  Globe,
+  FileText,
+  ShieldCheck,
+  Trophy
 } from 'lucide-react';
 import { 
   CIMS_INFO, 
@@ -43,9 +47,6 @@ import {
   ALL_PLACEMENT_RECORDS,
   PlacementRecord
 } from '@/lib/data/cimsData';
-
-import CoursesGrid from '@/components/CoursesGrid';
-import CoursesCarousel from '@/components/CoursesCarousel';
 
 export default function HomePage() {
   // Placement Gallery Modal & Filter State
@@ -76,6 +77,10 @@ export default function HomePage() {
   // Video Modal State
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
+  // Testimonials Carousel State
+  const [activeTestimonialIdx, setActiveTestimonialIdx] = useState(0);
+  const [isTestimonialHovered, setIsTestimonialHovered] = useState(false);
+
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -102,63 +107,6 @@ export default function HomePage() {
     "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop"
-  ];
-
-  const studentSpotlights = [
-    {
-      name: "Subhajit Roy",
-      course: "BBA in Hospital Management",
-      company: "Apollo Hospitals",
-      role: "Operations Executive",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop",
-      badge: "Hospital Management",
-      quote: "The clinical hospital rotations at City Hospital gave me the real-world skills to manage hospital administrative wings confidently."
-    },
-    {
-      name: "Priyanka Mondal",
-      course: "B.Sc in Hospitality & Hotel Admin",
-      company: "JW Marriott",
-      role: "Front Office Associate",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop",
-      badge: "Hospitality & Tourism",
-      quote: "CIMS provided unmatched grooming and 6 months 5-star hotel training. Getting placed at JW Marriott was my dream career start."
-    },
-    {
-      name: "Suman Sengupta",
-      course: "B.Sc Medical Lab Tech (BMLT)",
-      company: "Medica Superspecialty",
-      role: "Diagnostic Lab Technologist",
-      image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=400&auto=format&fit=crop",
-      badge: "Paramedical",
-      quote: "Working with automated biochemistry analyzers and daily pathology rounds made me job-ready before graduation."
-    },
-    {
-      name: "Ananya Maity",
-      course: "BCA - Computer Applications",
-      company: "Wipro Technologies",
-      role: "Associate Software Engineer",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop",
-      badge: "IT & Computing",
-      quote: "The high-spec computer lab and full-stack dev projects helped me clear campus placement with top IT recruiters."
-    },
-    {
-      name: "Tanmoy Bera",
-      course: "B.Sc in Hospitality & Hotel Admin",
-      company: "The Taj Group",
-      role: "Food & Beverage Associate",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop",
-      badge: "Hospitality",
-      quote: "Hands-on culinary labs and luxury hospitality mentorship prepared me for 5-star brand guest service standards."
-    },
-    {
-      name: "Sneha Mondal",
-      course: "BBA in Hospital Management",
-      company: "Fortis Healthcare",
-      role: "Quality Assurance Coordinator",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop",
-      badge: "Hospital Management",
-      quote: "Learning NABH quality accreditation protocols during college opened fast-track leadership opportunities for me."
-    }
   ];
 
   const allCourses = [
@@ -236,13 +184,68 @@ export default function HomePage() {
     }
   ];
 
+  const trainingVideos = [
+    {
+      id: "vid-1",
+      title: "Hospital Operations & Clinical Rotations at City Hospital",
+      thumbnail: "/images/partners/partner-city-hospital.jpg",
+      videoFile: "campus-tour.mp4",
+      desc: "Live inpatient ward coordination, OPD flow management, and hospital floor briefings."
+    },
+    {
+      id: "vid-2",
+      title: "5-Star Luxury Hotel Culinary Arts & Masterclass",
+      thumbnail: "/images/experience-life/CIMS_Campus_Gallery_Photos/culinary-hospitality-students.jpg",
+      videoFile: "cims-training-practical-lab-tour-enhanced-1080p.mp4",
+      desc: "Professional commercial kitchen training, bakery production, and luxury table service."
+    },
+    {
+      id: "vid-3",
+      title: "Advanced Paramedical Diagnostic Pathology Lab",
+      thumbnail: "/images/experience-life/CIMS_Campus_Gallery_Photos/cims-campus-group-photo.jpg",
+      videoFile: "cims-training-practical-lab-tour-enhanced-1080p.mp4",
+      desc: "Automated biochemistry analyzers, clinical microscopy, and hematology investigations."
+    },
+    {
+      id: "vid-4",
+      title: "Computer Applications & High-Performance IT Lab",
+      thumbnail: "/images/hero/campus-photo.jpg",
+      videoFile: "campus-tour.mp4",
+      desc: "Hands-on software development, full-stack programming, and corporate IT placement grooming."
+    }
+  ];
+
   const galleryItems = [
-    { title: "Practical Hospital Operations Training", category: "Hospital Training", image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop" },
-    { title: "Culinary & Food Production Kitchen", category: "Hospitality", image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=800&auto=format&fit=crop" },
-    { title: "Automated Paramedical Pathology Lab", category: "Medical Labs", image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?q=80&w=800&auto=format&fit=crop" },
-    { title: "State-of-the-Art Computer Application Lab", category: "Campus", image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop" },
-    { title: "Clinical Rotations & Patient Interaction", category: "Hospital Training", image: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=800&auto=format&fit=crop" },
-    { title: "Annual Cultural Fest & Freshers Welcome", category: "Events", image: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800&auto=format&fit=crop" }
+    { 
+      title: "Practical Hospital Operations Training", 
+      category: "Hospital Training", 
+      image: "/images/experience-life/CIMS_Campus_Gallery_Photos/campus-students-group.jpg" 
+    },
+    { 
+      title: "Culinary & Food Production Kitchen", 
+      category: "Hospitality", 
+      image: "/images/experience-life/CIMS_Campus_Gallery_Photos/culinary-hospitality-students.jpg" 
+    },
+    { 
+      title: "Automated Paramedical Pathology Lab", 
+      category: "Medical Labs", 
+      image: "/images/experience-life/CIMS_Campus_Gallery_Photos/cims-campus-group-photo.jpg" 
+    },
+    { 
+      title: "CIMS Campus Academic Building & Infrastructure", 
+      category: "Campus Life", 
+      image: "/images/experience-life/CIMS_Campus_Gallery_Photos/cims-building-students.jpg" 
+    },
+    { 
+      title: "Clinical Rotations & Healthcare Briefings", 
+      category: "Hospital Training", 
+      image: "/images/experience-life/CIMS_Campus_Gallery_Photos/institute-profile-photo.jpg" 
+    },
+    { 
+      title: "State-of-the-Art Computer Application Lab", 
+      category: "IT & Computing", 
+      image: "/images/hero/campus-photo.jpg" 
+    }
   ];
 
   const whyJoinPoints = [
@@ -251,39 +254,119 @@ export default function HomePage() {
     "National & International Internships in 5-Star Hotels & Hospitals",
     "Global Industry Exposure & Hospital Administration Rotations",
     "Modern Diagnostic Laboratories & Commercial Kitchen Labs",
-    "100% Placement Assistance with 1,700+ Placed Students",
-    "Swami Vivekananda Foundation Scholarship & Education Loan Support"
+    "Emphasis in Skill Development & 360° Practical Clinical Learning",
+    "Swami Vivekananda Foundation Scholarship Opportunities & Education Loans",
+    "Centre of Excellence for Healthcare Leadership & Practical Grooming",
+    "Finest Subject Experts & Hospital Administrators as Faculties",
+    "100% Placement Assistance with 1,700+ Placed Students"
   ];
 
-  const videos = [
+  const awardsList = [
     {
-      id: "vid-1",
-      title: "Hospital Management Clinical Training at City Hospital",
-      duration: "3:45",
-      thumbnail: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop",
-      youtubeId: "BlYjpccOmJE"
+      title: "MAKAUT (CCPTR) Affiliation Recognition",
+      organization: "Maulana Abul Kalam Azad University of Technology (CCPTR)",
+      citation: "Approved Autonomous Institution for Professional Healthcare Administration, Hospitality, and Computing Curriculums.",
+      badge: "University Affiliation"
     },
     {
-      id: "vid-2",
-      title: "5-Star Luxury Hotel Training & Culinary Masterclass",
-      duration: "4:20",
-      thumbnail: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=800&auto=format&fit=crop",
-      youtubeId: "KaIootmRKfk"
+      title: "Swami Vivekananda Foundation Educational Excellence Honor",
+      organization: "Swami Vivekananda Foundation, West Bengal",
+      citation: "Recognized for 15+ years of dedicated service in empowering youths with career-ready professional skills.",
+      badge: "Educational Trust Citation"
     },
     {
-      id: "vid-3",
-      title: "Advanced Paramedical Diagnostic Pathology & Radiology Lab",
-      duration: "5:10",
-      thumbnail: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?q=80&w=800&auto=format&fit=crop",
-      youtubeId: "1XWDaknwgZ4"
+      title: "Top Ranked Institute for Hospital Management in Eastern India",
+      organization: "Regional Healthcare Education Council",
+      citation: "Commended for unmatched live clinical hospital rotations at City Hospital and premier hospital placements.",
+      badge: "Healthcare Leadership"
+    },
+    {
+      title: "Padmashri & Hospitality Industry Mentorship Recognition",
+      organization: "National Hospitality Advisory Forum",
+      citation: "Honored for world-class culinary grooming, luxury beverage workshops, and 5-star hotel brand tie-ups.",
+      badge: "Industry Citation"
+    },
+    {
+      title: "Excellence in Paramedical Practical Diagnostic Education",
+      organization: "West Bengal Allied Health Sciences Forum",
+      citation: "Awarded for state-of-the-art pathology laboratories, automated analyzers, and hospital training wings.",
+      badge: "Allied Health Award"
+    },
+    {
+      title: "100% Placement & Career Support Honor",
+      organization: "Corporate & Hospital HR Consortium",
+      citation: "Recognized for consistent 100% placement track record across Apollo Hospitals, Fortis, Marriott, and Taj Group.",
+      badge: "Career Support Citation"
     }
   ];
+
+  const testimonialsList = [
+    {
+      name: "Dr. S. K. Mukherjee",
+      role: "Medical Superintendent – City Hospital",
+      avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=200&auto=format&fit=crop",
+      stars: 5,
+      quote: "CIMS hospital management and paramedical interns demonstrate exceptional clinical discipline, hospital administrative acumen, and patient care ethics during rotations at City Hospital."
+    },
+    {
+      name: "Mr. S. Banerjee",
+      role: "General Manager – Luxury Hospitality Partner",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+      stars: 5,
+      quote: "CIMS is one of the finest institutions in the region grooming future leaders for 5-star hotel operations. Their students are disciplined, groomed, and market-ready even before graduation."
+    },
+    {
+      name: "Riya Sharma",
+      role: "Operations Executive – Apollo Hospitals",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+      stars: 5,
+      quote: "The hands-on clinical postings at City Hospital and live hospital management case studies gave me the confidence to lead an inpatient ward team right after graduation."
+    },
+    {
+      name: "Amit Patel",
+      role: "Guest Service Associate – Marriott Hotels & Resorts",
+      avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200&auto=format&fit=crop",
+      stars: 5,
+      quote: "CIMS gave me real-world commercial kitchen labs, beverage masterclasses, and a 6-month industrial internship that landed me a guest service management role at Marriott Hotels."
+    },
+    {
+      name: "Suman Sengupta",
+      role: "Diagnostic Lab Technologist – Medica Superspecialty",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop",
+      stars: 5,
+      quote: "Working daily with automated biochemistry analyzers and pathology equipment during college made the transition to Medica's diagnostic division seamless."
+    },
+    {
+      name: "Souvik Biswas",
+      role: "Associate Software Engineer – TCS (BCA Batch)",
+      avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop",
+      stars: 5,
+      quote: "The practical rigor of CIMS computing labs and software project mentoring equipped me with modern full-stack development skills, clearing my TCS placement smoothly."
+    }
+  ];
+
+  // Auto-scroll testimonials carousel
+  useEffect(() => {
+    if (isTestimonialHovered) return;
+    const interval = setInterval(() => {
+      setActiveTestimonialIdx((prev) => (prev + 1) % testimonialsList.length);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [isTestimonialHovered, testimonialsList.length]);
+
+  const prevTestimonial = () => {
+    setActiveTestimonialIdx((prev) => (prev - 1 + testimonialsList.length) % testimonialsList.length);
+  };
+
+  const nextTestimonial = () => {
+    setActiveTestimonialIdx((prev) => (prev + 1) % testimonialsList.length);
+  };
 
   return (
     <div className="min-h-screen bg-white">
 
       {/* ─────────────────────────────────────────────────────────────
-          1. HERO SECTION WITH VIDEO BACKGROUND
+          1. HERO SECTION WITH VIDEO BACKGROUND & QUICK ADMISSION FORM
       ───────────────────────────────────────────────────────────── */}
       <section className="relative bg-[#0d1d42] overflow-hidden min-h-[620px] lg:min-h-[680px] flex items-center">
 
@@ -343,7 +426,7 @@ export default function HomePage() {
               {/* Social Media Links */}
               <div className="flex items-center gap-3">
                 <a
-                  href="https://www.facebook.com/CIMSCollege?mibextid=LQQJ4d"
+                  href={CIMS_INFO.socials.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="CIMS Facebook"
@@ -352,7 +435,7 @@ export default function HomePage() {
                   <Facebook size={15} className="text-white" />
                 </a>
                 <a
-                  href="https://youtube.com/@CIMSCollege"
+                  href={CIMS_INFO.socials.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="CIMS YouTube"
@@ -361,7 +444,7 @@ export default function HomePage() {
                   <Youtube size={15} className="text-white" />
                 </a>
                 <a
-                  href="https://instagram.com/cimscollege?igshid=YWJhMjlhZTc="
+                  href={CIMS_INFO.socials.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="CIMS Instagram"
@@ -398,7 +481,7 @@ export default function HomePage() {
                 Join <strong>Cambridge Institute of Management Studies (CIMS Group)</strong>, a premier unit of <strong>Swami Vivekananda Foundation</strong> affiliated to <strong>MAKAUT (CCPTR)</strong>. Experience mandatory clinical rotations at <strong>City Hospital</strong> and paid industrial internships across India&apos;s leading 5-star brand hotels.
               </p>
 
-              {/* Student Community Floating Trust Badge (Student Pictures) */}
+              {/* Student Community Floating Trust Badge */}
               <div className="flex flex-wrap items-center gap-3 p-3 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 max-w-md animate-float">
                 <div className="flex -space-x-2.5 overflow-hidden">
                   {studentAvatars.map((img, i) => (
@@ -470,12 +553,11 @@ export default function HomePage() {
 
             </div>
 
-            {/* Right Hero: Campus Photo + Admission Form stacked */}
+            {/* Right Hero: Campus Photo + Admission Form */}
             <div className="lg:col-span-5 space-y-4" id="admission-form">
 
               {/* Campus Building Photo Card */}
-              <div className="relative w-full overflow-hidden rounded-2xl border-4 border-[#112555] shadow-2xl" style={{ aspectRatio: '3/4', minHeight: '320px' }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
+              <div className="relative w-full overflow-hidden rounded-2xl border-4 border-[#112555] shadow-2xl" style={{ aspectRatio: '3/4', minHeight: '300px' }}>
                 <img
                   src="/images/hero/cims-building.jpg"
                   alt="CIMS Campus Building – Students on Balconies, Cambridge Institute of Management Studies"
@@ -519,7 +601,7 @@ export default function HomePage() {
                       Thank You, {formData.name || 'Candidate'}!
                     </h4>
                     <p className="text-xs text-gray-600 max-w-xs mx-auto">
-                      Your admission request has been received. Our senior counselor will call you within 24 hours with complete course fee and scholarship details.
+                      Your admission request has been received. Our senior counselor will call you within 24 hours with complete course fee, syllabus, and scholarship details.
                     </p>
                     <button
                       onClick={() => setFormSubmitted(false)}
@@ -665,7 +747,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 sm:-mt-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
 
-            {/* Box 1 (Orange / Pink) */}
+            {/* Box 1 (Orange) */}
             <div className="bg-[#F7941E] text-white rounded-lg p-5 text-center shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 border-r border-white/20 glow-on-hover">
               <span className="text-[11px] uppercase font-bold tracking-wider opacity-90 block">OVER</span>
               <div className="font-heading text-3xl sm:text-4xl font-black my-1">
@@ -744,10 +826,8 @@ export default function HomePage() {
         </div>
       </div>
 
-
-
       {/* ─────────────────────────────────────────────────────────────
-          5. ALL COURSES SECTION (ISHM "all_courcess" SECTION)
+          4. ALL COURSES SECTION (ISHM "all_courcess" SECTION WITH DOWNLOAD BROCHURE)
       ───────────────────────────────────────────────────────────── */}
       <section className="py-16 bg-[#f8fafc] border-t border-gray-200" id="all-courses">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -823,10 +903,20 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="text-center mt-10">
+          {/* Centered ISHM Signature "DOWNLOAD BROCHURE" Button */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
+            <a
+              href="https://cimsgroup.org/wp-content/uploads/2025/02/Brochure_CIMS_College.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-shimmer bg-[#ed8100] hover:bg-[#d97400] text-white px-8 py-3.5 rounded font-bold text-xs uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2"
+            >
+              <Download size={15} />
+              <span>DOWNLOAD BROCHURE</span>
+            </a>
             <Link
               href="/courses"
-              className="inline-flex items-center gap-2 bg-[#112555] hover:bg-[#1c3786] text-white px-7 py-3 rounded-md font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
+              className="border-2 border-[#112555] text-[#112555] hover:bg-[#112555] hover:text-white px-7 py-3 rounded font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2"
             >
               <span>View All Programs &amp; Details</span>
               <ArrowRight size={14} />
@@ -837,38 +927,94 @@ export default function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          6. STUDY TOURS & TRAINING VIDEOS (ISHM "study-ved" SECTION)
+          5. DEDICATED TRAINING VIDEOS SECTION (ISHM ".Gallery_Videos" WITH DIAGONAL GRADIENT)
       ───────────────────────────────────────────────────────────── */}
-      <section className="py-16 bg-white border-t border-gray-200" id="study-tours">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        id="training-videos"
+        className="py-16 border-t border-gray-200 relative overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, rgb(229, 234, 237) 0%, rgb(229, 234, 237) 59%, rgb(237, 129, 0) 59%, rgb(237, 129, 0) 100%)'
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
-              Practical Immersion
-            </span>
+            <div className="inline-block bg-white/80 backdrop-blur-sm px-4 py-1 rounded-full shadow-sm mb-2">
+              <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
+                Hands-On Practical Immersion
+              </span>
+            </div>
             <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-wide">
-              CIMS TRAINING &amp; PRACTICAL LAB TOURS
+              CIMS TRAINING VIDEOS
             </h2>
             <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full" />
-            <p className="text-xs sm:text-sm text-gray-600 mt-2">
-              Watch our students undergo live clinical hospital rotations, culinary arts production, and automated pathology lab operations.
+            <p className="text-xs sm:text-sm text-gray-700 mt-2 font-medium">
+              Watch our students undergo live clinical hospital rotations, culinary arts production, pathology testing, and software engineering labs.
             </p>
           </div>
 
-                      <div className="flex justify-center">
-              <video
-                src="/videos/cims-training-practical-lab-tour-enhanced-1080p.mp4"
-                controls
-                className="w-full max-w-4xl rounded-lg shadow-lg"
-                poster="/videos/cims-training-practical-lab-tour-poster.jpg"
-              />
-            </div>
+          {/* 4 Video Cards Grid matching ISHM Layout */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {trainingVideos.map((vid, idx) => (
+              <div
+                key={vid.id}
+                onClick={() => setSelectedVideo(vid.videoFile)}
+                className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 cursor-pointer group flex flex-col justify-between hover:-translate-y-1.5"
+              >
+                <div>
+                  <div className="relative aspect-video w-full bg-gray-900 overflow-hidden">
+                    <img
+                      src={vid.thumbnail}
+                      alt={vid.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-full bg-[#ed8100] text-white flex items-center justify-center shadow-xl group-hover:scale-125 transition-transform duration-300">
+                        <Play size={20} className="fill-current ml-0.5" />
+                      </div>
+                    </div>
+                    <div className="absolute top-2 left-2 bg-[#112555]/90 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                      CIMS Training
+                    </div>
+                  </div>
+
+                  <div className="p-4 space-y-1.5">
+                    <h3 className="font-heading font-extrabold text-xs sm:text-sm text-[#112555] group-hover:text-[#ed8100] transition-colors leading-snug line-clamp-2 uppercase">
+                      {vid.title}
+                    </h3>
+                    <p className="text-[11px] text-gray-500 line-clamp-2 leading-relaxed">
+                      {vid.desc}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-4 pt-0">
+                  <span className="text-[11px] font-bold text-[#ed8100] flex items-center gap-1 group-hover:underline">
+                    <span>Watch Training Video</span>
+                    <Play size={10} className="fill-current" />
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom "View All" Button matching ISHM */}
+          <div className="text-center mt-10">
+            <Link
+              href="/gallery"
+              className="inline-flex items-center gap-2 bg-[#112555] hover:bg-black text-white px-7 py-3 rounded font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-xl transition-all"
+            >
+              <span>View All Training Videos &amp; Campus Media</span>
+              <ArrowRight size={14} />
+            </Link>
+          </div>
 
         </div>
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          7. GALLERY SECTION (MATCHES ISHM GALLERY)
+          6. CAMPUS GALLERY SECTION (MATCHES ISHM GALLERY)
       ───────────────────────────────────────────────────────────── */}
       <section className="py-16 bg-[#f8fafc] border-t border-gray-200" id="gallery">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -924,7 +1070,7 @@ export default function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          8. WHY JOIN CIMS (MATCHES ISHM "WHY JOIN ISHM" SECTION)
+          7. WHY JOIN CIMS (MATCHES ISHM "#advantage" SECTION 1:1)
       ───────────────────────────────────────────────────────────── */}
       <section className="py-16 bg-white border-t border-gray-200" id="why-join">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -954,16 +1100,17 @@ export default function HomePage() {
                 ))}
               </div>
 
+              {/* Bottom CTA Button matching ISHM */}
               <div className="pt-4 flex items-center gap-3">
                 <a
                   href="#admission-form"
-                  className="bg-[#ed8100] hover:bg-[#d97400] text-white px-6 py-3 rounded-md font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
+                  className="bg-[#ed8100] hover:bg-[#d97400] text-white px-7 py-3 rounded font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
                 >
-                  Apply for Admission 2026
+                  Apply Now
                 </a>
                 <Link
                   href="/about"
-                  className="border border-[#112555] text-[#112555] hover:bg-[#112555] hover:text-white px-5 py-3 rounded-md font-bold text-xs uppercase tracking-wider transition-all"
+                  className="border border-[#112555] text-[#112555] hover:bg-[#112555] hover:text-white px-5 py-3 rounded font-bold text-xs uppercase tracking-wider transition-all"
                 >
                   About Our Heritage
                 </Link>
@@ -972,13 +1119,20 @@ export default function HomePage() {
             </div>
 
             <div className="lg:col-span-5 relative">
-              <div className="rounded-2xl overflow-hidden shadow-2xl border-4 border-[#112555] group bg-white">
+              <div className="rounded-2xl overflow-hidden shadow-2xl border-4 border-[#112555] group bg-white relative">
                 <img
                   src="/images/hero/cims-building.jpg"
                   alt="CIMS Campus Building – Students on Balconies, Cambridge Institute of Management Studies"
                   className="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-105 transition-transform duration-700"
                   loading="eager"
                 />
+                <button
+                  onClick={() => setSelectedVideo('campus-tour.mp4')}
+                  className="absolute inset-0 m-auto w-16 h-16 rounded-full bg-[#ed8100]/90 text-white flex items-center justify-center shadow-2xl hover:scale-110 hover:bg-[#ed8100] transition-all"
+                  aria-label="Play Campus Tour Video"
+                >
+                  <Play size={24} className="fill-current ml-1" />
+                </button>
               </div>
               <div className="absolute -bottom-4 -left-4 bg-[#ed8100] text-white p-4 rounded-xl shadow-xl hidden sm:block animate-float">
                 <div className="font-heading font-black text-2xl">15+ Years</div>
@@ -992,9 +1146,76 @@ export default function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          9. TIE-UPS & INDUSTRY ASSOCIATIONS (MATCHES ISHM TIE-UP)
+          8. AWARDS & ACHIEVEMENTS SECTION (MATCHES ISHM ".award_slider")
       ───────────────────────────────────────────────────────────── */}
-      <section className="py-16 bg-[#f8fafc] border-t border-gray-200" id="tie-ups">
+      <section className="py-16 bg-[#f8fafc] border-t border-gray-200" id="awards">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
+              Accreditations &amp; Institutional Honors
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-wide">
+              AWARDS &amp; ACHIEVEMENTS
+            </h2>
+            <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full" />
+            <p className="text-xs sm:text-sm text-gray-600 mt-2">
+              Recognitions, university affiliations, and excellence honors bestowed upon Cambridge Institute of Management Studies under Swami Vivekananda Foundation.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {awardsList.map((award, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-xl hover:border-[#ed8100] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded bg-orange-50 text-[#ed8100] border border-orange-200 tracking-wider">
+                      {award.badge}
+                    </span>
+                    <div className="w-9 h-9 rounded-full bg-blue-50 text-[#112555] flex items-center justify-center group-hover:bg-[#ed8100] group-hover:text-white transition-colors">
+                      <Trophy size={18} />
+                    </div>
+                  </div>
+
+                  <h3 className="font-heading font-extrabold text-base text-[#112555] group-hover:text-[#ed8100] transition-colors leading-snug">
+                    {award.title}
+                  </h3>
+                  <p className="text-xs font-bold text-gray-500 mt-1">
+                    {award.organization}
+                  </p>
+                  <p className="text-xs text-gray-600 leading-relaxed mt-2.5">
+                    {award.citation}
+                  </p>
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-gray-100 flex items-center gap-1.5 text-[11px] text-emerald-700 font-bold">
+                  <ShieldCheck size={14} className="text-emerald-600 flex-shrink-0" />
+                  <span>Verified Institutional Honor</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link
+              href="/approvals-affiliations"
+              className="inline-flex items-center gap-2 bg-[#112555] hover:bg-[#1c3786] text-white px-7 py-3 rounded font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
+            >
+              <span>View All Approvals &amp; Affiliation Orders</span>
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          9. TIE-UPS & INDUSTRY ASSOCIATIONS (MATCHES ISHM "#university")
+      ───────────────────────────────────────────────────────────── */}
+      <section className="py-16 bg-white border-t border-gray-200" id="tie-ups">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
 
           {/* Sub-block A: Verified Industry Support Brands */}
@@ -1038,7 +1259,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Sub-block B: Official Institutional Partners (cimsgroup.org/partners/) */}
+          {/* Sub-block B: Official Institutional Partners */}
           <div className="pt-8 border-t border-gray-200">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
@@ -1091,7 +1312,7 @@ export default function HomePage() {
       {/* ─────────────────────────────────────────────────────────────
           10. PLACEMENT & RECRUITERS (MATCHES ISHM "PLACEMENT")
       ───────────────────────────────────────────────────────────── */}
-      <section className="py-16 bg-white border-t border-gray-200" id="placement">
+      <section className="py-16 bg-[#f8fafc] border-t border-gray-200" id="placement">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
 
           {/* Section Heading */}
@@ -1110,7 +1331,7 @@ export default function HomePage() {
 
           {/* Part A: Corporate & Hotel Recruiter Logos */}
           <div className="space-y-4">
-            <div className="flex items-center justify-between border-b border-gray-100 pb-2">
+            <div className="flex items-center justify-between border-b border-gray-200 pb-2">
               <div>
                 <span className="text-[11px] font-extrabold text-[#ed8100] uppercase tracking-wider">
                   Top Recruiters
@@ -1129,7 +1350,7 @@ export default function HomePage() {
               {TOP_RECRUITERS.map((r, i) => (
                 <div
                   key={i}
-                  className="p-3.5 bg-gray-50/70 border border-gray-200 rounded-xl hover:border-[#ed8100] hover:bg-white hover:shadow-md transition-all flex flex-col items-center justify-center text-center group min-h-[110px]"
+                  className="p-3.5 bg-white border border-gray-200 rounded-xl hover:border-[#ed8100] hover:shadow-md transition-all flex flex-col items-center justify-center text-center group min-h-[110px]"
                 >
                   <div className="h-12 w-full flex items-center justify-center mb-1.5">
                     <img
@@ -1166,7 +1387,7 @@ export default function HomePage() {
               </div>
 
               {/* Filter Tabs */}
-              <div className="flex items-center gap-2 bg-gray-100 p-1 rounded-lg w-max self-start sm:self-auto">
+              <div className="flex items-center gap-2 bg-gray-200/80 p-1 rounded-lg w-max self-start sm:self-auto">
                 <button
                   type="button"
                   onClick={() => setPlacementFilterYear('2024')}
@@ -1264,17 +1485,22 @@ export default function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          10.5. TESTIMONIALS & INDUSTRY SPEAKS (MATCHES ISHM "#Testimonials")
+          11. WHAT INDUSTRY SAYS / TESTIMONIALS CAROUSEL (ISHM "#Testimonials")
       ───────────────────────────────────────────────────────────── */}
-      <section className="py-16 bg-white border-t border-gray-200" id="testimonials">
+      <section 
+        className="py-16 bg-white border-t border-gray-200" 
+        id="testimonials"
+        onMouseEnter={() => setIsTestimonialHovered(true)}
+        onMouseLeave={() => setIsTestimonialHovered(false)}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
               Student &amp; Mentor Voices
             </span>
             <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-wide">
-              TESTIMONIALS &amp; INDUSTRY SPEAKS
+              WHAT INDUSTRY SAYS
             </h2>
             <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full" />
             <p className="text-xs sm:text-sm text-gray-600 mt-2">
@@ -1282,85 +1508,95 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-[#f8fafc] p-6 rounded-2xl border border-gray-200 hover:border-[#ed8100] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
-              <div className="space-y-3">
-                <div className="flex items-center gap-1 text-[#ffc923] text-sm">
-                  {"★★★★★"}
-                </div>
-                <p className="text-xs text-gray-700 italic leading-relaxed">
-                  &ldquo;The hands‑on clinical exposure and live hospital postings at City Hospital prepared me to lead an inpatient floor team at Apollo right after graduation.&rdquo;
-                </p>
-              </div>
-              <div className="pt-4 border-t border-gray-200 mt-4 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#112555] text-white font-bold text-xs flex items-center justify-center">
-                  RS
-                </div>
-                <div>
-                  <h4 className="font-heading font-extrabold text-xs text-[#112555]">Riya Sharma</h4>
-                  <p className="text-[10px] text-[#ed8100] font-bold">Placed at Apollo Hospitals</p>
-                </div>
-              </div>
+          {/* Testimonials Carousel Slider Controls & Viewport */}
+          <div className="relative max-w-5xl mx-auto">
+            {/* Slider Navigation Buttons */}
+            <button
+              onClick={prevTestimonial}
+              className="absolute -left-3 sm:-left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-xl border border-gray-200 text-[#112555] hover:bg-[#ed8100] hover:text-white flex items-center justify-center transition-all focus:outline-none"
+              aria-label="Previous Testimonial"
+            >
+              <ChevronLeft size={22} />
+            </button>
+            <button
+              onClick={nextTestimonial}
+              className="absolute -right-3 sm:-right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-xl border border-gray-200 text-[#112555] hover:bg-[#ed8100] hover:text-white flex items-center justify-center transition-all focus:outline-none"
+              aria-label="Next Testimonial"
+            >
+              <ChevronRight size={22} />
+            </button>
+
+            {/* Testimonials Cards Slider View */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-2">
+              {[0, 1, 2].map((offset) => {
+                const itemIdx = (activeTestimonialIdx + offset) % testimonialsList.length;
+                const t = testimonialsList[itemIdx];
+                return (
+                  <div
+                    key={`${itemIdx}-${offset}`}
+                    className="bg-[#f8fafc] rounded-2xl p-6 border border-gray-200 shadow-sm hover:shadow-xl hover:border-[#ed8100] transition-all duration-300 flex flex-col justify-between text-center group"
+                  >
+                    <div>
+                      {/* Round Avatar at top */}
+                      <div className="w-20 h-20 mx-auto rounded-full overflow-hidden border-3 border-[#ed8100] shadow-md mb-4 bg-white flex items-center justify-center">
+                        <img
+                          src={t.avatar}
+                          alt={t.name}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+
+                      {/* 5 Stars */}
+                      <div className="flex items-center justify-center gap-1 text-[#ffc923] text-sm mb-3">
+                        {"★★★★★"}
+                      </div>
+
+                      {/* Quote */}
+                      <p className="text-xs text-gray-700 italic leading-relaxed mb-4">
+                        &ldquo;{t.quote}&rdquo;
+                      </p>
+                    </div>
+
+                    {/* Author Info */}
+                    <div className="pt-4 border-t border-gray-200">
+                      <h4 className="font-heading font-extrabold text-sm text-[#112555]">
+                        {t.name}
+                      </h4>
+                      <p className="text-[11px] text-[#ed8100] font-bold mt-0.5">
+                        {t.role}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
-            <div className="bg-[#f8fafc] p-6 rounded-2xl border border-gray-200 hover:border-[#ed8100] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
-              <div className="space-y-3">
-                <div className="flex items-center gap-1 text-[#ffc923] text-sm">
-                  {"★★★★★"}
-                </div>
-                <p className="text-xs text-gray-700 italic leading-relaxed">
-                  &ldquo;CIMS gave me real‑world kitchen labs and a 6‑month mandatory internship that landed me a guest service management role at Marriott Hotels.&rdquo;
-                </p>
-              </div>
-              <div className="pt-4 border-t border-gray-200 mt-4 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#112555] text-white font-bold text-xs flex items-center justify-center">
-                  AP
-                </div>
-                <div>
-                  <h4 className="font-heading font-extrabold text-xs text-[#112555]">Amit Patel</h4>
-                  <p className="text-[10px] text-[#ed8100] font-bold">Placed at Marriott Hotels</p>
-                </div>
-              </div>
+            {/* Indicator Dots */}
+            <div className="flex justify-center items-center gap-2 mt-6">
+              {testimonialsList.map((_, dotIdx) => (
+                <button
+                  key={dotIdx}
+                  onClick={() => setActiveTestimonialIdx(dotIdx)}
+                  className={`h-2.5 rounded-full transition-all ${
+                    dotIdx === activeTestimonialIdx
+                      ? 'w-8 bg-[#ed8100]'
+                      : 'w-2.5 bg-gray-300 hover:bg-gray-400'
+                  }`}
+                  aria-label={`Go to slide ${dotIdx + 1}`}
+                />
+              ))}
             </div>
 
-            <div className="bg-[#f8fafc] p-6 rounded-2xl border border-gray-200 hover:border-[#ed8100] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
-              <div className="space-y-3">
-                <div className="flex items-center gap-1 text-[#ffc923] text-sm">
-                  {"★★★★★"}
-                </div>
-                <p className="text-xs text-gray-700 italic leading-relaxed">
-                  &ldquo;CIMS paramedical and hospital administration interns demonstrate exceptional diagnostic discipline and patient care standards during rotations.&rdquo;
-                </p>
-              </div>
-              <div className="pt-4 border-t border-gray-200 mt-4 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#ed8100] text-white font-bold text-xs flex items-center justify-center">
-                  SM
-                </div>
-                <div>
-                  <h4 className="font-heading font-extrabold text-xs text-[#112555]">Dr. S. K. Mukherjee</h4>
-                  <p className="text-[10px] text-gray-500 font-semibold">Medical Superintendent, City Hospital</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-[#f8fafc] p-6 rounded-2xl border border-gray-200 hover:border-[#ed8100] hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
-              <div className="space-y-3">
-                <div className="flex items-center gap-1 text-[#ffc923] text-sm">
-                  {"★★★★★"}
-                </div>
-                <p className="text-xs text-gray-700 italic leading-relaxed">
-                  &ldquo;The practical rigor of CIMS computing labs equipped me with modern full-stack development skills, clearing my TCS placement interview smoothly.&rdquo;
-                </p>
-              </div>
-              <div className="pt-4 border-t border-gray-200 mt-4 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#112555] text-white font-bold text-xs flex items-center justify-center">
-                  SB
-                </div>
-                <div>
-                  <h4 className="font-heading font-extrabold text-xs text-[#112555]">Souvik Biswas</h4>
-                  <p className="text-[10px] text-[#ed8100] font-bold">Placed at TCS (BCA Batch)</p>
-                </div>
-              </div>
+            {/* Bottom "Download Prospectus" Button matching ISHM */}
+            <div className="text-center mt-8">
+              <a
+                href="https://cimsgroup.org/wp-content/uploads/2025/02/Brochure_CIMS_College.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-[#112555] hover:bg-[#ed8100] text-white px-8 py-3 rounded font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-xl transition-all"
+              >
+                Download Prospectus
+              </a>
             </div>
 
           </div>
@@ -1369,7 +1605,7 @@ export default function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          11. NEWS & NOTICE (MATCHES ISHM "News & Notice")
+          12. NEWS & NOTICE (MATCHES ISHM "News & Notice")
       ───────────────────────────────────────────────────────────── */}
       <section className="py-16 bg-[#f8fafc] border-t border-gray-200" id="news">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1439,7 +1675,7 @@ export default function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          12. BOTTOM ADMISSION BANNER (MATCHES ISHM FOOTER CTA)
+          13. BOTTOM ADMISSION BANNER (MATCHES ISHM FOOTER CTA)
       ───────────────────────────────────────────────────────────── */}
       <section className="bg-gradient-to-r from-[#112555] to-[#1c3786] text-white py-12 border-t-4 border-[#ed8100]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
@@ -1450,7 +1686,7 @@ export default function HomePage() {
             Begin Your Journey Towards a Successful Career
           </h2>
           <p className="text-xs sm:text-sm text-gray-300 max-w-xl mx-auto">
-            Take the first step towards an exciting professional career in healthcare administration, hospitality, or computing.
+            Take the first step towards an exciting professional career in healthcare administration, hospitality, paramedical, or computing.
           </p>
           <div className="flex flex-wrap justify-center gap-3 pt-2">
             <a
@@ -1485,33 +1721,23 @@ export default function HomePage() {
           onClick={() => setSelectedVideo(null)}
         >
           <div
-            className="bg-black max-w-3xl w-full rounded-2xl overflow-hidden shadow-2xl relative"
+            className="bg-black max-w-3xl w-full rounded-2xl overflow-hidden shadow-2xl relative border-2 border-[#ed8100]"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setSelectedVideo(null)}
-              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center hover:bg-white/40"
+              className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center transition-colors"
               aria-label="Close video"
             >
               <X size={18} />
             </button>
             <div className="relative pt-[56.25%] w-full bg-black">
-              {selectedVideo?.endsWith('.mp4') ? (
-                <video
-                  src={`/videos/${selectedVideo}`}
-                  controls
-                  autoPlay
-                  className="absolute inset-0 w-full h-full"
-                />
-              ) : (
-                <iframe
-                  src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
-                  title="CIMS Training Tour"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="absolute inset-0 w-full h-full border-0"
-                />
-              )}
+              <video
+                src={`/videos/${selectedVideo}`}
+                controls
+                autoPlay
+                className="absolute inset-0 w-full h-full"
+              />
             </div>
           </div>
         </div>
