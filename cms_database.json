@@ -303,5 +303,57 @@
       "createdAt": "2026-11-05T18:33:24.438Z",
       "status": "New"
     }
+  ],
+  "applications": [
+    {
+      "studentName": "SWEETY ALLEY",
+      "guardianName": "milan",
+      "motherName": "",
+      "idType": "Voter ID Card",
+      "idNumberMasked": "XXXX-XXXX-4374",
+      "dob": "2002-05-20",
+      "telephoneNumber": "9832944374",
+      "alternativeNumber": "",
+      "email": "sweetyalley4@gmail.com",
+      "bloodGroup": "B-",
+      "gender": "Female",
+      "category": "General",
+      "nationality": "Indian",
+      "presentAddress": "LAXMIPUR MATH KATAPUKUR BURDWAN",
+      "permanentAddress": "LAXMIPUR MATH KATAPUKUR BURDWAN",
+      "city": "Bardhaman",
+      "district": "Purba Medinipur",
+      "state": "West Bengal",
+      "pinCode": "713101",
+      "appliedCourse": "BBA in Hospital Management",
+      "session": "2026-2027",
+      "hostelRequired": false,
+      "transportRequired": false,
+      "class10": {
+        "board": "WBBSE",
+        "institution": "",
+        "passingYear": "2024",
+        "percentage": ""
+      },
+      "class12": {
+        "board": "WBCHSE",
+        "stream": "Science",
+        "institution": "",
+        "passingYear": "2026",
+        "percentage": ""
+      },
+      "officeUse": {
+        "batch": "Batch 2026-2027 (Regular)",
+        "verificationDate": "2026-11-15",
+        "verifiedBy": "Pending Staff Assignment",
+        "status": "Pending Review",
+        "others": "Application received online via official portal. Ready for document verification."
+      },
+      "declarationAccepted": true,
+      "applicantSignature": "sweetyalley",
+      "id": "app-1794767146189",
+      "applicationNo": "CIMS-2026-59193",
+      "createdAt": "2026-11-15T18:25:46.189Z"
+    }
   ]
 }

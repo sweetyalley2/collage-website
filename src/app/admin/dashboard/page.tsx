@@ -18,17 +18,41 @@ import {
   Search,
   Phone,
   Mail,
-  Calendar
+  Calendar,
+  GraduationCap,
+  FileCheck,
+  Lock,
+  ShieldCheck,
+  Eye,
+  Printer,
+  X,
+  Filter,
+  MapPin,
+  FileText
 } from 'lucide-react';
-import { CMSData, Inquiry } from '@/lib/cmsStore';
+import { CMSData, Inquiry, AdmissionApplication } from '@/lib/cmsStore';
 import { Course, NewsNotice, GalleryItem, INITIAL_COURSES, INITIAL_NEWS, INITIAL_GALLERY, INITIAL_TESTIMONIALS } from '@/lib/data/cimsData';
 
 export default function AdminDashboardPage() {
   const [data, setData] = useState<CMSData | null>(null);
-  const [activeTab, setActiveTab] = useState<'inquiries' | 'courses' | 'news' | 'gallery' | 'hero'>('inquiries');
+  const [activeTab, setActiveTab] = useState<'applications' | 'inquiries' | 'courses' | 'news' | 'gallery' | 'hero'>('applications');
   const [loading, setLoading] = useState(true);
   const [savedSuccess, setSavedSuccess] = useState(false);
   const router = useRouter();
+
+  // Admission Applications Management State
+  const [applications, setApplications] = useState<AdmissionApplication[]>([]);
+  const [selectedApp, setSelectedApp] = useState<AdmissionApplication | null>(null);
+  const [officeEdit, setOfficeEdit] = useState({
+    batch: '',
+    enrollmentNo: '',
+    verifiedBy: '',
+    status: 'Pending Review' as AdmissionApplication['officeUse']['status'],
+    others: ''
+  });
+  const [savingOffice, setSavingOffice] = useState(false);
+  const [appSearchTerm, setAppSearchTerm] = useState('');
+  const [appStatusFilter, setAppStatusFilter] = useState('ALL');
 
   // News draft state
   const [newNotice, setNewNotice] = useState({
@@ -48,7 +72,68 @@ export default function AdminDashboardPage() {
 
   useEffect(() => {
     fetchContent();
+    fetchApplications();
   }, []);
+
+  const fetchApplications = async () => {
+    try {
+      const res = await fetch('/api/admission');
+      if (res.ok) {
+        const json = await res.json();
+        setApplications(json.applications || []);
+      }
+    } catch (err) {
+      console.warn('Error fetching admission applications:', err);
+    }
+  };
+
+  const openAppModal = (app: AdmissionApplication) => {
+    setSelectedApp(app);
+    setOfficeEdit({
+      batch: app.officeUse?.batch || 'Batch 2026-2027 (Regular)',
+      enrollmentNo: app.officeUse?.enrollmentNo || '',
+      verifiedBy: app.officeUse?.verifiedBy || 'Admissions Desk Staff',
+      status: app.officeUse?.status || 'Pending Review',
+      others: app.officeUse?.others || ''
+    });
+  };
+
+  const handleSaveOffice = async () => {
+    if (!selectedApp) return;
+    setSavingOffice(true);
+    try {
+      const res = await fetch('/api/admission', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: selectedApp.id,
+          officeUse: {
+            ...selectedApp.officeUse,
+            batch: officeEdit.batch,
+            enrollmentNo: officeEdit.enrollmentNo,
+            verifiedBy: officeEdit.verifiedBy,
+            status: officeEdit.status,
+            others: officeEdit.others,
+            verificationDate: new Date().toISOString().split('T')[0]
+          }
+        })
+      });
+
+      if (res.ok) {
+        const json = await res.json();
+        if (json.application) {
+          setSelectedApp(json.application);
+          setApplications(prev => prev.map(a => a.id === json.application.id ? json.application : a));
+        }
+        setSavedSuccess(true);
+        setTimeout(() => setSavedSuccess(false), 3000);
+      }
+    } catch (err) {
+      console.error('Failed to update office fields:', err);
+    } finally {
+      setSavingOffice(false);
+    }
+  };
 
   const fetchContent = async () => {
     try {
@@ -175,6 +260,16 @@ export default function AdminDashboardPage() {
         
         {/* Navigation Tabs */}
         <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-200 pb-3">
+          <button
+            onClick={() => setActiveTab('applications')}
+            className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-colors ${
+              activeTab === 'applications' ? 'bg-[#ed8100] text-white shadow' : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
+            }`}
+          >
+            <GraduationCap size={15} />
+            <span>Online Applications ({applications.length})</span>
+          </button>
+
           <button
             onClick={() => setActiveTab('inquiries')}
             className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-colors ${
@@ -615,6 +710,287 @@ export default function AdminDashboardPage() {
         )}
 
       </div>
+
+      {/* Dossier Review & Office Use Only Modal */}
+      {selectedApp && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden animate-fade-in my-auto">
+            
+            {/* Modal Header */}
+            <div className="bg-[#112555] text-white p-5 flex items-center justify-between border-b-2 border-[#ed8100]">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-full bg-[#ed8100] text-white flex items-center justify-center font-bold">
+                  <GraduationCap size={22} />
+                </div>
+                <div>
+                  <h3 className="font-heading font-extrabold text-base leading-tight">
+                    {selectedApp.studentName} – Application Dossier
+                  </h3>
+                  <p className="text-xs text-orange-200 font-mono">
+                    {selectedApp.applicationNo} • Submitted: {new Date(selectedApp.createdAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' })}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => window.print()}
+                  className="bg-white/10 hover:bg-white/20 text-white p-2 rounded-lg text-xs font-bold flex items-center gap-1 transition-colors"
+                  title="Print Dossier"
+                >
+                  <Printer size={15} />
+                  <span className="hidden sm:inline">Print</span>
+                </button>
+                <button
+                  onClick={() => setSelectedApp(null)}
+                  className="text-gray-300 hover:text-white p-2 rounded-lg transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6 overflow-y-auto space-y-6 text-xs text-gray-700 flex-1">
+              
+              {/* Top Row: Photo & Core Identifiers */}
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 bg-gray-50 p-5 rounded-xl border border-gray-200">
+                <div className="md:col-span-3 flex flex-col items-center justify-center">
+                  <div className="relative w-32 h-40 rounded-lg overflow-hidden border-2 border-gray-300 bg-white shadow-md">
+                    {selectedApp.photoBase64 ? (
+                      <img
+                        src={selectedApp.photoBase64}
+                        alt={selectedApp.studentName}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex flex-col items-center justify-center text-gray-400 p-2 text-center">
+                        <Users size={32} className="mb-1 text-gray-300" />
+                        <span className="text-[10px]">No Photo Uploaded</span>
+                      </div>
+                    )}
+                  </div>
+                  <span className="text-[10px] text-gray-500 font-semibold mt-2">
+                    {selectedApp.photoFileName || 'Passport Photo'}
+                  </span>
+                </div>
+
+                <div className="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div>
+                    <span className="text-[10px] text-gray-500 font-bold uppercase">Candidate Full Name:</span>
+                    <div className="font-bold text-sm text-[#112555]">{selectedApp.studentName}</div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-gray-500 font-bold uppercase">Father / Guardian Name:</span>
+                    <div className="font-bold text-sm text-gray-800">{selectedApp.guardianName}</div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-gray-500 font-bold uppercase">Program Applied:</span>
+                    <div className="font-bold text-[#ed8100] text-sm">{selectedApp.appliedCourse}</div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-gray-500 font-bold uppercase">Session:</span>
+                    <div className="font-semibold text-gray-800">{selectedApp.session}</div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-gray-500 font-bold uppercase">Primary Phone / WhatsApp:</span>
+                    <div className="font-bold text-gray-900">{selectedApp.telephoneNumber}</div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-gray-500 font-bold uppercase">Student Email:</span>
+                    <div className="font-semibold text-gray-900">{selectedApp.email}</div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-gray-500 font-bold uppercase">Date of Birth:</span>
+                    <div className="font-semibold text-gray-800">{selectedApp.dob}</div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-gray-500 font-bold uppercase">Gender &amp; Blood Group:</span>
+                    <div className="font-semibold text-gray-800">{selectedApp.gender} • Blood Group: {selectedApp.bloodGroup}</div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-gray-500 font-bold uppercase">ID Document Proof:</span>
+                    <div className="font-semibold text-gray-800">{selectedApp.idType} ({selectedApp.idNumberMasked})</div>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-gray-500 font-bold uppercase">Category &amp; Nationality:</span>
+                    <div className="font-semibold text-gray-800">{selectedApp.category || 'General'} • {selectedApp.nationality}</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Address Details */}
+              <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-2">
+                <h4 className="font-heading font-extrabold text-xs text-[#112555] uppercase tracking-wider flex items-center gap-1.5">
+                  <MapPin size={14} className="text-[#ed8100]" />
+                  <span>Residential &amp; Communication Address</span>
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <span className="text-[10px] text-gray-500 font-bold uppercase">Present Address:</span>
+                    <p className="font-medium text-gray-800 mt-0.5">{selectedApp.presentAddress}</p>
+                    <p className="text-[11px] text-gray-600 mt-1">
+                      {selectedApp.city}, {selectedApp.district}, {selectedApp.state} - PIN: {selectedApp.pinCode}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-gray-500 font-bold uppercase">Permanent Address:</span>
+                    <p className="font-medium text-gray-800 mt-0.5">{selectedApp.permanentAddress || selectedApp.presentAddress}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Academic Qualifications */}
+              <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-2">
+                <h4 className="font-heading font-extrabold text-xs text-[#112555] uppercase tracking-wider flex items-center gap-1.5">
+                  <FileText size={14} className="text-[#ed8100]" />
+                  <span>Academic Qualifications</span>
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-3 bg-white rounded-lg border border-gray-200">
+                    <span className="font-bold text-xs text-[#112555] block">Secondary (10th Standard)</span>
+                    <div className="mt-1 space-y-0.5 text-[11px]">
+                      <div>Board: <strong>{selectedApp.class10?.board || 'N/A'}</strong></div>
+                      <div>School: {selectedApp.class10?.institution || 'N/A'}</div>
+                      <div>Passing Year: {selectedApp.class10?.passingYear || 'N/A'}</div>
+                      <div>Score: <strong className="text-emerald-700">{selectedApp.class10?.percentage || 'N/A'}%</strong></div>
+                    </div>
+                  </div>
+                  <div className="p-3 bg-white rounded-lg border border-gray-200">
+                    <span className="font-bold text-xs text-[#112555] block">Higher Secondary (12th Standard)</span>
+                    <div className="mt-1 space-y-0.5 text-[11px]">
+                      <div>Board &amp; Stream: <strong>{selectedApp.class12?.board || 'N/A'} ({selectedApp.class12?.stream || 'N/A'})</strong></div>
+                      <div>Institution: {selectedApp.class12?.institution || 'N/A'}</div>
+                      <div>Passing Year: {selectedApp.class12?.passingYear || 'N/A'}</div>
+                      <div>Score: <strong className="text-emerald-700">{selectedApp.class12?.percentage || 'N/A'}%</strong></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* ============================================================== */}
+              {/* OFFICE USE ONLY (EDITABLE BY AUTHORIZED STAFF)                 */}
+              {/* ============================================================== */}
+              <div className="bg-gradient-to-br from-amber-50 to-orange-50/50 p-5 rounded-xl border-2 border-amber-300 space-y-4">
+                <div className="flex items-center justify-between pb-2 border-b border-amber-200">
+                  <div className="flex items-center space-x-2 text-[#112555]">
+                    <ShieldCheck size={18} className="text-[#ed8100]" />
+                    <h4 className="font-heading font-extrabold text-sm uppercase tracking-wider">
+                      Office Use Only (Authorized Staff Control Desk)
+                    </h4>
+                  </div>
+                  <span className="bg-[#112555] text-[#ffc923] text-[9px] font-black uppercase px-2.5 py-0.5 rounded">
+                    Staff Restricted
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-700 uppercase mb-1">
+                      Assigned Batch
+                    </label>
+                    <input
+                      type="text"
+                      value={officeEdit.batch}
+                      onChange={(e) => setOfficeEdit({ ...officeEdit, batch: e.target.value })}
+                      placeholder="e.g. Batch 2026-27 A"
+                      className="w-full bg-white border border-gray-300 rounded px-2.5 py-1.5 text-xs font-bold text-[#112555]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-700 uppercase mb-1">
+                      Admission Status
+                    </label>
+                    <select
+                      value={officeEdit.status}
+                      onChange={(e) => setOfficeEdit({ ...officeEdit, status: e.target.value as any })}
+                      className="w-full bg-white border border-gray-300 rounded px-2.5 py-1.5 text-xs font-bold text-[#112555]"
+                    >
+                      <option value="Pending Review">Pending Review</option>
+                      <option value="Verified">Verified</option>
+                      <option value="Fee Paid">Fee Paid</option>
+                      <option value="Enrolled">Enrolled</option>
+                      <option value="Rejected">Rejected</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-700 uppercase mb-1">
+                      Enrollment / Roll No.
+                    </label>
+                    <input
+                      type="text"
+                      value={officeEdit.enrollmentNo}
+                      onChange={(e) => setOfficeEdit({ ...officeEdit, enrollmentNo: e.target.value })}
+                      placeholder="e.g. CIMS-2026-BBA-042"
+                      className="w-full bg-white border border-gray-300 rounded px-2.5 py-1.5 text-xs font-medium text-gray-800"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-700 uppercase mb-1">
+                      Verification Officer
+                    </label>
+                    <input
+                      type="text"
+                      value={officeEdit.verifiedBy}
+                      onChange={(e) => setOfficeEdit({ ...officeEdit, verifiedBy: e.target.value })}
+                      placeholder="Staff Officer Name"
+                      className="w-full bg-white border border-gray-300 rounded px-2.5 py-1.5 text-xs font-medium text-gray-800"
+                    />
+                  </div>
+
+                  <div className="sm:col-span-2 lg:col-span-4">
+                    <label className="block text-[10px] font-bold text-gray-700 uppercase mb-1">
+                      Staff Remarks / Others
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={officeEdit.others}
+                      onChange={(e) => setOfficeEdit({ ...officeEdit, others: e.target.value })}
+                      placeholder="Counselor comments, fee concessions, scholarship notes, spot document remarks..."
+                      className="w-full bg-white border border-gray-300 rounded p-2 text-xs text-gray-800"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-end pt-2">
+                  <button
+                    onClick={handleSaveOffice}
+                    disabled={savingOffice}
+                    className="bg-[#ed8100] hover:bg-[#d97400] text-white text-xs font-bold uppercase tracking-wider px-5 py-2 rounded-lg shadow flex items-center gap-1.5 transition-all"
+                  >
+                    {savingOffice ? (
+                      <span>Saving Office Record...</span>
+                    ) : (
+                      <>
+                        <Save size={14} />
+                        <span>Save Office Record</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Modal Footer */}
+            <div className="bg-gray-50 px-6 py-3 border-t border-gray-200 flex items-center justify-between">
+              <span className="text-[11px] text-gray-500">
+                Digital Signature: <strong>{selectedApp.applicantSignature}</strong>
+              </span>
+              <button
+                onClick={() => setSelectedApp(null)}
+                className="bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs font-bold px-4 py-1.5 rounded transition-colors"
+              >
+                Close
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
     </div>
   );
 }

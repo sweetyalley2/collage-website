@@ -545,13 +545,13 @@ export default function HomePage() {
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-3.5 pt-4">
-                <a
-                  href="#admission-form"
+                <Link
+                  href="/admission"
                   className="btn-shimmer bg-[#ed8100] hover:bg-[#d97400] text-white px-6 py-3.5 rounded-md font-bold text-xs uppercase tracking-wider shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2"
                 >
                   <span>Apply Now 2026</span>
                   <ArrowRight size={15} />
-                </a>
+                </Link>
 
                 <button
                   onClick={() => setSelectedVideo('campus-tour.mp4')}
@@ -754,6 +754,17 @@ export default function HomePage() {
                     <p className="text-[10px] text-gray-400 text-center leading-tight">
                       We value your privacy. A representative will contact you with admission details.
                     </p>
+
+                    <div className="pt-2 border-t border-gray-100 text-center">
+                      <Link
+                        href="/admission"
+                        className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-[#112555] hover:text-[#ed8100] transition-colors py-1 group"
+                      >
+                        <GraduationCap size={15} className="text-[#ed8100]" />
+                        <span>Fill Complete Online Admission Form 2026-27</span>
+                        <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                    </div>
                   </form>
                 )}
 
@@ -915,12 +926,12 @@ export default function HomePage() {
                       <span>Details</span>
                       <ChevronRight size={13} />
                     </Link>
-                    <a
-                      href="#admission-form"
+                    <Link
+                      href="/admission"
                       className="bg-[#ed8100] hover:bg-[#d97400] text-white text-[11px] font-bold uppercase px-3.5 py-1.5 rounded shadow transition-all hover:scale-105"
                     >
                       Apply Now
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
@@ -1127,12 +1138,12 @@ export default function HomePage() {
 
               {/* Bottom CTA Button matching ISHM */}
               <div className="pt-4 flex items-center gap-3">
-                <a
-                  href="#admission-form"
+                <Link
+                  href="/admission"
                   className="bg-[#ed8100] hover:bg-[#d97400] text-white px-7 py-3 rounded font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
                 >
                   Apply Now
-                </a>
+                </Link>
                 <Link
                   href="/about"
                   className="border border-[#112555] text-[#112555] hover:bg-[#112555] hover:text-white px-5 py-3 rounded font-bold text-xs uppercase tracking-wider transition-all"
@@ -1714,12 +1725,12 @@ export default function HomePage() {
             Take the first step towards an exciting professional career in healthcare administration, hospitality, paramedical, or computing.
           </p>
           <div className="flex flex-wrap justify-center gap-3 pt-2">
-            <a
-              href="#admission-form"
+            <Link
+              href="/admission"
               className="btn-shimmer bg-[#ed8100] hover:bg-[#d97400] text-white px-7 py-3 rounded-md font-bold text-xs uppercase tracking-wider shadow-lg"
             >
               Apply Online 2026
-            </a>
+            </Link>
             <a
               href={`tel:${CIMS_INFO.phone}`}
               className="bg-white text-[#112555] hover:bg-gray-100 px-6 py-3 rounded-md font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 shadow"

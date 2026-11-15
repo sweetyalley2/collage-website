@@ -245,7 +245,7 @@ export default function Navbar() {
                       </p>
                     </div>
                     <Link
-                      href="/#admission-form"
+                      href="/admission"
                       className="mt-3 block text-center bg-[#ed8100] hover:bg-[#d97400] text-white text-[11px] font-bold uppercase tracking-wider py-1.5 rounded shadow-sm"
                     >
                       Enquire for 2026 Batch
@@ -254,6 +254,15 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
+
+            <Link 
+              href="/admission" 
+              className={`px-3 py-2 text-xs xl:text-sm font-bold uppercase tracking-wider transition-colors rounded-md ${
+                pathname === '/admission' ? 'text-[#ed8100] bg-orange-50/70' : 'text-[#112555] hover:text-[#ed8100] hover:underline decoration-2 decoration-[#ed8100]'
+              }`}
+            >
+              Admission
+            </Link>
 
             <Link 
               href="/training-placements" 
@@ -317,13 +326,13 @@ export default function Navbar() {
               </div>
             </div>
 
-            <a 
-              href="/#admission-form" 
+            <Link 
+              href="/admission" 
               className="bg-[#ed8100] hover:bg-[#d97400] text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-md shadow-md transition-all hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-1.5"
             >
               <GraduationCap size={16} />
               <span>Admission 2026</span>
-            </a>
+            </Link>
 
             <a 
               href="https://cimsgroup.org/wp-content/uploads/2025/02/Brochure_CIMS_College.pdf"
@@ -432,7 +441,7 @@ export default function Navbar() {
 
             <div className="pt-6 space-y-3">
               <Link 
-                href="/#admission-form" 
+                href="/admission" 
                 onClick={closeMobileMenu}
                 className="w-full block text-center bg-[#ed8100] text-white py-3 rounded-lg font-bold text-sm shadow-md"
               >
@@ -453,6 +462,16 @@ export default function Navbar() {
           </div>
         </div>
       )}
+
+      {/* Floating ISHM-Style Right Side Tab: ONLINE ADMISSION FORM */}
+      <Link
+        href="/admission"
+        aria-label="Online Admission Form"
+        className="fixed right-0 top-[45%] -translate-y-1/2 z-40 bg-[#ed8100] hover:bg-[#d97400] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-widest py-3 px-1.5 sm:px-2 rounded-l-md shadow-2xl flex items-center gap-1.5 transition-all hover:pr-3 cursor-pointer group"
+        style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+      >
+        <span>ONLINE ADMISSION FORM</span>
+      </Link>
     </header>
   );
 }

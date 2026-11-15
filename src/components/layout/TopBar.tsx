@@ -105,7 +105,7 @@ export default function TopBar() {
           {/* Right: Admission CTA & Brochure (Clean without Student Portal or Fee Payment) */}
           <div className="flex items-center space-x-3 sm:space-x-4">
             <Link 
-              href="/#admission-form" 
+              href="/admission" 
               className="bg-[#ed8100] hover:bg-[#d97400] text-white px-3 py-1 rounded font-bold uppercase tracking-wide text-[10px] transition-transform hover:scale-105 shadow-sm flex items-center gap-1"
             >
               <GraduationCap size={12} />
