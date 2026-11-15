@@ -300,6 +300,15 @@ export default function Navbar() {
               Contact
             </Link>
 
+            <Link 
+              href="/student-portal" 
+              className={`px-2.5 py-1.5 text-xs font-bold uppercase tracking-wider transition-colors rounded-md bg-blue-50 text-[#112555] hover:bg-[#ed8100] hover:text-white border border-blue-200 ${
+                pathname === '/student-portal' ? 'bg-[#ed8100] text-white border-[#ed8100]' : ''
+              }`}
+            >
+              Student Portal
+            </Link>
+
           </nav>
 
           {/* Right Action CTA Buttons & ISHM "Need Help" Box */}
@@ -427,6 +436,13 @@ export default function Navbar() {
               </Link>
               <Link href="/contact" onClick={closeMobileMenu} className="font-bold text-base text-[#112555] hover:text-[#ed8100] py-1">
                 Contact Us
+              </Link>
+              <Link href="/student-portal" onClick={closeMobileMenu} className="font-bold text-base text-[#ed8100] hover:underline py-1 flex items-center justify-between">
+                <span>Student Portal</span>
+                <span className="text-[10px] bg-orange-100 text-[#ed8100] px-2 py-0.5 rounded font-bold uppercase">Active</span>
+              </Link>
+              <Link href="/pay-fee" onClick={closeMobileMenu} className="font-bold text-base text-[#112555] hover:text-[#ed8100] py-1">
+                Pay Fee Online
               </Link>
             </div>
 

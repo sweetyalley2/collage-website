@@ -114,16 +114,16 @@ export default function TopBar() {
             </Link>
 
             <Link 
-              href="/contact#student-portal" 
-              className="hover:text-[#ed8100] flex items-center gap-1 transition-colors text-[11px]"
+              href="/student-portal" 
+              className="hover:text-[#ed8100] flex items-center gap-1 transition-colors text-[11px] font-semibold"
             >
               <UserCheck size={12} />
               <span className="hidden sm:inline">Student Portal</span>
             </Link>
 
             <Link 
-              href="/contact#pay-fee" 
-              className="hover:text-[#ed8100] flex items-center gap-1 transition-colors text-[11px]"
+              href="/pay-fee" 
+              className="hover:text-[#ed8100] flex items-center gap-1 transition-colors text-[11px] font-semibold"
             >
               <CreditCard size={12} />
               <span className="hidden sm:inline">Pay Fee</span>

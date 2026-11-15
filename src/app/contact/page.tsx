@@ -158,20 +158,36 @@ export default function ContactPage() {
 
             {/* Student Portal & Pay Fee Info Anchors */}
             <div className="grid grid-cols-2 gap-3 pt-2">
-              <div id="student-portal" className="p-4 bg-gray-50 rounded-xl border border-gray-200">
-                <div className="flex items-center gap-2 font-heading font-bold text-xs text-[#112555]">
-                  <UserCheck size={16} className="text-[#ed8100]" />
-                  <span>Student Portal</span>
+              <div id="student-portal" className="p-4 bg-gray-50 rounded-xl border border-gray-200 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 font-heading font-bold text-xs text-[#112555]">
+                    <UserCheck size={16} className="text-[#ed8100]" />
+                    <span>Student Portal</span>
+                  </div>
+                  <p className="text-[10px] text-gray-500 mt-1">Active student logins, attendance &amp; marks verification.</p>
                 </div>
-                <p className="text-[10px] text-gray-500 mt-1">Active student logins, attendance &amp; marks verification.</p>
+                <Link
+                  href="/student-portal"
+                  className="mt-3 inline-flex items-center gap-1 text-[11px] font-bold text-[#ed8100] hover:underline"
+                >
+                  <span>Open Student Portal &rarr;</span>
+                </Link>
               </div>
 
-              <div id="pay-fee" className="p-4 bg-gray-50 rounded-xl border border-gray-200">
-                <div className="flex items-center gap-2 font-heading font-bold text-xs text-[#112555]">
-                  <CreditCard size={16} className="text-[#ed8100]" />
-                  <span>Pay Fee</span>
+              <div id="pay-fee" className="p-4 bg-gray-50 rounded-xl border border-gray-200 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 font-heading font-bold text-xs text-[#112555]">
+                    <CreditCard size={16} className="text-[#ed8100]" />
+                    <span>Pay Fee</span>
+                  </div>
+                  <p className="text-[10px] text-gray-500 mt-1">Tuition fee payment instructions &amp; bank transfer details.</p>
                 </div>
-                <p className="text-[10px] text-gray-500 mt-1">Tuition fee payment instructions &amp; bank details.</p>
+                <Link
+                  href="/pay-fee"
+                  className="mt-3 inline-flex items-center gap-1 text-[11px] font-bold text-[#ed8100] hover:underline"
+                >
+                  <span>Pay Fee Online &rarr;</span>
+                </Link>
               </div>
             </div>
 
