@@ -191,7 +191,7 @@ export default function Footer() {
 
             <div className="mt-4 pt-3 border-t border-gray-800 flex items-center justify-between">
               <Link 
-                href="/#admission-form" 
+                href="/admission" 
                 className="inline-block bg-[#ed8100] hover:bg-[#d97400] text-white text-xs font-bold uppercase tracking-wider px-3.5 py-2 rounded shadow transition-colors"
               >
                 Apply Online 2026

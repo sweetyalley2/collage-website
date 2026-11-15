@@ -34,7 +34,9 @@ import {
   Globe,
   FileText,
   ShieldCheck,
-  Trophy
+  Trophy,
+  Stethoscope,
+  Hotel
 } from 'lucide-react';
 import { 
   CIMS_INFO, 
@@ -61,7 +63,7 @@ export default function HomePage() {
       ? CIMS_PLACED_STUDENTS_2025
       : ALL_PLACEMENT_RECORDS;
 
-  // Hero Form State
+  // Hero Quick Enquiry Form State
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -77,6 +79,13 @@ export default function HomePage() {
 
   // Video Modal State
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
+  // Gallery Tab & Lightbox State
+  const [activeGalleryTab, setActiveGalleryTab] = useState<'ALL' | 'HOSPITAL' | 'HOSPITALITY' | 'CAMPUS'>('ALL');
+  const [selectedGalleryImage, setSelectedGalleryImage] = useState<{ title: string; category: string; image: string } | null>(null);
+
+  // Tie-Up Tab State
+  const [activeTieUpTab, setActiveTieUpTab] = useState<'ALL' | 'HOSPITAL' | 'HOTEL'>('ALL');
 
   // Testimonials Carousel State
   const [activeTestimonialIdx, setActiveTestimonialIdx] = useState(0);
@@ -114,7 +123,7 @@ export default function HomePage() {
         const data = await res.json().catch(() => ({}));
         setFormError(data.error || 'Failed to submit enquiry. Please call our helpline.');
       }
-    } catch (e) {
+    } catch {
       setFormSubmitted(true);
     } finally {
       setFormSubmitting(false);
@@ -124,105 +133,105 @@ export default function HomePage() {
   const studentAvatars = [
     "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop"
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop"
   ];
 
   const allCourses = [
     {
       title: "BBA in Hospital Management",
-      degree: "BBA-HM",
-      duration: "3 - 4 Years",
-      slug: "hospital-management",
+      degree: "Bachelor of Business Administration",
+      duration: "3 Years Full-Time",
       image: "/images/experience-life/CIMS_Campus_Gallery_Photos/campus-students-group.jpg",
-      badge: "Hospital Management",
-      desc: "Healthcare operations, patient care administration, hospital finance, NABH protocols & clinical internships."
+      desc: "Comprehensive training in clinical administration, healthcare finance, hospital operations, and OPD management with mandatory City Hospital rotations.",
+      slug: "hospital-management",
+      badge: "MAKAUT CCPTR"
     },
     {
       title: "B.Sc in Hospitality & Hotel Administration",
-      degree: "B.Sc HHA",
-      duration: "3 Years",
-      slug: "hospitality-hotel-management",
+      degree: "Bachelor of Science",
+      duration: "3 Years Full-Time",
       image: "/images/experience-life/CIMS_Campus_Gallery_Photos/culinary-hospitality-students.jpg",
-      badge: "Hospitality & Tourism",
-      desc: "Culinary arts, front desk suites, food & beverage production, mixology & 6 months 5-star hotel training."
+      desc: "Premier 5-star hotel training covering food production, beverage management, front office, and guest relations with 6 months paid hotel internships.",
+      slug: "hospitality-hotel-management",
+      badge: "MAKAUT CCPTR"
     },
     {
       title: "B.Sc Medical Laboratory Technology (BMLT)",
-      degree: "B.Sc Paramedical",
-      duration: "3 - 4 Years",
-      slug: "allied-health-science",
+      degree: "Bachelor of Science",
+      duration: "3 Years + 6 Mo Internship",
       image: "/images/experience-life/CIMS_Campus_Gallery_Photos/cims-campus-group-photo.jpg",
-      badge: "Allied Health",
-      desc: "Diagnostic pathology, biochemistry analyzers, clinical microbiology, hematology and blood banking."
-    },
-    {
-      title: "B.Sc Medical Radiology & Imaging Technology (BMRIT)",
-      degree: "B.Sc Paramedical",
-      duration: "3 - 4 Years",
+      desc: "Clinical pathology, hematology, microbiology, and clinical biochemistry diagnostics in modern automated laboratories.",
       slug: "allied-health-science",
-      image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=800&auto=format&fit=crop",
-      badge: "Allied Health",
-      desc: "Digital X-ray imaging, computed tomography (CT Scan), MRI protocols, and radiologic physics."
-    },
-    {
-      title: "B.Sc Operation Theatre Technology (BOTT)",
-      degree: "B.Sc Paramedical",
-      duration: "3 - 4 Years",
-      slug: "allied-health-science",
-      image: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=800&auto=format&fit=crop",
-      badge: "Allied Health",
-      desc: "Surgical instrumentation, sterile processing, anesthesia assistance and critical surgery monitoring."
+      badge: "MAKAUT CCPTR"
     },
     {
       title: "BCA - Bachelor of Computer Applications",
-      degree: "BCA",
-      duration: "3 - 4 Years",
+      degree: "Bachelor Degree",
+      duration: "3 Years Full-Time",
+      image: "/images/hero/campus-photo.jpg",
+      desc: "High-demand IT degree specializing in full-stack web technologies, modern databases, software development, cloud systems, and cybersecurity.",
       slug: "bca",
-      image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop",
-      badge: "Computing",
-      desc: "Software engineering, full-stack web and cloud systems, Python, AI algorithms and IT campus placements."
+      badge: "MAKAUT CCPTR"
     },
     {
-      title: "Diploma in Hotel Management & Aviation",
-      degree: "Diploma",
-      duration: "1 - 2 Years",
+      title: "B.Sc Medical Radiology & Imaging Technology (BMRIT)",
+      degree: "Bachelor of Science",
+      duration: "3 Years + 6 Mo Internship",
+      image: "/images/experience-life/CIMS_Campus_Gallery_Photos/institute-profile-photo.jpg",
+      desc: "Diagnostic radiographic imaging, CT scan protocols, MRI assistance, and patient radiation safety under senior radiologists.",
+      slug: "allied-health-science",
+      badge: "Paramedical Council"
+    },
+    {
+      title: "B.Sc Operation Theatre Technology (BOTT)",
+      degree: "Bachelor of Science",
+      duration: "3 Years + 6 Mo Internship",
+      image: "/images/experience-life/CIMS_Campus_Gallery_Photos/campus-students-group.jpg",
+      desc: "Surgical instrumentation, sterile surgical suite maintenance, anesthesia assisting, and patient post-op observation.",
+      slug: "allied-health-science",
+      badge: "Paramedical Council"
+    },
+    {
+      title: "Diploma in Medical Laboratory Technology (DMLT)",
+      degree: "Diploma Program",
+      duration: "2 Years Full-Time",
+      image: "/images/experience-life/CIMS_Campus_Gallery_Photos/cims-campus-group-photo.jpg",
+      desc: "Practical diploma focusing on clinical pathology specimens, blood banking, biochemical analyzer operation, and rapid diagnostics.",
+      slug: "allied-health-science",
+      badge: "State Recognized"
+    },
+    {
+      title: "Diploma in Hotel Management & Catering Tech",
+      degree: "Diploma Program",
+      duration: "1–2 Years Full-Time",
+      image: "/images/experience-life/CIMS_Campus_Gallery_Photos/culinary-hospitality-students.jpg",
+      desc: "Fast-track professional diploma focusing on culinary arts, bakery production, F&B service, and housekeeping leadership in 5-star hotels.",
       slug: "hospitality-hotel-management",
-      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=800&auto=format&fit=crop",
-      badge: "Diploma",
-      desc: "Fast-track professional training in hospitality services, front office and aviation ground operations."
-    },
-    {
-      title: "Masters in Hospital Administration (MHA)",
-      degree: "Postgraduate Degree",
-      duration: "2 Years",
-      slug: "hospital-management",
-      image: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?q=80&w=800&auto=format&fit=crop",
-      badge: "Master Degree",
-      desc: "Advanced healthcare leadership, hospital economics, health policy, quality accreditation and bioethics."
+      badge: "State Recognized"
     }
   ];
 
   const trainingVideos = [
     {
       id: "vid-1",
-      title: "Hospital Operations & Clinical Rotations at City Hospital",
-      thumbnail: "/images/partners/partner-city-hospital.jpg",
+      title: "Hospital Clinical Postings & Bedside Training",
+      thumbnail: "/images/experience-life/CIMS_Campus_Gallery_Photos/campus-students-group.jpg",
       videoFile: "campus-tour.mp4",
-      desc: "Live inpatient ward coordination, OPD flow management, and hospital floor briefings."
+      desc: "Live clinical rotations at City Hospital covering patient intake, vital monitoring, and hospital administration."
     },
     {
       id: "vid-2",
-      title: "5-Star Luxury Hotel Culinary Arts & Masterclass",
+      title: "Food Production & Commercial Kitchen Labs",
       thumbnail: "/images/experience-life/CIMS_Campus_Gallery_Photos/culinary-hospitality-students.jpg",
-      videoFile: "cims-training-practical-lab-tour-enhanced-1080p.mp4",
-      desc: "Professional commercial kitchen training, bakery production, and luxury table service."
+      videoFile: "campus-tour.mp4",
+      desc: "Students mastering multi-cuisine culinary arts, bakery techniques, and high-volume banquet service."
     },
     {
       id: "vid-3",
-      title: "Advanced Paramedical Diagnostic Pathology Lab",
+      title: "Paramedical Diagnostic Pathology & Hematology",
       thumbnail: "/images/experience-life/CIMS_Campus_Gallery_Photos/cims-campus-group-photo.jpg",
-      videoFile: "cims-training-practical-lab-tour-enhanced-1080p.mp4",
+      videoFile: "campus-tour.mp4",
       desc: "Automated biochemistry analyzers, clinical microscopy, and hematology investigations."
     },
     {
@@ -267,10 +276,18 @@ export default function HomePage() {
     }
   ];
 
+  const filteredGalleryItems = galleryItems.filter((item) => {
+    if (activeGalleryTab === 'ALL') return true;
+    if (activeGalleryTab === 'HOSPITAL') return item.category.toLowerCase().includes('hospital') || item.category.toLowerCase().includes('medical');
+    if (activeGalleryTab === 'HOSPITALITY') return item.category.toLowerCase().includes('hospitality') || item.category.toLowerCase().includes('culinary');
+    if (activeGalleryTab === 'CAMPUS') return item.category.toLowerCase().includes('campus') || item.category.toLowerCase().includes('it');
+    return true;
+  });
+
   const whyJoinPoints = [
-    "Multiple Government Recognition & MAKAUT (CCPTR) Affiliated",
-    "Affordable Course Fee with Easy Installment Options",
-    "Practical Clinical Hospital Rotations & 5-Star Hotel Internships Across India",
+    "Multiple Government Recognitions & MAKAUT (CCPTR) Affiliation",
+    "Affordable Course Fee Structure with Flexible Semester Installments",
+    "Mandatory Clinical Hospital Postings & 5-Star Hotel Internships Across India",
     "Comprehensive Industry Exposure & Hospital Administration Rotations",
     "Modern Diagnostic Laboratories & Commercial Kitchen Labs",
     "Emphasis in Skill Development & 360° Practical Clinical Learning",
@@ -294,28 +311,10 @@ export default function HomePage() {
       badge: "Educational Trust Citation"
     },
     {
-      title: "Top Ranked Institute for Hospital Management in Eastern India",
-      organization: "Regional Healthcare Education Council",
-      citation: "Commended for unmatched live clinical hospital rotations at City Hospital and premier hospital placements.",
-      badge: "Healthcare Leadership"
-    },
-    {
-      title: "Padmashri & Hospitality Industry Mentorship Recognition",
-      organization: "National Hospitality Advisory Forum",
-      citation: "Honored for world-class culinary grooming, luxury beverage workshops, and 5-star hotel brand tie-ups.",
-      badge: "Industry Citation"
-    },
-    {
       title: "Excellence in Paramedical Practical Diagnostic Education",
       organization: "West Bengal Allied Health Sciences Forum",
       citation: "Awarded for state-of-the-art pathology laboratories, automated analyzers, and hospital training wings.",
       badge: "Allied Health Award"
-    },
-    {
-      title: "100% Placement & Career Support Honor",
-      organization: "Corporate & Hospital HR Consortium",
-      citation: "Recognized for consistent 100% placement track record across Apollo Hospitals, Fortis, Marriott, and Taj Group.",
-      badge: "Career Support Citation"
     }
   ];
 
@@ -380,6 +379,21 @@ export default function HomePage() {
   const nextTestimonial = () => {
     setActiveTestimonialIdx((prev) => (prev + 1) % testimonialsList.length);
   };
+
+  // Filtered Tie-Up Brands and Partners (Point 9: Non-Repetitive)
+  const filteredIndustryBrands = INDUSTRY_SUPPORT_BRANDS.filter((brand) => {
+    if (activeTieUpTab === 'ALL') return true;
+    if (activeTieUpTab === 'HOSPITAL') return brand.category.toLowerCase().includes('hospital');
+    if (activeTieUpTab === 'HOTEL') return brand.category.toLowerCase().includes('hospitality');
+    return true;
+  });
+
+  const filteredPartners = CIMS_PARTNERS.filter((partner) => {
+    if (activeTieUpTab === 'ALL') return true;
+    if (activeTieUpTab === 'HOSPITAL') return partner.category.toLowerCase().includes('hospital') || partner.category.toLowerCase().includes('healthcare') || partner.category.toLowerCase().includes('skill');
+    if (activeTieUpTab === 'HOTEL') return partner.category.toLowerCase().includes('resort') || partner.category.toLowerCase().includes('hotel');
+    return true;
+  });
 
   return (
     <div className="min-h-screen bg-white">
@@ -572,29 +586,8 @@ export default function HomePage() {
 
             </div>
 
-            {/* Right Hero: Campus Photo + Admission Form */}
-            <div className="lg:col-span-5 space-y-4" id="admission-form">
-
-              {/* Campus Building Photo Card */}
-              <div className="relative w-full overflow-hidden rounded-2xl border-4 border-[#112555] shadow-2xl" style={{ aspectRatio: '3/4', minHeight: '300px' }}>
-                <img
-                  src="/images/hero/cims-building.jpg"
-                  alt="CIMS Campus Building – Students on Balconies, Cambridge Institute of Management Studies"
-                  className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
-                  loading="eager"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0d1d42]/70 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-                  <span className="bg-[#112555]/80 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-lg border border-white/20">
-                    CIMS Campus, Kolkata
-                  </span>
-                  <span className="bg-[#ed8100]/90 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg">
-                    Est. 2011
-                  </span>
-                </div>
-              </div>
-
-              {/* Admission Form */}
+            {/* Right Hero: Quick Admission Enquiry Form (Matches ISHM Clean Proportions) */}
+            <div className="lg:col-span-5" id="admission-form">
               <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-7 border-t-4 border-[#ed8100] text-gray-800">
 
                 <div className="mb-4 pb-3 border-b border-gray-100 flex items-center justify-between">
@@ -645,104 +638,118 @@ export default function HomePage() {
                       <input
                         type="text"
                         name="name"
-                        required
                         value={formData.name}
                         onChange={handleFormChange}
-                        placeholder="Full Name"
-                        className="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-300 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#ed8100]"
+                        placeholder="Enter student full name"
+                        required
+                        className="w-full text-xs p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-[#ed8100] focus:border-transparent outline-none transition"
                       />
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <label className="block text-[11px] font-bold text-gray-700 uppercase tracking-wider mb-1">
-                          Phone No. *
+                          Mobile Number *
                         </label>
                         <input
                           type="tel"
                           name="phone"
-                          required
                           value={formData.phone}
                           onChange={handleFormChange}
-                          placeholder="10-digit Mobile"
-                          className="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-300 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#ed8100]"
+                          placeholder="10-digit mobile"
+                          required
+                          className="w-full text-xs p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-[#ed8100] focus:border-transparent outline-none transition"
                         />
                       </div>
                       <div>
                         <label className="block text-[11px] font-bold text-gray-700 uppercase tracking-wider mb-1">
-                          Email
+                          Email Address *
                         </label>
                         <input
                           type="email"
                           name="email"
                           value={formData.email}
                           onChange={handleFormChange}
-                          placeholder="Email Address"
-                          className="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-300 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#ed8100]"
+                          placeholder="student@example.com"
+                          required
+                          className="w-full text-xs p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-[#ed8100] focus:border-transparent outline-none transition"
                         />
                       </div>
                     </div>
 
                     <div>
                       <label className="block text-[11px] font-bold text-gray-700 uppercase tracking-wider mb-1">
-                        Select Course *
+                        Select Program *
                       </label>
                       <select
                         name="course"
                         value={formData.course}
                         onChange={handleFormChange}
-                        className="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-300 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#ed8100]"
+                        className="w-full text-xs p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-[#ed8100] focus:border-transparent outline-none transition bg-white"
                       >
-                        <option value="BBA in Hospital Management">BBA in Hospital Management</option>
-                        <option value="B.Sc in Hospitality & Hotel Administration">B.Sc Hospitality &amp; Hotel Admin</option>
-                        <option value="B.Sc Medical Laboratory Technology (BMLT)">B.Sc Medical Lab Tech (BMLT)</option>
-                        <option value="B.Sc Medical Radiology & Imaging (BMRIT)">B.Sc Radiology &amp; Imaging (BMRIT)</option>
-                        <option value="B.Sc Operation Theatre Technology (BOTT)">B.Sc Operation Theatre Tech (BOTT)</option>
-                        <option value="BCA - Bachelor of Computer Applications">BCA - Computer Applications</option>
-                        <option value="Diploma in Hotel Management & Aviation">Diploma in Hotel Management</option>
-                        <option value="Masters in Hospital Administration (MHA)">Masters in Hospital Administration</option>
+                        <option value="BBA in Hospital Management">BBA in Hospital Management (3 Years)</option>
+                        <option value="B.Sc in Hospitality & Hotel Administration">B.Sc in Hospitality &amp; Hotel Admin (3 Years)</option>
+                        <option value="B.Sc Medical Laboratory Technology (BMLT)">B.Sc Medical Lab Technology - BMLT (3.5 Years)</option>
+                        <option value="BCA - Bachelor of Computer Applications">BCA - Computer Applications (3 Years)</option>
+                        <option value="B.Sc Medical Radiology & Imaging Technology (BMRIT)">B.Sc Radiology &amp; Imaging - BMRIT (3.5 Years)</option>
+                        <option value="B.Sc Operation Theatre Technology (BOTT)">B.Sc Operation Theatre Tech - BOTT (3.5 Years)</option>
+                        <option value="Diploma in Medical Laboratory Technology (DMLT)">Diploma in Medical Lab Tech - DMLT (2 Years)</option>
+                        <option value="Diploma in Hotel Management & Catering Tech">Diploma in Hotel Management (1–2 Years)</option>
                       </select>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <label className="block text-[11px] font-bold text-gray-700 uppercase tracking-wider mb-1">
-                          Qualification
+                          Last Qualification
                         </label>
                         <select
                           name="qualification"
                           value={formData.qualification}
                           onChange={handleFormChange}
-                          className="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-300 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#ed8100]"
+                          className="w-full text-xs p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-[#ed8100] focus:border-transparent outline-none transition bg-white"
                         >
-                          <option value="10+2 / Higher Secondary">10+2 / Higher Secondary</option>
-                          <option value="10th Pass">10th Pass</option>
-                          <option value="Graduate Any Stream">Graduate</option>
-                          <option value="Diploma Pass">Diploma Pass</option>
+                          <option value="10+2 / Higher Secondary">Class 12 / Higher Secondary</option>
+                          <option value="Class 10 / Madhyamik">Class 10 / Madhyamik</option>
+                          <option value="Graduate / Ongoing">Graduate / Ongoing Degree</option>
                         </select>
                       </div>
                       <div>
                         <label className="block text-[11px] font-bold text-gray-700 uppercase tracking-wider mb-1">
-                          City
+                          City / District
                         </label>
                         <input
                           type="text"
                           name="city"
                           value={formData.city}
                           onChange={handleFormChange}
-                          placeholder="Current City"
-                          className="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-300 rounded focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#ed8100]"
+                          placeholder="e.g. Kolkata, Howrah"
+                          className="w-full text-xs p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-[#ed8100] focus:border-transparent outline-none transition"
                         />
                       </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[11px] font-bold text-gray-700 uppercase tracking-wider mb-1">
+                        Any Questions / Message (Optional)
+                      </label>
+                      <input
+                        type="text"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleFormChange}
+                        placeholder="Inquire about course fee, hostel, or scholarship"
+                        className="w-full text-xs p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-[#ed8100] focus:border-transparent outline-none transition"
+                      />
                     </div>
 
                     <button
                       type="submit"
                       disabled={formSubmitting}
-                      className="btn-shimmer w-full bg-[#ed8100] hover:bg-[#d97400] text-white py-3 rounded-md font-bold text-xs uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 shadow-md hover:shadow-lg mt-2"
+                      className="w-full bg-[#ed8100] hover:bg-[#d97400] text-white py-3 rounded-md font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 mt-2 disabled:opacity-70 cursor-pointer"
                     >
                       {formSubmitting ? (
-                        <span>Submitting...</span>
+                        <span>Submitting Your Enquiry...</span>
                       ) : (
                         <>
                           <span>Submit Admission Query</span>
@@ -963,7 +970,193 @@ export default function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          5. DEDICATED TRAINING VIDEOS SECTION (ISHM ".Gallery_Videos" WITH DIAGONAL GRADIENT)
+          5. CAMPUS GALLERY SECTION (MATCHES ISHM GALLERY SEQUENCE)
+      ───────────────────────────────────────────────────────────── */}
+      <section className="py-16 bg-[#f8fafc] border-t border-gray-200" id="gallery">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
+              Visual Glimpses
+            </span>
+            <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-wide">
+              CAMPUS LIFE &amp; FACILITIES
+            </h2>
+            <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full" />
+            <p className="text-xs sm:text-sm text-gray-600 mt-2">
+              Experience the campus facilities, hospital training wings, and student life at CIMS College.
+            </p>
+          </div>
+
+          {/* Interactive Category Filter Tabs (Point 6: ISHM Gallery Alignment) */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+            <button
+              type="button"
+              onClick={() => setActiveGalleryTab('ALL')}
+              className={`px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer ${
+                activeGalleryTab === 'ALL'
+                  ? 'bg-[#ed8100] text-white shadow-md'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+              }`}
+            >
+              All Gallery
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveGalleryTab('HOSPITAL')}
+              className={`px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer ${
+                activeGalleryTab === 'HOSPITAL'
+                  ? 'bg-[#ed8100] text-white shadow-md'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+              }`}
+            >
+              Hospital Training
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveGalleryTab('HOSPITALITY')}
+              className={`px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer ${
+                activeGalleryTab === 'HOSPITALITY'
+                  ? 'bg-[#ed8100] text-white shadow-md'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+              }`}
+            >
+              Hospitality &amp; Culinary
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveGalleryTab('CAMPUS')}
+              className={`px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer ${
+                activeGalleryTab === 'CAMPUS'
+                  ? 'bg-[#ed8100] text-white shadow-md'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+              }`}
+            >
+              Campus Life &amp; Labs
+            </button>
+          </div>
+
+          {/* Gallery Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredGalleryItems.map((item, idx) => (
+              <div
+                key={idx}
+                onClick={() => setSelectedGalleryImage(item)}
+                className="group relative h-64 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all cursor-pointer bg-gray-900 hover:-translate-y-1.5 border border-gray-200"
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-5 text-white">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#ed8100] bg-black/60 px-2 py-0.5 rounded w-max mb-1.5 backdrop-blur-sm">
+                    {item.category}
+                  </span>
+                  <h4 className="font-heading font-bold text-sm leading-snug">
+                    {item.title}
+                  </h4>
+                  <div className="mt-2 flex items-center gap-1 text-[11px] font-bold text-[#ffc923] opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Eye size={12} />
+                    <span>Click to View Image</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link
+              href="/gallery"
+              className="inline-flex items-center gap-2 border-2 border-[#112555] text-[#112555] hover:bg-[#112555] hover:text-white px-7 py-3 rounded font-bold text-xs uppercase tracking-wider transition-all shadow-sm"
+            >
+              <span>View Full Campus Photo Archive</span>
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          6. WHY JOIN CIMS (MATCHES ISHM "#advantage" 2-COLUMN LAYOUT)
+      ───────────────────────────────────────────────────────────── */}
+      <section className="py-16 bg-white border-t border-gray-200" id="why-join">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+
+            <div className="lg:col-span-7 space-y-4">
+              <span className="text-xs font-extrabold uppercase text-[#ed8100] tracking-wider">
+                Excellence in Professional Education
+              </span>
+              <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-tight">
+                WHY JOIN CIMS
+              </h2>
+              <p className="text-xs sm:text-sm font-semibold text-[#ed8100]">
+                Endless opportunities await at Cambridge Institute of Management Studies!
+              </p>
+
+              {/* ISHM Style Square Icon Bullet List */}
+              <div className="pt-2 space-y-3">
+                {whyJoinPoints.map((point, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <span className="w-2.5 h-2.5 bg-[#ed8100] mt-1.5 flex-shrink-0" />
+                    <span className="font-bold text-xs sm:text-sm text-gray-800">
+                      {point}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bottom CTA Button matching ISHM */}
+              <div className="pt-4 flex items-center gap-3">
+                <Link
+                  href="/admission"
+                  className="bg-[#ed8100] hover:bg-[#d97400] text-white px-7 py-3 rounded font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
+                >
+                  Apply Now
+                </Link>
+                <Link
+                  href="/about"
+                  className="border border-[#112555] text-[#112555] hover:bg-[#112555] hover:text-white px-5 py-3 rounded font-bold text-xs uppercase tracking-wider transition-all"
+                >
+                  About Our Heritage
+                </Link>
+              </div>
+
+            </div>
+
+            <div className="lg:col-span-5 relative">
+              <div className="rounded-2xl overflow-hidden shadow-2xl border-4 border-[#112555] group bg-white relative">
+                <img
+                  src="/images/hero/cims-building.jpg"
+                  alt="CIMS Campus Building – Students on Balconies, Cambridge Institute of Management Studies"
+                  className="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                  loading="eager"
+                />
+                <button
+                  onClick={() => setSelectedVideo('campus-tour.mp4')}
+                  className="absolute inset-0 m-auto w-16 h-16 rounded-full bg-[#ed8100]/90 text-white flex items-center justify-center shadow-2xl hover:scale-110 hover:bg-[#ed8100] transition-all cursor-pointer"
+                  aria-label="Play Campus Tour Video"
+                >
+                  <Play size={24} className="fill-current ml-1" />
+                </button>
+              </div>
+              <div className="absolute -bottom-4 -left-4 bg-[#ed8100] text-white p-4 rounded-xl shadow-xl hidden sm:block animate-float">
+                <div className="font-heading font-black text-2xl">15+ Years</div>
+                <div className="text-[11px] font-bold uppercase tracking-wider">Educational Trust</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          7. DEDICATED TRAINING VIDEOS SECTION (ISHM ".Gallery_Videos" WITH DIAGONAL GRADIENT)
       ───────────────────────────────────────────────────────────── */}
       <section
         id="training-videos"
@@ -991,7 +1184,7 @@ export default function HomePage() {
 
           {/* 4 Video Cards Grid matching ISHM Layout */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {trainingVideos.map((vid, idx) => (
+            {trainingVideos.map((vid) => (
               <div
                 key={vid.id}
                 onClick={() => setSelectedVideo(vid.videoFile)}
@@ -1050,54 +1243,203 @@ export default function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          6. CAMPUS GALLERY SECTION (MATCHES ISHM GALLERY)
+          8. HOSPITAL & INDUSTRY TIE-UPS (ORGANIZED & NON-REPETITIVE)
       ───────────────────────────────────────────────────────────── */}
-      <section className="py-16 bg-[#f8fafc] border-t border-gray-200" id="gallery">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 bg-white border-t border-gray-200" id="tie-ups">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
 
-          <div className="text-center max-w-2xl mx-auto mb-10">
+          <div className="text-center max-w-3xl mx-auto">
             <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
-              Visual Glimpses
+              Practical Rotations &amp; Industry Network
             </span>
             <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-wide">
-              CAMPUS LIFE &amp; FACILITIES
+              HOSPITAL &amp; INDUSTRY TIE-UPS
             </h2>
             <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full" />
             <p className="text-xs sm:text-sm text-gray-600 mt-2">
-              Experience the campus facilities, hospital training wings, and student life at CIMS College.
+              Mandatory clinical hospital rotations and luxury 5-star hotel brand internships providing extensive hands-on industry exposure across India.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {galleryItems.map((item, idx) => (
-              <div
-                key={idx}
-                className="group relative h-64 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all cursor-pointer bg-gray-900 hover:-translate-y-1.5"
-              >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-5 text-white">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#ed8100] bg-black/60 px-2 py-0.5 rounded w-max mb-1.5 backdrop-blur-sm">
-                    {item.category}
-                  </span>
-                  <h4 className="font-heading font-bold text-sm leading-snug">
-                    {item.title}
-                  </h4>
-                </div>
-              </div>
-            ))}
+          {/* Non-repetitive Stream Filter Tabs */}
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <button
+              type="button"
+              onClick={() => setActiveTieUpTab('ALL')}
+              className={`px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer ${
+                activeTieUpTab === 'ALL'
+                  ? 'bg-[#112555] text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              All Affiliated Partners
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTieUpTab('HOSPITAL')}
+              className={`px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
+                activeTieUpTab === 'HOSPITAL'
+                  ? 'bg-[#ed8100] text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              <Stethoscope size={13} />
+              <span>Clinical Hospital Rotations</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTieUpTab('HOTEL')}
+              className={`px-4 py-2 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
+                activeTieUpTab === 'HOTEL'
+                  ? 'bg-[#ed8100] text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              <Hotel size={13} />
+              <span>5-Star Luxury Hotel Chains</span>
+            </button>
           </div>
 
-          <div className="text-center mt-8">
+          {/* Dual Dedicated Stream Showcase */}
+          <div className="space-y-12 pt-4">
+
+            {/* Stream A: Clinical Healthcare & Hospital Rotations */}
+            {(activeTieUpTab === 'ALL' || activeTieUpTab === 'HOSPITAL') && (
+              <div className="space-y-4">
+                <div className="border-b border-gray-200 pb-2 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-full bg-blue-100 text-[#112555] flex items-center justify-center">
+                      <Stethoscope size={16} className="text-[#ed8100]" />
+                    </div>
+                    <h3 className="font-heading font-extrabold text-lg text-[#112555]">
+                      Clinical Healthcare &amp; Hospital Training Partners
+                    </h3>
+                  </div>
+                  <span className="text-xs text-gray-500 font-semibold">
+                    Bedside patient care, OT observation &amp; automated pathology labs
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5">
+                  {INDUSTRY_SUPPORT_BRANDS.filter(b => b.category.toLowerCase().includes('hospital')).map((brand, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-[#ed8100] hover:-translate-y-1 transition-all flex flex-col items-center justify-center text-center group min-h-[120px]"
+                    >
+                      <div className="h-14 w-full flex items-center justify-center p-1 mb-1">
+                        <img
+                          src={brand.logo}
+                          alt={`${brand.name} Hospital`}
+                          className="max-h-12 max-w-[110px] w-auto h-auto object-contain group-hover:scale-105 transition-transform"
+                          loading="lazy"
+                        />
+                      </div>
+                      <h4 className="font-heading font-bold text-xs text-[#112555] leading-tight">
+                        {brand.name}
+                      </h4>
+                      <span className="text-[9px] font-bold text-emerald-700 uppercase tracking-wider mt-1 px-2 py-0.5 bg-emerald-50 rounded">
+                        Clinical Rotations
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Stream B: Luxury 5-Star Hotel & Resort Internships */}
+            {(activeTieUpTab === 'ALL' || activeTieUpTab === 'HOTEL') && (
+              <div className="space-y-4 pt-4 border-t border-gray-200">
+                <div className="border-b border-gray-200 pb-2 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-full bg-orange-100 text-[#ed8100] flex items-center justify-center">
+                      <Hotel size={16} className="text-[#ed8100]" />
+                    </div>
+                    <h3 className="font-heading font-extrabold text-lg text-[#112555]">
+                      Luxury 5-Star Hospitality &amp; Hotel Brands
+                    </h3>
+                  </div>
+                  <span className="text-xs text-gray-500 font-semibold">
+                    6 Months paid internships in culinary production, F&amp;B and front office
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5">
+                  {INDUSTRY_SUPPORT_BRANDS.filter(b => b.category.toLowerCase().includes('hospitality')).map((brand, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-[#ed8100] hover:-translate-y-1 transition-all flex flex-col items-center justify-center text-center group min-h-[120px]"
+                    >
+                      <div className="h-14 w-full flex items-center justify-center p-1 mb-1">
+                        <img
+                          src={brand.logo}
+                          alt={`${brand.name} Hotel`}
+                          className="max-h-12 max-w-[110px] w-auto h-auto object-contain group-hover:scale-105 transition-transform"
+                          loading="lazy"
+                        />
+                      </div>
+                      <h4 className="font-heading font-bold text-xs text-[#112555] leading-tight">
+                        {brand.name}
+                      </h4>
+                      <span className="text-[9px] font-bold text-blue-700 uppercase tracking-wider mt-1 px-2 py-0.5 bg-blue-50 rounded">
+                        5-Star Internship
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Official Training Units Showcase */}
+            <div className="pt-6 border-t border-gray-200">
+              <div className="mb-6">
+                <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
+                  Official Training Establishments
+                </span>
+                <h3 className="font-heading text-xl font-extrabold text-[#112555]">
+                  Dedicated Clinical Training Wings &amp; Resort Properties
+                </h3>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredPartners.map((partner) => (
+                  <div
+                    key={partner.id}
+                    className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col"
+                  >
+                    <div className="h-44 bg-gray-100 overflow-hidden relative">
+                      <img
+                        src={partner.image}
+                        alt={partner.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute top-2.5 left-2.5 bg-[#112555] text-white text-[10px] font-bold px-2.5 py-0.5 rounded shadow">
+                        {partner.category}
+                      </div>
+                    </div>
+                    <div className="p-4 space-y-2 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h4 className="font-heading font-extrabold text-sm sm:text-base text-[#112555] group-hover:text-[#ed8100] transition-colors">
+                          {partner.name}
+                        </h4>
+                        <p className="text-xs text-gray-600 leading-relaxed mt-1">
+                          {partner.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+
+          <div className="text-center pt-4">
             <Link
-              href="/gallery"
-              className="inline-flex items-center gap-2 border-2 border-[#112555] text-[#112555] hover:bg-[#112555] hover:text-white px-6 py-2.5 rounded-md font-bold text-xs uppercase tracking-wider transition-all"
+              href="/approvals-affiliations"
+              className="inline-flex items-center gap-2 bg-[#112555] hover:bg-[#1c3786] text-white px-7 py-3 rounded font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
             >
-              <span>View Full Campus Photo Archive</span>
+              <span>View All Approvals &amp; Affiliation Orders</span>
               <ArrowRight size={14} />
             </Link>
           </div>
@@ -1106,83 +1448,7 @@ export default function HomePage() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          7. WHY JOIN CIMS (MATCHES ISHM "#advantage" SECTION 1:1)
-      ───────────────────────────────────────────────────────────── */}
-      <section className="py-16 bg-white border-t border-gray-200" id="why-join">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-
-            <div className="lg:col-span-7 space-y-4">
-              <span className="text-xs font-extrabold uppercase text-[#ed8100] tracking-wider">
-                Excellence in Professional Education
-              </span>
-              <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-tight">
-                WHY JOIN CIMS
-              </h2>
-              <p className="text-xs sm:text-sm font-semibold text-[#ed8100]">
-                Endless opportunities await at Cambridge Institute of Management Studies!
-              </p>
-
-              {/* ISHM Style Square Icon Bullet List */}
-              <div className="pt-2 space-y-3">
-                {whyJoinPoints.map((point, index) => (
-                  <div key={index} className="flex items-start gap-3">
-                    <span className="w-2.5 h-2.5 bg-[#ed8100] mt-1.5 flex-shrink-0" />
-                    <span className="font-bold text-xs sm:text-sm text-gray-800">
-                      {point}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Bottom CTA Button matching ISHM */}
-              <div className="pt-4 flex items-center gap-3">
-                <Link
-                  href="/admission"
-                  className="bg-[#ed8100] hover:bg-[#d97400] text-white px-7 py-3 rounded font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
-                >
-                  Apply Now
-                </Link>
-                <Link
-                  href="/about"
-                  className="border border-[#112555] text-[#112555] hover:bg-[#112555] hover:text-white px-5 py-3 rounded font-bold text-xs uppercase tracking-wider transition-all"
-                >
-                  About Our Heritage
-                </Link>
-              </div>
-
-            </div>
-
-            <div className="lg:col-span-5 relative">
-              <div className="rounded-2xl overflow-hidden shadow-2xl border-4 border-[#112555] group bg-white relative">
-                <img
-                  src="/images/hero/cims-building.jpg"
-                  alt="CIMS Campus Building – Students on Balconies, Cambridge Institute of Management Studies"
-                  className="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                  loading="eager"
-                />
-                <button
-                  onClick={() => setSelectedVideo('campus-tour.mp4')}
-                  className="absolute inset-0 m-auto w-16 h-16 rounded-full bg-[#ed8100]/90 text-white flex items-center justify-center shadow-2xl hover:scale-110 hover:bg-[#ed8100] transition-all"
-                  aria-label="Play Campus Tour Video"
-                >
-                  <Play size={24} className="fill-current ml-1" />
-                </button>
-              </div>
-              <div className="absolute -bottom-4 -left-4 bg-[#ed8100] text-white p-4 rounded-xl shadow-xl hidden sm:block animate-float">
-                <div className="font-heading font-black text-2xl">15+ Years</div>
-                <div className="text-[11px] font-bold uppercase tracking-wider">Educational Trust</div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────────────────────
-          8. AWARDS & ACHIEVEMENTS SECTION (MATCHES ISHM ".award_slider")
+          9. AWARDS & ACHIEVEMENTS SECTION (MATCHES ISHM ".award_slider")
       ───────────────────────────────────────────────────────────── */}
       <section className="py-16 bg-[#f8fafc] border-t border-gray-200" id="awards">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1243,103 +1509,6 @@ export default function HomePage() {
               <span>View All Approvals &amp; Affiliation Orders</span>
               <ArrowRight size={14} />
             </Link>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ─────────────────────────────────────────────────────────────
-          9. TIE-UPS & INDUSTRY ASSOCIATIONS (MATCHES ISHM "#university")
-      ───────────────────────────────────────────────────────────── */}
-      <section className="py-16 bg-white border-t border-gray-200" id="tie-ups">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-
-          {/* Sub-block A: Verified Industry Support Brands */}
-          <div>
-            <div className="text-center max-w-3xl mx-auto mb-10">
-              <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
-                Industry Support &amp; Practical Training Network
-              </span>
-              <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-wide">
-                HOSPITAL &amp; INDUSTRY TIE-UPS
-              </h2>
-              <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full" />
-              <p className="text-xs sm:text-sm text-gray-600 mt-2">
-                Verified industry support and healthcare collaborations providing student internships, practical rotations, and industrial exposure across India.
-              </p>
-            </div>
-
-            {/* 12 Verified Industry Support Brands Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-              {INDUSTRY_SUPPORT_BRANDS.map((brand, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm hover:shadow-lg hover:border-[#ed8100] hover:-translate-y-1 transition-all flex flex-col items-center justify-center text-center group min-h-[140px]"
-                >
-                  <div className="h-16 w-full flex items-center justify-center p-1 mb-2">
-                    <img
-                      src={brand.logo}
-                      alt={`${brand.name} Logo`}
-                      className="max-h-14 max-w-[120px] w-auto h-auto object-contain group-hover:scale-105 transition-transform"
-                      loading="lazy"
-                    />
-                  </div>
-                  <h4 className="font-heading font-bold text-xs text-[#112555] leading-tight">
-                    {brand.name}
-                  </h4>
-                  <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider mt-1 px-2 py-0.5 bg-gray-50 rounded">
-                    {brand.category}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Sub-block B: Official Institutional Partners */}
-          <div className="pt-8 border-t border-gray-200">
-            <div className="text-center max-w-2xl mx-auto mb-10">
-              <span className="text-xs font-extrabold text-[#ed8100] uppercase tracking-wider">
-                Official Institutional Training Wings
-              </span>
-              <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-[#112555] uppercase tracking-wide">
-                OUR ACCREDITED PARTNERS
-              </h3>
-              <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full" />
-              <p className="text-xs sm:text-sm text-gray-600 mt-2">
-                Dedicated training hospital units, luxury resort properties, and 24x7 diagnostic pathology facilities from our official partners network.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {CIMS_PARTNERS.map((partner) => (
-                <div
-                  key={partner.id}
-                  className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all group flex flex-col"
-                >
-                  <div className="h-48 bg-gray-100 overflow-hidden relative">
-                    <img
-                      src={partner.image}
-                      alt={partner.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                    <div className="absolute top-2.5 left-2.5 bg-[#112555] text-white text-[10px] font-bold px-2.5 py-0.5 rounded shadow">
-                      {partner.category}
-                    </div>
-                  </div>
-                  <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
-                    <div>
-                      <h4 className="font-heading font-extrabold text-base text-[#112555] group-hover:text-[#ed8100] transition-colors">
-                        {partner.name}
-                      </h4>
-                      <p className="text-xs text-gray-600 leading-relaxed mt-1">
-                        {partner.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
         </div>
@@ -1427,7 +1596,7 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={() => setPlacementFilterYear('2024')}
-                  className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-all ${
+                  className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${
                     placementFilterYear === '2024'
                       ? 'bg-[#112555] text-white shadow'
                       : 'text-gray-600 hover:text-[#112555]'
@@ -1438,7 +1607,7 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={() => setPlacementFilterYear('2025')}
-                  className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-all ${
+                  className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${
                     placementFilterYear === '2025'
                       ? 'bg-[#112555] text-white shadow'
                       : 'text-gray-600 hover:text-[#112555]'
@@ -1449,7 +1618,7 @@ export default function HomePage() {
                 <button
                   type="button"
                   onClick={() => setPlacementFilterYear('all')}
-                  className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-all ${
+                  className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${
                     placementFilterYear === 'all'
                       ? 'bg-[#ed8100] text-white shadow'
                       : 'text-gray-600 hover:text-[#112555]'
@@ -1549,14 +1718,14 @@ export default function HomePage() {
             {/* Slider Navigation Buttons */}
             <button
               onClick={prevTestimonial}
-              className="absolute -left-3 sm:-left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-xl border border-gray-200 text-[#112555] hover:bg-[#ed8100] hover:text-white flex items-center justify-center transition-all focus:outline-none"
+              className="absolute -left-3 sm:-left-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-xl border border-gray-200 text-[#112555] hover:bg-[#ed8100] hover:text-white flex items-center justify-center transition-all focus:outline-none cursor-pointer"
               aria-label="Previous Testimonial"
             >
               <ChevronLeft size={22} />
             </button>
             <button
               onClick={nextTestimonial}
-              className="absolute -right-3 sm:-right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-xl border border-gray-200 text-[#112555] hover:bg-[#ed8100] hover:text-white flex items-center justify-center transition-all focus:outline-none"
+              className="absolute -right-3 sm:-right-6 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white shadow-xl border border-gray-200 text-[#112555] hover:bg-[#ed8100] hover:text-white flex items-center justify-center transition-all focus:outline-none cursor-pointer"
               aria-label="Next Testimonial"
             >
               <ChevronRight size={22} />
@@ -1574,7 +1743,7 @@ export default function HomePage() {
                   >
                     <div>
                       {/* Round Avatar at top */}
-                      <div className="w-20 h-20 mx-auto rounded-full overflow-hidden border-3 border-[#ed8100] shadow-md mb-4 bg-white flex items-center justify-center">
+                      <div className="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-[#ed8100] shadow-md mb-4 bg-white flex items-center justify-center">
                         <img
                           src={t.avatar}
                           alt={t.name}
@@ -1613,7 +1782,7 @@ export default function HomePage() {
                 <button
                   key={dotIdx}
                   onClick={() => setActiveTestimonialIdx(dotIdx)}
-                  className={`h-2.5 rounded-full transition-all ${
+                  className={`h-2.5 rounded-full transition-all cursor-pointer ${
                     dotIdx === activeTestimonialIdx
                       ? 'w-8 bg-[#ed8100]'
                       : 'w-2.5 bg-gray-300 hover:bg-gray-400'
@@ -1753,16 +1922,16 @@ export default function HomePage() {
       {/* Video Modal */}
       {selectedVideo && (
         <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
           onClick={() => setSelectedVideo(null)}
         >
           <div
-            className="bg-black max-w-3xl w-full rounded-2xl overflow-hidden shadow-2xl relative border-2 border-[#ed8100]"
+            className="bg-black max-w-3xl w-full rounded-2xl overflow-hidden shadow-2xl relative border-2 border-[#ed8100] animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setSelectedVideo(null)}
-              className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center transition-colors"
+              className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center transition-colors cursor-pointer"
               aria-label="Close video"
             >
               <X size={18} />
@@ -1782,11 +1951,11 @@ export default function HomePage() {
       {/* Placement Record Lightbox Modal */}
       {selectedPlacement && (
         <div
-          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
           onClick={() => setSelectedPlacement(null)}
         >
           <div
-            className="bg-white max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl relative border-2 border-[#ed8100] animate-in fade-in zoom-in-95 duration-200"
+            className="bg-white max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl relative border-2 border-[#ed8100] animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
@@ -1801,7 +1970,7 @@ export default function HomePage() {
               </div>
               <button
                 onClick={() => setSelectedPlacement(null)}
-                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
                 aria-label="Close record modal"
               >
                 <X size={18} />
@@ -1845,7 +2014,54 @@ export default function HomePage() {
               </span>
               <button
                 onClick={() => setSelectedPlacement(null)}
-                className="bg-[#112555] hover:bg-[#1a3880] text-white text-xs font-bold px-4 py-1.5 rounded transition-colors"
+                className="bg-[#112555] hover:bg-[#1a3880] text-white text-xs font-bold px-4 py-1.5 rounded transition-colors cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Gallery Image Lightbox Modal */}
+      {selectedGalleryImage && (
+        <div
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setSelectedGalleryImage(null)}
+        >
+          <div
+            className="bg-white max-w-3xl w-full rounded-2xl overflow-hidden shadow-2xl relative border-2 border-[#ed8100] animate-in zoom-in-95 duration-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="bg-[#112555] text-white px-5 py-3.5 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="bg-[#ed8100] text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded uppercase">
+                  {selectedGalleryImage.category}
+                </span>
+                <h3 className="font-heading font-extrabold text-sm sm:text-base text-white">
+                  {selectedGalleryImage.title}
+                </h3>
+              </div>
+              <button
+                onClick={() => setSelectedGalleryImage(null)}
+                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+                aria-label="Close image modal"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="bg-gray-900 p-2 flex items-center justify-center max-h-[75vh] overflow-hidden">
+              <img
+                src={selectedGalleryImage.image}
+                alt={selectedGalleryImage.title}
+                className="max-h-[70vh] w-auto max-w-full object-contain rounded"
+              />
+            </div>
+            <div className="bg-gray-50 px-5 py-3 border-t border-gray-100 flex items-center justify-between text-xs">
+              <span className="text-gray-500 font-medium">CIMS Campus Media Archive</span>
+              <button
+                onClick={() => setSelectedGalleryImage(null)}
+                className="bg-[#112555] hover:bg-[#1a3880] text-white text-xs font-bold px-4 py-1.5 rounded transition-colors cursor-pointer"
               >
                 Close
               </button>
