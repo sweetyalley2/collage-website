@@ -10,10 +10,8 @@ import {
   Linkedin, 
   Instagram, 
   Youtube,
-  GraduationCap,
-  CreditCard,
-  UserCheck,
-  Lock
+  Download,
+  GraduationCap
 } from 'lucide-react';
 import { CIMS_INFO } from '@/lib/data/cimsData';
 
@@ -104,30 +102,25 @@ export default function TopBar() {
             </div>
           </div>
 
-          {/* Right: Action Links matching ISHM Reference */}
+          {/* Right: Admission CTA & Brochure (Clean without Student Portal or Fee Payment) */}
           <div className="flex items-center space-x-3 sm:space-x-4">
             <Link 
               href="/#admission-form" 
-              className="bg-[#ed8100] hover:bg-[#d97400] text-white px-2.5 py-1 rounded font-bold uppercase tracking-wide text-[10px] transition-transform hover:scale-105 shadow-sm"
+              className="bg-[#ed8100] hover:bg-[#d97400] text-white px-3 py-1 rounded font-bold uppercase tracking-wide text-[10px] transition-transform hover:scale-105 shadow-sm flex items-center gap-1"
             >
-              Apply Now 2026
+              <GraduationCap size={12} />
+              <span>Apply Now 2026</span>
             </Link>
 
-            <Link 
-              href="/student-portal" 
-              className="hover:text-[#ed8100] flex items-center gap-1 transition-colors text-[11px] font-semibold"
+            <a 
+              href="https://cimsgroup.org/wp-content/uploads/2025/02/Brochure_CIMS_College.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#ed8100] flex items-center gap-1 transition-colors text-[11px] font-semibold text-gray-300"
             >
-              <UserCheck size={12} />
-              <span className="hidden sm:inline">Student Portal</span>
-            </Link>
-
-            <Link 
-              href="/pay-fee" 
-              className="hover:text-[#ed8100] flex items-center gap-1 transition-colors text-[11px] font-semibold"
-            >
-              <CreditCard size={12} />
-              <span className="hidden sm:inline">Pay Fee</span>
-            </Link>
+              <Download size={12} className="text-[#ed8100]" />
+              <span>E-Brochure</span>
+            </a>
           </div>
 
         </div>

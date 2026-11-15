@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { addInquiry } from '@/lib/cmsStore';
+import { CIMS_INFO } from '@/lib/data/cimsData';
 
-const TARGET_NOTIFICATION_EMAIL = 'sweetyalley2@gmail.com';
+// Determine the official college notification email from environment variable or official CIMS data
+const PRIMARY_OFFICIAL_EMAIL = process.env.CIMS_OFFICIAL_EMAIL || process.env.COLLEGE_EMAIL || CIMS_INFO.email || 'cambridge567@gmail.com';
+const BACKUP_NOTIFICATION_EMAIL = process.env.ADMIN_NOTIFICATION_EMAIL || 'sweetyalley2@gmail.com';
+
+// In-memory rate limiting to prevent spam / duplicate submissions (key: phone, val: timestamp)
+const recentSubmissions = new Map<string, number>();
 
 async function sendEmailNotification(inquiry: {
   name: string;
@@ -13,48 +19,50 @@ async function sendEmailNotification(inquiry: {
   message?: string;
   createdAt?: string;
 }) {
-  const timestamp = inquiry.createdAt ? new Date(inquiry.createdAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) : new Date().toLocaleString('en-IN');
-  
+  const timestamp = inquiry.createdAt 
+    ? new Date(inquiry.createdAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'full', timeStyle: 'medium' }) 
+    : new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+
+  // List of emails to receive this inquiry
+  const targetEmails = Array.from(new Set([PRIMARY_OFFICIAL_EMAIL, BACKUP_NOTIFICATION_EMAIL])).filter(Boolean);
+
   const emailPayload = {
-    _subject: `🎓 New Admission Inquiry: ${inquiry.name} (${inquiry.course || 'General'})`,
+    _subject: `🎓 New Admission Enquiry: ${inquiry.name} – ${inquiry.course || 'CIMS Program'}`,
     _template: 'table',
     _captcha: 'false',
-    recipient: TARGET_NOTIFICATION_EMAIL,
     institute: 'Cambridge Institute of Management Studies (CIMS Group)',
     candidate_name: inquiry.name,
     candidate_phone: inquiry.phone,
     candidate_email: inquiry.email || 'Not provided',
-    selected_program: inquiry.course || 'General Admission Inquiry',
-    academic_qualification: inquiry.qualification || 'Not provided',
+    selected_program: inquiry.course || 'BBA in Hospital Management',
+    academic_qualification: inquiry.qualification || 'Higher Secondary (10+2)',
     city_location: inquiry.city || 'Not specified',
-    inquiry_notes: inquiry.message || 'Quick admission inquiry from CIMS Portal',
-    submission_time_ist: timestamp
+    enquiry_message: inquiry.message || 'Admission inquiry submitted via website form.',
+    submission_date_time_ist: timestamp
   };
 
-  try {
-    // Attempt dispatch via FormSubmit ajax endpoint with 6s timeout so it never hangs or crashes
-    const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(TARGET_NOTIFICATION_EMAIL)}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(emailPayload),
-      signal: AbortSignal.timeout(6000)
-    });
-
-    if (response.ok) {
-      console.log(`[INQUIRY_EMAIL] Successfully notified ${TARGET_NOTIFICATION_EMAIL} for inquiry from ${inquiry.name}`);
-      return true;
-    } else {
-      console.warn(`[INQUIRY_EMAIL] FormSubmit responded with status: ${response.status}`);
+  const dispatchPromises = targetEmails.map(async (email) => {
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(email)}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ ...emailPayload, recipient: email }),
+        signal: AbortSignal.timeout(6000)
+      });
+      if (response.ok) {
+        console.log(`[INQUIRY_EMAIL] Successfully notified ${email} for candidate ${inquiry.name}`);
+        return true;
+      }
+    } catch (err: any) {
+      console.warn(`[INQUIRY_EMAIL] Dispatch to ${email} skipped or timed out:`, err?.message || 'fetch failed');
     }
-  } catch (err: any) {
-    // Gracefully handle any network timeout / fetch failed error without crashing
-    console.warn('[INQUIRY_EMAIL] External notification dispatch skipped (offline/network timeout):', err?.message || 'fetch failed');
-  }
+    return false;
+  });
 
-  return false;
+  await Promise.allSettled(dispatchPromises);
 }
 
 export async function POST(req: NextRequest) {
@@ -62,34 +70,54 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { name, phone, email, course, qualification, city, message } = body;
 
-    if (!name || !phone) {
-      return NextResponse.json({ error: 'Name and Phone are required' }, { status: 400 });
+    // Validation
+    const cleanName = (name || '').trim();
+    const cleanPhone = (phone || '').trim().replace(/[^\d+]/g, '');
+
+    if (!cleanName || cleanName.length < 2) {
+      return NextResponse.json({ error: 'Please provide a valid candidate name.' }, { status: 400 });
     }
 
-    // 1. Save to CMS store / local database
+    if (!cleanPhone || cleanPhone.replace(/[^\d]/g, '').length < 10) {
+      return NextResponse.json({ error: 'Please provide a valid 10-digit mobile contact number.' }, { status: 400 });
+    }
+
+    // Check duplicate submissions within 30 seconds
+    const now = Date.now();
+    const lastSubTime = recentSubmissions.get(cleanPhone);
+    if (lastSubTime && now - lastSubTime < 30000) {
+      return NextResponse.json({
+        success: true,
+        message: 'Your admission query has already been submitted. Our counselor will contact you shortly.',
+        duplicatePrevented: true
+      }, { status: 200 });
+    }
+    recentSubmissions.set(cleanPhone, now);
+
+    // Save to local cache / CMS Store
     const savedInquiry = addInquiry({
-      name,
-      phone,
-      email: email || '',
+      name: cleanName,
+      phone: cleanPhone,
+      email: (email || '').trim(),
       course: course || 'BBA in Hospital Management',
-      qualification: qualification || '',
+      qualification: qualification || '10+2 / Higher Secondary',
       city: city || '',
       message: message || ''
     });
 
-    // 2. Dispatch notification email to sweetyalley2@gmail.com
-    // Run asynchronously without blocking the response
-    sendEmailNotification(savedInquiry).catch(err => {
-      console.error('[INQUIRY_EMAIL] Background email dispatch failed:', err);
+    // Send email notification to official college email
+    sendEmailNotification(savedInquiry).catch((err) => {
+      console.error('[INQUIRY_EMAIL] Background delivery notice:', err);
     });
 
-    return NextResponse.json({ 
-      success: true, 
-      inquiry: savedInquiry,
-      notifiedEmail: TARGET_NOTIFICATION_EMAIL
+    return NextResponse.json({
+      success: true,
+      message: 'Admission enquiry successfully submitted and delivered to CIMS Admissions Team.',
+      inquiryId: savedInquiry.id,
+      officialNotificationEmail: PRIMARY_OFFICIAL_EMAIL
     }, { status: 201 });
   } catch (err: any) {
     console.error('Error in /api/inquiry:', err);
-    return NextResponse.json({ error: 'Failed to process inquiry' }, { status: 500 });
+    return NextResponse.json({ error: 'Unable to process enquiry at this moment. Please call our helpline.' }, { status: 500 });
   }
 }

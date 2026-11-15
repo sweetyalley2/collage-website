@@ -76,14 +76,14 @@ export default function HospitalityPage() {
                     <span className="w-2 h-2 bg-[#ed8100] rounded-full" />
                     Commercial Culinary Kitchens
                   </div>
-                  <p className="text-xs text-gray-600 mt-1 leading-relaxed">Modern baking, international culinary arts, butchery, and food production training labs.</p>
+                  <p className="text-xs text-gray-600 mt-1 leading-relaxed">Modern baking, culinary arts, banquet service, and food production training labs.</p>
                 </div>
                 <div className="p-5 bg-white rounded-xl border border-gray-200 hover:border-[#ed8100] shadow-sm hover:shadow-md transition-all">
                   <div className="font-heading font-bold text-base text-[#112555] flex items-center gap-2">
                     <span className="w-2 h-2 bg-[#ed8100] rounded-full" />
-                    Global Career Opportunities
+                    Premier Industry Career Opportunities
                   </div>
-                  <p className="text-xs text-gray-600 mt-1 leading-relaxed">Placement pathways across international hotels, luxury cruise liners, and commercial aviation.</p>
+                  <p className="text-xs text-gray-600 mt-1 leading-relaxed">Placement pathways across leading 5-star luxury hotels, resorts, and corporate hospitality brands.</p>
                 </div>
                 <div className="p-5 bg-white rounded-xl border border-gray-200 hover:border-[#ed8100] shadow-sm hover:shadow-md transition-all">
                   <div className="font-heading font-bold text-base text-[#112555] flex items-center gap-2">
@@ -98,7 +98,7 @@ export default function HospitalityPage() {
             {/* Career Opportunities */}
             <div className="space-y-4 pt-2">
               <h3 className="font-heading font-extrabold text-xl text-[#112555] uppercase tracking-wide">
-                Career Profiles in Global Hospitality:
+                Career Profiles in Hospitality Management:
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-gray-700">
                 <div className="flex items-center gap-2.5 p-2.5 bg-gray-50 rounded-lg border border-gray-100">
@@ -119,7 +119,7 @@ export default function HospitalityPage() {
                 </div>
                 <div className="flex items-center gap-2.5 p-2.5 bg-gray-50 rounded-lg border border-gray-100">
                   <span className="w-2 h-2 bg-[#ed8100] flex-shrink-0" />
-                  <span className="font-semibold">Luxury Cruise Liner Executive</span>
+                  <span className="font-semibold">Luxury Resort Operations Executive</span>
                 </div>
                 <div className="flex items-center gap-2.5 p-2.5 bg-gray-50 rounded-lg border border-gray-100">
                   <span className="w-2 h-2 bg-[#ed8100] flex-shrink-0" />

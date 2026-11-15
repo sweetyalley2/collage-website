@@ -13,8 +13,7 @@ import {
   GraduationCap, 
   ChevronRight,
   PhoneCall,
-  UserCheck,
-  CreditCard,
+  FileText,
   Building2
 } from 'lucide-react';
 import { CIMS_INFO } from '@/lib/data/cimsData';
@@ -35,19 +34,32 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone) {
-      setErrorMsg('Please enter your full name and contact number.');
+    setErrorMsg('');
+
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      setErrorMsg('Please enter a valid candidate full name.');
       return;
     }
+
+    const cleanPhone = formData.phone.replace(/[^\d]/g, '');
+    if (cleanPhone.length < 10) {
+      setErrorMsg('Please enter a valid 10-digit mobile contact number.');
+      return;
+    }
+
     setSubmitting(true);
-    setErrorMsg('');
     try {
-      await fetch('/api/inquiry', {
+      const res = await fetch('/api/inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-      setSubmitted(true);
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setErrorMsg(data.error || 'Failed to submit enquiry. Please call our helpline.');
+      }
     } catch (e) {
       setSubmitted(true);
     } finally {
@@ -156,38 +168,40 @@ export default function ContactPage() {
 
             </div>
 
-            {/* Student Portal & Pay Fee Info Anchors */}
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              <div id="student-portal" className="p-4 bg-gray-50 rounded-xl border border-gray-200 flex flex-col justify-between">
+            {/* Campus & Admissions Information */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-2 font-heading font-bold text-xs text-[#112555]">
-                    <UserCheck size={16} className="text-[#ed8100]" />
-                    <span>Student Portal</span>
+                    <Building2 size={16} className="text-[#ed8100]" />
+                    <span>Campus Visit &amp; Tours</span>
                   </div>
-                  <p className="text-[10px] text-gray-500 mt-1">Active student logins, attendance &amp; marks verification.</p>
+                  <p className="text-[10px] text-gray-500 mt-1">Visit our Purba Medinipur campus &amp; City Hospital training facility Mon – Sat.</p>
                 </div>
-                <Link
-                  href="/student-portal"
+                <a
+                  href={`tel:${CIMS_INFO.phone}`}
                   className="mt-3 inline-flex items-center gap-1 text-[11px] font-bold text-[#ed8100] hover:underline"
                 >
-                  <span>Open Student Portal &rarr;</span>
-                </Link>
+                  <span>Book Guided Tour &rarr;</span>
+                </a>
               </div>
 
-              <div id="pay-fee" className="p-4 bg-gray-50 rounded-xl border border-gray-200 flex flex-col justify-between">
+              <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-2 font-heading font-bold text-xs text-[#112555]">
-                    <CreditCard size={16} className="text-[#ed8100]" />
-                    <span>Pay Fee</span>
+                    <FileText size={16} className="text-[#ed8100]" />
+                    <span>Official E-Brochure</span>
                   </div>
-                  <p className="text-[10px] text-gray-500 mt-1">Tuition fee payment instructions &amp; bank transfer details.</p>
+                  <p className="text-[10px] text-gray-500 mt-1">Complete syllabus, hospital rotations &amp; course fee structures.</p>
                 </div>
-                <Link
-                  href="/pay-fee"
+                <a
+                  href="https://cimsgroup.org/wp-content/uploads/2025/02/Brochure_CIMS_College.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-3 inline-flex items-center gap-1 text-[11px] font-bold text-[#ed8100] hover:underline"
                 >
-                  <span>Pay Fee Online &rarr;</span>
-                </Link>
+                  <span>Download Brochure &rarr;</span>
+                </a>
               </div>
             </div>
 

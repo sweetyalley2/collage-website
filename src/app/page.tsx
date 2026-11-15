@@ -73,6 +73,7 @@ export default function HomePage() {
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formSubmitting, setFormSubmitting] = useState(false);
+  const [formError, setFormError] = useState('');
 
   // Video Modal State
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
@@ -87,14 +88,32 @@ export default function HomePage() {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setFormError('');
+
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      setFormError('Please enter a valid candidate name.');
+      return;
+    }
+
+    const cleanPhone = formData.phone.replace(/[^\d]/g, '');
+    if (cleanPhone.length < 10) {
+      setFormError('Please enter a valid 10-digit mobile contact number.');
+      return;
+    }
+
     setFormSubmitting(true);
     try {
-      await fetch('/api/inquiry', {
+      const res = await fetch('/api/inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-      setFormSubmitted(true);
+      if (res.ok) {
+        setFormSubmitted(true);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setFormError(data.error || 'Failed to submit enquiry. Please call our helpline.');
+      }
     } catch (e) {
       setFormSubmitted(true);
     } finally {
@@ -251,8 +270,8 @@ export default function HomePage() {
   const whyJoinPoints = [
     "Multiple Government Recognition & MAKAUT (CCPTR) Affiliated",
     "Affordable Course Fee with Easy Installment Options",
-    "National & International Internships in 5-Star Hotels & Hospitals",
-    "Global Industry Exposure & Hospital Administration Rotations",
+    "Practical Clinical Hospital Rotations & 5-Star Hotel Internships Across India",
+    "Comprehensive Industry Exposure & Hospital Administration Rotations",
     "Modern Diagnostic Laboratories & Commercial Kitchen Labs",
     "Emphasis in Skill Development & 360° Practical Clinical Learning",
     "Swami Vivekananda Foundation Scholarship Opportunities & Education Loans",
@@ -471,7 +490,7 @@ export default function HomePage() {
               </div>
 
               <h1 className="font-heading text-3xl sm:text-5xl lg:text-5xl font-black tracking-tight leading-[1.12] text-white">
-                Launch Your Global Career in <br />
+                Launch Your Professional Career in <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ffc923] via-[#ff9724] to-[#ed8100]">
                   Healthcare &amp; Hospitality
                 </span>
@@ -612,6 +631,12 @@ export default function HomePage() {
                   </div>
                 ) : (
                   <form onSubmit={handleFormSubmit} className="space-y-3">
+
+                    {formError && (
+                      <div className="p-2.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded">
+                        {formError}
+                      </div>
+                    )}
 
                     <div>
                       <label className="block text-[11px] font-bold text-gray-700 uppercase tracking-wider mb-1">
@@ -1325,7 +1350,7 @@ export default function HomePage() {
             </h2>
             <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full mb-3" />
             <p className="text-xs sm:text-sm text-gray-600">
-              Leading IT conglomerates, international 5-star luxury hotel chains, and premier multispecialty hospital groups regularly recruit graduating CIMS students.
+              Leading IT conglomerates, luxury 5-star brand hotel chains, and premier multispecialty hospital groups regularly recruit graduating CIMS students.
             </p>
           </div>
 

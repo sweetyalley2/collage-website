@@ -143,9 +143,9 @@ export const INITIAL_COURSES: Course[] = [
     fullDesc: "Step into the vibrant global hospitality industry with CIMS. Acclaimed as the leading Hospitality and Hotel Management college in West Bengal, CIMS combines rigorous practical kitchen labs, simulated front desk suites, mock bar setups, and mandatory 6-month industrial internships in 5-star luxury hotels.",
     highlights: [
       "Industrial training in luxury 5-star brand hotels (Taj, Marriott, Hyatt)",
-      "Hands-on Food Production, Bakery & International Culinary Labs",
+      "Hands-on Food Production, Bakery & Culinary Labs",
       "Wine tasting, banquet management & mixology workshops",
-      "Direct international internship & career opportunities"
+      "Direct 5-star hotel internship & placement opportunities across India"
     ],
     careerProspects: [
       "Hotel General Manager Track",
@@ -755,7 +755,7 @@ export const INITIAL_NEWS: NewsNotice[] = [
     category: "Admission",
     isImportant: true,
     summary: "Official admission notice for 2026-27 academic session: Applications open for BBA in Hospital Management, B.Sc in Hospitality & Hotel Administration, Paramedical (BMLT/BMRIT/BOTT), and BCA under MAKAUT (CCPTR).",
-    content: "Admission Open 2026 in Kolkata Colleges: The Path to a Global Career. As we step into the 2026 academic year, Cambridge Institute of Management Studies (CIMS Group), under Swami Vivekananda Foundation and affiliated with MAKAUT (CCPTR), invites applications for its premier undergraduate and diploma programs. Early applicants receive dedicated counseling, merit scholarship opportunities, and education loan approval support."
+    content: "Admission Open 2026 in Kolkata Colleges: The Path to a Professional Career. As we step into the 2026 academic year, Cambridge Institute of Management Studies (CIMS Group), under Swami Vivekananda Foundation and affiliated with MAKAUT (CCPTR), invites applications for its premier undergraduate and diploma programs. Early applicants receive dedicated counseling, merit scholarship opportunities, and education loan approval support."
   },
   {
     id: "n-2",
@@ -763,8 +763,8 @@ export const INITIAL_NEWS: NewsNotice[] = [
     date: "March 2026",
     category: "Career",
     isImportant: true,
-    summary: "The future of service industries in 2026: Career roadmaps in luxury hotel chains, international hospitality management, and airline catering/aviation operations.",
-    content: "Introduction: The Future of Service Industries in 2026. The landscape of higher education and employment is evolving rapidly with high demand for groomed professionals. CIMS provides 6 months mandatory industrial exposure in 5-star properties like Taj, ITC, Marriott, Hyatt, and Westin, delivering a direct pathway to global careers."
+    summary: "The future of service industries in 2026: Career roadmaps in luxury hotel chains, modern hospitality management, and premier catering/service operations.",
+    content: "Introduction: The Future of Service Industries in 2026. The landscape of higher education and employment is evolving rapidly with high demand for groomed professionals. CIMS provides 6 months mandatory industrial exposure in 5-star properties like Taj, ITC, Marriott, Hyatt, and Westin, delivering a direct pathway to rewarding professional careers."
   },
   {
     id: "n-3",
