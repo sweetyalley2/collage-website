@@ -519,17 +519,17 @@ export default function HomePage() {
     return () => clearInterval(interval);
   }, [isEnquiryModalOpen]);
 
-  // 2. Preload active collage images for smooth transitions
+  // 2. Progressive preloader: preloads upcoming slide images without jamming initial page load
   useEffect(() => {
-    const urls = new Set<string>();
-    COLLAGE_COMPOSITIONS.forEach((comp) => {
-      comp.tiles.forEach((tile) => urls.add(tile.src));
-    });
-    urls.forEach((url) => {
-      const img = new window.Image();
-      img.src = url;
-    });
-  }, []);
+    const nextIdx = (activeSlide + 1) % COLLAGE_COMPOSITIONS.length;
+    const nextComp = COLLAGE_COMPOSITIONS[nextIdx];
+    if (nextComp) {
+      nextComp.tiles.forEach((tile) => {
+        const img = new window.Image();
+        img.src = tile.src;
+      });
+    }
+  }, [activeSlide]);
 
   return (
     <div className="relative w-full h-[calc(100vh-75px)] sm:h-[calc(100vh-125px)] min-h-[520px] sm:min-h-[640px] max-h-[960px] overflow-hidden bg-slate-950 select-none flex items-center justify-center">

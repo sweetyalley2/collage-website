@@ -37,6 +37,7 @@ export default function CoursesGrid() {
                     alt={course.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute top-2.5 left-2.5 bg-[#112555]/90 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded shadow">
                     {course.category}

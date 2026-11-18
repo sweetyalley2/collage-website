@@ -85,6 +85,7 @@ export default function GalleryPage() {
                 alt={`CIMS Photograph ${idx + 1}`}
                 className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
                 loading="lazy"
+                decoding="async"
               />
               {/* Subtle hover icon overlay */}
               <div className="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">

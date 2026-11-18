@@ -99,10 +99,10 @@ export const CIMS_INFO = {
     studentSatisfaction: "98%",
   },
   socials: {
-    facebook: "https://facebook.com/cimsgroup",
+    facebook: "https://www.facebook.com/CIMSCollege?mibextid=LQQJ4d",
     twitter: "https://twitter.com/cimsgroup",
-    linkedin: "https://linkedin.com/company/cimsgroup",
-    instagram: "https://instagram.com/cimsgroup",
+    linkedin: "https://www.linkedin.com/in/cims-group-18576b266/",
+    instagram: "https://www.instagram.com/cimscollege?cnvx=MWNtaG15bGxhNmcxcw==",
     youtube: "https://youtube.com/cimsgroup",
   },
 };
@@ -814,18 +814,6 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     year: "2023–2024",
     sector: "Healthcare",
     image: "/images/placement/students-2023-2024/hm-13-madhumita-bag.jpg"
-  },
-  {
-    id: "hm-2023-24-14",
-    studentName: "Suteshna Maity",
-    course: "Hospital Management",
-    trainingOrg: "Jaiprakash Hospital, Rourkela, Odisha",
-    placementOrg: "Ideal Hospital, Uluberia",
-    company: "Ideal Hospital, Uluberia",
-    location: "Uluberia",
-    year: "2023–2024",
-    sector: "Healthcare",
-    image: "/images/placement/students-2023-2024/hm-14-suteshna-maity.jpg"
   },
   {
     id: "hm-2023-24-15",

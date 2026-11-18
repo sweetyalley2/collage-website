@@ -8,14 +8,17 @@ export default function FloatingActions() {
   const [showTopBtn, setShowTopBtn] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
     const checkScroll = () => {
-      if (window.scrollY > 300) {
-        setShowTopBtn(true);
-      } else {
-        setShowTopBtn(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setShowTopBtn(window.scrollY > 300);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
-    window.addEventListener('scroll', checkScroll);
+    window.addEventListener('scroll', checkScroll, { passive: true });
     return () => window.removeEventListener('scroll', checkScroll);
   }, []);
 

@@ -41,10 +41,17 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 30);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -211,7 +218,7 @@ export default function Navbar() {
                 <div className="space-y-1 text-xs">
                   <Link href="/placement" className="block p-2 rounded-lg font-bold text-gray-700 hover:text-[#ed8100] hover:bg-orange-50/60 transition-colors">
                     Recent Placements (2023–2024)
-                    <span className="block text-[10px] text-gray-500 font-normal">Official 40 verified student posters</span>
+                    <span className="block text-[10px] text-gray-500 font-normal">Official verified student posters</span>
                   </Link>
                   <Link href="/placement#records" className="block p-2 rounded-lg font-bold text-gray-700 hover:text-[#ed8100] hover:bg-orange-50/60 transition-colors">
                     Placement Record Database
@@ -470,23 +477,23 @@ export default function Navbar() {
 
 
       {/* Floating Right Side Tabs: 1. ONLINE ADMISSION FORM, 2. ENQUIRY FORM */}
-      <div className="fixed right-0 top-[66%] sm:top-[58%] -translate-y-1/2 z-40 flex flex-col items-end gap-2.5 select-none">
-        {/* 1. ONLINE ADMISSION FORM */}
+      <div className="fixed right-0 top-[60%] sm:top-[58%] -translate-y-1/2 z-40 flex flex-col items-end gap-2 sm:gap-2.5 select-none">
+        {/* 1. ONLINE ADMISSION FORM (Slightly reduced size on mobile, positioned clear of navigation) */}
         <Link
           href="/admission"
           aria-label="Online Admission Form"
-          className="bg-[#ed8100] hover:bg-[#d97400] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-widest py-3 px-1.5 sm:px-2 rounded-l-md shadow-2xl flex items-center gap-1.5 transition-all hover:pr-3 cursor-pointer group"
+          className="bg-[#ed8100] hover:bg-[#d97400] text-white text-[9px] sm:text-[11px] font-black uppercase tracking-wider sm:tracking-widest py-2 sm:py-3 px-1 sm:px-2 rounded-l-md shadow-xl flex items-center gap-1 transition-all hover:pr-2.5 cursor-pointer group"
           style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
         >
           <span>ONLINE ADMISSION FORM</span>
         </Link>
 
-        {/* 2. ENQUIRY FORM (Directly below ONLINE ADMISSION FORM) */}
+        {/* 2. ENQUIRY FORM (Directly below ONLINE ADMISSION FORM with matching size & spacing) */}
         <button
           type="button"
           onClick={() => setIsEnquiryOpen(true)}
           aria-label="Enquiry Form"
-          className="bg-[#ed8100] hover:bg-[#d97400] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-widest py-3 px-1.5 sm:px-2 rounded-l-md shadow-2xl flex items-center gap-1.5 transition-all hover:pr-3 cursor-pointer group"
+          className="bg-[#ed8100] hover:bg-[#d97400] text-white text-[9px] sm:text-[11px] font-black uppercase tracking-wider sm:tracking-widest py-2 sm:py-3 px-1 sm:px-2 rounded-l-md shadow-xl flex items-center gap-1 transition-all hover:pr-2.5 cursor-pointer group"
           style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
         >
           <span>ENQUIRY FORM</span>

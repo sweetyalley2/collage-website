@@ -82,7 +82,7 @@ export default function PlacementPage() {
           <div className="flex flex-wrap items-center justify-center gap-4 pt-3 text-xs">
             <span className="bg-white/10 px-3.5 py-1.5 rounded-lg border border-white/20 font-semibold flex items-center gap-1.5">
               <CheckCircle size={15} className="text-[#ed8100]" />
-              40 Verified Student Dossiers
+              {CIMS_PLACED_STUDENTS_2023_2024.length} Verified Student Dossiers
             </span>
             <span className="bg-white/10 px-3.5 py-1.5 rounded-lg border border-white/20 font-semibold flex items-center gap-1.5">
               <Building2 size={15} className="text-[#ed8100]" />
@@ -393,13 +393,13 @@ export default function PlacementPage() {
             <div className="p-6 space-y-6">
               <div className="flex flex-col sm:flex-row items-center gap-6">
                 
-                {/* Photo Display */}
-                <div className="w-36 h-44 rounded-xl overflow-hidden border-4 border-[#112555] shadow-lg flex-shrink-0 bg-gray-50 flex items-center justify-center">
+                {/* Photo Display - object-contain prevents face cropping & preserves full image */}
+                <div className="w-40 sm:w-48 h-52 sm:h-60 rounded-xl overflow-hidden border-4 border-[#112555] shadow-xl flex-shrink-0 bg-white flex items-center justify-center p-1.5">
                   {selectedRecord.image ? (
                     <img
                       src={selectedRecord.image}
                       alt={selectedRecord.studentName}
-                      className="w-full h-full object-cover object-top"
+                      className="w-full h-full object-contain object-center select-none"
                     />
                   ) : (
                     <div className="text-center p-3">
