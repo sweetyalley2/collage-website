@@ -19,17 +19,26 @@ export default function BackgroundAnimation() {
     <>
       <style jsx>{`
         @keyframes float {
-          0% { transform: translateY(0) translateX(0); opacity: 0.1; }
-          50% { transform: translateY(-20%) translateX(20%); opacity: 0.2; }
-          100% { transform: translateY(0) translateX(0); opacity: 0.1; }
+          0% { transform: translate3d(0, 0, 0); opacity: 0.08; }
+          50% { transform: translate3d(20px, -20px, 0); opacity: 0.16; }
+          100% { transform: translate3d(0, 0, 0); opacity: 0.08; }
         }
-        .float-circle { animation: float 20s ease-in-out infinite; }
+        .float-circle { 
+          animation: float 22s ease-in-out infinite; 
+          will-change: transform;
+          backface-visibility: hidden;
+        }
+        @media (max-width: 640px) {
+          .float-circle-extra {
+            display: none;
+          }
+        }
       `}</style>
       <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
         {circles.map((c, i) => (
           <div
             key={i}
-            className="bg-[#ff9900] opacity-80 rounded-full float-circle"
+            className={`bg-[#ff9900] opacity-80 rounded-full float-circle ${i > 2 ? 'float-circle-extra' : ''}`}
             style={{
               width: c.size,
               height: c.size,

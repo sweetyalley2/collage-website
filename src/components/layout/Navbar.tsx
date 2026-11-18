@@ -31,11 +31,13 @@ import {
   Sparkles
 } from 'lucide-react';
 import { CIMS_INFO } from '@/lib/data/cimsData';
+import EnquiryModal from '@/components/EnquiryModal';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -467,15 +469,32 @@ export default function Navbar() {
       )}
 
 
-      {/* Floating Right Side Tab: ONLINE ADMISSION FORM (Moved lower as requested to prevent content/placement overlap) */}
-      <Link
-        href="/admission"
-        aria-label="Online Admission Form"
-        className="fixed right-0 top-[68%] -translate-y-1/2 z-40 bg-[#ed8100] hover:bg-[#d97400] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-widest py-3 px-1.5 sm:px-2 rounded-l-md shadow-2xl flex items-center gap-1.5 transition-all hover:pr-3 cursor-pointer group"
-        style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
-      >
-        <span>ONLINE ADMISSION FORM</span>
-      </Link>
+      {/* Floating Right Side Tabs: 1. ONLINE ADMISSION FORM, 2. ENQUIRY FORM */}
+      <div className="fixed right-0 top-[66%] sm:top-[58%] -translate-y-1/2 z-40 flex flex-col items-end gap-2.5 select-none">
+        {/* 1. ONLINE ADMISSION FORM */}
+        <Link
+          href="/admission"
+          aria-label="Online Admission Form"
+          className="bg-[#ed8100] hover:bg-[#d97400] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-widest py-3 px-1.5 sm:px-2 rounded-l-md shadow-2xl flex items-center gap-1.5 transition-all hover:pr-3 cursor-pointer group"
+          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+        >
+          <span>ONLINE ADMISSION FORM</span>
+        </Link>
+
+        {/* 2. ENQUIRY FORM (Directly below ONLINE ADMISSION FORM) */}
+        <button
+          type="button"
+          onClick={() => setIsEnquiryOpen(true)}
+          aria-label="Enquiry Form"
+          className="bg-[#ed8100] hover:bg-[#d97400] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-widest py-3 px-1.5 sm:px-2 rounded-l-md shadow-2xl flex items-center gap-1.5 transition-all hover:pr-3 cursor-pointer group"
+          style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
+        >
+          <span>ENQUIRY FORM</span>
+        </button>
+      </div>
+
+      {/* Reusable Enquiry Form Modal */}
+      <EnquiryModal isOpen={isEnquiryOpen} onClose={() => setIsEnquiryOpen(false)} />
     </header>
   );
 }

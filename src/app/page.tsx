@@ -1,18 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import {
-  GraduationCap,
-  Send,
-  ArrowRight,
-  X,
-  CheckCircle2,
-  AlertCircle,
-  Sparkles,
-  PhoneCall,
-  FileText
-} from 'lucide-react';
+import EnquiryModal from '@/components/EnquiryModal';
 
 interface CollageTile {
   src: string;
@@ -106,6 +95,24 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
         "rotation": "rotate-1 sm:rotate-2",
         "zIndex": "z-20",
         "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+      },
+      {
+        "src": "/images/cims-optimized/cims-photo-009.webp",
+        "alt": "Emergency Care & Clinical Simulation",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
+        "rowSpan": "row-span-1",
+        "rotation": "-rotate-1 sm:-rotate-1.5",
+        "zIndex": "z-10",
+        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+      },
+      {
+        "src": "/images/cims-optimized/cims-photo-010.webp",
+        "alt": "IT & High-Speed Development Lab",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
+        "rowSpan": "row-span-1",
+        "rotation": "rotate-1 sm:rotate-2",
+        "zIndex": "z-20",
+        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
       }
     ]
   },
@@ -182,6 +189,24 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
         "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
         "rowSpan": "row-span-1",
         "rotation": "rotate-1 sm:rotate-2",
+        "zIndex": "z-20",
+        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+      },
+      {
+        "src": "/images/cims-optimized/cims-photo-011.webp",
+        "alt": "Operation Theatre Protocol & Equipment Training",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
+        "rowSpan": "row-span-1",
+        "rotation": "-rotate-1 sm:-rotate-1.5",
+        "zIndex": "z-10",
+        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+      },
+      {
+        "src": "/images/cims-optimized/cims-photo-009.webp",
+        "alt": "Clinical Management Practical Simulation",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
+        "rowSpan": "row-span-1",
+        "rotation": "rotate-1 sm:rotate-1.5",
         "zIndex": "z-20",
         "aspect": "aspect-[4/3] sm:aspect-[16/10]"
       }
@@ -262,6 +287,24 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
         "rotation": "rotate-1 sm:rotate-1.5",
         "zIndex": "z-20",
         "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+      },
+      {
+        "src": "/images/cims-optimized/cims-photo-027.webp",
+        "alt": "Hospital Operations & Executive Conference",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
+        "rowSpan": "row-span-1",
+        "rotation": "-rotate-1 sm:-rotate-1",
+        "zIndex": "z-10",
+        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+      },
+      {
+        "src": "/images/cims-optimized/cims-photo-028.webp",
+        "alt": "Clinical Rotation Briefing & Rounds",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
+        "rowSpan": "row-span-1",
+        "rotation": "rotate-1 sm:rotate-2",
+        "zIndex": "z-20",
+        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
       }
     ]
   },
@@ -338,6 +381,24 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
         "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
         "rowSpan": "row-span-1",
         "rotation": "-rotate-1 sm:-rotate-1.8",
+        "zIndex": "z-20",
+        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+      },
+      {
+        "src": "/images/cims-optimized/cims-photo-036.webp",
+        "alt": "Hospital Inpatient Ward Management Practical",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
+        "rowSpan": "row-span-1",
+        "rotation": "-rotate-1 sm:-rotate-1.5",
+        "zIndex": "z-10",
+        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+      },
+      {
+        "src": "/images/cims-optimized/cims-photo-037.webp",
+        "alt": "Food Science & Bakery Creation Workshop",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
+        "rowSpan": "row-span-1",
+        "rotation": "rotate-1 sm:rotate-1.5",
         "zIndex": "z-20",
         "aspect": "aspect-[4/3] sm:aspect-[16/10]"
       }
@@ -418,6 +479,24 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
         "rotation": "rotate-1 sm:rotate-2",
         "zIndex": "z-20",
         "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+      },
+      {
+        "src": "/images/cims-optimized/cims-photo-046.webp",
+        "alt": "Clinical Diagnostic Laboratory Session",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
+        "rowSpan": "row-span-1",
+        "rotation": "-rotate-1 sm:-rotate-1.5",
+        "zIndex": "z-10",
+        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+      },
+      {
+        "src": "/images/cims-optimized/cims-photo-048.webp",
+        "alt": "Culinary Masterclass & Fine Dining Banquet",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
+        "rowSpan": "row-span-1",
+        "rotation": "rotate-1 sm:rotate-2",
+        "zIndex": "z-20",
+        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
       }
     ]
   }
@@ -429,18 +508,6 @@ export default function HomePage() {
 
   // Enquiry Form Modal State
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    course: 'BBA in Hospital Management',
-    qualification: '10+2 / Higher Secondary',
-    city: '',
-    message: ''
-  });
-  const [formSubmitting, setFormSubmitting] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [formError, setFormError] = useState('');
 
   // 1. Automatic Collage Change Timer (Transitions smoothly every 2.5 seconds)
   useEffect(() => {
@@ -452,7 +519,7 @@ export default function HomePage() {
     return () => clearInterval(interval);
   }, [isEnquiryModalOpen]);
 
-  // 2. Preload all collage images to ensure seamless, flash-free transitions
+  // 2. Preload active collage images for smooth transitions
   useEffect(() => {
     const urls = new Set<string>();
     COLLAGE_COMPOSITIONS.forEach((comp) => {
@@ -463,62 +530,6 @@ export default function HomePage() {
       img.src = url;
     });
   }, []);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormError('');
-
-    if (!formData.name.trim() || formData.name.trim().length < 2) {
-      setFormError('Please enter a valid candidate name.');
-      return;
-    }
-
-    const cleanPhone = formData.phone.replace(/[^\d]/g, '');
-    if (cleanPhone.length < 10) {
-      setFormError('Please enter a valid 10-digit mobile contact number.');
-      return;
-    }
-
-    setFormSubmitting(true);
-    try {
-      const res = await fetch('/api/inquiry', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-      const data = await res.json();
-      if (res.ok && data.success) {
-        setFormSubmitted(true);
-      } else {
-        setFormError(data.error || 'Unable to submit enquiry. Please try again.');
-      }
-    } catch (err) {
-      setFormError('Network connection issue. Please check your internet or call helpline.');
-    } finally {
-      setFormSubmitting(false);
-    }
-  };
-
-  const resetFormModal = () => {
-    setIsEnquiryModalOpen(false);
-    setTimeout(() => {
-      setFormSubmitted(false);
-      setFormError('');
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        course: 'BBA in Hospital Management',
-        qualification: '10+2 / Higher Secondary',
-        city: '',
-        message: ''
-      });
-    }, 300);
-  };
 
   return (
     <div className="relative w-full h-[calc(100vh-75px)] sm:h-[calc(100vh-125px)] min-h-[520px] sm:min-h-[640px] max-h-[960px] overflow-hidden bg-slate-950 select-none flex items-center justify-center">
@@ -535,6 +546,10 @@ export default function HomePage() {
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         {COLLAGE_COMPOSITIONS.map((comp, compIdx) => {
           const isActive = compIdx === activeSlide;
+          // Performance optimization: Mount active and adjacent slides only (reduces DOM & GPU image decoders by 50%+)
+          const isAdjacent = compIdx === (activeSlide + 1) % COLLAGE_COMPOSITIONS.length || compIdx === (activeSlide - 1 + COLLAGE_COMPOSITIONS.length) % COLLAGE_COMPOSITIONS.length;
+          if (!isActive && !isAdjacent) return null;
+
           return (
             <div
               key={comp.id}
@@ -560,6 +575,7 @@ export default function HomePage() {
                             alt={tile.alt}
                             className="w-full h-full object-cover filter brightness-[0.98] contrast-[1.03] select-none pointer-events-none"
                             loading={compIdx === 0 ? 'eager' : 'lazy'}
+                            decoding="async"
                           />
                         </div>
                       </div>
@@ -576,34 +592,7 @@ export default function HomePage() {
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-black/45 z-20 pointer-events-none" />
       <div className="absolute inset-0 bg-radial-gradient from-transparent via-black/20 to-black/60 z-20 pointer-events-none" />
 
-      {/* =========================================================================
-          2. CORNER ACTION BUTTONS (LOWER CORNER POSITION AS REQUESTED)
-          - Removed from middle so entire multi-photo collage background is fully visible
-          - Placed in lower left corner so top tabs and center photos are never blocked
-          - 1. Admission Form (Orange)
-          - 2. Enquiry Form (Navy Blue)
-          ========================================================================= */}
-      <div className="absolute bottom-6 sm:bottom-8 left-4 sm:left-8 z-30 flex flex-col sm:flex-row items-start sm:items-center gap-2.5 sm:gap-3.5">
-        {/* 1. Admission Form Button */}
-        <Link
-          href="/admission"
-          className="group inline-flex items-center gap-2.5 bg-gradient-to-r from-[#ed8100] via-[#ff9724] to-[#ed8100] bg-[length:200%_auto] hover:bg-right text-white font-heading font-extrabold text-xs sm:text-sm px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl shadow-[0_8px_25px_rgba(237,129,0,0.55)] hover:shadow-[0_12px_35px_rgba(237,129,0,0.75)] hover:scale-105 active:scale-95 transition-all duration-300 border border-white/60 uppercase tracking-wider text-center"
-        >
-          <GraduationCap size={18} className="group-hover:rotate-12 transition-transform duration-300" />
-          <span>Admission Form</span>
-          <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-        </Link>
 
-        {/* 2. Enquiry Form Button */}
-        <button
-          type="button"
-          onClick={() => setIsEnquiryModalOpen(true)}
-          className="group inline-flex items-center gap-2.5 bg-[#112555] hover:bg-[#0c1b3f] text-white font-heading font-extrabold text-xs sm:text-sm px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl shadow-[0_8px_25px_rgba(17,37,85,0.6)] hover:shadow-[0_12px_35px_rgba(17,37,85,0.85)] hover:scale-105 active:scale-95 transition-all duration-300 border border-white/60 uppercase tracking-wider text-center cursor-pointer"
-        >
-          <Send size={15} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300 text-[#ffc923]" />
-          <span>Enquiry Form</span>
-        </button>
-      </div>
 
       {/* Collage Slide Indicators (Dots) */}
       <div className="absolute bottom-4 right-4 sm:left-1/2 sm:-translate-x-1/2 z-30 flex items-center gap-2 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
@@ -621,212 +610,8 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* =========================================================================
-          3. ENQUIRY FORM MODAL (POPS UP ON CLICKING ENQUIRY FORM BUTTON)
-          - Submits to /api/inquiry
-          - Dispatches email notification to cambridge567@gmail.com
-          - Stores lead in Admin Dashboard CMS store
-          ========================================================================= */}
-      {isEnquiryModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
-          <div 
-            className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden border border-gray-100 flex flex-col max-h-[92vh]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="bg-gradient-to-r from-[#112555] to-[#1e3a8a] text-white p-5 sm:p-6 relative">
-              <button
-                type="button"
-                onClick={resetFormModal}
-                className="absolute top-4 right-4 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-1.5 transition-colors cursor-pointer"
-                aria-label="Close Enquiry Form"
-              >
-                <X size={20} />
-              </button>
-              <span className="text-[#ffc923] text-xs font-extrabold uppercase tracking-wider block mb-1">
-                Admissions 2026–2027
-              </span>
-              <h3 className="font-heading text-xl sm:text-2xl font-bold">
-                CIMS Admission Enquiry
-              </h3>
-              <p className="text-xs text-gray-200 mt-1">
-                Submit your query. Our academic counsellor will contact you within 24 hours.
-              </p>
-            </div>
-
-            {/* Modal Body */}
-            <div className="p-5 sm:p-6 overflow-y-auto">
-              {formSubmitted ? (
-                <div className="py-8 text-center space-y-4">
-                  <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
-                    <CheckCircle2 size={36} />
-                  </div>
-                  <h4 className="font-heading text-xl font-bold text-[#112555]">
-                    Enquiry Submitted Successfully!
-                  </h4>
-                  <p className="text-sm text-gray-600 max-w-sm mx-auto">
-                    Thank you, <span className="font-bold text-[#112555]">{formData.name}</span>. Your details have been delivered to the CIMS Admissions Office. Our team will get in touch at <span className="font-bold text-[#112555]">{formData.phone}</span> shortly.
-                  </p>
-                  <div className="pt-4">
-                    <button
-                      type="button"
-                      onClick={resetFormModal}
-                      className="bg-[#112555] hover:bg-[#0c1b3f] text-white px-8 py-2.5 rounded-lg font-bold text-sm shadow transition-all cursor-pointer"
-                    >
-                      Close Window
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <form onSubmit={handleFormSubmit} className="space-y-3.5">
-                  {formError && (
-                    <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-xs flex items-center gap-2">
-                      <AlertCircle size={16} className="shrink-0" />
-                      <span>{formError}</span>
-                    </div>
-                  )}
-
-                  {/* Candidate Name */}
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">
-                      Candidate Full Name <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="e.g. Rahul Sen"
-                      className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-gray-300 focus:border-[#ed8100] focus:ring-1 focus:ring-[#ed8100] outline-none transition-all"
-                    />
-                  </div>
-
-                  {/* Phone & Email */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">
-                        Mobile Number <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        required
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        placeholder="10-digit number"
-                        className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-gray-300 focus:border-[#ed8100] focus:ring-1 focus:ring-[#ed8100] outline-none transition-all"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        placeholder="name@email.com"
-                        className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-gray-300 focus:border-[#ed8100] focus:ring-1 focus:ring-[#ed8100] outline-none transition-all"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Course of Interest */}
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">
-                      Course of Interest <span className="text-red-500">*</span>
-                    </label>
-                    <select
-                      name="course"
-                      value={formData.course}
-                      onChange={handleInputChange}
-                      className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-gray-300 focus:border-[#ed8100] focus:ring-1 focus:ring-[#ed8100] outline-none transition-all bg-white"
-                    >
-                      <option value="BBA in Hospital Management">BBA in Hospital Management (MAKAUT CCPTR)</option>
-                      <option value="B.Sc Hospitality & Hotel Administration">B.Sc Hospitality &amp; Hotel Administration (MAKAUT)</option>
-                      <option value="Bachelor of Computer Application (BCA)">Bachelor of Computer Application (BCA)</option>
-                      <option value="Aviation & Airport Operations">Aviation &amp; Airport Operations</option>
-                      <option value="Fashion Design & Apparel Technology">Fashion Design &amp; Apparel Technology</option>
-                      <option value="Allied Health Sciences & Paramedical">Allied Health Sciences &amp; Paramedical (BMLT/BMRIT)</option>
-                    </select>
-                  </div>
-
-                  {/* Qualification & City */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">
-                        Qualification
-                      </label>
-                      <select
-                        name="qualification"
-                        value={formData.qualification}
-                        onChange={handleInputChange}
-                        className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-gray-300 focus:border-[#ed8100] focus:ring-1 focus:ring-[#ed8100] outline-none transition-all bg-white"
-                      >
-                        <option value="10+2 / Higher Secondary">10+2 / Higher Secondary</option>
-                        <option value="Graduation Passed / Appearing">Graduation Passed / Appearing</option>
-                        <option value="Secondary (10th)">Secondary (10th)</option>
-                        <option value="Diploma / Polytechnic">Diploma / Polytechnic</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">
-                        City / District
-                      </label>
-                      <input
-                        type="text"
-                        name="city"
-                        value={formData.city}
-                        onChange={handleInputChange}
-                        placeholder="e.g. Kolkata / Medinipur"
-                        className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-gray-300 focus:border-[#ed8100] focus:ring-1 focus:ring-[#ed8100] outline-none transition-all"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Message (Optional) */}
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1">
-                      Message / Any Question (Optional)
-                    </label>
-                    <textarea
-                      name="message"
-                      rows={2}
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      placeholder="Tell us about your questions regarding admission, hostel or fees..."
-                      className="w-full px-3.5 py-2 text-sm rounded-lg border border-gray-300 focus:border-[#ed8100] focus:ring-1 focus:ring-[#ed8100] outline-none transition-all resize-none"
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <div className="pt-2">
-                    <button
-                      type="submit"
-                      disabled={formSubmitting}
-                      className="w-full py-3 px-4 bg-gradient-to-r from-[#ed8100] to-[#ff9724] hover:from-[#d97400] hover:to-[#ed8100] text-white font-bold text-sm rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
-                    >
-                      {formSubmitting ? (
-                        <>
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          <span>Submitting Enquiry...</span>
-                        </>
-                      ) : (
-                        <>
-                          <Send size={16} />
-                          <span>Submit Admission Enquiry</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
-                </form>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      {/* 3. Reusable Enquiry Form Modal */}
+      <EnquiryModal isOpen={isEnquiryModalOpen} onClose={() => setIsEnquiryModalOpen(false)} />
     </div>
   );
 }
