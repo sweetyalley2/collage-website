@@ -110,8 +110,34 @@ export const CIMS_INFO = {
 export const INITIAL_COURSES: Course[] = [
   {
     id: "c-1",
+    slug: "hospitality-hotel-management",
+    title: "Hospitality and Hotel Management",
+    category: "Hospitality",
+    degree: "Undergraduate Degree (B.Sc HHA / Diploma)",
+    duration: "3 Years",
+    eligibility: "10+2 in any stream from recognized Board",
+    image: "/images/experience-life/CIMS_Campus_Gallery_Photos/culinary-hospitality-students.jpg",
+    shortDesc: "World-class hospitality training encompassing culinary arts, front office operations, food & beverage, and hotel management.",
+    fullDesc: "Step into the vibrant global hospitality industry with CIMS. Acclaimed as the leading Hospitality and Hotel Management college in West Bengal, CIMS combines rigorous practical kitchen labs, simulated front desk suites, mock bar setups, and mandatory 6-month industrial internships in 5-star luxury hotels.",
+    highlights: [
+      "Industrial training in luxury 5-star brand hotels (Taj, Marriott, Hyatt, Sterling)",
+      "Hands-on Food Production, Bakery & Culinary Labs",
+      "Wine tasting, banquet management & mixology workshops",
+      "Direct 5-star hotel internship & placement opportunities across India"
+    ],
+    careerProspects: [
+      "Hotel General Manager Track",
+      "Executive Chef & Food Production Manager",
+      "Front Office & Guest Relations Manager",
+      "Food & Beverage Service Director",
+      "Event & Banquet Operations Director"
+    ],
+    affiliatedTo: "MAKAUT (CCPTR) & Swami Vivekananda Foundation"
+  },
+  {
+    id: "c-2",
     slug: "hospital-management",
-    title: "BBA in Hospital Management",
+    title: "Hospital Management",
     category: "Hospital Management",
     degree: "Undergraduate Degree (BBA-HM)",
     duration: "3 Years / 4 Years Honours",
@@ -135,37 +161,37 @@ export const INITIAL_COURSES: Course[] = [
     affiliatedTo: "MAKAUT (CCPTR)"
   },
   {
-    id: "c-2",
-    slug: "hospitality-hotel-management",
-    title: "B.Sc in Hospitality & Hotel Administration",
-    category: "Hospitality",
-    degree: "Undergraduate Degree (B.Sc HHA)",
-    duration: "3 Years",
-    eligibility: "10+2 in any stream from recognized Board",
-    image: "/images/experience-life/CIMS_Campus_Gallery_Photos/culinary-hospitality-students.jpg",
-    shortDesc: "World-class hospitality training encompassing culinary arts, front office operations, food & beverage, and hotel management.",
-    fullDesc: "Step into the vibrant global hospitality industry with CIMS. Acclaimed as the leading Hospitality and Hotel Management college in West Bengal, CIMS combines rigorous practical kitchen labs, simulated front desk suites, mock bar setups, and mandatory 6-month industrial internships in 5-star luxury hotels.",
+    id: "c-3",
+    slug: "bca",
+    title: "Computer Application",
+    category: "Computer Applications",
+    degree: "Undergraduate Degree (BCA)",
+    duration: "3 Years / 4 Years Honours",
+    eligibility: "10+2 with Mathematics / Computer Science / Statistics / Information Practices",
+    image: "/images/cims-optimized/cims-photo-024.webp",
+    shortDesc: "Cutting-edge computing education in software engineering, cloud computing, web development, and modern AI algorithms.",
+    fullDesc: "The BCA Computer Application program at CIMS College empowers aspiring tech leaders with robust programming foundations, modern cloud computing architectures, full-stack web and mobile development, and data analytics. Equipped with high-tech computer labs and industry live-project mentorship.",
     highlights: [
-      "Industrial training in luxury 5-star brand hotels (Taj, Marriott, Hyatt)",
-      "Hands-on Food Production, Bakery & Culinary Labs",
-      "Wine tasting, banquet management & mixology workshops",
-      "Direct 5-star hotel internship & placement opportunities across India"
+      "Modern high-speed computing lab with latest dev stacks",
+      "Hands-on projects in Python, Java, React, Next.js, and Cloud",
+      "Campus placement drives with leading IT and consulting firms",
+      "Tech hackathons, code sprints, and certifications"
     ],
     careerProspects: [
-      "Hotel General Manager Track",
-      "Executive Chef & Food Production Manager",
-      "Front Office Manager",
-      "Aviation & Cabin Crew / Cruise Line Executive",
-      "Event & Banquet Operations Director"
+      "Full-Stack Software Developer",
+      "Cloud & DevOps Engineer",
+      "Database Administrator",
+      "Systems Analyst",
+      "Mobile App Developer"
     ],
-    affiliatedTo: "Recognized by MAKAUT & Tourism Councils"
+    affiliatedTo: "MAKAUT (CCPTR)"
   },
   {
-    id: "c-3",
+    id: "c-4",
     slug: "allied-health-science",
-    title: "Allied Health Sciences & Paramedical (BMLT / BMRIT / BOTT)",
+    title: "Allied Health Science",
     category: "Allied Health",
-    degree: "B.Sc & Diploma Programs",
+    degree: "B.Sc & Diploma Programs (BMLT / BMRIT / BOTT / DMLT)",
     duration: "3 - 4 Years (incl. Internship)",
     eligibility: "10+2 with Physics, Chemistry, Biology (PCB)",
     image: "/images/experience-life/CIMS_Campus_Gallery_Photos/cims-campus-group-photo.jpg",
@@ -185,167 +211,19 @@ export const INITIAL_COURSES: Course[] = [
       "Diagnostic Wing Supervisor"
     ],
     affiliatedTo: "State Paramedical Faculty & MAKAUT Framework"
-  },
-  {
-    id: "c-4",
-    slug: "bca",
-    title: "BCA - Bachelor of Computer Applications",
-    category: "Computer Applications",
-    degree: "Undergraduate Degree (BCA)",
-    duration: "3 Years / 4 Years Honours",
-    eligibility: "10+2 with Mathematics / Computer Science / Statistics / Information Practices",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop",
-    shortDesc: "Cutting-edge computing education in software engineering, cloud computing, web development, and modern AI algorithms.",
-    fullDesc: "The BCA program at CIMS College empowers aspiring tech leaders with robust programming foundations, modern cloud computing architectures, full-stack web and mobile development, and data analytics. Equipped with high-tech computer labs and industry live-project mentorship.",
-    highlights: [
-      "Modern high-speed computing lab with latest dev stacks",
-      "Hands-on projects in Python, Java, React, Next.js, and Cloud",
-      "Campus placement drives with leading IT and consulting firms",
-      "Tech hackathons, code sprints, and certifications"
-    ],
-    careerProspects: [
-      "Full-Stack Software Developer",
-      "Cloud & DevOps Engineer",
-      "Database Administrator",
-      "Systems Analyst",
-      "Mobile App Developer"
-    ],
-    affiliatedTo: "MAKAUT (CCPTR)"
-  },
-  {
-    id: "c-5",
-    slug: "aviation",
-    title: "BBA in Aviation & Airport Operations",
-    category: "Aviation",
-    degree: "Undergraduate Degree (BBA-Aviation)",
-    duration: "3 Years Full-Time",
-    eligibility: "10+2 passed in any stream from recognized Board",
-    image: "/images/cims-photos/cims-photo-001.jpeg",
-    shortDesc: "Professional aviation program preparing students for international airline ground handling, airport operations, customer care, and cargo management.",
-    fullDesc: "The Aviation and Airport Operations program at CIMS College grooms students for premier careers across national and international airports and airline operators. Curriculum covers flight dispatching, passenger ticketing, ramp handling, aviation safety, airport security, and cabin crew grooming.",
-    highlights: [
-      "Rigorous airport terminal operations and airline guest handling training",
-      "Live simulated aircraft cabin training and safety protocols",
-      "Comprehensive personality grooming, communicative English & etiquette",
-      "Direct placement assistance in top domestic & international airlines"
-    ],
-    careerProspects: [
-      "Airport Operations Manager",
-      "Airline Passenger Service Executive",
-      "Flight Dispatcher / Cargo Logistics Officer",
-      "Cabin Crew / Air Hostess / Flight Attendant",
-      "Aviation Security & Baggage Operations Lead"
-    ],
-    affiliatedTo: "MAKAUT (CCPTR) & Recognized Aviation Councils"
-  },
-  {
-    id: "c-6",
-    slug: "fashion-design",
-    title: "B.Sc in Fashion Design & Apparel Technology",
-    category: "Fashion Design",
-    degree: "Undergraduate Degree (B.Sc Fashion)",
-    duration: "3 Years Full-Time",
-    eligibility: "10+2 passed in any stream from recognized Board",
-    image: "/images/cims-photos/cims-photo-002.jpeg",
-    shortDesc: "Creative design program covering garment manufacturing, textile technology, visual merchandising, pattern making, and fashion retail management.",
-    fullDesc: "Step into the creative world of fashion with CIMS College. The program combines hands-on garment construction labs, digital textile CAD styling, portfolio curation, fashion photography, and retail merchandising for modern apparel brands and export houses.",
-    highlights: [
-      "State-of-the-art garment stitching & pattern making design labs",
-      "Computer-Aided Design (CAD) software for fashion illustration",
-      "Annual runway fashion shows, celebrity guest masterclasses & exhibitions",
-      "Industry internships with garment export houses, luxury boutiques & apparel brands"
-    ],
-    careerProspects: [
-      "Fashion & Apparel Designer",
-      "Visual Merchandiser for Retail Chains",
-      "Textile Development Specialist",
-      "Costume Stylist & Fashion Illustrator",
-      "Fashion Production & Sourcing Manager"
-    ],
-    affiliatedTo: "MAKAUT (CCPTR) & Design Education Framework"
   }
 ];
 
-export const INITIAL_GALLERY: GalleryItem[] = [
-  {
-    id: "g-1",
-    title: "Hospital Management Practical Simulation Lab",
-    category: "Hospital Training",
-    image: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=900&auto=format&fit=crop",
-    description: "Students simulating hospital desk, patient admission, and health informatics operations."
-  },
-  {
-    id: "g-2",
-    title: "Culinary & Food Production Training Kitchen",
-    category: "Hospitality",
-    image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=900&auto=format&fit=crop",
-    description: "Hands-on commercial culinary training supervised by master hospitality chefs."
-  },
-  {
-    id: "g-3",
-    title: "Advanced Paramedical Diagnostic Laboratory",
-    category: "Medical Labs",
-    image: "https://images.unsplash.com/photo-1582719471384-894fbb16e074?q=80&w=900&auto=format&fit=crop",
-    description: "Clinical pathology, biochemistry, and microscopy practical sessions."
-  },
-  {
-    id: "g-4",
-    title: "Modern Air-Conditioned Computer Application Lab",
-    category: "Campus",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=900&auto=format&fit=crop",
-    description: "High-spec workstations with cloud development, programming, and web engineering tools."
-  },
-  {
-    id: "g-5",
-    title: "Clinical Exposure & Hospital Rounds",
-    category: "Hospital Training",
-    image: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=900&auto=format&fit=crop",
-    description: "Rotational learning and patient records coordination in partner multispecialty hospitals."
-  },
-  {
-    id: "g-6",
-    title: "Annual Cultural Fest & Freshers Welcome",
-    category: "Events",
-    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=900&auto=format&fit=crop",
-    description: "Vibrant student life, cultural performances, and felicitation ceremonies at CIMS."
-  },
-  // New campus life photographs
-  {
-    id: "g-7",
-    title: "Campus Students Group Activity",
-    category: "Campus",
-    image: "/images/gallery/campus-life/campus-students-group.jpg",
-    description: "Students gathered for campus activities and community events."
-  },
-  {
-    id: "g-8",
-    title: "CIMS Building and Infrastructure",
-    category: "Campus",
-    image: "/images/gallery/campus-life/cims-building-students.jpg",
-    description: "Modern campus facilities and building architecture."
-  },
-  {
-    id: "g-9",
-    title: "CIMS Campus Group Photo",
-    category: "Campus",
-    image: "/images/gallery/campus-life/cims-campus-group-photo.jpg",
-    description: "Group photo of students and faculty on campus."
-  },
-  {
-    id: "g-10",
-    title: "Institute Profile Photo",
-    category: "Campus",
-    image: "/images/gallery/campus-life/institute-profile-photo.jpg",
-    description: "Official institute profile showcasing leadership."
-  },
-  {
-    id: "g-11",
-    title: "Culinary and Hospitality Practical Activities",
-    category: "Hospitality",
-    image: "/images/gallery/campus-life/culinary-hospitality-students.jpg",
-    description: "Students engaged in culinary and hospitality training."
-  }
-];
+export const INITIAL_GALLERY: GalleryItem[] = Array.from({ length: 20 }, (_, i) => {
+  const num = String(i + 1).padStart(3, '0');
+  return {
+    id: `g-${i + 1}`,
+    title: `CIMS Practical & Campus Photo ${i + 1}`,
+    category: (i % 4 === 0 ? 'Campus' : i % 4 === 1 ? 'Hospital Training' : i % 4 === 2 ? 'Hospitality' : 'Medical Labs') as GalleryItem['category'],
+    image: `/images/gallery/cims-gallery-${num}.jpg`,
+    description: `Official authentic CIMS photo ${i + 1}.`
+  };
+});
 
 // ------------------------------------------------------------
 // Partners – Authentic Units from https://cimsgroup.org/partners/
@@ -887,7 +765,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Rourkela, Odisha",
     year: "2023–2024",
     sector: "Healthcare",
-    image: "/images/cims-photos/cims-photo-003.jpeg"
+    image: "/images/placement/students-2023-2024/hm-09-pampa-koley.jpg"
   },
   {
     id: "hm-2023-24-10",
@@ -899,7 +777,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Rourkela, Odisha",
     year: "2023–2024",
     sector: "Healthcare",
-    image: "/images/cims-photos/cims-photo-006.jpeg"
+    image: "/images/placement/students-2023-2024/hm-10-sangita-maikap.jpg"
   },
   {
     id: "hm-2023-24-11",
@@ -911,7 +789,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Kolkata",
     year: "2023–2024",
     sector: "Healthcare",
-    image: "/images/cims-photos/cims-photo-007.jpeg"
+    image: "/images/placement/students-2023-2024/hm-11-khadija-khatun.jpg"
   },
   {
     id: "hm-2023-24-12",
@@ -923,7 +801,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Rourkela, Odisha",
     year: "2023–2024",
     sector: "Healthcare",
-    image: "/images/cims-photos/cims-photo-008.jpeg"
+    image: "/images/placement/students-2023-2024/hm-12-monisha-khatun.jpg"
   },
   {
     id: "hm-2023-24-13",
@@ -935,7 +813,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Rourkela, Odisha",
     year: "2023–2024",
     sector: "Healthcare",
-    image: "/images/cims-photos/cims-photo-009.jpeg"
+    image: "/images/placement/students-2023-2024/hm-13-madhumita-bag.jpg"
   },
   {
     id: "hm-2023-24-14",
@@ -947,7 +825,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Uluberia",
     year: "2023–2024",
     sector: "Healthcare",
-    image: "/images/cims-photos/cims-photo-010.jpeg"
+    image: "/images/placement/students-2023-2024/hm-14-suteshna-maity.jpg"
   },
   {
     id: "hm-2023-24-15",
@@ -959,7 +837,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Saharsa, Bihar",
     year: "2023–2024",
     sector: "Healthcare",
-    image: "/images/cims-photos/cims-photo-011.jpeg"
+    image: "/images/placement/students-2023-2024/hm-15-subhasish-ghorai.jpg"
   },
   {
     id: "hm-2023-24-16",
@@ -1033,7 +911,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Wayanad, Kerala",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/cims-photos/cims-photo-002.jpeg"
+    image: "/images/placement/students-2023-2024/hosp-01-sujoy-barman.png"
   },
   {
     id: "hosp-2023-24-02",
@@ -1045,7 +923,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Surat, Gujarat",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/cims-photos/cims-photo-004.jpeg"
+    image: "/images/placement/students-2023-2024/hosp-02-aman-roy.png"
   },
   {
     id: "hosp-2023-24-03",
@@ -1057,7 +935,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Ahmedabad, Gujarat",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/cims-photos/cims-photo-005.jpeg"
+    image: "/images/placement/students-2023-2024/hosp-03-saptam-mondal.png"
   },
   {
     id: "hosp-2023-24-04",
@@ -1069,7 +947,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Indore, MP",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/cims-photos/cims-photo-012.jpeg"
+    image: "/images/placement/students-2023-2024/hosp-04-janmenjay-manna.png"
   },
   {
     id: "hosp-2023-24-05",
@@ -1081,7 +959,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Indore, MP",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/cims-photos/cims-photo-013.jpeg"
+    image: "/images/placement/students-2023-2024/hosp-05-bhairab-pandit.png"
   },
   {
     id: "hosp-2023-24-06",
@@ -1093,7 +971,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Chennai, Tamil Nadu",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/placement/placed-student-2025-04.jpg",
+    image: "/images/placement/students-2023-2024/hosp-06-sneha-ghorai.jpeg",
     companyLogo: "/images/placement/recruiter-hotel-marriott.jpg"
   },
   {
@@ -1106,7 +984,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Goa",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/placement/placed-student-2025-10.jpg",
+    image: "/images/placement/students-2023-2024/hosp-07-pranab-chakraborty.jpeg",
     companyLogo: "/images/placement/recruiter-hotel-taj.jpg"
   },
   {
@@ -1119,7 +997,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Surat, Gujarat",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/cims-photos/cims-photo-014.jpeg",
+    image: "/images/placement/students-2023-2024/hosp-08-rahul-samanta.jpeg",
     companyLogo: "/images/placement/recruiter-hotel-marriott.jpg"
   },
   {
@@ -1132,7 +1010,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Chennai, Tamil Nadu",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/placement/placed-student-2025-11.jpg",
+    image: "/images/placement/students-2023-2024/hosp-09-manisha-mondal.jpeg",
     companyLogo: "/images/placement/recruiter-hotel-marriott.jpg"
   },
   {
@@ -1145,7 +1023,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Pune, Maharashtra",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/placement/placed-student-2025-12.jpg",
+    image: "/images/placement/students-2023-2024/hosp-10-mahesh-pandey.jpeg",
     companyLogo: "/images/placement/recruiter-hotel-marriott.jpg"
   },
   {
@@ -1158,7 +1036,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Ahmedabad, Gujarat",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/placement/placed-student-2025-03.jpg"
+    image: "/images/placement/students-2023-2024/hosp-11-sachin-debsingha.jpeg"
   },
   {
     id: "hosp-2023-24-12",
@@ -1170,7 +1048,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Ahmedabad, Gujarat",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/placement/placed-student-2025-05.jpg"
+    image: "/images/placement/students-2023-2024/hosp-12-sourav-debsingha.jpeg"
   },
   {
     id: "hosp-2023-24-13",
@@ -1182,7 +1060,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Assonora, Goa",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/placement/placed-student-2025-06.jpg"
+    image: "/images/placement/students-2023-2024/hosp-13-rahul-debsingha.jpeg"
   },
   {
     id: "hosp-2023-24-14",
@@ -1194,7 +1072,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Wayanad, Kerala",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/placement/placed-student-2025-08.jpg"
+    image: "/images/placement/students-2023-2024/hosp-14-tarani-mahata.jpeg"
   },
   {
     id: "hosp-2023-24-15",
@@ -1206,7 +1084,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Ahmedabad, Gujarat",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/placement/placed-student-2025-01.jpg"
+    image: "/images/placement/students-2023-2024/hosp-15-nalini-mahata.jpeg"
   },
   {
     id: "hosp-2023-24-16",
@@ -1218,7 +1096,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Indore, MP",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/placement/placed-student-2025-07.jpg",
+    image: "/images/placement/students-2023-2024/hosp-16-amit-mahata.jpeg",
     companyLogo: "/images/placement/recruiter-hotel-marriott.jpg"
   },
   {
@@ -1231,7 +1109,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Rajkot, Gujarat",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/placement/placed-student-2025-02.jpg"
+    image: "/images/placement/students-2023-2024/hosp-17-amarjit-sardar.jpeg"
   },
   {
     id: "hosp-2023-24-18",
@@ -1243,7 +1121,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Indore, MP",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/placement/placed-student-2025-09.jpg",
+    image: "/images/placement/students-2023-2024/hosp-18-rahul-deb-jana.jpeg",
     companyLogo: "/images/placement/recruiter-hotel-marriott.jpg"
   },
   {
@@ -1256,7 +1134,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Kolkata",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/placement/placed-student-2025-13.jpg"
+    image: "/images/placement/students-2023-2024/hosp-19-sanjana-chowdhury.jpeg"
   },
   {
     id: "hosp-2023-24-20",
@@ -1268,7 +1146,7 @@ export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
     location: "Kolkata",
     year: "2023–2024",
     sector: "Hospitality",
-    image: "/images/placement/placed-student-2025-14.jpg"
+    image: "/images/placement/students-2023-2024/hosp-20-rikta-maity.jpeg"
   }
 ];
 

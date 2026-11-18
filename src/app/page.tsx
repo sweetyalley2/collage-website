@@ -10,7 +10,8 @@ import {
   CheckCircle2,
   AlertCircle,
   Sparkles,
-  PhoneCall
+  PhoneCall,
+  FileText
 } from 'lucide-react';
 
 interface CollageTile {
@@ -55,7 +56,7 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
       {
         "src": "/images/cims-optimized/cims-photo-003.webp",
         "alt": "Paramedical Pathology & Diagnostic Lab",
-        "colSpan": "hidden sm:block sm:col-span-4 lg:col-span-3",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
         "rowSpan": "row-span-1",
         "rotation": "-rotate-1 sm:-rotate-1.5",
         "zIndex": "z-10",
@@ -64,7 +65,7 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
       {
         "src": "/images/cims-optimized/cims-photo-004.webp",
         "alt": "Hospitality Service & Front Office",
-        "colSpan": "hidden lg:block lg:col-span-3",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
         "rowSpan": "row-span-2",
         "rotation": "rotate-1 sm:rotate-1.5",
         "zIndex": "z-20",
@@ -133,7 +134,7 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
       {
         "src": "/images/cims-optimized/cims-photo-014.webp",
         "alt": "Bakery, Pastry & Confectionery Arts",
-        "colSpan": "hidden sm:block sm:col-span-4 lg:col-span-3",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
         "rowSpan": "row-span-1",
         "rotation": "rotate-1 sm:rotate-1.5",
         "zIndex": "z-10",
@@ -142,7 +143,7 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
       {
         "src": "/images/cims-optimized/cims-photo-015.webp",
         "alt": "Hospital Administration Seminar Session",
-        "colSpan": "hidden lg:block lg:col-span-3",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
         "rowSpan": "row-span-2",
         "rotation": "-rotate-1 sm:-rotate-1.5",
         "zIndex": "z-20",
@@ -211,7 +212,7 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
       {
         "src": "/images/cims-optimized/cims-photo-021.webp",
         "alt": "Paramedical Hematology Cell Counting",
-        "colSpan": "hidden sm:block sm:col-span-4 lg:col-span-3",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
         "rowSpan": "row-span-1",
         "rotation": "-rotate-1 sm:-rotate-1",
         "zIndex": "z-10",
@@ -220,7 +221,7 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
       {
         "src": "/images/cims-optimized/cims-photo-022.webp",
         "alt": "Culinary Masterclass by Executive Chef",
-        "colSpan": "hidden lg:block lg:col-span-3",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
         "rowSpan": "row-span-2",
         "rotation": "rotate-1 sm:rotate-2",
         "zIndex": "z-20",
@@ -289,7 +290,7 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
       {
         "src": "/images/cims-optimized/cims-photo-032.webp",
         "alt": "Five Star Hotel Concierge Simulation",
-        "colSpan": "hidden sm:block sm:col-span-4 lg:col-span-3",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
         "rowSpan": "row-span-1",
         "rotation": "rotate-1 sm:rotate-2",
         "zIndex": "z-20",
@@ -298,7 +299,7 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
       {
         "src": "/images/cims-optimized/cims-photo-033.webp",
         "alt": "Medical Radiology & Diagnostic Imaging",
-        "colSpan": "hidden lg:block lg:col-span-3",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
         "rowSpan": "row-span-2",
         "rotation": "-rotate-1 sm:-rotate-2",
         "zIndex": "z-10",
@@ -367,7 +368,7 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
       {
         "src": "/images/cims-optimized/cims-photo-041.webp",
         "alt": "Computer Programming & Web Tech Practical",
-        "colSpan": "hidden sm:block sm:col-span-4 lg:col-span-3",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
         "rowSpan": "row-span-1",
         "rotation": "-rotate-1 sm:-rotate-1.8",
         "zIndex": "z-10",
@@ -376,7 +377,7 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
       {
         "src": "/images/cims-optimized/cims-photo-042.webp",
         "alt": "Healthcare Administration Strategy Forum",
-        "colSpan": "hidden lg:block lg:col-span-3",
+        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
         "rowSpan": "row-span-2",
         "rotation": "rotate-1 sm:rotate-1.5",
         "zIndex": "z-20",
@@ -425,7 +426,6 @@ const COLLAGE_COMPOSITIONS: CollageComposition[] = [
 export default function HomePage() {
   // Active collage slide index (0 to 4)
   const [activeSlide, setActiveSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
 
   // Enquiry Form Modal State
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
@@ -442,7 +442,7 @@ export default function HomePage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formError, setFormError] = useState('');
 
-  // 1. Automatic Collage Change Timer (Transitions every 2.5 seconds as requested)
+  // 1. Automatic Collage Change Timer (Transitions smoothly every 2.5 seconds)
   useEffect(() => {
     if (isEnquiryModalOpen) return;
     const interval = setInterval(() => {
@@ -464,12 +464,10 @@ export default function HomePage() {
     });
   }, []);
 
-  // Form input change handler
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Form submit handler connected to /api/inquiry
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormError('');
@@ -523,19 +521,16 @@ export default function HomePage() {
   };
 
   return (
-    <div 
-      className="relative w-full h-[calc(100vh-125px)] min-h-[580px] sm:min-h-[640px] max-h-[960px] overflow-hidden bg-slate-950 select-none flex items-center justify-center"
+    <div className="relative w-full h-[calc(100vh-75px)] sm:h-[calc(100vh-125px)] min-h-[520px] sm:min-h-[640px] max-h-[960px] overflow-hidden bg-slate-950 select-none flex items-center justify-center">
       
-    >
+
+
       {/* =========================================================================
           1. FULL-WIDTH MULTI-PHOTO COLLAGE BACKGROUND
-          - Multiple authentic CIMS photos visible simultaneously across screen
-          - Mixture of large, medium and small rectangular photographs
-          - Slight diagonal rotation angles (-2 deg to +2 deg)
-          - Clean white borders/frames with physical box shadows
-          - Layered, tightly arranged mosaic layout without empty gaps
-          - Automatic transition every 4.5s with smooth crossfade & Ken Burns zoom
-          - 100% authentic CIMS photos optimized in WebP for fast performance
+          - Multiple authentic CIMS photos visible simultaneously
+          - Clean white frames with shadow and slight diagonal angles
+          - Auto-transitions every 2.5s with smooth 0.7s crossfade
+          - High performance WebP images
           ========================================================================= */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         {COLLAGE_COMPOSITIONS.map((comp, compIdx) => {
@@ -582,50 +577,36 @@ export default function HomePage() {
       <div className="absolute inset-0 bg-radial-gradient from-transparent via-black/20 to-black/60 z-20 pointer-events-none" />
 
       {/* =========================================================================
-          2. MINIMAL HOMEPAGE CONTENT: ONLY THE TWO REQUESTED BUTTONS
-          - 1. Admission Form button (Links to /admission)
-          - 2. Enquiry Form button (Opens interactive enquiry modal)
-          - No extra homepage sections, no welcome text, no promotional previews
+          2. CORNER ACTION BUTTONS (LOWER CORNER POSITION AS REQUESTED)
+          - Removed from middle so entire multi-photo collage background is fully visible
+          - Placed in lower left corner so top tabs and center photos are never blocked
+          - 1. Admission Form (Orange)
+          - 2. Enquiry Form (Navy Blue)
           ========================================================================= */}
-      <div className="relative z-30 px-4 sm:px-6 w-full max-w-xl mx-auto flex flex-col items-center justify-center text-center">
-        
-        {/* Subtle decorative college badge */}
-        <div className="inline-flex items-center gap-2 bg-black/40 backdrop-blur-md border border-white/20 text-[#ffc923] text-xs font-extrabold uppercase px-4 py-1.5 rounded-full mb-6 shadow-xl">
-          <Sparkles size={14} className="text-[#ffc923]" />
-          <span>Cambridge Institute of Management Studies</span>
-        </div>
+      <div className="absolute bottom-6 sm:bottom-8 left-4 sm:left-8 z-30 flex flex-col sm:flex-row items-start sm:items-center gap-2.5 sm:gap-3.5">
+        {/* 1. Admission Form Button */}
+        <Link
+          href="/admission"
+          className="group inline-flex items-center gap-2.5 bg-gradient-to-r from-[#ed8100] via-[#ff9724] to-[#ed8100] bg-[length:200%_auto] hover:bg-right text-white font-heading font-extrabold text-xs sm:text-sm px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl shadow-[0_8px_25px_rgba(237,129,0,0.55)] hover:shadow-[0_12px_35px_rgba(237,129,0,0.75)] hover:scale-105 active:scale-95 transition-all duration-300 border border-white/60 uppercase tracking-wider text-center"
+        >
+          <GraduationCap size={18} className="group-hover:rotate-12 transition-transform duration-300" />
+          <span>Admission Form</span>
+          <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+        </Link>
 
-        {/* The Two Prominent Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 sm:gap-6 w-full max-w-sm sm:max-w-none">
-          {/* 1. Admission Form Button */}
-          <Link
-            href="/admission"
-            className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#ed8100] via-[#ff9724] to-[#ed8100] bg-[length:200%_auto] hover:bg-right text-white font-heading font-extrabold text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-4.5 rounded-xl shadow-[0_12px_40px_rgba(237,129,0,0.65)] hover:shadow-[0_16px_50px_rgba(237,129,0,0.85)] hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-white/80 uppercase tracking-wider text-center"
-          >
-            <GraduationCap size={22} className="group-hover:rotate-12 transition-transform duration-300" />
-            <span>Admission Form</span>
-            <ArrowRight size={17} className="group-hover:translate-x-1 transition-transform" />
-          </Link>
-
-          {/* 2. Enquiry Form Button */}
-          <button
-            type="button"
-            onClick={() => setIsEnquiryModalOpen(true)}
-            className="group inline-flex items-center justify-center gap-3 bg-[#112555] hover:bg-[#0c1b3f] text-white font-heading font-extrabold text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-4.5 rounded-xl shadow-[0_12px_40px_rgba(17,37,85,0.75)] hover:shadow-[0_16px_50px_rgba(17,37,85,0.95)] hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-white/80 uppercase tracking-wider text-center cursor-pointer"
-          >
-            <Send size={19} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" />
-            <span>Enquiry Form</span>
-          </button>
-        </div>
-
-        {/* Small subtle session hint */}
-        <p className="text-white/80 text-[11px] font-semibold mt-4 drop-shadow">
-          Academic Session 2026–27 • Admissions &amp; Counseling Open
-        </p>
+        {/* 2. Enquiry Form Button */}
+        <button
+          type="button"
+          onClick={() => setIsEnquiryModalOpen(true)}
+          className="group inline-flex items-center gap-2.5 bg-[#112555] hover:bg-[#0c1b3f] text-white font-heading font-extrabold text-xs sm:text-sm px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl shadow-[0_8px_25px_rgba(17,37,85,0.6)] hover:shadow-[0_12px_35px_rgba(17,37,85,0.85)] hover:scale-105 active:scale-95 transition-all duration-300 border border-white/60 uppercase tracking-wider text-center cursor-pointer"
+        >
+          <Send size={15} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300 text-[#ffc923]" />
+          <span>Enquiry Form</span>
+        </button>
       </div>
 
       {/* Collage Slide Indicators (Dots) */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+      <div className="absolute bottom-4 right-4 sm:left-1/2 sm:-translate-x-1/2 z-30 flex items-center gap-2 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
         {COLLAGE_COMPOSITIONS.map((comp, idx) => (
           <button
             key={comp.id}
@@ -641,10 +622,10 @@ export default function HomePage() {
       </div>
 
       {/* =========================================================================
-          3. INTERACTIVE ENQUIRY FORM MODAL (POPS UP ON CLICKING ENQUIRY FORM)
-          - Connects to /api/inquiry
-          - Sends instant email notification to official CIMS email
-          - Stores submission in Admin Dashboard CMS Store
+          3. ENQUIRY FORM MODAL (POPS UP ON CLICKING ENQUIRY FORM BUTTON)
+          - Submits to /api/inquiry
+          - Dispatches email notification to cambridge567@gmail.com
+          - Stores lead in Admin Dashboard CMS store
           ========================================================================= */}
       {isEnquiryModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">

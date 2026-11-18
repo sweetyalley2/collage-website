@@ -10,43 +10,7 @@ export default function TrainingVideosPage() {
 
   const videos = [
     {
-      id: "vid-1",
-      title: "Hospital Clinical Postings & Bedside Training",
-      category: "Hospital Management",
-      thumbnail: "/images/cims-photos/cims-photo-001.jpeg",
-      videoFile: "campus-tour.mp4",
-      duration: "Practical Lab Tour",
-      desc: "Live clinical rotations at City Hospital covering patient intake, vital monitoring, OT protocol observation, and hospital administration workflows."
-    },
-    {
-      id: "vid-2",
-      title: "Food Production & Commercial Kitchen Labs",
-      category: "Hospitality Management",
-      thumbnail: "/images/cims-photos/cims-photo-002.jpeg",
-      videoFile: "campus-tour.mp4",
-      duration: "Culinary Studio",
-      desc: "Students mastering multi-cuisine culinary arts, bakery techniques, food styling, and high-volume banquet service in state-of-the-art commercial kitchens."
-    },
-    {
-      id: "vid-3",
-      title: "Paramedical Diagnostic Pathology & Hematology",
-      category: "Allied Health Sciences",
-      thumbnail: "/images/cims-photos/cims-photo-003.jpeg",
-      videoFile: "campus-tour.mp4",
-      duration: "Diagnostic Wing",
-      desc: "Automated biochemistry analyzers, clinical microscopy, hematology investigations, and patient diagnostics in high-tech medical laboratories."
-    },
-    {
-      id: "vid-4",
-      title: "Computer Applications & High-Performance IT Lab",
-      category: "Computer Applications",
-      thumbnail: "/images/cims-photos/cims-photo-010.jpeg",
-      videoFile: "campus-tour.mp4",
-      duration: "IT Infrastructure",
-      desc: "Hands-on software development, full-stack programming, cloud architecture, and corporate IT placement grooming in air-conditioned computer labs."
-    },
-    {
-      id: "vid-5",
+      id: "vid-campus",
       title: "CIMS Campus Tour & Academic Infrastructure",
       category: "Campus Life",
       thumbnail: "/images/hero/cims-building.jpg",
@@ -82,10 +46,10 @@ export default function TrainingVideosPage() {
         </div>
       </div>
 
-      {/* VIDEO GRID */}
+      {/* VIDEO SHOWCASE */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-10">
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="max-w-2xl mx-auto">
           {videos.map((vid) => (
             <div
               key={vid.id}

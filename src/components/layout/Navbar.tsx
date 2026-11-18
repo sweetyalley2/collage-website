@@ -26,7 +26,9 @@ import {
   Globe,
   Video,
   ExternalLink,
-  Briefcase
+  Briefcase,
+  Home,
+  Sparkles
 } from 'lucide-react';
 import { CIMS_INFO } from '@/lib/data/cimsData';
 
@@ -90,7 +92,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation Links (Part 1: Exact 10-Item Order) */}
-          <nav className="hidden xl:flex items-center space-x-0.5 2xl:space-x-1">
+          <nav className="hidden lg:flex items-center space-x-0.5 xl:space-x-1">
             
             {/* 1. Home */}
             <Link 
@@ -127,7 +129,7 @@ export default function Navbar() {
                     Mission &amp; Vision
                     <span className="block text-[10px] text-gray-500 font-normal">Core values &amp; educational philosophy</span>
                   </Link>
-                  <Link href="/about#leadership" className="block p-2 rounded-lg font-bold text-gray-700 hover:text-[#ed8100] hover:bg-orange-50/60 transition-colors">
+                  <Link href="/about#director-desk" className="block p-2 rounded-lg font-bold text-gray-700 hover:text-[#ed8100] hover:bg-orange-50/60 transition-colors">
                     Director&apos;s Desk
                     <span className="block text-[10px] text-gray-500 font-normal">Leadership message &amp; institutional roadmap</span>
                   </Link>
@@ -179,16 +181,8 @@ export default function Navbar() {
                     <span className="font-bold text-[#112555] hover:text-[#ed8100] block">Computer Application (BCA)</span>
                     <span className="text-[10px] text-gray-500">3 Years • Full-Stack, Software &amp; Cloud</span>
                   </Link>
-                  <Link href="/courses/aviation" className="p-2 rounded-lg hover:bg-orange-50/60 transition-colors block border border-transparent hover:border-orange-100">
-                    <span className="font-bold text-[#112555] hover:text-[#ed8100] block">Aviation &amp; Airport Operations</span>
-                    <span className="text-[10px] text-gray-500">3 Years / Diploma • Ground Ops &amp; Cabin Crew</span>
-                  </Link>
-                  <Link href="/courses/fashion-design" className="p-2 rounded-lg hover:bg-orange-50/60 transition-colors block border border-transparent hover:border-orange-100">
-                    <span className="font-bold text-[#112555] hover:text-[#ed8100] block">Fashion Design &amp; Technology</span>
-                    <span className="text-[10px] text-gray-500">3 Years / Diploma • Garment CAD &amp; Styling</span>
-                  </Link>
                   <Link href="/courses/allied-health-science" className="p-2 rounded-lg hover:bg-orange-50/60 transition-colors block border border-transparent hover:border-orange-100">
-                    <span className="font-bold text-[#112555] hover:text-[#ed8100] block">Allied Health Science (Paramedical)</span>
+                    <span className="font-bold text-[#112555] hover:text-[#ed8100] block">Applied Health Science (Paramedical)</span>
                     <span className="text-[10px] text-gray-500">BMLT / BMRIT / BOTT / DMLT Diagnostics</span>
                   </Link>
                 </div>
@@ -326,7 +320,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex xl:hidden items-center space-x-2">
+          <div className="flex lg:hidden items-center space-x-2">
             <a 
               href={`tel:${CIMS_INFO.phone}`}
               className="p-2 text-[#ed8100] hover:bg-orange-50 rounded-full"
@@ -348,7 +342,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer Menu (Exact 10-Item Navigation Flow) */}
       {mobileMenuOpen && (
-        <div className="xl:hidden fixed inset-0 top-[80px] z-50 bg-black/60 backdrop-blur-sm" onClick={closeMobileMenu}>
+        <div className="lg:hidden fixed inset-0 top-[80px] z-50 bg-black/60 backdrop-blur-sm" onClick={closeMobileMenu}>
           <div 
             className="w-4/5 max-w-sm h-full bg-white shadow-2xl p-6 overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
@@ -372,7 +366,7 @@ export default function Navbar() {
                 {activeDropdown === 'mobile-about' && (
                   <div className="pl-4 py-2 space-y-1.5 bg-gray-50 rounded-lg mt-1 text-xs font-semibold text-gray-700">
                     <Link href="/about#mission-vision" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Mission &amp; Vision</Link>
-                    <Link href="/about#leadership" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Director&apos;s Desk</Link>
+                    <Link href="/about#director-desk" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Director&apos;s Desk</Link>
                     <Link href="/about#why-cims" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Why CIMS</Link>
                   </div>
                 )}
@@ -392,10 +386,8 @@ export default function Navbar() {
                     <Link href="/courses/hospitality-hotel-management" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Hospitality &amp; Hotel Management</Link>
                     <Link href="/courses/hospital-management" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Hospital Management</Link>
                     <Link href="/courses/bca" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Computer Application (BCA)</Link>
-                    <Link href="/courses/aviation" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Aviation</Link>
-                    <Link href="/courses/fashion-design" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Fashion Design</Link>
-                    <Link href="/courses/allied-health-science" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Allied Health Science (Paramedical)</Link>
-                    <Link href="/courses" onClick={closeMobileMenu} className="block py-1 text-[#ed8100] font-bold">• View All Courses Overview</Link>
+                    <Link href="/courses/allied-health-science" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Applied Health Science (Paramedical)</Link>
+                    <Link href="/courses" onClick={closeMobileMenu} className="block py-1 text-[#ed8100] font-bold">• View All 4 Courses</Link>
                   </div>
                 )}
               </div>
@@ -474,11 +466,12 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* Floating ISHM-Style Right Side Tab: ONLINE ADMISSION FORM */}
+
+      {/* Floating Right Side Tab: ONLINE ADMISSION FORM (Moved lower as requested to prevent content/placement overlap) */}
       <Link
         href="/admission"
         aria-label="Online Admission Form"
-        className="fixed right-0 top-[45%] -translate-y-1/2 z-40 bg-[#ed8100] hover:bg-[#d97400] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-widest py-3 px-1.5 sm:px-2 rounded-l-md shadow-2xl flex items-center gap-1.5 transition-all hover:pr-3 cursor-pointer group"
+        className="fixed right-0 top-[68%] -translate-y-1/2 z-40 bg-[#ed8100] hover:bg-[#d97400] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-widest py-3 px-1.5 sm:px-2 rounded-l-md shadow-2xl flex items-center gap-1.5 transition-all hover:pr-3 cursor-pointer group"
         style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}
       >
         <span>ONLINE ADMISSION FORM</span>

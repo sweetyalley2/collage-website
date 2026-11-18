@@ -166,3 +166,86 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   transform-origin: center center;
 }
 
+/* =========================================================================
+   ISHM-INSPIRED SMOOTH LIGHTWEIGHT MOBILE & DESKTOP ANIMATIONS
+   - Fast 60fps hardware-accelerated transitions
+   - Touch tap feedback for responsive mobile experience
+   - Subtle entrance slide-up and fade-in effects
+   ========================================================================= */
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpSubtle {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUpSubtle 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Interactive Card Elevation & Mobile Tap Feedback */
+.card-interactive {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  touch-action: manipulation;
+  will-change: transform;
+}
+
+.card-interactive:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px -8px rgba(17, 37, 85, 0.16);
+}
+
+.card-interactive:active {
+  transform: scale(0.985);
+}
+
+/* Smooth Image Scale on Hover / Focus */
+.img-smooth-zoom {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+  will-change: transform;
+}
+
+.img-smooth-zoom:hover {
+  transform: scale(1.05);
+}
+
+/* Smooth Button Hover Glow */
+.btn-glow {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.btn-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -4px rgba(237, 129, 0, 0.4);
+}
+
+.btn-glow:active {
+  transform: scale(0.97);
+}
+
+

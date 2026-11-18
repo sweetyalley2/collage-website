@@ -205,43 +205,46 @@ export default function PlacementPage() {
                   onClick={() => setSelectedRecord(rec)}
                   className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-md hover:shadow-2xl hover:border-[#ed8100] hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group flex flex-col justify-between relative"
                 >
-                  {/* Top Company Branding Header */}
-                  <div className="bg-[#112555] text-white p-3.5 flex items-center justify-between border-b-2 border-[#ed8100]">
-                    <div className="flex items-center gap-1.5 overflow-hidden">
-                      {isHospital ? (
-                        <Stethoscope size={15} className="text-[#ed8100] shrink-0" />
-                      ) : (
-                        <Hotel size={15} className="text-[#ffc923] shrink-0" />
-                      )}
-                      <span className="font-heading font-extrabold text-xs tracking-tight line-clamp-1">
-                        {rec.company}
-                      </span>
+                  {/* Official Poster Top Bar: CIMS Logo + Institute Brand + Batch */}
+                  <div className="bg-[#0b1736] text-white p-3 flex items-center justify-between border-b-2 border-[#ed8100]">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full overflow-hidden bg-white p-0.5 shrink-0 border border-white/60">
+                        <img src="/images/logo/cims-logo.png" alt="CIMS Logo" className="w-full h-full object-contain" />
+                      </div>
+                      <div className="leading-tight">
+                        <span className="font-heading font-black text-xs uppercase tracking-wider text-[#ffc923] block">
+                          CIMS GROUP
+                        </span>
+                        <span className="text-[8px] text-gray-300 font-bold uppercase tracking-widest block">
+                          ESTD 2011 • MAKAUT (CCPTR)
+                        </span>
+                      </div>
                     </div>
-                    <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-white/20 tracking-wider shrink-0 ml-1">
+                    <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-[#ed8100] text-white tracking-wider shrink-0 shadow-sm">
                       {rec.year}
                     </span>
                   </div>
 
-                  {/* Poster Main Body: Background + Foreground Student Image + Diagonal Ribbon */}
-                  <div className="relative h-60 bg-gradient-to-b from-gray-100 to-gray-200 overflow-hidden flex items-center justify-center">
+                  {/* ISHM-Inspired Placement Poster Body: Corporate Blue + Company Watermark + JOB @ Banner + Student Photo */}
+                  <div className="relative h-64 bg-gradient-to-br from-[#0d1d42] via-[#112555] to-[#1a3880] overflow-hidden flex flex-col items-center justify-between p-3 select-none">
                     
-                    {/* Background Pattern */}
-                    <div className="absolute inset-0 bg-blue-900/5 group-hover:bg-blue-900/10 transition-colors" />
-
-                    {/* Watermark Logo */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
-                      <Image
-                        src="/images/logo/svf-logo.jpg"
-                        alt="CIMS Watermark"
-                        width={180}
-                        height={180}
-                        className="object-contain"
-                      />
+                    {/* Background Company Name Watermark */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none overflow-hidden px-2">
+                      <span className="text-2xl sm:text-3xl font-heading font-black uppercase text-center text-white tracking-tighter leading-tight line-clamp-3">
+                        {rec.company}
+                      </span>
                     </div>
 
-                    {/* Student Photograph Foreground */}
+                    {/* Prominent Large Banner: JOB @ [COMPANY NAME] */}
+                    <div className="relative z-10 w-full bg-gradient-to-r from-[#ed8100] via-[#ff9c26] to-[#ed8100] text-white py-1.5 px-2 rounded-lg shadow-md text-center border border-white/40">
+                      <span className="font-heading font-black text-[11px] sm:text-xs uppercase tracking-wider block drop-shadow-sm truncate">
+                        JOB @ {rec.company.toUpperCase()}
+                      </span>
+                    </div>
+
+                    {/* Authentic Individual Student Photograph in White Frame */}
                     {rec.image ? (
-                      <div className="relative w-36 h-44 rounded-xl overflow-hidden border-3 border-white shadow-xl group-hover:scale-105 transition-transform duration-300 z-10 bg-white">
+                      <div className="relative z-10 w-32 h-40 rounded-xl overflow-hidden border-3 border-white shadow-2xl group-hover:scale-105 transition-transform duration-300 bg-white my-1">
                         <img
                           src={rec.image}
                           alt={rec.studentName}
@@ -250,35 +253,27 @@ export default function PlacementPage() {
                         />
                       </div>
                     ) : (
-                      /* Neutral Professional Placeholder Badge */
-                      <div className="relative w-36 h-44 rounded-xl overflow-hidden border-3 border-white shadow-xl group-hover:scale-105 transition-transform duration-300 z-10 bg-gradient-to-b from-[#112555] to-[#1c3786] flex flex-col items-center justify-center text-white p-3 text-center">
-                        <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-2">
-                          <GraduationCap size={32} className="text-[#ffc923]" />
-                        </div>
-                        <span className="font-heading font-black text-xs uppercase tracking-wider text-[#ffc923]">
+                      <div className="relative z-10 w-32 h-40 rounded-xl overflow-hidden border-3 border-white shadow-2xl group-hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-[#112555] to-[#1c3786] flex flex-col items-center justify-center text-white p-3 text-center my-1">
+                        <GraduationCap size={28} className="text-[#ffc923] mb-1" />
+                        <span className="font-heading font-black text-[11px] uppercase tracking-wider text-[#ffc923]">
                           Placed Graduate
                         </span>
-                        <span className="text-[10px] text-white/80 mt-1">CIMS Alumni</span>
+                        <span className="text-[9px] text-white/80">Batch 2023–24</span>
                       </div>
                     )}
 
-                    {/* Diagonal Colored Banner: "Placed at [Company Name]" */}
-                    <div className="absolute top-4 -right-12 rotate-45 bg-[#ed8100] text-white text-[9px] font-black uppercase tracking-wider py-1 px-12 shadow-lg z-20 text-center pointer-events-none">
-                      PLACED
+                    {/* Student Full Name in Clean Solid Banner */}
+                    <div className="relative z-10 w-full bg-black/60 backdrop-blur-sm border border-[#ed8100]/60 rounded-lg py-1 px-2 text-center shadow-md">
+                      <h3 className="font-heading font-black text-xs text-white uppercase tracking-wider truncate">
+                        {rec.studentName}
+                      </h3>
                     </div>
 
-                    {/* Click overlay indicator */}
+                    {/* Hover Eye Overlay */}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity z-20 flex items-center justify-center text-white gap-1.5 font-bold text-xs backdrop-blur-[1px]">
                       <Eye size={16} className="text-[#ffc923]" />
                       <span>View Placement Dossier</span>
                     </div>
-                  </div>
-
-                  {/* Student Name Colored Label (Part 3) */}
-                  <div className="bg-[#ed8100] text-white px-4 py-2 text-center shadow-sm">
-                    <h3 className="font-heading font-extrabold text-sm tracking-wide uppercase line-clamp-1">
-                      {rec.studentName}
-                    </h3>
                   </div>
 
                   {/* Course & Training Details at Bottom */}
