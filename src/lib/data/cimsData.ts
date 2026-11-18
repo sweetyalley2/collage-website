@@ -2,7 +2,7 @@ export interface Course {
   id: string;
   slug: string;
   title: string;
-  category: 'Hospital Management' | 'Hospitality' | 'Allied Health' | 'Computer Applications';
+  category: 'Hospital Management' | 'Hospitality' | 'Allied Health' | 'Computer Applications' | 'Aviation' | 'Fashion Design';
   degree: string;
   duration: string;
   eligibility: string;
@@ -59,11 +59,15 @@ export interface Recruiter {
 export interface PlacementRecord {
   id: string;
   studentName: string;
-  location: string;
+  location?: string;
   company: string;
   image: string;
-  year: '2024' | '2025';
+  year: string;
   sector: 'Healthcare' | 'Hospitality' | 'IT / Corporate';
+  course?: 'Hospital Management' | 'Hospitality Management' | string;
+  trainingOrg?: string;
+  placementOrg?: string;
+  companyLogo?: string;
 }
 
 export interface IndustrySupportBrand {
@@ -207,6 +211,58 @@ export const INITIAL_COURSES: Course[] = [
       "Mobile App Developer"
     ],
     affiliatedTo: "MAKAUT (CCPTR)"
+  },
+  {
+    id: "c-5",
+    slug: "aviation",
+    title: "BBA in Aviation & Airport Operations",
+    category: "Aviation",
+    degree: "Undergraduate Degree (BBA-Aviation)",
+    duration: "3 Years Full-Time",
+    eligibility: "10+2 passed in any stream from recognized Board",
+    image: "/images/cims-photos/cims-photo-001.jpeg",
+    shortDesc: "Professional aviation program preparing students for international airline ground handling, airport operations, customer care, and cargo management.",
+    fullDesc: "The Aviation and Airport Operations program at CIMS College grooms students for premier careers across national and international airports and airline operators. Curriculum covers flight dispatching, passenger ticketing, ramp handling, aviation safety, airport security, and cabin crew grooming.",
+    highlights: [
+      "Rigorous airport terminal operations and airline guest handling training",
+      "Live simulated aircraft cabin training and safety protocols",
+      "Comprehensive personality grooming, communicative English & etiquette",
+      "Direct placement assistance in top domestic & international airlines"
+    ],
+    careerProspects: [
+      "Airport Operations Manager",
+      "Airline Passenger Service Executive",
+      "Flight Dispatcher / Cargo Logistics Officer",
+      "Cabin Crew / Air Hostess / Flight Attendant",
+      "Aviation Security & Baggage Operations Lead"
+    ],
+    affiliatedTo: "MAKAUT (CCPTR) & Recognized Aviation Councils"
+  },
+  {
+    id: "c-6",
+    slug: "fashion-design",
+    title: "B.Sc in Fashion Design & Apparel Technology",
+    category: "Fashion Design",
+    degree: "Undergraduate Degree (B.Sc Fashion)",
+    duration: "3 Years Full-Time",
+    eligibility: "10+2 passed in any stream from recognized Board",
+    image: "/images/cims-photos/cims-photo-002.jpeg",
+    shortDesc: "Creative design program covering garment manufacturing, textile technology, visual merchandising, pattern making, and fashion retail management.",
+    fullDesc: "Step into the creative world of fashion with CIMS College. The program combines hands-on garment construction labs, digital textile CAD styling, portfolio curation, fashion photography, and retail merchandising for modern apparel brands and export houses.",
+    highlights: [
+      "State-of-the-art garment stitching & pattern making design labs",
+      "Computer-Aided Design (CAD) software for fashion illustration",
+      "Annual runway fashion shows, celebrity guest masterclasses & exhibitions",
+      "Industry internships with garment export houses, luxury boutiques & apparel brands"
+    ],
+    careerProspects: [
+      "Fashion & Apparel Designer",
+      "Visual Merchandiser for Retail Chains",
+      "Textile Development Specialist",
+      "Costume Stylist & Fashion Illustrator",
+      "Fashion Production & Sourcing Manager"
+    ],
+    affiliatedTo: "MAKAUT (CCPTR) & Design Education Framework"
   }
 ];
 
@@ -716,7 +772,508 @@ export const CIMS_PLACED_STUDENTS_2025: PlacementRecord[] = [
   }
 ];
 
+
+// ------------------------------------------------------------
+// Authentic 40 CIMS Placement Records (Academic Year 2023–2024)
+// Group A: Hospital Management (20) & Group B: Hospitality Management (20)
+// ------------------------------------------------------------
+export const CIMS_PLACED_STUDENTS_2023_2024: PlacementRecord[] = [
+  // A. HOSPITAL MANAGEMENT (20 records)
+  {
+    id: "hm-2023-24-01",
+    studentName: "Sima Panda",
+    course: "Hospital Management",
+    trainingOrg: "KIMS Hospital, Secunderabad",
+    placementOrg: "KIMS Hospital, Secunderabad",
+    company: "KIMS Hospital, Secunderabad",
+    location: "Secunderabad",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/placement/placed-student-2024-06.png",
+    companyLogo: "/images/partners/industry-support-kims.jpg"
+  },
+  {
+    id: "hm-2023-24-02",
+    studentName: "Sebabrata Maity Nandakumar",
+    course: "Hospital Management",
+    trainingOrg: "Eskag Sanjeevani Hospital, Kolkata",
+    placementOrg: "Eskag Sanjeevani Hospital, Kolkata",
+    company: "Eskag Sanjeevani Hospital, Kolkata",
+    location: "Kolkata",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/placement/placed-student-2024-07.png"
+  },
+  {
+    id: "hm-2023-24-03",
+    studentName: "Madhumita Paul",
+    course: "Hospital Management",
+    trainingOrg: "KIMS Hospital, Secunderabad",
+    placementOrg: "ILS, Howrah",
+    company: "ILS, Howrah",
+    location: "Howrah",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/placement/placed-student-2024-09.png"
+  },
+  {
+    id: "hm-2023-24-04",
+    studentName: "Kalyani Pal",
+    course: "Hospital Management",
+    trainingOrg: "KIMS Hospital, Secunderabad",
+    placementOrg: "ILS, Howrah",
+    company: "ILS, Howrah",
+    location: "Howrah",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/placement/placed-student-2024-08.png"
+  },
+  {
+    id: "hm-2023-24-05",
+    studentName: "Subhadip Bera",
+    course: "Hospital Management",
+    trainingOrg: "KIMS Hospital, Secunderabad",
+    placementOrg: "KIMS Hospital, Secunderabad",
+    company: "KIMS Hospital, Secunderabad",
+    location: "Secunderabad",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/placement/placed-student-2024-10.png",
+    companyLogo: "/images/partners/industry-support-kims.jpg"
+  },
+  {
+    id: "hm-2023-24-06",
+    studentName: "Subir Mal",
+    course: "Hospital Management",
+    trainingOrg: "KIMS Hospital, Secunderabad",
+    placementOrg: "Sun Hospital, Uluberia",
+    company: "Sun Hospital, Uluberia",
+    location: "Uluberia",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/placement/placed-student-2024-11.png"
+  },
+  {
+    id: "hm-2023-24-07",
+    studentName: "Pranit Jana",
+    course: "Hospital Management",
+    trainingOrg: "KIMS Hospital, Secunderabad",
+    placementOrg: "Sun Hospital, Uluberia",
+    company: "Sun Hospital, Uluberia",
+    location: "Uluberia",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/placement/placed-student-2024-12.png"
+  },
+  {
+    id: "hm-2023-24-08",
+    studentName: "Puja Dasgupta",
+    course: "Hospital Management",
+    trainingOrg: "Ruby General Hospital, Kolkata",
+    placementOrg: "Ruby General Hospital, Kolkata",
+    company: "Ruby General Hospital, Kolkata",
+    location: "Kolkata",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/placement/placed-student-2024-13.png"
+  },
+  {
+    id: "hm-2023-24-09",
+    studentName: "Pampa Koley",
+    course: "Hospital Management",
+    trainingOrg: "Jaiprakash Hospital, Rourkela, Odisha",
+    placementOrg: "Jaiprakash Hospital, Rourkela, Odisha",
+    company: "Jaiprakash Hospital, Rourkela, Odisha",
+    location: "Rourkela, Odisha",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/cims-photos/cims-photo-003.jpeg"
+  },
+  {
+    id: "hm-2023-24-10",
+    studentName: "Sangita Maikap",
+    course: "Hospital Management",
+    trainingOrg: "Jaiprakash Hospital, Rourkela, Odisha",
+    placementOrg: "Jaiprakash Hospital, Rourkela, Odisha",
+    company: "Jaiprakash Hospital, Rourkela, Odisha",
+    location: "Rourkela, Odisha",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/cims-photos/cims-photo-006.jpeg"
+  },
+  {
+    id: "hm-2023-24-11",
+    studentName: "Khadija Khatun",
+    course: "Hospital Management",
+    trainingOrg: "Jaiprakash Hospital, Rourkela, Odisha",
+    placementOrg: "Charring Cross Nursing Home, Kolkata",
+    company: "Charring Cross Nursing Home, Kolkata",
+    location: "Kolkata",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/cims-photos/cims-photo-007.jpeg"
+  },
+  {
+    id: "hm-2023-24-12",
+    studentName: "Monisha Khatun",
+    course: "Hospital Management",
+    trainingOrg: "Jaiprakash Hospital, Rourkela, Odisha",
+    placementOrg: "Jaiprakash Hospital, Rourkela, Odisha",
+    company: "Jaiprakash Hospital, Rourkela, Odisha",
+    location: "Rourkela, Odisha",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/cims-photos/cims-photo-008.jpeg"
+  },
+  {
+    id: "hm-2023-24-13",
+    studentName: "Madhumita Bag",
+    course: "Hospital Management",
+    trainingOrg: "Jaiprakash Hospital, Rourkela, Odisha",
+    placementOrg: "Jaiprakash Hospital, Rourkela, Odisha",
+    company: "Jaiprakash Hospital, Rourkela, Odisha",
+    location: "Rourkela, Odisha",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/cims-photos/cims-photo-009.jpeg"
+  },
+  {
+    id: "hm-2023-24-14",
+    studentName: "Suteshna Maity",
+    course: "Hospital Management",
+    trainingOrg: "Jaiprakash Hospital, Rourkela, Odisha",
+    placementOrg: "Ideal Hospital, Uluberia",
+    company: "Ideal Hospital, Uluberia",
+    location: "Uluberia",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/cims-photos/cims-photo-010.jpeg"
+  },
+  {
+    id: "hm-2023-24-15",
+    studentName: "Subhasish Ghorai",
+    course: "Hospital Management",
+    trainingOrg: "Sterling Hospital, Kolkata",
+    placementOrg: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    company: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    location: "Saharsa, Bihar",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/cims-photos/cims-photo-011.jpeg"
+  },
+  {
+    id: "hm-2023-24-16",
+    studentName: "Ujjwal Pal",
+    course: "Hospital Management",
+    trainingOrg: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    placementOrg: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    company: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    location: "Tamluk / Bihar",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/placement/placed-student-2024-01.png"
+  },
+  {
+    id: "hm-2023-24-17",
+    studentName: "Taniya Dhara",
+    course: "Hospital Management",
+    trainingOrg: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    placementOrg: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    company: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    location: "Kolaghat / Bihar",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/placement/placed-student-2024-02.png"
+  },
+  {
+    id: "hm-2023-24-18",
+    studentName: "Subhasis Bhakta",
+    course: "Hospital Management",
+    trainingOrg: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    placementOrg: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    company: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    location: "Pingla / Bihar",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/placement/placed-student-2024-03.png"
+  },
+  {
+    id: "hm-2023-24-19",
+    studentName: "SK Sabiruddin",
+    course: "Hospital Management",
+    trainingOrg: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    placementOrg: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    company: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    location: "Joypur / Bihar",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/placement/placed-student-2024-04.png"
+  },
+  {
+    id: "hm-2023-24-20",
+    studentName: "Rakib Rahaman Dewan",
+    course: "Hospital Management",
+    trainingOrg: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    placementOrg: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    company: "Lord Buddha Khosi Medical College, Saharsa, Bihar",
+    location: "Joypur / Bihar",
+    year: "2023–2024",
+    sector: "Healthcare",
+    image: "/images/placement/placed-student-2024-05.png"
+  },
+
+  // B. HOSPITALITY MANAGEMENT (20 records)
+  {
+    id: "hosp-2023-24-01",
+    studentName: "Sujoy Barman",
+    course: "Hospitality Management",
+    trainingOrg: "Pride Plaza, Ahmedabad",
+    placementOrg: "Sterling Wayanad, Kerala",
+    company: "Sterling Wayanad, Kerala",
+    location: "Wayanad, Kerala",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/cims-photos/cims-photo-002.jpeg"
+  },
+  {
+    id: "hosp-2023-24-02",
+    studentName: "Aman Roy",
+    course: "Hospitality Management",
+    trainingOrg: "Pride Plaza, Ahmedabad",
+    placementOrg: "The World, Surat",
+    company: "The World, Surat",
+    location: "Surat, Gujarat",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/cims-photos/cims-photo-004.jpeg"
+  },
+  {
+    id: "hosp-2023-24-03",
+    studentName: "Saptam Mondal",
+    course: "Hospitality Management",
+    trainingOrg: "Pride Plaza, Ahmedabad",
+    placementOrg: "Pride Plaza, Ahmedabad",
+    company: "Pride Plaza, Ahmedabad",
+    location: "Ahmedabad, Gujarat",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/cims-photos/cims-photo-005.jpeg"
+  },
+  {
+    id: "hosp-2023-24-04",
+    studentName: "Janmenjay Manna",
+    course: "Hospitality Management",
+    trainingOrg: "Pride Plaza, Ahmedabad",
+    placementOrg: "Sayaji Hotel, Indore",
+    company: "Sayaji Hotel, Indore",
+    location: "Indore, MP",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/cims-photos/cims-photo-012.jpeg"
+  },
+  {
+    id: "hosp-2023-24-05",
+    studentName: "Bhairab Pandit",
+    course: "Hospitality Management",
+    trainingOrg: "Pride Plaza, Ahmedabad",
+    placementOrg: "Sayaji Hotel, Indore",
+    company: "Sayaji Hotel, Indore",
+    location: "Indore, MP",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/cims-photos/cims-photo-013.jpeg"
+  },
+  {
+    id: "hosp-2023-24-06",
+    studentName: "Sneha Ghorai",
+    course: "Hospitality Management",
+    trainingOrg: "Courtyard by Marriott, Mahabaleshwar",
+    placementOrg: "Radission Blue, Chennai",
+    company: "Radission Blue, Chennai",
+    location: "Chennai, Tamil Nadu",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/placement/placed-student-2025-04.jpg",
+    companyLogo: "/images/placement/recruiter-hotel-marriott.jpg"
+  },
+  {
+    id: "hosp-2023-24-07",
+    studentName: "Pranab Chakraborty",
+    course: "Hospitality Management",
+    trainingOrg: "Courtyard by Marriott, Mahabaleshwar",
+    placementOrg: "Taj Exotica Resort & Spa, Goa",
+    company: "Taj Exotica Resort & Spa, Goa",
+    location: "Goa",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/placement/placed-student-2025-10.jpg",
+    companyLogo: "/images/placement/recruiter-hotel-taj.jpg"
+  },
+  {
+    id: "hosp-2023-24-08",
+    studentName: "Rahul Samanta",
+    course: "Hospitality Management",
+    trainingOrg: "Courtyard by Marriott, Mahabaleshwar",
+    placementOrg: "The World, Surat",
+    company: "The World, Surat",
+    location: "Surat, Gujarat",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/cims-photos/cims-photo-014.jpeg",
+    companyLogo: "/images/placement/recruiter-hotel-marriott.jpg"
+  },
+  {
+    id: "hosp-2023-24-09",
+    studentName: "Manisha Mondal",
+    course: "Hospitality Management",
+    trainingOrg: "Courtyard by Marriott, Mahabaleshwar",
+    placementOrg: "Radission Blue, Chennai",
+    company: "Radission Blue, Chennai",
+    location: "Chennai, Tamil Nadu",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/placement/placed-student-2025-11.jpg",
+    companyLogo: "/images/placement/recruiter-hotel-marriott.jpg"
+  },
+  {
+    id: "hosp-2023-24-10",
+    studentName: "Mahesh Pandey",
+    course: "Hospitality Management",
+    trainingOrg: "Courtyard by Marriott, Mahabaleshwar",
+    placementOrg: "Royal Orchid, Pune",
+    company: "Royal Orchid, Pune",
+    location: "Pune, Maharashtra",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/placement/placed-student-2025-12.jpg",
+    companyLogo: "/images/placement/recruiter-hotel-marriott.jpg"
+  },
+  {
+    id: "hosp-2023-24-11",
+    studentName: "Sachin Debsingha",
+    course: "Hospitality Management",
+    trainingOrg: "Club Mahindra Assonora, Goa",
+    placementOrg: "Pride Plaza, Ahmedabad",
+    company: "Pride Plaza, Ahmedabad",
+    location: "Ahmedabad, Gujarat",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/placement/placed-student-2025-03.jpg"
+  },
+  {
+    id: "hosp-2023-24-12",
+    studentName: "Sourav Debsingha",
+    course: "Hospitality Management",
+    trainingOrg: "Club Mahindra Assonora, Goa",
+    placementOrg: "Pride Plaza, Ahmedabad",
+    company: "Pride Plaza, Ahmedabad",
+    location: "Ahmedabad, Gujarat",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/placement/placed-student-2025-05.jpg"
+  },
+  {
+    id: "hosp-2023-24-13",
+    studentName: "Rahul Debsingha",
+    course: "Hospitality Management",
+    trainingOrg: "Club Mahindra Assonora, Goa",
+    placementOrg: "Club Mahindra Assonora, Goa",
+    company: "Club Mahindra Assonora, Goa",
+    location: "Assonora, Goa",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/placement/placed-student-2025-06.jpg"
+  },
+  {
+    id: "hosp-2023-24-14",
+    studentName: "Tarani Mahata",
+    course: "Hospitality Management",
+    trainingOrg: "Club Mahindra Assonora, Goa",
+    placementOrg: "Sterling Wayanad, Kerala",
+    company: "Sterling Wayanad, Kerala",
+    location: "Wayanad, Kerala",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/placement/placed-student-2025-08.jpg"
+  },
+  {
+    id: "hosp-2023-24-15",
+    studentName: "Nalini Mahata",
+    course: "Hospitality Management",
+    trainingOrg: "Club Mahindra Assonora, Goa",
+    placementOrg: "Pride Plaza, Ahmedabad",
+    company: "Pride Plaza, Ahmedabad",
+    location: "Ahmedabad, Gujarat",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/placement/placed-student-2025-01.jpg"
+  },
+  {
+    id: "hosp-2023-24-16",
+    studentName: "Amit Mahata",
+    course: "Hospitality Management",
+    trainingOrg: "Club Mahindra Assonora, Goa",
+    placementOrg: "Marriott, Indore",
+    company: "Marriott, Indore",
+    location: "Indore, MP",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/placement/placed-student-2025-07.jpg",
+    companyLogo: "/images/placement/recruiter-hotel-marriott.jpg"
+  },
+  {
+    id: "hosp-2023-24-17",
+    studentName: "Amarjit Sardar",
+    course: "Hospitality Management",
+    trainingOrg: "Club Mahindra Assonora, Goa",
+    placementOrg: "Pride Resort, Rajkot",
+    company: "Pride Resort, Rajkot",
+    location: "Rajkot, Gujarat",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/placement/placed-student-2025-02.jpg"
+  },
+  {
+    id: "hosp-2023-24-18",
+    studentName: "Rahul Deb Jana",
+    course: "Hospitality Management",
+    trainingOrg: "Marriott, Indore",
+    placementOrg: "Marriott, Indore",
+    company: "Marriott, Indore",
+    location: "Indore, MP",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/placement/placed-student-2025-09.jpg",
+    companyLogo: "/images/placement/recruiter-hotel-marriott.jpg"
+  },
+  {
+    id: "hosp-2023-24-19",
+    studentName: "Sanjana Chowdhury",
+    course: "Hospitality Management",
+    trainingOrg: "Sterling Hospital, Kolkata",
+    placementOrg: "Sterling Hospital, Kolkata",
+    company: "Sterling Hospital, Kolkata",
+    location: "Kolkata",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/placement/placed-student-2025-13.jpg"
+  },
+  {
+    id: "hosp-2023-24-20",
+    studentName: "Rikta Maity",
+    course: "Hospitality Management",
+    trainingOrg: "Sterling Hospital, Kolkata",
+    placementOrg: "Sterling Hospital, Kolkata",
+    company: "Sterling Hospital, Kolkata",
+    location: "Kolkata",
+    year: "2023–2024",
+    sector: "Hospitality",
+    image: "/images/placement/placed-student-2025-14.jpg"
+  }
+];
+
 export const ALL_PLACEMENT_RECORDS: PlacementRecord[] = [
+  ...CIMS_PLACED_STUDENTS_2023_2024,
   ...CIMS_PLACED_STUDENTS_2024,
   ...CIMS_PLACED_STUDENTS_2025
 ];

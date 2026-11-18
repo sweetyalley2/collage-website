@@ -44,6 +44,7 @@ import {
   CIMS_PARTNERS, 
   TOP_RECRUITERS,
   INDUSTRY_SUPPORT_BRANDS,
+  CIMS_PLACED_STUDENTS_2023_2024,
   CIMS_PLACED_STUDENTS_2024,
   CIMS_PLACED_STUDENTS_2025,
   ALL_PLACEMENT_RECORDS,
@@ -53,11 +54,13 @@ import {
 export default function HomePage() {
   // Placement Gallery Modal & Filter State
   const [selectedPlacement, setSelectedPlacement] = useState<PlacementRecord | null>(null);
-  const [placementFilterYear, setPlacementFilterYear] = useState<'2024' | '2025' | 'all'>('2024');
+  const [placementFilterYear, setPlacementFilterYear] = useState<'2023-2024' | '2024' | '2025' | 'all'>('2023-2024');
 
   // Filtered placement records based on user batch tab selection
   const filteredPlacementRecords =
-    placementFilterYear === '2024'
+    placementFilterYear === '2023-2024'
+      ? CIMS_PLACED_STUDENTS_2023_2024
+      : placementFilterYear === '2024'
       ? CIMS_PLACED_STUDENTS_2024
       : placementFilterYear === '2025'
       ? CIMS_PLACED_STUDENTS_2025
@@ -403,21 +406,38 @@ export default function HomePage() {
       ───────────────────────────────────────────────────────────── */}
       <section className="relative bg-[#0d1d42] overflow-hidden min-h-[620px] lg:min-h-[680px] flex items-center">
 
-        {/* CIMS Training Tour Video Background */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className="absolute inset-0 w-full h-full object-cover"
-            poster="/images/hero/cims-building.jpg"
-          >
-            <source src="/videos/campus-tour.mp4" type="video/mp4" />
-          </video>
-          {/* Dark overlay for text legibility */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0d1d42]/90 via-[#0d1d42]/75 to-[#0d1d42]/50" />
+        {/* Real CIMS Photographic Collage Mosaic Background (Part 2) */}
+        <div className="absolute inset-0 z-0 overflow-hidden select-none">
+          {/* Asymmetrical 8-Photo Mosaic Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 w-[105%] h-[105%] -m-2 opacity-35 filter brightness-90 contrast-105">
+            <div className="relative h-48 sm:h-64 rounded-xl overflow-hidden shadow">
+              <img src="/images/cims-photos/cims-photo-001.jpeg" alt="CIMS Campus Building" className="w-full h-full object-cover" />
+            </div>
+            <div className="relative h-48 sm:h-64 rounded-xl overflow-hidden shadow">
+              <img src="/images/cims-photos/cims-photo-002.jpeg" alt="Culinary Training Lab" className="w-full h-full object-cover" />
+            </div>
+            <div className="relative h-48 sm:h-64 rounded-xl overflow-hidden shadow">
+              <img src="/images/cims-photos/cims-photo-003.jpeg" alt="Paramedical Pathology" className="w-full h-full object-cover" />
+            </div>
+            <div className="relative h-48 sm:h-64 rounded-xl overflow-hidden shadow">
+              <img src="/images/cims-photos/cims-photo-004.jpeg" alt="Hospitality Training" className="w-full h-full object-cover" />
+            </div>
+            <div className="relative h-48 sm:h-64 rounded-xl overflow-hidden shadow">
+              <img src="/images/cims-photos/cims-photo-005.jpeg" alt="Hospital Lecture Hall" className="w-full h-full object-cover" />
+            </div>
+            <div className="relative h-48 sm:h-64 rounded-xl overflow-hidden shadow">
+              <img src="/images/cims-photos/cims-photo-007.jpeg" alt="Institutional Seminar" className="w-full h-full object-cover" />
+            </div>
+            <div className="relative h-48 sm:h-64 rounded-xl overflow-hidden shadow">
+              <img src="/images/cims-photos/cims-photo-010.jpeg" alt="Computer Applications Lab" className="w-full h-full object-cover" />
+            </div>
+            <div className="relative h-48 sm:h-64 rounded-xl overflow-hidden shadow">
+              <img src="/images/cims-photos/cims-photo-012.jpeg" alt="Convocation Ceremony" className="w-full h-full object-cover" />
+            </div>
+          </div>
+          {/* Subtle Deep Navy & Warm Gradient Overlay for Text Legibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#071129]/95 via-[#0d1d42]/90 to-[#071129]/80 backdrop-blur-[1px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(#ed8100_1px,transparent_1px)] [background-size:32px_32px] opacity-10" />
         </div>
 
         {/* Floating Animated Ambient Glows */}
@@ -506,7 +526,7 @@ export default function HomePage() {
               <h1 className="font-heading text-3xl sm:text-5xl lg:text-5xl font-black tracking-tight leading-[1.12] text-white">
                 Launch Your Professional Career in <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ffc923] via-[#ff9724] to-[#ed8100]">
-                  Healthcare &amp; Hospitality
+                  Healthcare, Hospitality, Computing &amp; Aviation
                 </span>
               </h1>
 
@@ -1526,7 +1546,7 @@ export default function HomePage() {
               Career Records &amp; Corporate Relations
             </span>
             <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-[#112555] uppercase tracking-wide">
-              PLACEMENT &amp; CORPORATE RECRUITERS
+              RECENT PLACEMENTS &amp; CORPORATE RECRUITERS
             </h2>
             <div className="w-16 h-1 bg-[#ed8100] mx-auto mt-2 rounded-full mb-3" />
             <p className="text-xs sm:text-sm text-gray-600">
@@ -1592,7 +1612,18 @@ export default function HomePage() {
               </div>
 
               {/* Filter Tabs */}
-              <div className="flex items-center gap-2 bg-gray-200/80 p-1 rounded-lg w-max self-start sm:self-auto">
+              <div className="flex flex-wrap items-center gap-1.5 bg-gray-200/80 p-1 rounded-lg w-max self-start sm:self-auto">
+                <button
+                  type="button"
+                  onClick={() => setPlacementFilterYear('2023-2024')}
+                  className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${
+                    placementFilterYear === '2023-2024'
+                      ? 'bg-[#ed8100] text-white shadow'
+                      : 'text-gray-600 hover:text-[#112555]'
+                  }`}
+                >
+                  2023-24 ({CIMS_PLACED_STUDENTS_2023_2024.length})
+                </button>
                 <button
                   type="button"
                   onClick={() => setPlacementFilterYear('2024')}
@@ -1602,7 +1633,7 @@ export default function HomePage() {
                       : 'text-gray-600 hover:text-[#112555]'
                   }`}
                 >
-                  2024 Batch ({CIMS_PLACED_STUDENTS_2024.length})
+                  2024 ({CIMS_PLACED_STUDENTS_2024.length})
                 </button>
                 <button
                   type="button"
@@ -1613,18 +1644,18 @@ export default function HomePage() {
                       : 'text-gray-600 hover:text-[#112555]'
                   }`}
                 >
-                  2025 Batch ({CIMS_PLACED_STUDENTS_2025.length})
+                  2025 ({CIMS_PLACED_STUDENTS_2025.length})
                 </button>
                 <button
                   type="button"
                   onClick={() => setPlacementFilterYear('all')}
                   className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-all cursor-pointer ${
                     placementFilterYear === 'all'
-                      ? 'bg-[#ed8100] text-white shadow'
+                      ? 'bg-[#112555] text-white shadow'
                       : 'text-gray-600 hover:text-[#112555]'
                   }`}
                 >
-                  All Records ({ALL_PLACEMENT_RECORDS.length})
+                  All ({ALL_PLACEMENT_RECORDS.length})
                 </button>
               </div>
             </div>
@@ -1657,6 +1688,11 @@ export default function HomePage() {
                   {/* Details */}
                   <div className="p-4 space-y-1.5 flex-1 flex flex-col justify-between">
                     <div>
+                      {record.course && (
+                        <span className="inline-block px-1.5 py-0.5 mb-1 text-[9px] font-bold uppercase rounded bg-amber-50 text-amber-700 border border-amber-200">
+                          {record.course}
+                        </span>
+                      )}
                       <h4 className="font-heading font-extrabold text-sm text-[#112555] group-hover:text-[#ed8100] transition-colors leading-snug">
                         {record.studentName}
                       </h4>
@@ -1677,7 +1713,7 @@ export default function HomePage() {
             {/* Clear "View All Placement Records" CTA */}
             <div className="text-center pt-6">
               <Link
-                href="/training-placements"
+                href="/placement"
                 className="inline-flex items-center gap-2 bg-[#ed8100] hover:bg-[#d97400] text-white px-8 py-3.5 rounded-md font-bold text-xs uppercase tracking-wider shadow-lg hover:shadow-xl hover:scale-105 transition-all"
               >
                 <span>View All Placement Records &amp; Career Details</span>
