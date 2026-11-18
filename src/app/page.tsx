@@ -1,435 +1,228 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import {
   GraduationCap,
   Send,
   ArrowRight,
-  PhoneCall,
   X,
   CheckCircle2,
   AlertCircle,
   Sparkles,
-  MapPin,
-  Mail,
-  User,
+  PhoneCall,
+  ChevronLeft,
+  ChevronRight,
   BookOpen,
   Award
 } from 'lucide-react';
 
-interface CollageTile {
+interface InsetTile {
   src: string;
   alt: string;
-  colSpan: string;
-  rowSpan: string;
+  caption: string;
   rotation: string;
-  zIndex: string;
-  aspect: string;
+  hideOnMobile?: boolean;
 }
 
-interface CollageComposition {
+interface CollageSlide {
   id: string;
-  title: string;
-  tiles: CollageTile[];
+  discipline: string;
+  subtitle: string;
+  focalPhoto: {
+    src: string;
+    alt: string;
+  };
+  insetTiles: InsetTile[];
 }
 
-const COLLAGE_COMPOSITIONS: CollageComposition[] = [
+// 5 ISHM-Inspired Collage Compositions Using Authentic CIMS Optimized Photographs
+const COLLAGE_SLIDES: CollageSlide[] = [
   {
-    "id": "comp-1",
-    "title": "Campus & Specialized Labs",
-    "tiles": [
+    id: 'slide-hospitality',
+    discipline: 'Hotel & Hospitality Management',
+    subtitle: '5-Star Luxury Hotel Internships • Culinary, F&B & Front Office Live Training',
+    focalPhoto: {
+      src: '/images/cims-optimized/cims-photo-002.webp',
+      alt: 'Live Culinary Kitchen Practical with Executive Chef & Students'
+    },
+    insetTiles: [
       {
-        "src": "/images/cims-photos/cims-photo-001.jpeg",
-        "alt": "CIMS Campus Main Building & Entrance",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-2",
-        "rotation": "-rotate-1 sm:-rotate-2",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[4/5] lg:aspect-[3/4]"
+        src: '/images/cims-optimized/cims-photo-004.webp',
+        alt: 'Hospitality Front Office & Concierge Training',
+        caption: 'Front Office Protocol',
+        rotation: '-rotate-2 sm:-rotate-3'
       },
       {
-        "src": "/images/cims-photos/cims-photo-002.jpeg",
-        "alt": "Culinary Production & Kitchen Training",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-2",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-014.webp',
+        alt: 'Bakery, Pastry & Confectionery Arts',
+        caption: 'Confectionery Arts',
+        rotation: 'rotate-1 sm:rotate-2'
       },
       {
-        "src": "/images/cims-photos/cims-photo-003.jpeg",
-        "alt": "Paramedical Pathology & Diagnostic Lab",
-        "colSpan": "hidden sm:block sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-1.5",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-016.webp',
+        alt: 'Fine Dining Restaurant Table Layout',
+        caption: 'F&B Service Setup',
+        rotation: '-rotate-1 sm:-rotate-2'
       },
       {
-        "src": "/images/cims-photos/cims-photo-004.jpeg",
-        "alt": "Hospitality Service & Front Office",
-        "colSpan": "hidden lg:block lg:col-span-3",
-        "rowSpan": "row-span-2",
-        "rotation": "rotate-1 sm:rotate-1.5",
-        "zIndex": "z-20",
-        "aspect": "aspect-[3/4]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-005.jpeg",
-        "alt": "Hospital Management Lecture Hall",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-1.5",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-006.jpeg",
-        "alt": "Student Medical Laboratory Practical",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-2",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-007.jpeg",
-        "alt": "Institutional Seminar & Academic Symposium",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-1",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-008.jpeg",
-        "alt": "Student Campus Activities & Teamwork",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-2",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-026.webp',
+        alt: 'Mocktail & Beverage Mixology Lab',
+        caption: 'Beverage Mixology',
+        rotation: 'rotate-2 sm:rotate-3',
+        hideOnMobile: true
       }
     ]
   },
   {
-    "id": "comp-2",
-    "title": "Hospitality & Clinical Diagnostics",
-    "tiles": [
+    id: 'slide-hospital',
+    discipline: 'Hospital Management & Healthcare',
+    subtitle: 'Multispecialty Hospital Tie-ups • Clinical Administration & Operations Training',
+    focalPhoto: {
+      src: '/images/cims-optimized/cims-photo-005.webp',
+      alt: 'Hospital Management Seminar Hall & Administrative Case Studies'
+    },
+    insetTiles: [
       {
-        "src": "/images/cims-photos/cims-photo-012.jpeg",
-        "alt": "Grand Convocation Ceremony",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-2",
-        "rotation": "rotate-1 sm:rotate-1.5",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[3/4]"
+        src: '/images/cims-optimized/cims-photo-013.webp',
+        alt: 'Clinical Ward Patient Care Protocols',
+        caption: 'Clinical Care Setup',
+        rotation: 'rotate-2 sm:rotate-3'
       },
       {
-        "src": "/images/cims-photos/cims-photo-013.jpeg",
-        "alt": "Clinical Ward Nursing & Patient Care",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-2",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-015.webp',
+        alt: 'Healthcare Administration Lecture Session',
+        caption: 'Hospital Admin Rounds',
+        rotation: '-rotate-2 sm:-rotate-2'
       },
       {
-        "src": "/images/cims-photos/cims-photo-014.jpeg",
-        "alt": "Bakery, Pastry & Confectionery Arts",
-        "colSpan": "hidden sm:block sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-1.5",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-023.webp',
+        alt: 'Superintendent Guidance & Practical Rounds',
+        caption: 'Superintendent Rounds',
+        rotation: 'rotate-1 sm:rotate-2'
       },
       {
-        "src": "/images/cims-photos/cims-photo-015.jpeg",
-        "alt": "Hospital Administration Seminar Session",
-        "colSpan": "hidden lg:block lg:col-span-3",
-        "rowSpan": "row-span-2",
-        "rotation": "-rotate-1 sm:-rotate-1.5",
-        "zIndex": "z-20",
-        "aspect": "aspect-[3/4]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-016.jpeg",
-        "alt": "Luxury Hotel Restaurant Mock Setup",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-2",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-017.jpeg",
-        "alt": "Biochemistry Centrifuge Diagnostic Testing",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-1",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-018.jpeg",
-        "alt": "Campus Gardens & Student Gathering",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-1.5",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-010.jpeg",
-        "alt": "Advanced Computing & Coding Lab",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-2",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-037.webp',
+        alt: 'Medical Records & Case History Discussion',
+        caption: 'Healthcare Operations',
+        rotation: '-rotate-1 sm:-rotate-3',
+        hideOnMobile: true
       }
     ]
   },
   {
-    "id": "comp-3",
-    "title": "Aviation, Fashion & Medical Technology",
-    "tiles": [
+    id: 'slide-paramedical',
+    discipline: 'Paramedical & Allied Health Sciences',
+    subtitle: 'Advanced Pathology Laboratories • BMLT, Radiology & OT Technology Practicals',
+    focalPhoto: {
+      src: '/images/cims-optimized/cims-photo-003.webp',
+      alt: 'Advanced Pathology Diagnostic Lab & Microscopic Analysis'
+    },
+    insetTiles: [
       {
-        "src": "/images/cims-photos/cims-photo-019.jpeg",
-        "alt": "Aviation & In-Flight Service Practical",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-2",
-        "rotation": "-rotate-1 sm:-rotate-2",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[3/4]"
+        src: '/images/cims-optimized/cims-photo-006.webp',
+        alt: 'Paramedical Hematology & Blood Testing',
+        caption: 'Hematology Practical',
+        rotation: '-rotate-2 sm:-rotate-3'
       },
       {
-        "src": "/images/cims-photos/cims-photo-020.jpeg",
-        "alt": "Fashion & Garment Technology Workshop",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-1.5",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-017.webp',
+        alt: 'Biochemistry Centrifuge Diagnostic Equipment',
+        caption: 'Biochemistry Lab',
+        rotation: 'rotate-2 sm:rotate-2'
       },
       {
-        "src": "/images/cims-photos/cims-photo-021.jpeg",
-        "alt": "Paramedical Hematology Cell Counting",
-        "colSpan": "hidden sm:block sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-1",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-021.webp',
+        alt: 'Diagnostic Microscopy Cell Morphology',
+        caption: 'Cell Morphology',
+        rotation: '-rotate-1 sm:-rotate-2'
       },
       {
-        "src": "/images/cims-photos/cims-photo-022.jpeg",
-        "alt": "Culinary Masterclass by Executive Chef",
-        "colSpan": "hidden lg:block lg:col-span-3",
-        "rowSpan": "row-span-2",
-        "rotation": "rotate-1 sm:rotate-2",
-        "zIndex": "z-20",
-        "aspect": "aspect-[3/4]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-023.jpeg",
-        "alt": "Superintendent Rounds & Hospital Training",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-1.5",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-024.jpeg",
-        "alt": "BCA Software Engineering Practical",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-1.8",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-025.jpeg",
-        "alt": "Industry Mentorship & Interactive Workshop",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-1",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-026.jpeg",
-        "alt": "Beverage Mixology & Hospitality Bar Craft",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-1.5",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-031.webp',
+        alt: 'Operation Theatre Technology Practical',
+        caption: 'OT Equipment Practical',
+        rotation: 'rotate-1 sm:rotate-3',
+        hideOnMobile: true
       }
     ]
   },
   {
-    "id": "comp-4",
-    "title": "Medical Operations, Library & Degree Day",
-    "tiles": [
+    id: 'slide-computing',
+    discipline: 'Computer Application & IT (BCA)',
+    subtitle: 'Modern Computing Labs • Software Engineering, Coding & Digital Innovation',
+    focalPhoto: {
+      src: '/images/cims-optimized/cims-photo-010.webp',
+      alt: 'High-Tech Computing Laboratory with Modern Workstations'
+    },
+    insetTiles: [
       {
-        "src": "/images/cims-photos/cims-photo-030.jpeg",
-        "alt": "Degree Conferment & Academic Honors",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-2",
-        "rotation": "rotate-1 sm:rotate-1.8",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[3/4]"
+        src: '/images/cims-optimized/cims-photo-024.webp',
+        alt: 'Software Engineering & Programming Practical',
+        caption: 'Software Development',
+        rotation: 'rotate-2 sm:rotate-3'
       },
       {
-        "src": "/images/cims-photos/cims-photo-031.jpeg",
-        "alt": "Operation Theatre Technology Practical",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-1.5",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-029.webp',
+        alt: 'Digital Library & Information Center',
+        caption: 'Digital Tech Library',
+        rotation: '-rotate-2 sm:-rotate-2'
       },
       {
-        "src": "/images/cims-photos/cims-photo-032.jpeg",
-        "alt": "Five Star Hotel Concierge Simulation",
-        "colSpan": "hidden sm:block sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-2",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-041.webp',
+        alt: 'Algorithms & Full-Stack Web Development Workshop',
+        caption: 'Algorithm Workshop',
+        rotation: 'rotate-1 sm:rotate-2'
       },
       {
-        "src": "/images/cims-photos/cims-photo-033.jpeg",
-        "alt": "Medical Radiology & Diagnostic Imaging",
-        "colSpan": "hidden lg:block lg:col-span-3",
-        "rowSpan": "row-span-2",
-        "rotation": "-rotate-1 sm:-rotate-2",
-        "zIndex": "z-10",
-        "aspect": "aspect-[3/4]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-034.jpeg",
-        "alt": "Independence Day Flag Hoisting & Assembly",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-1.2",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-035.jpeg",
-        "alt": "Culinary Fruit & Vegetable Carving Art",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-1.4",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-029.jpeg",
-        "alt": "Central Library & Digital Study Center",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-1.6",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-038.jpeg",
-        "alt": "Campus Placement Drive & Interview Rounds",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-1.8",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-019.webp',
+        alt: 'Aviation & Airport Passenger System Training',
+        caption: 'Aviation IT Systems',
+        rotation: '-rotate-1 sm:-rotate-3',
+        hideOnMobile: true
       }
     ]
   },
   {
-    "id": "comp-5",
-    "title": "Smart Academics, Hospital Cases & Arts",
-    "tiles": [
+    id: 'slide-campus',
+    discipline: 'Campus Life & Academic Convocation',
+    subtitle: 'ESTD 2011 • Approved Under MAKAUT (CCPTR) & Swami Vivekananda Foundation',
+    focalPhoto: {
+      src: '/images/cims-optimized/cims-photo-001.webp',
+      alt: 'CIMS Main Campus Building & Educational Infrastructure'
+    },
+    insetTiles: [
       {
-        "src": "/images/cims-photos/cims-photo-039.jpeg",
-        "alt": "Advanced Automated Clinical Analyzers",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-2",
-        "rotation": "-rotate-1 sm:-rotate-1.5",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[3/4]"
+        src: '/images/cims-optimized/cims-photo-012.webp',
+        alt: 'Grand Academic Convocation Procession',
+        caption: 'Convocation Procession',
+        rotation: '-rotate-2 sm:-rotate-3'
       },
       {
-        "src": "/images/cims-photos/cims-photo-040.jpeg",
-        "alt": "Fine Dining Banquet Protocol Workshop",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-2",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-030.webp',
+        alt: 'Degree Conferment & Student Academic Honors',
+        caption: 'Degree Conferment',
+        rotation: 'rotate-2 sm:rotate-2'
       },
       {
-        "src": "/images/cims-photos/cims-photo-041.jpeg",
-        "alt": "Computer Programming & Web Tech Practical",
-        "colSpan": "hidden sm:block sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-1.8",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-034.webp',
+        alt: 'National Assembly & Campus Flag Hoisting',
+        caption: 'Campus Assembly',
+        rotation: '-rotate-1 sm:-rotate-2'
       },
       {
-        "src": "/images/cims-photos/cims-photo-042.jpeg",
-        "alt": "Healthcare Administration Strategy Forum",
-        "colSpan": "hidden lg:block lg:col-span-3",
-        "rowSpan": "row-span-2",
-        "rotation": "rotate-1 sm:rotate-1.5",
-        "zIndex": "z-20",
-        "aspect": "aspect-[3/4]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-043.jpeg",
-        "alt": "Human Anatomy & Physiology Practical Models",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-1.2",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-044.jpeg",
-        "alt": "Specialty Coffee & Barista Service Lab",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-1",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-045.jpeg",
-        "alt": "Triumphant Graduate Students in Robes",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "-rotate-1 sm:-rotate-1.5",
-        "zIndex": "z-10",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
-      },
-      {
-        "src": "/images/cims-photos/cims-photo-047.jpeg",
-        "alt": "CIMS Campus Modern Academic Infrastructure",
-        "colSpan": "col-span-6 sm:col-span-4 lg:col-span-3",
-        "rowSpan": "row-span-1",
-        "rotation": "rotate-1 sm:rotate-2",
-        "zIndex": "z-20",
-        "aspect": "aspect-[4/3] sm:aspect-[16/10]"
+        src: '/images/cims-optimized/cims-photo-038.webp',
+        alt: 'Placement Drive & Campus Interviews',
+        caption: 'Placement Drive',
+        rotation: 'rotate-1 sm:rotate-3',
+        hideOnMobile: true
       }
     ]
   }
 ];
 
 export default function HomePage() {
-  // Active collage slide index (0 to 4)
-  const [activeSlide, setActiveSlide] = useState(0);
+  // Active collage slide (0 to 4)
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
   // Enquiry Form Modal State
@@ -447,34 +240,48 @@ export default function HomePage() {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formError, setFormError] = useState('');
 
-  // 1. Automatic Collage Change Timer (Transitions every 5.5 seconds)
+  // 1. Automatic Collage Change Timer: changes every 3.5 seconds (Requirement: 3-4 seconds)
   useEffect(() => {
     if (isPaused) return;
-    const interval = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % COLLAGE_COMPOSITIONS.length);
-    }, 5500);
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % COLLAGE_SLIDES.length);
+    }, 3500);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
   }, [isPaused]);
 
-  // 2. Preload all collage images to ensure seamless, flash-free transitions
+  // 2. Preload the next collage images in advance (Performance Optimization)
   useEffect(() => {
-    const urls = new Set<string>();
-    COLLAGE_COMPOSITIONS.forEach((comp) => {
-      comp.tiles.forEach((tile) => urls.add(tile.src));
-    });
-    urls.forEach((url) => {
+    const nextIdx = (currentSlide + 1) % COLLAGE_SLIDES.length;
+    const nextSlide = COLLAGE_SLIDES[nextIdx];
+    
+    // Preload focal photo
+    const img1 = new window.Image();
+    img1.src = nextSlide.focalPhoto.src;
+    
+    // Preload inset tiles
+    nextSlide.insetTiles.forEach((tile) => {
       const img = new window.Image();
-      img.src = url;
+      img.src = tile.src;
+    });
+  }, [currentSlide]);
+
+  // Preload initial batch on mount
+  useEffect(() => {
+    COLLAGE_SLIDES.slice(0, 2).forEach((slide) => {
+      const focal = new window.Image();
+      focal.src = slide.focalPhoto.src;
+      slide.insetTiles.forEach((t) => {
+        const inset = new window.Image();
+        inset.src = t.src;
+      });
     });
   }, []);
 
-  // Form input change handler
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Form submit handler connected to /api/inquiry
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormError('');
@@ -529,83 +336,103 @@ export default function HomePage() {
 
   return (
     <div 
-      className="relative w-full h-[calc(100vh-125px)] min-h-[580px] sm:min-h-[640px] max-h-[960px] overflow-hidden bg-slate-950 select-none flex items-center justify-center"
+      className="relative w-full h-[calc(100vh-125px)] min-h-[580px] sm:min-h-[640px] max-h-[920px] overflow-hidden bg-[#071129] select-none flex items-center justify-center"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       {/* =========================================================================
-          1. RECREATION OF REFERENCE VIDEO PHOTOGRAPHIC COLLAGE (BACKGROUND)
-          - Multiple authentic CIMS photos visible simultaneously
-          - Mixture of large, medium and small rectangular photographs
-          - Slight diagonal rotation angles (-2 deg to +2 deg)
-          - Clean white borders/frames with physical box shadows
-          - Layered, tightly arranged mosaic layout without empty gaps
-          - Automatic transition every 5.5s with smooth crossfade & Ken Burns zoom
+          1. ISHM-STYLE CIMS PHOTOGRAPHIC COLLAGE BACKGROUND
+          - Large full-width photographic hero
+          - Multiple photographs visible simultaneously (focal + 3-4 inset tiles)
+          - Combination of large, medium and small image tiles with clean white borders
+          - Asymmetrical angled layout matching ISHM
+          - Automatic transition every 3.5 seconds with smooth crossfade
+          - Preloaded next composition, optimized WebP images (<80KB per tile)
           ========================================================================= */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        {COLLAGE_COMPOSITIONS.map((comp, compIdx) => {
-          const isActive = compIdx === activeSlide;
+        {COLLAGE_SLIDES.map((slide, idx) => {
+          const isActive = idx === currentSlide;
           return (
             <div
-              key={comp.id}
-              className={`absolute inset-0 w-full h-full transition-opacity duration-1200 ease-in-out ${
+              key={slide.id}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-800 ease-in-out ${
                 isActive ? 'opacity-100 z-10' : 'opacity-0 pointer-events-none z-0'
               }`}
             >
-              {/* Cinematic subtle Ken Burns motion container */}
-              <div className={`w-full h-full p-2 sm:p-4 lg:p-6 ${isActive ? 'animate-kenburns-subtle' : ''}`}>
-                <div className="grid grid-cols-12 gap-2 sm:gap-3 lg:gap-4.5 w-full h-full items-center justify-center">
-                  {comp.tiles.map((tile, tileIdx) => (
+              <div className={`relative w-full h-full overflow-hidden ${isActive ? 'animate-kenburns-subtle' : ''}`}>
+                
+                {/* A. Large Focal Background Photograph */}
+                <div className="absolute inset-0 w-full h-full">
+                  <img
+                    src={slide.focalPhoto.src}
+                    alt={slide.focalPhoto.alt}
+                    className="w-full h-full object-cover filter brightness-[0.85] contrast-[1.05]"
+                    loading={idx === 0 ? 'eager' : 'lazy'}
+                  />
+                  {/* Subtle directional gradients for legibility & contrast */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#071129]/95 via-[#071129]/70 to-transparent sm:via-[#071129]/50" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#071129]/90 via-black/25 to-black/40" />
+                </div>
+
+                {/* B. ISHM-Style Discipline Heading & Ribbon (Top-Left) */}
+                <div className="absolute top-6 sm:top-10 lg:top-14 left-4 sm:left-8 lg:left-14 z-20 max-w-xl">
+                  <div className="inline-flex items-center gap-2 bg-[#ed8100] text-white font-extrabold text-[11px] sm:text-xs uppercase px-3.5 py-1.5 rounded-full shadow-lg mb-2">
+                    <Sparkles size={13} className="text-white" />
+                    <span>CIMS ACADEMIC PROGRAMME</span>
+                  </div>
+                  <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)] leading-tight">
+                    {slide.discipline}
+                  </h1>
+                  <p className="text-gray-200 text-xs sm:text-sm font-medium mt-1.5 drop-shadow max-w-lg hidden sm:block">
+                    {slide.subtitle}
+                  </p>
+                </div>
+
+                {/* C. ISHM-Style Multiple Inset Photographic Tiles (Bottom-Right / Spread) */}
+                <div className="absolute right-3 sm:right-6 lg:right-12 bottom-16 sm:bottom-12 z-20 flex flex-row items-end gap-2 sm:gap-3.5 max-w-[92vw] sm:max-w-2xl overflow-hidden">
+                  {slide.insetTiles.map((tile, tIdx) => (
                     <div
-                      key={tileIdx}
-                      className={`${tile.colSpan} ${tile.rowSpan} ${tile.zIndex} relative group`}
+                      key={tIdx}
+                      className={`relative bg-white p-1 sm:p-1.5 rounded-md shadow-[0_12px_35px_rgba(0,0,0,0.65)] border border-white/95 transform transition-all duration-500 hover:scale-105 hover:rotate-0 ${tile.rotation} ${tile.hideOnMobile ? 'hidden sm:block' : ''}`}
                     >
-                      {/* Clean White Frame / Border with Shadow & Diagonal Angle */}
-                      <div
-                        className={`bg-white p-1 sm:p-1.5 md:p-2 rounded-sm sm:rounded shadow-[0_8px_30px_rgba(0,0,0,0.5)] transform ${tile.rotation} transition-transform duration-500 hover:rotate-0 hover:scale-105 border border-white/90 overflow-hidden w-full`}
-                      >
-                        <div className={`relative w-full ${tile.aspect} overflow-hidden rounded-[2px] bg-slate-200`}>
-                          <img
-                            src={tile.src}
-                            alt={tile.alt}
-                            className="w-full h-full object-cover filter brightness-[0.98] contrast-[1.03] select-none pointer-events-none"
-                            loading={compIdx === 0 ? 'eager' : 'lazy'}
-                          />
-                        </div>
+                      <div className="relative w-24 sm:w-32 md:w-40 aspect-[4/3] overflow-hidden rounded-[2px] bg-slate-200">
+                        <img
+                          src={tile.src}
+                          alt={tile.alt}
+                          className="w-full h-full object-cover"
+                          loading={idx === 0 ? 'eager' : 'lazy'}
+                        />
+                      </div>
+                      <div className="bg-[#112555] text-white text-[9px] sm:text-[10px] font-bold px-1 py-0.5 mt-1 rounded text-center truncate max-w-full">
+                        {tile.caption}
                       </div>
                     </div>
                   ))}
                 </div>
+
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* Subtle Dark Vignette Overlay for Contrast & Button Legibility */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-black/45 z-20 pointer-events-none" />
-      <div className="absolute inset-0 bg-radial-gradient from-transparent via-black/20 to-black/60 z-20 pointer-events-none" />
+      {/* Subtle Vignette for Foreground Button Prominence */}
+      <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-black/60 z-20 pointer-events-none" />
 
       {/* =========================================================================
           2. MINIMAL HOMEPAGE CONTENT: ONLY THE TWO REQUESTED BUTTONS
-          - 1. Admission Form button (Links to /admission)
-          - 2. Enquiry Form button (Opens interactive enquiry modal)
-          - No extra homepage sections, no welcome text, no promotional previews
+          - 1. Admission Form button (opens existing /admission page)
+          - 2. Enquiry Form button (opens interactive enquiry modal)
+          - No extra headings, no descriptions, no statistics, no extra sections
           ========================================================================= */}
-      <div className="relative z-30 px-4 sm:px-6 w-full max-w-xl mx-auto flex flex-col items-center justify-center text-center">
+      <div className="relative z-30 px-4 w-full max-w-md sm:max-w-xl mx-auto flex flex-col items-center justify-center text-center mt-14 sm:mt-20">
         
-        {/* Subtle decorative college badge */}
-        <div className="inline-flex items-center gap-2 bg-black/40 backdrop-blur-md border border-white/20 text-[#ffc923] text-xs font-extrabold uppercase px-4 py-1.5 rounded-full mb-6 shadow-xl">
-          <Sparkles size={14} className="text-[#ffc923]" />
-          <span>Cambridge Institute of Management Studies</span>
-        </div>
-
-        {/* The Two Prominent Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 sm:gap-6 w-full max-w-sm sm:max-w-none">
+        {/* Floating Action Buttons Container */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3.5 sm:gap-5 w-full max-w-sm sm:max-w-none">
           {/* 1. Admission Form Button */}
           <Link
             href="/admission"
-            className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#ed8100] via-[#ff9724] to-[#ed8100] bg-[length:200%_auto] hover:bg-right text-white font-heading font-extrabold text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-4.5 rounded-xl shadow-[0_12px_40px_rgba(237,129,0,0.65)] hover:shadow-[0_16px_50px_rgba(237,129,0,0.85)] hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-white/80 uppercase tracking-wider text-center"
+            className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#ed8100] via-[#ff9724] to-[#ed8100] bg-[length:200%_auto] hover:bg-right text-white font-heading font-black text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-4.5 rounded-xl shadow-[0_12px_40px_rgba(237,129,0,0.65)] hover:shadow-[0_16px_50px_rgba(237,129,0,0.85)] hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-white/80 uppercase tracking-wider text-center"
           >
             <GraduationCap size={22} className="group-hover:rotate-12 transition-transform duration-300" />
             <span>Admission Form</span>
@@ -616,40 +443,58 @@ export default function HomePage() {
           <button
             type="button"
             onClick={() => setIsEnquiryModalOpen(true)}
-            className="group inline-flex items-center justify-center gap-3 bg-[#112555] hover:bg-[#0c1b3f] text-white font-heading font-extrabold text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-4.5 rounded-xl shadow-[0_12px_40px_rgba(17,37,85,0.75)] hover:shadow-[0_16px_50px_rgba(17,37,85,0.95)] hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-white/80 uppercase tracking-wider text-center cursor-pointer"
+            className="group inline-flex items-center justify-center gap-3 bg-[#112555] hover:bg-[#0c1b3f] text-white font-heading font-black text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-4.5 rounded-xl shadow-[0_12px_40px_rgba(17,37,85,0.75)] hover:shadow-[0_16px_50px_rgba(17,37,85,0.95)] hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-white/80 uppercase tracking-wider text-center cursor-pointer"
           >
             <Send size={19} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" />
             <span>Enquiry Form</span>
           </button>
         </div>
 
-        {/* Small subtle session hint */}
-        <p className="text-white/80 text-[11px] font-semibold mt-4 drop-shadow">
+        {/* Subtle academic badge pill */}
+        <p className="text-white/90 text-[11px] font-semibold mt-4 drop-shadow bg-black/40 px-3 py-1 rounded-full border border-white/10 backdrop-blur-sm">
           Academic Session 2026–27 • Admissions &amp; Counseling Open
         </p>
       </div>
 
-      {/* Collage Slide Indicators (Dots) */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
-        {COLLAGE_COMPOSITIONS.map((comp, idx) => (
-          <button
-            key={comp.id}
-            onClick={() => setActiveSlide(idx)}
-            className={`transition-all duration-300 rounded-full cursor-pointer ${
-              idx === activeSlide
-                ? 'w-6 h-2 bg-[#ed8100]'
-                : 'w-2 h-2 bg-white/50 hover:bg-white'
-            }`}
-            aria-label={`Jump to collage ${idx + 1}: ${comp.title}`}
-          />
-        ))}
+      {/* ISHM-Style Collage Composition Dots & Controls */}
+      <div className="absolute bottom-4 left-4 sm:left-8 z-30 flex items-center gap-2 bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+        <button
+          type="button"
+          onClick={() => setCurrentSlide((prev) => (prev - 1 + COLLAGE_SLIDES.length) % COLLAGE_SLIDES.length)}
+          className="text-white/70 hover:text-white transition-colors cursor-pointer"
+          aria-label="Previous Collage"
+        >
+          <ChevronLeft size={16} />
+        </button>
+        <div className="flex items-center gap-1.5">
+          {COLLAGE_SLIDES.map((slide, idx) => (
+            <button
+              key={slide.id}
+              onClick={() => setCurrentSlide(idx)}
+              className={`transition-all duration-300 rounded-full cursor-pointer ${
+                idx === currentSlide
+                  ? 'w-6 h-2 bg-[#ed8100]'
+                  : 'w-2 h-2 bg-white/50 hover:bg-white'
+              }`}
+              aria-label={`Jump to ${slide.discipline}`}
+            />
+          ))}
+        </div>
+        <button
+          type="button"
+          onClick={() => setCurrentSlide((prev) => (prev + 1) % COLLAGE_SLIDES.length)}
+          className="text-white/70 hover:text-white transition-colors cursor-pointer"
+          aria-label="Next Collage"
+        >
+          <ChevronRight size={16} />
+        </button>
       </div>
 
       {/* =========================================================================
-          3. INTERACTIVE ENQUIRY FORM MODAL (POPS UP ON CLICKING ENQUIRY FORM)
-          - Connects to /api/inquiry
-          - Sends instant email notification to official CIMS email
-          - Stores submission in Admin Dashboard CMS Store
+          3. ENQUIRY FORM MODAL (POPS UP ON CLICKING ENQUIRY FORM BUTTON)
+          - Submits to /api/inquiry
+          - Dispatches email notification to cambridge567@gmail.com
+          - Stores lead in Admin Dashboard CMS store
           ========================================================================= */}
       {isEnquiryModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
