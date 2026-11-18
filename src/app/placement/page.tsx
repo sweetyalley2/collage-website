@@ -205,89 +205,78 @@ export default function PlacementPage() {
                   onClick={() => setSelectedRecord(rec)}
                   className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-md hover:shadow-2xl hover:border-[#ed8100] hover:-translate-y-1.5 transition-all duration-300 cursor-pointer group flex flex-col justify-between relative"
                 >
-                  {/* POSTER BODY (Uniform ISHM-Inspired Series across all students) */}
-                  <div className="relative bg-gradient-to-b from-[#0c1a3b] via-[#112555] to-[#0a1530] text-white flex flex-col overflow-hidden select-none">
+                  {/* POSTER BODY (Uniform ISHM-Inspired Series: ONE STUDENT = ONE ORIGINAL PHOTO = ONE POSTER) */}
+                  <div className="relative bg-gradient-to-b from-[#0b1736] via-[#112555] to-[#09142e] text-white flex flex-col justify-between overflow-hidden select-none min-h-[430px] p-3.5 sm:p-4">
                     
-                    {/* Background Pattern */}
+                    {/* Background Subtle Accent */}
                     <div className="absolute inset-0 bg-blue-900/10 pointer-events-none" />
 
-                    {/* TOP SECTION: Professional CIMS college building image as background visual + Official CIMS Logo + CIMS Name */}
-                    <div className="relative h-20 w-full overflow-hidden border-b-2 border-[#ed8100]">
-                      {/* CIMS Building background image visual */}
-                      <img
-                        src="/images/cims-optimized/cims-photo-001.webp"
-                        alt="CIMS College Campus Building"
-                        className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-105 transition-transform duration-700"
-                      />
-                      {/* Dark gradient overlay for text readability */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#0b1736]/95 via-[#0e214d]/85 to-[#0b1736]/95" />
-
-                      {/* Prominent CIMS Logo & Name */}
-                      <div className="relative z-10 h-full px-3 flex items-center justify-between">
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-10 h-10 rounded-full overflow-hidden bg-white p-0.5 shrink-0 shadow-md border-2 border-[#ed8100]">
-                            <img
-                              src="/images/logo/svf-logo.jpg"
-                              alt="CIMS Official Logo"
-                              className="w-full h-full object-cover object-center"
-                            />
-                          </div>
-                          <div className="leading-tight">
-                            <span className="font-heading font-black text-sm tracking-wide text-white uppercase block">
-                              CIMS <span className="text-[#ed8100]">GROUP</span>
-                            </span>
-                            <span className="text-[8.5px] font-bold text-[#ffc923] uppercase tracking-wider block">
-                              Cambridge Institute of Management Studies
-                            </span>
-                            <span className="text-[7.5px] text-gray-300 font-semibold uppercase tracking-widest block">
-                              Under MAKAUT (CCPTR) &amp; SVF
-                            </span>
-                          </div>
+                    {/* TOP: Existing CIMS Logo + CIMS GROUP + Cambridge Institute of Management Studies */}
+                    <div className="relative z-10 w-full flex items-center justify-between pb-3 border-b border-white/15">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden bg-white p-0.5 shrink-0 shadow-lg border-2 border-[#ed8100]">
+                          <img
+                            src="/images/logo/svf-logo.jpg"
+                            alt="CIMS Logo"
+                            className="w-full h-full object-cover object-center"
+                          />
                         </div>
-                        <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-[#ed8100] text-white tracking-wider shrink-0 shadow-sm">
-                          PLACED
+                        <div className="leading-tight text-left">
+                          <span className="font-heading font-black text-sm sm:text-base tracking-wide text-white uppercase block">
+                            CIMS <span className="text-[#ed8100]">GROUP</span>
+                          </span>
+                          <span className="text-[9.5px] sm:text-[10.5px] font-bold text-[#ffc923] block leading-tight">
+                            Cambridge Institute of Management Studies
+                          </span>
+                          <span className="text-[7.5px] text-gray-300 font-semibold uppercase tracking-wider block">
+                            Under MAKAUT (CCPTR) &amp; SVF
+                          </span>
+                        </div>
+                      </div>
+                      <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-[#ed8100] text-white tracking-wider shrink-0 shadow-sm">
+                        PLACED
+                      </span>
+                    </div>
+
+                    {/* BELOW HEADER: Company headline in an attractive coloured diagonal banner */}
+                    <div className="relative z-10 w-full my-3 text-center">
+                      <div className="inline-block w-full bg-gradient-to-r from-[#ed8100] via-[#ff9724] to-[#ed8100] text-white py-1.5 sm:py-2 px-3 rounded-lg shadow-lg border border-white/40 transform -rotate-1 hover:rotate-0 transition-transform">
+                        <span className="font-heading font-black text-xs sm:text-sm uppercase tracking-wider block drop-shadow-md truncate">
+                          JOB @ {rec.company.toUpperCase()}
                         </span>
                       </div>
                     </div>
 
-                    {/* MIDDLE SECTION: Headline "Job @ [Company Name]" with coloured diagonal ribbon/banner */}
-                    <div className="relative z-10 px-3 pt-3 pb-1 w-full text-center">
-                      <div className="inline-block w-full bg-gradient-to-r from-[#ed8100] via-[#ff9c26] to-[#ed8100] text-white py-1.5 px-2 rounded-lg shadow-md border border-white/40 transform -rotate-0.5 hover:rotate-0 transition-transform">
-                        <span className="font-heading font-black text-xs sm:text-[13px] uppercase tracking-wider block drop-shadow-sm truncate">
-                          Job @ {rec.company}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* STUDENT SECTION: Student's authentic photograph, fully visible face, not cropped */}
-                    <div className="relative z-10 my-2 w-full flex items-center justify-center px-4">
-                      <div className="relative w-36 h-44 rounded-xl overflow-hidden border-3 border-white shadow-2xl bg-white flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+                    {/* CENTRE: ONE large student photograph only. No building image, no second photo, no split layout */}
+                    <div className="relative z-10 w-full flex items-center justify-center my-1">
+                      <div className="w-44 h-52 sm:w-48 sm:h-56 rounded-xl overflow-hidden shadow-2xl bg-white border-4 border-white flex items-center justify-center p-1 group-hover:scale-105 transition-transform duration-300">
                         <img
                           src={rec.image}
                           alt={rec.studentName}
-                          className="w-full h-full object-cover object-top"
+                          className="w-full h-full object-contain"
                           loading="lazy"
                         />
                       </div>
                     </div>
 
-                    {/* BOTTOM SECTION: Student Name in coloured label + Batch/Year underneath */}
-                    <div className="relative z-10 w-full px-3 pb-3 text-center space-y-1">
-                      <div className="bg-[#112555] text-white py-1.5 px-2 rounded-lg shadow-md border border-[#ed8100]/60">
-                        <h3 className="font-heading font-black text-xs sm:text-[13px] text-white uppercase tracking-wider truncate">
+                    {/* BOTTOM: Student Name in a coloured label + Batch name and passing year below the name */}
+                    <div className="relative z-10 w-full text-center space-y-1.5 pt-2">
+                      <div className="bg-[#ed8100] text-white py-1.5 px-3 rounded-lg shadow-md border border-white/30">
+                        <h3 className="font-heading font-black text-xs sm:text-sm uppercase tracking-wider truncate drop-shadow-sm">
                           {rec.studentName}
                         </h3>
                       </div>
-                      <div className="inline-block bg-black/40 backdrop-blur-sm border border-white/20 text-[#ffc923] text-[10px] font-bold uppercase tracking-wider px-3 py-0.5 rounded-full shadow-inner">
-                        Batch: {rec.course?.includes('Hospitality') ? 'BHM' : 'BBA-HM'} {rec.year}
+                      <div className="text-[10.5px] sm:text-[11px] font-bold text-gray-200 tracking-wide uppercase">
+                        {rec.course?.includes('Hospitality') ? 'BHM' : 'BBA HM'} {rec.year}
                       </div>
                     </div>
 
-                    {/* Hover Eye Overlay */}
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity z-20 flex items-center justify-center text-white gap-1.5 font-bold text-xs backdrop-blur-[1px]">
-                      <Eye size={16} className="text-[#ffc923]" />
+                    {/* Hover Eye Overlay for Interactive Dossier View */}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity z-20 flex items-center justify-center text-white gap-2 font-bold text-xs backdrop-blur-[1px]">
+                      <Eye size={18} className="text-[#ffc923]" />
                       <span>View Placement Dossier</span>
                     </div>
+
                   </div>
 
                   {/* Course & Training Details at Bottom */}
