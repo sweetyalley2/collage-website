@@ -81,7 +81,7 @@ export default function UsefulLinksPage() {
         {
           title: "CIMS Academic Prospectus & Brochure",
           desc: "Download official PDF prospectus containing complete fee structure, laboratory syllabus, and eligibility.",
-          url: "https://cimsgroup.org/wp-content/uploads/2025/02/Brochure_CIMS_College.pdf",
+          url: "/documents/cims-brochure.pdf",
           badge: "Official PDF"
         },
         {

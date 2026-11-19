@@ -170,29 +170,29 @@ export default function Navbar() {
                 <div className="border-b border-gray-100 pb-2 mb-3 flex items-center justify-between">
                   <h3 className="font-heading font-extrabold text-[#112555] text-xs uppercase tracking-wider flex items-center gap-1.5">
                     <GraduationCap size={15} className="text-[#ed8100]" />
-                    Academic Programs Under MAKAUT (CCPTR)
+                    Academic Programs &amp; Degree Courses
                   </h3>
                   <Link href="/courses" className="text-[11px] font-bold text-[#ed8100] hover:underline">
-                    All Courses &rarr;
+                    All 4 Courses &rarr;
                   </Link>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 text-xs">
                   <Link href="/courses/hospitality-hotel-management" className="p-2 rounded-lg hover:bg-orange-50/60 transition-colors block border border-transparent hover:border-orange-100">
                     <span className="font-bold text-[#112555] hover:text-[#ed8100] block">Hospitality &amp; Hotel Management</span>
-                    <span className="text-[10px] text-gray-500">3 Years • 5-Star Hotel Rotations &amp; Culinary</span>
+                    <span className="text-[10px] text-gray-500">6 Mo. Industrial + 6 Mo. Job • Raiganj Univ.</span>
                   </Link>
                   <Link href="/courses/hospital-management" className="p-2 rounded-lg hover:bg-orange-50/60 transition-colors block border border-transparent hover:border-orange-100">
                     <span className="font-bold text-[#112555] hover:text-[#ed8100] block">Hospital Management</span>
-                    <span className="text-[10px] text-gray-500">3 Years • Clinical Postings at City Hospital</span>
+                    <span className="text-[10px] text-gray-500">Clinical Postings at City Hospital</span>
                   </Link>
                   <Link href="/courses/bca" className="p-2 rounded-lg hover:bg-orange-50/60 transition-colors block border border-transparent hover:border-orange-100">
-                    <span className="font-bold text-[#112555] hover:text-[#ed8100] block">Computer Application (BCA)</span>
-                    <span className="text-[10px] text-gray-500">3 Years • Full-Stack, Software &amp; Cloud</span>
+                    <span className="font-bold text-[#112555] hover:text-[#ed8100] block">Computer Application</span>
+                    <span className="text-[10px] text-gray-500">Full-Stack, Software Engineering &amp; Cloud</span>
                   </Link>
                   <Link href="/courses/allied-health-science" className="p-2 rounded-lg hover:bg-orange-50/60 transition-colors block border border-transparent hover:border-orange-100">
-                    <span className="font-bold text-[#112555] hover:text-[#ed8100] block">Applied Health Science (Paramedical)</span>
-                    <span className="text-[10px] text-gray-500">BMLT / BMRIT / BOTT / DMLT Diagnostics</span>
+                    <span className="font-bold text-[#112555] hover:text-[#ed8100] block">Allied Health Science</span>
+                    <span className="text-[10px] text-gray-500">BMLT / BMRIT / BOTT Diagnostics</span>
                   </Link>
                 </div>
               </div>
@@ -318,10 +318,11 @@ export default function Navbar() {
             </Link>
 
             <a 
-              href="https://cimsgroup.org/wp-content/uploads/2025/02/Brochure_CIMS_College.pdf"
+              href="/documents/cims-brochure.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-[#112555] text-[#112555] hover:bg-[#112555] hover:text-white text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-md transition-all flex items-center gap-1"
+              download="CIMS-Brochure.pdf"
+              className="border border-[#112555] text-[#112555] hover:bg-[#112555] hover:text-white text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-md transition-all flex items-center gap-1 shadow-sm"
             >
               <Download size={13} />
               <span className="hidden sm:inline">Brochure</span>
@@ -394,8 +395,8 @@ export default function Navbar() {
                   <div className="pl-4 py-2 space-y-1.5 bg-gray-50 rounded-lg mt-1 text-xs font-semibold text-gray-700">
                     <Link href="/courses/hospitality-hotel-management" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Hospitality &amp; Hotel Management</Link>
                     <Link href="/courses/hospital-management" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Hospital Management</Link>
-                    <Link href="/courses/bca" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Computer Application (BCA)</Link>
-                    <Link href="/courses/allied-health-science" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Applied Health Science (Paramedical)</Link>
+                    <Link href="/courses/bca" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Computer Application</Link>
+                    <Link href="/courses/allied-health-science" onClick={closeMobileMenu} className="block py-1 hover:text-[#ed8100]">• Allied Health Science</Link>
                     <Link href="/courses" onClick={closeMobileMenu} className="block py-1 text-[#ed8100] font-bold">• View All 4 Courses</Link>
                   </div>
                 )}
@@ -460,12 +461,13 @@ export default function Navbar() {
                 Apply Online 2026
               </Link>
               <a 
-                href="https://cimsgroup.org/wp-content/uploads/2025/02/Brochure_CIMS_College.pdf" 
+                href="/documents/cims-brochure.pdf" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full block text-center border border-[#112555] text-[#112555] py-2 rounded-lg font-bold text-xs uppercase tracking-wider"
+                download="CIMS-Brochure.pdf"
+                className="w-full block text-center border border-[#112555] text-[#112555] py-2 rounded-lg font-bold text-xs uppercase tracking-wider shadow-sm hover:bg-[#112555] hover:text-white transition-colors"
               >
-                Download E-Brochure
+                Download Brochure
               </a>
               <div className="pt-2 text-center text-xs text-gray-500">
                 Helpline: <a href={`tel:${CIMS_INFO.phone}`} className="font-bold text-[#112555]">{CIMS_INFO.phone}</a>

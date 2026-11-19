@@ -83,7 +83,7 @@ export const CIMS_INFO = {
   parentOrg: "A Unit of Swami Vivekananda Foundation",
   affiliation: "Affiliated to Maulana Abul Kalam Azad University of Technology (MAKAUT) under CCPTR",
   established: 2011,
-  experienceYears: "15+",
+  experienceYears: "17+",
   phone: "+91 8158881234",
   altPhone: "+91 9007070004",
   email: "cambridge567@gmail.com",
@@ -93,8 +93,8 @@ export const CIMS_INFO = {
   stats: {
     placementsDone: "1,700+",
     internshipsDone: "2,700+",
-    yearsExcellence: "15+",
-    loanScholarship: "100%",
+    yearsExcellence: "17+",
+    loanScholarship: "Full",
     recruitersCount: "120+",
     studentSatisfaction: "98%",
   },
@@ -118,11 +118,12 @@ export const INITIAL_COURSES: Course[] = [
     eligibility: "10+2 in any stream from recognized Board",
     image: "/images/experience-life/CIMS_Campus_Gallery_Photos/culinary-hospitality-students.jpg",
     shortDesc: "World-class hospitality training encompassing culinary arts, front office operations, food & beverage, and hotel management.",
-    fullDesc: "Step into the vibrant global hospitality industry with CIMS. Acclaimed as the leading Hospitality and Hotel Management college in West Bengal, CIMS combines rigorous practical kitchen labs, simulated front desk suites, mock bar setups, and mandatory 6-month industrial internships in 5-star luxury hotels.",
+    fullDesc: "Step into the vibrant global hospitality industry with CIMS. Acclaimed as the leading Hospitality and Hotel Management college in West Bengal, CIMS combines rigorous practical kitchen labs, simulated front desk suites, mock bar setups, 6 Months Industrial Internship, and 6 Months Job Internship across leading 5-star brand hotels.",
     highlights: [
-      "Industrial training in luxury 5-star brand hotels (Taj, Marriott, Hyatt, Sterling)",
+      "6 Months Industrial Internship",
+      "6 Months Job Internship",
+      "5-Star Brand – 6 Months",
       "Hands-on Food Production, Bakery & Culinary Labs",
-      "Wine tasting, banquet management & mixology workshops",
       "Direct 5-star hotel internship & placement opportunities across India"
     ],
     careerProspects: [
@@ -132,7 +133,7 @@ export const INITIAL_COURSES: Course[] = [
       "Food & Beverage Service Director",
       "Event & Banquet Operations Director"
     ],
-    affiliatedTo: "MAKAUT (CCPTR) & Swami Vivekananda Foundation"
+    affiliatedTo: "Raiganj University Curriculum"
   },
   {
     id: "c-2",
@@ -144,7 +145,7 @@ export const INITIAL_COURSES: Course[] = [
     eligibility: "10+2 passed in any stream from recognized Board",
     image: "/images/experience-life/CIMS_Campus_Gallery_Photos/campus-students-group.jpg",
     shortDesc: "Comprehensive program preparing leaders for the burgeoning healthcare and hospital administrative sectors.",
-    fullDesc: "CIMS College is recognized as one of the premier Hospital Management institutes in West Bengal. The BBA in Hospital Management equips students with strategic operational skills, patient care administration, healthcare finance, hospital information systems (HIS) and NABH accreditation protocols.",
+    fullDesc: "CIMS College is recognized as one of the premier Hospital Management institutes in West Bengal. The Hospital Management program equips students with strategic operational skills, patient care administration, healthcare finance, hospital information systems (HIS) and NABH accreditation protocols.",
     highlights: [
       "Rigorous hospital clinical rotations & administrative internships",
       "NABH & NABL regulatory compliance training",
@@ -165,17 +166,17 @@ export const INITIAL_COURSES: Course[] = [
     slug: "bca",
     title: "Computer Application",
     category: "Computer Applications",
-    degree: "Undergraduate Degree (BCA)",
-    duration: "3 Years / 4 Years Honours",
+    degree: "Undergraduate Degree & Diploma",
+    duration: "3 - 4 Years (incl. Projects)",
     eligibility: "10+2 with Mathematics / Computer Science / Statistics / Information Practices",
     image: "/images/cims-optimized/cims-photo-024.webp",
-    shortDesc: "Cutting-edge computing education in software engineering, cloud computing, web development, and modern AI algorithms.",
-    fullDesc: "The BCA Computer Application program at CIMS College empowers aspiring tech leaders with robust programming foundations, modern cloud computing architectures, full-stack web and mobile development, and data analytics. Equipped with high-tech computer labs and industry live-project mentorship.",
+    shortDesc: "Cutting-edge computing education in software engineering, cloud computing, web development, and modern algorithms.",
+    fullDesc: "The Computer Application program at CIMS College empowers aspiring tech leaders with robust programming foundations, modern cloud computing architectures, full-stack web and mobile development, and data analytics. Equipped with high-tech computer labs and industry live-project mentorship.",
     highlights: [
       "Modern high-speed computing lab with latest dev stacks",
       "Hands-on projects in Python, Java, React, Next.js, and Cloud",
       "Campus placement drives with leading IT and consulting firms",
-      "Tech hackathons, code sprints, and certifications"
+      "Tech hackathons, code sprints, and professional certifications"
     ],
     careerProspects: [
       "Full-Stack Software Developer",
@@ -184,7 +185,7 @@ export const INITIAL_COURSES: Course[] = [
       "Systems Analyst",
       "Mobile App Developer"
     ],
-    affiliatedTo: "MAKAUT (CCPTR)"
+    affiliatedTo: "Industry-Aligned University Curriculum"
   },
   {
     id: "c-4",
@@ -195,8 +196,8 @@ export const INITIAL_COURSES: Course[] = [
     duration: "3 - 4 Years (incl. Internship)",
     eligibility: "10+2 with Physics, Chemistry, Biology (PCB)",
     image: "/images/experience-life/CIMS_Campus_Gallery_Photos/cims-campus-group-photo.jpg",
-    shortDesc: "High-demand clinical paramedical programs delivering hands-on pathology, radiology imaging, and operation theatre expertise.",
-    fullDesc: "Allied Health professionals are the backbone of modern healthcare delivery. CIMS Paramedical College in West Bengal provides advanced clinical exposure in BMLT (Medical Lab Technology), BMRIT (Medical Radiology & Imaging), and BOTT (Operation Theatre Technology) backed by modern diagnostic laboratories and daily clinical rotations.",
+    shortDesc: "High-demand clinical allied health programs delivering hands-on pathology, radiology imaging, and operation theatre expertise.",
+    fullDesc: "Allied Health professionals are the backbone of modern healthcare delivery. CIMS Allied Health Science College in West Bengal provides advanced clinical exposure in BMLT (Medical Lab Technology), BMRIT (Medical Radiology & Imaging), and BOTT (Operation Theatre Technology) backed by modern diagnostic laboratories and daily clinical rotations at City Hospital.",
     highlights: [
       "Real clinical rotations in active hospital pathology & diagnostic wings",
       "Advanced automated biochemistry, microbiology & hematology analyzers",
@@ -210,7 +211,7 @@ export const INITIAL_COURSES: Course[] = [
       "Critical Care & Emergency Technician",
       "Diagnostic Wing Supervisor"
     ],
-    affiliatedTo: "State Paramedical Faculty & MAKAUT Framework"
+    affiliatedTo: "State Allied Health Faculty & University Framework"
   }
 ];
 

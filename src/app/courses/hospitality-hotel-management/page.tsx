@@ -58,18 +58,18 @@ export default function HospitalityPage() {
               </p>
             </div>
 
-            {/* Core Pillars */}
+            {/* Core Pillars - Why Study Hospitality at CIMS? */}
             <div className="space-y-4">
               <h3 className="font-heading font-extrabold text-xl text-[#112555] uppercase tracking-wide">
-                Why Study Hospitality at CIMS:
+                Why Study Hospitality at CIMS?
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-5 bg-white rounded-xl border border-gray-200 hover:border-[#ed8100] shadow-sm hover:shadow-md transition-all">
                   <div className="font-heading font-bold text-base text-[#112555] flex items-center gap-2">
                     <span className="w-2 h-2 bg-[#ed8100] rounded-full" />
-                    5-Star Brand Internships
+                    5-Star Brand – 6 Months
                   </div>
-                  <p className="text-xs text-gray-600 mt-1 leading-relaxed">Guaranteed 6-month industrial training in Taj, Marriott, Hyatt, Radisson, and ITC hotels.</p>
+                  <p className="text-xs text-gray-600 mt-1 leading-relaxed">Guaranteed 6-month industrial internship with premier luxury 5-star brand hotels across India (Taj, Marriott, Hyatt, Radisson, and ITC hotels).</p>
                 </div>
                 <div className="p-5 bg-white rounded-xl border border-gray-200 hover:border-[#ed8100] shadow-sm hover:shadow-md transition-all">
                   <div className="font-heading font-bold text-base text-[#112555] flex items-center gap-2">
@@ -88,9 +88,34 @@ export default function HospitalityPage() {
                 <div className="p-5 bg-white rounded-xl border border-gray-200 hover:border-[#ed8100] shadow-sm hover:shadow-md transition-all">
                   <div className="font-heading font-bold text-base text-[#112555] flex items-center gap-2">
                     <span className="w-2 h-2 bg-[#ed8100] rounded-full" />
-                    Recognized Degree Curriculum
+                    University Curriculum
                   </div>
-                  <p className="text-xs text-gray-600 mt-1 leading-relaxed">Aligned with national tourism standards and MAKAUT educational frameworks.</p>
+                  <p className="text-xs text-gray-600 mt-1 leading-relaxed">Curriculum structured under the <strong>Raiganj University Curriculum</strong>.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Internship Opportunities */}
+            <div className="space-y-4 pt-2">
+              <h3 className="font-heading font-extrabold text-xl text-[#112555] uppercase tracking-wide">
+                Internship Opportunities
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="p-5 bg-orange-50/70 rounded-xl border-l-4 border-[#ed8100] shadow-sm">
+                  <h4 className="font-heading font-extrabold text-base text-[#112555]">
+                    6 Months Industrial Internship
+                  </h4>
+                  <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                    Intensive 6-month hands-on industrial training across front office, food & beverage service, culinary production, and housekeeping departments at premier 5-star luxury hotels.
+                  </p>
+                </div>
+                <div className="p-5 bg-blue-50/70 rounded-xl border-l-4 border-[#112555] shadow-sm">
+                  <h4 className="font-heading font-extrabold text-base text-[#112555]">
+                    6 Months Job Internship
+                  </h4>
+                  <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                    6-month on-the-job professional internship with real industry exposure, corporate mentorship, and direct pre-placement interview opportunities at leading hospitality chains.
+                  </p>
                 </div>
               </div>
             </div>
@@ -137,21 +162,25 @@ export default function HospitalityPage() {
                 Program Summary
               </h4>
               <div className="space-y-3 text-xs text-gray-700 divide-y divide-gray-100">
-                <div className="pt-2 flex justify-between">
-                  <span className="text-gray-500 font-semibold">Degree:</span>
+                <div className="pt-2 flex justify-between items-center">
+                  <span className="text-gray-500 font-semibold">Degree / Diploma:</span>
                   <span className="font-bold text-[#112555]">B.Sc HHA / Diploma</span>
                 </div>
-                <div className="pt-2 flex justify-between">
+                <div className="pt-2 flex justify-between items-center">
+                  <span className="text-gray-500 font-semibold">Curriculum:</span>
+                  <span className="font-bold text-[#112555] text-right">Raiganj University Curriculum</span>
+                </div>
+                <div className="pt-2 flex justify-between items-center">
                   <span className="text-gray-500 font-semibold">Duration:</span>
                   <span className="font-bold text-[#112555]">3 Years (Degree) / 1-2 Yrs (Dip)</span>
                 </div>
-                <div className="pt-2 flex justify-between">
+                <div className="pt-2 flex justify-between items-center">
                   <span className="text-gray-500 font-semibold">Eligibility:</span>
                   <span className="font-bold text-[#112555]">10+2 Any Stream</span>
                 </div>
-                <div className="pt-2 flex justify-between">
+                <div className="pt-2 flex justify-between items-center">
                   <span className="text-gray-500 font-semibold">Internship:</span>
-                  <span className="font-bold text-[#112555]">6 Months in 5-Star Hotels</span>
+                  <span className="font-bold text-[#112555] text-right">6 Mo. Industrial + 6 Mo. Job</span>
                 </div>
               </div>
 

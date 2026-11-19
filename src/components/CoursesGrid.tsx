@@ -20,7 +20,7 @@ export default function CoursesGrid() {
           </h2>
           <div className="w-16 h-1 bg-[#ed8100] mx-auto rounded-full" />
           <p className="text-xs sm:text-sm text-gray-600">
-            Professional degree and diploma programs under MAKAUT (CCPTR) with mandatory clinical postings and 5-star hotel rotations.
+            Professional degree and diploma programs with mandatory clinical postings and 5-star hotel rotations.
           </p>
         </div>
 
@@ -70,8 +70,8 @@ export default function CoursesGrid() {
                     <span>View Curriculum</span>
                     <ArrowRight size={13} className="text-[#ed8100]" />
                   </Link>
-                  <span className="text-[10px] font-semibold text-gray-400 uppercase">
-                    MAKAUT
+                  <span className="text-[10px] font-semibold text-gray-500 uppercase">
+                    {course.slug === 'hospitality-hotel-management' ? 'Raiganj Univ.' : course.slug === 'bca' ? 'Professional' : 'MAKAUT CCPTR'}
                   </span>
                 </div>
               </div>

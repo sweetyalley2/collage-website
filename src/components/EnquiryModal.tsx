@@ -86,15 +86,15 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
           <button
             type="button"
             onClick={handleClose}
-            className="absolute top-4 right-4 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-1.5 transition-colors cursor-pointer"
+            className="absolute top-3.5 right-3.5 text-white/90 hover:text-white bg-white/10 hover:bg-white/25 rounded-full p-2 transition-all cursor-pointer shadow-sm"
             aria-label="Close Enquiry Form"
           >
-            <X size={20} />
+            <X size={20} className="stroke-[2.5]" />
           </button>
-          <span className="text-[#ffc923] text-xs font-extrabold uppercase tracking-wider block mb-1">
+          <span className="text-[#ffc923] text-xs font-black uppercase tracking-wider block mb-1">
             Admissions 2026–2027
           </span>
-          <h3 className="font-heading text-xl sm:text-2xl font-bold">
+          <h3 className="font-heading text-lg sm:text-2xl font-bold pr-8">
             CIMS Admission Enquiry
           </h3>
           <p className="text-xs text-gray-200 mt-1">
@@ -192,10 +192,10 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
                   onChange={handleInputChange}
                   className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-gray-300 focus:border-[#ed8100] focus:ring-1 focus:ring-[#ed8100] outline-none transition-all bg-white"
                 >
-                  <option value="BBA in Hospital Management">BBA in Hospital Management (MAKAUT CCPTR)</option>
-                  <option value="B.Sc Hospitality & Hotel Administration">B.Sc Hospitality &amp; Hotel Administration (MAKAUT)</option>
-                  <option value="Bachelor of Computer Application (BCA)">Bachelor of Computer Application (BCA)</option>
-                  <option value="Allied Health Sciences & Paramedical">Allied Health Sciences &amp; Paramedical (BMLT/BMRIT)</option>
+                  <option value="BBA in Hospital Management">Hospital Management</option>
+                  <option value="B.Sc Hospitality & Hotel Administration">Hospitality &amp; Hotel Management (Raiganj University Curriculum)</option>
+                  <option value="Computer Application">Computer Application</option>
+                  <option value="Allied Health Science">Allied Health Science (BMLT / BMRIT / BOTT)</option>
                 </select>
               </div>
 
@@ -247,12 +247,19 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
                 />
               </div>
 
-              {/* Submit Button */}
-              <div className="pt-2">
+              {/* Submit & Cancel Buttons */}
+              <div className="pt-2 flex flex-col-reverse sm:flex-row gap-2.5">
+                <button
+                  type="button"
+                  onClick={handleClose}
+                  className="sm:w-1/3 py-2.5 px-4 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-xs uppercase tracking-wider rounded-lg transition-colors cursor-pointer text-center"
+                >
+                  Cancel
+                </button>
                 <button
                   type="submit"
                   disabled={formSubmitting}
-                  className="w-full py-3 px-4 bg-gradient-to-r from-[#ed8100] to-[#ff9724] hover:from-[#d97400] hover:to-[#ed8100] text-white font-bold text-sm rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
+                  className="flex-1 py-2.5 px-4 bg-gradient-to-r from-[#ed8100] to-[#ff9724] hover:from-[#d97400] hover:to-[#ed8100] text-white font-bold text-xs uppercase tracking-wider rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
                 >
                   {formSubmitting ? (
                     <>
@@ -261,7 +268,7 @@ export default function EnquiryModal({ isOpen, onClose }: EnquiryModalProps) {
                     </>
                   ) : (
                     <>
-                      <Send size={16} />
+                      <Send size={15} />
                       <span>Submit Admission Enquiry</span>
                     </>
                   )}

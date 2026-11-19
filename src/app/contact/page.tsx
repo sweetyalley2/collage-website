@@ -303,7 +303,7 @@ export default function ContactPage() {
                         <option value="B.Sc Medical Laboratory Technology (BMLT)">B.Sc Medical Lab Tech (BMLT)</option>
                         <option value="B.Sc Medical Radiology & Imaging (BMRIT)">B.Sc Radiology &amp; Imaging (BMRIT)</option>
                         <option value="B.Sc Operation Theatre Technology (BOTT)">B.Sc Operation Theatre Tech (BOTT)</option>
-                        <option value="BCA - Computer Applications">BCA - Computer Applications</option>
+                        <option value="Computer Application">Computer Application</option>
                         <option value="General Inquiry">General Admission Inquiry</option>
                       </select>
                     </div>

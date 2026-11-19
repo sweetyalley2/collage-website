@@ -29,7 +29,7 @@ export default function AlliedHealthPage() {
           </div>
 
           <h1 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
-            ALLIED HEALTH &amp; PARAMEDICAL SCIENCES
+            ALLIED HEALTH SCIENCE
           </h1>
           <div className="w-20 h-1 bg-[#ed8100] mx-auto rounded-full" />
           
@@ -54,7 +54,7 @@ export default function AlliedHealthPage() {
               </h2>
               <div className="section-title-bar" />
               <p className="text-gray-700 text-sm leading-relaxed">
-                Allied Health and Paramedical professionals play a critical role in clinical diagnostics and surgical care. CIMS Paramedical College in West Bengal delivers high-caliber clinical exposure across three core specializations: <strong>B.Sc Medical Laboratory Technology (BMLT)</strong>, <strong>B.Sc Medical Radiology &amp; Imaging Technology (BMRIT)</strong>, and <strong>B.Sc Operation Theatre Technology (BOTT)</strong>. Backed by automated biochemistry analyzers, clinical hematology instrumentation, and daily rotations at partner hospital pathology wings.
+                Allied Health professionals play a critical role in clinical diagnostics and surgical care. CIMS Allied Health Science College in West Bengal delivers high-caliber clinical exposure across three core specializations: <strong>B.Sc Medical Laboratory Technology (BMLT)</strong>, <strong>B.Sc Medical Radiology &amp; Imaging Technology (BMRIT)</strong>, and <strong>B.Sc Operation Theatre Technology (BOTT)</strong>. Backed by automated biochemistry analyzers, clinical hematology instrumentation, and daily rotations at partner hospital pathology wings.
               </p>
             </div>
 

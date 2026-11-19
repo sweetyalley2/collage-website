@@ -4,11 +4,11 @@ import { Laptop, Check, Award, ArrowRight, PhoneCall, Code, Cloud, ChevronRight 
 import { CIMS_INFO } from '@/lib/data/cimsData';
 
 export const metadata = {
-  title: "BCA - Bachelor of Computer Applications | Cambridge Institute of Management Studies",
-  description: "BCA course under MAKAUT (CCPTR) with high-speed computing labs, full-stack software development, cloud systems, and campus placement drives.",
+  title: "Computer Application | Cambridge Institute of Management Studies",
+  description: "Computer Application course with high-speed computing labs, full-stack software development, cloud systems, and campus placement drives.",
 };
 
-export default function BCAPage() {
+export default function ComputerApplicationPage() {
   return (
     <div className="min-h-screen bg-white text-gray-800">
       
@@ -25,16 +25,16 @@ export default function BCAPage() {
             <ChevronRight size={14} className="text-[#ed8100]" />
             <Link href="/courses" className="hover:text-[#ed8100] transition-colors">Courses</Link>
             <ChevronRight size={14} className="text-[#ed8100]" />
-            <span className="text-[#ed8100]">BCA (Computer Applications)</span>
+            <span className="text-[#ed8100]">Computer Application</span>
           </div>
 
           <h1 className="font-heading text-3xl sm:text-5xl font-black uppercase tracking-tight text-white">
-            BACHELOR OF COMPUTER APPLICATIONS (BCA)
+            COMPUTER APPLICATION
           </h1>
           <div className="w-20 h-1 bg-[#ed8100] mx-auto rounded-full" />
           
           <p className="text-gray-200 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">
-            Approved under <strong>MAKAUT (CCPTR)</strong> • Software Engineering, Cloud Systems, Modern AI Algorithms &amp; IT Placements.
+            Software Engineering, Cloud Systems, Modern AI Algorithms &amp; IT Industry Placements.
           </p>
 
         </div>
@@ -54,14 +54,14 @@ export default function BCAPage() {
               </h2>
               <div className="section-title-bar" />
               <p className="text-gray-700 text-sm leading-relaxed">
-                The Bachelor of Computer Applications (BCA) program at CIMS College is designed to bridge the gap between theoretical computer science and modern enterprise software practices. Structured under the MAKAUT (CCPTR) academic framework, students acquire hands-on proficiency in full-stack web and mobile engineering, Python, Java, cloud architectures, database administration, and artificial intelligence algorithms.
+                The Computer Application program at CIMS College is designed to bridge the gap between theoretical computer science and modern enterprise software practices. Students acquire hands-on proficiency in full-stack web and mobile engineering, Python, Java, cloud architectures, database administration, and artificial intelligence algorithms.
               </p>
             </div>
 
             {/* Core Pillars */}
             <div className="space-y-4">
               <h3 className="font-heading font-extrabold text-xl text-[#112555] uppercase tracking-wide">
-                BCA Core Computing Pillars at CIMS:
+                Computer Application Core Computing Pillars at CIMS:
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="p-5 bg-white rounded-xl border border-gray-200 hover:border-[#ed8100] shadow-sm hover:shadow-md transition-all">
@@ -88,9 +88,9 @@ export default function BCAPage() {
                 <div className="p-5 bg-white rounded-xl border border-gray-200 hover:border-[#ed8100] shadow-sm hover:shadow-md transition-all">
                   <div className="font-heading font-bold text-base text-[#112555] flex items-center gap-2">
                     <span className="w-2 h-2 bg-[#ed8100] rounded-full" />
-                    MAKAUT (CCPTR) Degree
+                    Industry-Aligned Professional Curriculum
                   </div>
-                  <p className="text-xs text-gray-600 mt-1 leading-relaxed">Recognized university degree qualifying graduates for MCA, M.Sc, and global IT employment.</p>
+                  <p className="text-xs text-gray-600 mt-1 leading-relaxed">Comprehensive curriculum qualifying graduates for advanced software engineering careers and global IT employment.</p>
                 </div>
               </div>
             </div>
@@ -138,8 +138,8 @@ export default function BCAPage() {
               </h4>
               <div className="space-y-3 text-xs text-gray-700 divide-y divide-gray-100">
                 <div className="pt-2 flex justify-between">
-                  <span className="text-gray-500 font-semibold">Degree:</span>
-                  <span className="font-bold text-[#112555]">BCA (Undergraduate)</span>
+                  <span className="text-gray-500 font-semibold">Course:</span>
+                  <span className="font-bold text-[#112555]">Computer Application</span>
                 </div>
                 <div className="pt-2 flex justify-between">
                   <span className="text-gray-500 font-semibold">Duration:</span>
@@ -150,8 +150,8 @@ export default function BCAPage() {
                   <span className="font-bold text-[#112555] text-right">10+2 with Math/CS/IP</span>
                 </div>
                 <div className="pt-2 flex justify-between">
-                  <span className="text-gray-500 font-semibold">Affiliation:</span>
-                  <span className="font-bold text-[#112555]">MAKAUT (CCPTR)</span>
+                  <span className="text-gray-500 font-semibold">Training:</span>
+                  <span className="font-bold text-[#112555]">Full-Time Practical</span>
                 </div>
               </div>
 

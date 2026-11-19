@@ -11,7 +11,8 @@ import {
   Laptop,
   ChevronRight,
   PhoneCall,
-  Sparkles
+  Sparkles,
+  Download
 } from 'lucide-react';
 import { INITIAL_COURSES, CIMS_INFO } from '@/lib/data/cimsData';
 
@@ -91,7 +92,13 @@ export default function CoursesPage() {
                 </h2>
 
                 <div className="text-xs text-gray-500 mt-1 flex flex-wrap gap-x-4 gap-y-1">
-                  <span>Affiliation: <strong className="text-[#112555]">{course.affiliatedTo}</strong></span>
+                  {course.slug === 'hospitality-hotel-management' ? (
+                    <span>University Curriculum: <strong className="text-[#112555]">Raiganj University Curriculum</strong></span>
+                  ) : course.slug === 'bca' ? (
+                    <span>Curriculum Structure: <strong className="text-[#112555]">Industry-Aligned Professional Curriculum</strong></span>
+                  ) : (
+                    <span>Affiliation: <strong className="text-[#112555]">{course.affiliatedTo}</strong></span>
+                  )}
                   <span>Eligibility: <strong className="text-gray-700">{course.eligibility}</strong></span>
                 </div>
               </div>
@@ -99,6 +106,30 @@ export default function CoursesPage() {
               <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
                 {course.fullDesc}
               </p>
+
+              {/* Hospitality Specific Highlights & Internships */}
+              {course.slug === 'hospitality-hotel-management' && (
+                <div className="bg-orange-50/70 border border-orange-200 rounded-lg p-3 text-xs space-y-2">
+                  <div>
+                    <div className="font-bold text-[#112555] uppercase tracking-wide text-[11px] mb-1">
+                      Internship Opportunities:
+                    </div>
+                    <div className="flex flex-wrap gap-x-4 gap-y-1 text-gray-800">
+                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 bg-[#ed8100] rounded-full" /><strong>6 Months Industrial Internship</strong></span>
+                      <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 bg-[#ed8100] rounded-full" /><strong>6 Months Job Internship</strong></span>
+                    </div>
+                  </div>
+                  <div className="pt-1.5 border-t border-orange-200/60">
+                    <div className="font-bold text-[#112555] uppercase tracking-wide text-[11px] mb-1">
+                      Why Study Hospitality at CIMS?
+                    </div>
+                    <div className="flex items-center gap-1.5 text-gray-800">
+                      <span className="w-1.5 h-1.5 bg-[#ed8100] rounded-full" />
+                      <span><strong>5-Star Brand – 6 Months</strong> mandatory training with premier luxury hotel chains.</span>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Highlights Checklist */}
               <div className="space-y-1.5 pt-2 border-t border-gray-100">
@@ -152,6 +183,16 @@ export default function CoursesPage() {
               className="bg-[#ed8100] hover:bg-[#d97400] text-white px-7 py-3 rounded-md font-bold text-xs uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:scale-105"
             >
               Submit Admission Query
+            </a>
+            <a
+              href="/documents/cims-brochure.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              download="CIMS-Brochure.pdf"
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-6 py-3 rounded-md font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 shadow"
+            >
+              <Download size={14} className="text-[#ffc923]" />
+              <span>Download Brochure</span>
             </a>
             <a
               href={`tel:${CIMS_INFO.phone}`}

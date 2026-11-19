@@ -677,14 +677,14 @@ export default function OnlineAdmissionPage() {
                       required
                       className="w-full border border-gray-300 focus:border-[#ed8100] focus:ring-1 focus:ring-[#ed8100] rounded-lg px-3.5 py-2.5 text-xs text-gray-900 font-semibold bg-white outline-none transition-colors"
                     >
-                      <option value="BBA in Hospital Management">BBA in Hospital Management (3/4 Years Honours) – MAKAUT</option>
-                      <option value="B.Sc in Hospitality & Hotel Administration">B.Sc in Hospitality &amp; Hotel Administration (3 Years) – MAKAUT</option>
-                      <option value="Bachelor of Computer Applications (BCA)">Bachelor of Computer Applications - BCA (3/4 Years Honours) – MAKAUT</option>
-                      <option value="B.Sc in Medical Laboratory Technology (BMLT)">B.Sc in Medical Laboratory Technology (BMLT) – Paramedical</option>
-                      <option value="B.Sc in Medical Radiology & Imaging Technology (BMRIT)">B.Sc in Medical Radiology &amp; Imaging Technology (BMRIT)</option>
-                      <option value="Bachelor of Operation Theatre Technology (BOTT)">Bachelor of Operation Theatre Technology (BOTT)</option>
-                      <option value="Diploma in Hotel Management & Catering Technology">Diploma in Hotel Management &amp; Catering Technology (1-2 Years)</option>
-                      <option value="Diploma in Medical Lab Technology (DMLT)">Diploma in Medical Lab Technology (DMLT - 2 Years)</option>
+                      <option value="BBA in Hospital Management">Hospital Management (BBA - 3/4 Years Honours)</option>
+                      <option value="B.Sc in Hospitality & Hotel Administration">Hospitality &amp; Hotel Management (3 Years) – Raiganj University Curriculum</option>
+                      <option value="Computer Application">Computer Application (3/4 Years Honours &amp; Diploma)</option>
+                      <option value="B.Sc in Medical Laboratory Technology (BMLT)">Allied Health Science: BMLT (Medical Lab Technology)</option>
+                      <option value="B.Sc in Medical Radiology & Imaging Technology (BMRIT)">Allied Health Science: BMRIT (Radiology &amp; Imaging)</option>
+                      <option value="Bachelor of Operation Theatre Technology (BOTT)">Allied Health Science: BOTT (Operation Theatre Technology)</option>
+                      <option value="Diploma in Hotel Management & Catering Technology">Hospitality Management: Diploma in Hotel Management (1-2 Years)</option>
+                      <option value="Diploma in Medical Lab Technology (DMLT)">Allied Health Science: DMLT (Medical Lab Technology - 2 Years)</option>
                     </select>
                   </div>
 

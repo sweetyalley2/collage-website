@@ -125,7 +125,7 @@ export default function HeroSection() {
               </div>
               <div className="flex items-center gap-2 text-xs text-white">
                 <CheckCircle2 size={16} className="text-[#ed8100] flex-shrink-0" />
-                <span>100% Loan Assistance &amp; Scholarships</span>
+                <span>Education Loan Assistance &amp; Scholarships</span>
               </div>
             </div>
 
@@ -140,9 +140,10 @@ export default function HeroSection() {
               </a>
 
               <a
-                href="https://cimsgroup.org/wp-content/uploads/2025/02/Brochure_CIMS_College.pdf"
+                href="/documents/cims-brochure.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
+                download="CIMS-Brochure.pdf"
                 className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-5 py-3.5 rounded-lg font-bold text-sm uppercase tracking-wider transition-all flex items-center gap-2"
               >
                 <Download size={16} />

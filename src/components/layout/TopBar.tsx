@@ -113,13 +113,14 @@ export default function TopBar() {
             </Link>
 
             <a 
-              href="https://cimsgroup.org/wp-content/uploads/2025/02/Brochure_CIMS_College.pdf"
+              href="/documents/cims-brochure.pdf"
               target="_blank"
               rel="noopener noreferrer"
+              download="CIMS-Brochure.pdf"
               className="hover:text-[#ed8100] flex items-center gap-1 transition-colors text-[11px] font-semibold text-gray-300"
             >
               <Download size={12} className="text-[#ed8100]" />
-              <span>E-Brochure</span>
+              <span>Brochure</span>
             </a>
           </div>
 
